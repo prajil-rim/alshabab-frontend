@@ -1,0 +1,35 @@
+import Quote from "@/components/icons/quote";
+import { StrapiImage } from "../strapi-image";
+import { TestimonialProps } from "@/types";
+
+const TestimonialCard = ({
+    image,
+    testimonial,
+    location,
+    user,
+}: Readonly<TestimonialProps>) => {
+    return (
+        <div className="border border-[#666666]/20 rounded-[20px] aspect-square flex items-center justify-center p-5 text-center flex-col group hover:border-primary hover:shadow-xl">
+            <p className="text-sm mt-auto overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:7] [-webkit-box-orient:vertical] font-manrope">
+                {testimonial}
+            </p>
+            <div className="flex items-center gap-2 mt-auto">
+                <StrapiImage
+                    alt={image.alternativeText || ""}
+                    // src={image.url}
+                    src="http://localhost:3000/images/others/avatar.webp"
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                />
+                <div className="flex flex-col items-start">
+                    <span className="text-sm">{user}</span>
+                    <span className="font-manrope text-xs">{location}</span>
+                </div>
+            </div>
+            <Quote />
+        </div>
+    );
+};
+
+export default TestimonialCard;

@@ -1,0 +1,83 @@
+import BlogSection from "@/components/common/blog-section/blog-section";
+import FAQSection from "@/components/common/faq/faq-section";
+import FormSectionWithPoints from "@/components/common/form-section-with-points";
+import PDListSection from "@/components/common/pd-list-section";
+import Testimonials from "@/components/common/testimonials/testimonials";
+import PDListingHero from "@/components/hero/pd-listing-hero";
+import FooterCTA from "@/components/layout/footer-cta";
+import PopularPD from "@/components/common/pd-packages";
+import {
+    getDestinationsList,
+    getDestinationsPage,
+    getFaqs,
+    getPackagesList,
+    getTestimonials,
+} from "@/data/loaders";
+import { notFound } from "next/navigation";
+import React from "react";
+import GlobalToursSection from "@/components/common/global-tours-section";
+
+async function loader() {
+    const [pageData, faqs, testimonials, destinations, packages] =
+        await Promise.all([
+            getDestinationsPage(),
+            getFaqs(),
+            getTestimonials(),
+            getDestinationsList(),
+            getPackagesList(),
+        ]);
+    if (!pageData && pageData.data) notFound();
+    return {
+        pageData: pageData.data,
+        faqs: faqs.data,
+        testimonials: testimonials.data,
+        destinations: destinations.data,
+        packages: packages.data,
+    };
+}
+
+const DestinationListingPage = async () => {
+    const { pageData, faqs, testimonials, destinations, packages } =
+        await loader();
+
+    return (
+        <main>
+            <PDListingHero
+                cta={{
+                    text: "Get Free Consultation",
+                    href: "/contact-us",
+                    isExternal: false,
+                }}
+                hero={pageData.hero}
+                breadcrumbs={[
+                    {
+                        text: "Home",
+                        href: "/",
+                    },
+                    {
+                        text: "Destinations",
+                    },
+                ]}
+            />
+            <PDListSection {...pageData.destinations} />
+            <FormSectionWithPoints
+                {...pageData.form_section}
+                packages={packages}
+                destinations={destinations}
+                pointer={true}
+            />
+            <PopularPD {...pageData.popular_destinations} />
+            <GlobalToursSection {...pageData.global_tour_section} />
+            <Testimonials {...testimonials} />
+            <BlogSection {...pageData.blog_section} />
+            <FAQSection
+                title={faqs?.title}
+                description={faqs?.description}
+                faqs={faqs?.faqs}
+            />
+            <FooterCTA {...pageData.footer_cta_section} />
+        </main>
+    );
+};
+
+export default DestinationListingPage;
