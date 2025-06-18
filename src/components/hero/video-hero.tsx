@@ -50,6 +50,8 @@ const VideoHero = ({
                     autoPlay
                     muted
                     loop
+                    playsInline
+                    controls={false}
                     className="absolute inset-0 size-full object-cover pointer-events-none"
                 ></video>
             )}

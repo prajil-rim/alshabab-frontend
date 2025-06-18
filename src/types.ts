@@ -18,37 +18,12 @@ export interface LogoProps {
     image: MediaProps;
 }
 
-type ComponentType = "blocks.hero-slide";
-
 interface Base {
     id: number;
     documentId: string;
     createdAt?: string;
     updatedAt?: string;
     publishedAt?: string;
-}
-
-interface DynamicBase<
-    T extends ComponentType,
-    D extends object = Record<string, unknown>
-> extends Base {
-    __component?: T;
-    data?: D;
-}
-
-export type Block = HeroSlideProps;
-
-export interface HeroSlideProps extends DynamicBase<"blocks.hero-slide"> {
-    title: string;
-    description: string;
-    destination: string;
-    attraction: string;
-    background: {
-        id: number;
-        type: "image" | "video";
-        background: MediaProps;
-    };
-    cta: LinkProps;
 }
 
 export interface ReelsSectionProps {

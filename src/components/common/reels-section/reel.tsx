@@ -63,6 +63,8 @@ const Reel = ({
                     className="w-full pointer-events-none"
                     muted
                     loop
+                    playsInline
+                    controls={false}
                 />
                 <div className="flex flex-col gap-2 absolute right-0 bottom-0 p-2 items-center">
                     <div className="flex flex-col items-center">

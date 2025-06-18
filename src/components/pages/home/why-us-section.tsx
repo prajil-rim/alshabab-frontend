@@ -56,6 +56,8 @@ const WhyUsSection = ({
                         autoPlay
                         muted
                         loop
+                        playsInline
+                        controls={false}
                     ></video>
                 </div>
                 {cards

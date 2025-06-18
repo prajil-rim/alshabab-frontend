@@ -126,6 +126,8 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                                             }}
                                             autoPlay
                                             muted
+                                            controls={false}
+                                            playsInline
                                             className="absolute inset-0 size-full object-cover pointer-events-none"
                                             onEnded={() => {
                                                 if (api) {
