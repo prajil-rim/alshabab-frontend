@@ -50,7 +50,7 @@ const VideoHero = ({
                     autoPlay
                     muted
                     loop
-                    className="absolute inset-0 size-full object-cover"
+                    className="absolute inset-0 size-full object-cover pointer-events-none"
                 ></video>
             )}
             <div className="absolute inset-0 size-full bg-black/40"></div>

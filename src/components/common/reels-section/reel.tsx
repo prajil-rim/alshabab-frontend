@@ -60,7 +60,7 @@ const Reel = ({
                         if (el) videoRefs.current[index] = el;
                     }}
                     src={url}
-                    className="w-full"
+                    className="w-full pointer-events-none"
                     muted
                     loop
                 />

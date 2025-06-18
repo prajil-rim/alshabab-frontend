@@ -9,6 +9,7 @@ import {
 } from "@/data/loaders";
 import Footer from "@/components/layout/footer";
 import { Toaster } from "sonner";
+import Head from "next/head";
 
 const playFairDisplay = Playfair_Display({
     variable: "--font-playfair-display",
@@ -47,9 +48,9 @@ export default async function RootLayout({
 }>) {
     const { header, footer, destinations, packages } = await loader();
     return (
-        <html lang="en">
+        <html lang="en" className="overflow-x-hidden">
             <body
-                className={`${playFairDisplay.variable} ${manrope.variable} antialiased`}
+                className={`${playFairDisplay.variable} ${manrope.variable} antialiased overflow-hidden max-w-screen`}
             >
                 <Header
                     {...header}

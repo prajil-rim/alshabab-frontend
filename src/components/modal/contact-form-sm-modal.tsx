@@ -40,15 +40,15 @@ const ContactFormSmModal = ({
                     <ArrowRightUp color="red" />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="bg-[#ECF4FF] px-2 max-h-[calc(100vh-1rem)] overflow-y-scroll scrollbar-none">
+            <DialogContent className="bg-[#ECF4FF] px-2 max-h-[calc(100vh-5rem)] overflow-y-scroll scrollbar-none">
                 <DialogTitle className="sr-only">Contact Us</DialogTitle>
                 <DialogDescription className="sr-only"></DialogDescription>
                 <div className="size-full flex flex-col gap-3 items-center">
                     <Image
                         src="/images/logo/form_logo.webp"
                         width={100}
-                        height={100}
-                        alt="Footer logo"
+                        height={40}
+                        alt="logo red"
                         className="mx-auto"
                     />
                     <ContactUsForm

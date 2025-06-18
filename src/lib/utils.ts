@@ -35,5 +35,8 @@ export function returnMetadata(data: { seo: SeoMetadata }) {
                 alt: data.seo?.openGraph?.ogImage?.alternativeText || "",
             },
         },
+        other: {
+            "color-scheme": "light",
+        },
     };
 }

@@ -126,9 +126,7 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                                             }}
                                             autoPlay
                                             muted
-                                            // loop={index !== 0}
-                                            // loop
-                                            className="absolute inset-0 size-full object-cover"
+                                            className="absolute inset-0 size-full object-cover pointer-events-none"
                                             onEnded={() => {
                                                 if (api) {
                                                     if (

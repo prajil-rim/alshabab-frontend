@@ -31,6 +31,7 @@ const HeroSlide = ({
                     playsInline
                     width={1920}
                     height={1080}
+                    className="pointer-events-none"
                 />
             )}
             <h1>{title}</h1>
