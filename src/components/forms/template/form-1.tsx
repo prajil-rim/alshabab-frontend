@@ -49,7 +49,7 @@ const Form1 = ({
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="font-manrope border shadow-xl rounded-xl p-7 space-y-5 bg-white"
+                className="font-manrope border shadow-xl rounded-xl p-4 lg:p-7 space-y-5 bg-white"
             >
                 <FormField
                     control={form.control}
@@ -70,7 +70,7 @@ const Form1 = ({
                         </FormItem>
                     )}
                 />
-                <div className="grid grid-cols-2 gap-x-3">
+                <div className="grid lg:grid-cols-2 gap-x-3 gap-y-3 lg:gap-y-0">
                     <FormField
                         control={form.control}
                         name="email"
@@ -110,7 +110,7 @@ const Form1 = ({
                         )}
                     />
                 </div>
-                <div className="grid grid-cols-2 gap-x-3">
+                <div className="grid lg:grid-cols-2 gap-x-3 gap-y-3 lg:gap-y-0">
                     <FormField
                         control={form.control}
                         name="destination"

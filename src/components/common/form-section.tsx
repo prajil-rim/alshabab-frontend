@@ -32,19 +32,21 @@ const FormSection = ({
     return (
         <section
             className={cn(
-                "bg-gradient-to-t from-white to-[#F5F1E3]",
+                "bg-gradient-to-t from-white to-[#F5F1E3] px-3 lg:px-2",
                 className
             )}
         >
-            <div className="max-w-6xl mx-auto py-20 grid grid-cols-2 gap-5 ">
-                <div className="space-y-6">
-                    <h3 className="text-4xl font-semibold">{heading}</h3>
-                    <h4 className="text-2xl font-manrope font-semibold">
+            <div className="max-w-6xl mx-auto sm:pb-20 py-10 grid grid-cols-1 lg:grid-cols-2 gap-5 ">
+                <div className="space-y-4 lg:space-y-6">
+                    <h3 className="text-2xl lg:text-4xl font-semibold">
+                        {heading}
+                    </h3>
+                    <h4 className="text-lg lg:text-2xl font-manrope font-semibold">
                         {heading_2}
                     </h4>
                     <p className="font-manrope max-w-4xl">{description}</p>
                     <Link
-                        href={cta.href}
+                        href={cta?.href || "#"}
                         target={cta.isExternal ? "_blank" : "_self"}
                     >
                         <Button
@@ -56,12 +58,16 @@ const FormSection = ({
                     </Link>
                 </div>
                 {packageForm ? (
-                    <PackageConsultationForm packages={packages || []} />
+                    <div className="ps-1 pe-5 lg:ps-0 lg:pe-0">
+                        <PackageConsultationForm packages={packages || []} />
+                    </div>
                 ) : (
-                    <ConsultationForm
-                        destinations={destinations || []}
-                        packages={packages || []}
-                    />
+                    <div className="ps-1 pe-5 lg:ps-0 lg:pe-0">
+                        <ConsultationForm
+                            destinations={destinations || []}
+                            packages={packages || []}
+                        />
+                    </div>
                 )}
             </div>
         </section>

@@ -21,12 +21,7 @@ const Destinations = ({
             <DropdownMenuContent className="font-manrope">
                 {destinations?.map((destination) => (
                     <Link
-                        href={
-                            "/destinations/" +
-                            destination.slug +
-                            "?id=" +
-                            destination.documentId
-                        }
+                        href={"/destinations/" + destination.slug}
                         key={destination.documentId}
                     >
                         <DropdownMenuItem>

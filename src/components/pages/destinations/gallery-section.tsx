@@ -5,6 +5,7 @@ import { GalleryProps } from "@/types";
 import GalleryCard from "./gallery-card";
 import { Button } from "@/components/ui/button";
 import ArrowRightUp from "@/components/icons/arrow-right-up";
+import GalleryCarousel from "@/components/carousels/gallery-carousel";
 
 interface GallerySectionProps {
     title: string;
@@ -30,16 +31,16 @@ const GallerySection = ({
     const hasMoreToShow = visibleCount < gallery.length;
 
     return (
-        <section className="max-w-6xl mx-auto py-20 space-y-12 text-center">
+        <section className="max-w-6xl mx-auto py-10 space-y-12 text-center px-3 lg:px-2">
             <div className="space-y-6">
-                <h1 className="text-4xl font-semibold">{title}</h1>
+                <h1 className="text-2xl lg:text-4xl font-semibold">{title}</h1>
                 <p className="font-manrope overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
                     {description}
                 </p>
             </div>
 
-            <div className="relative">
-                <div className="grid grid-cols-4 gap-3">
+            <div className="relative hidden lg:block">
+                <div className="grid lg:grid-cols-4 gap-3">
                     {visibleGallery.map((gallery_) => (
                         <GalleryCard {...gallery_} key={gallery_.id} />
                     ))}
@@ -58,6 +59,16 @@ const GallerySection = ({
                     </>
                 )}
             </div>
+
+            <GalleryCarousel
+                cards={[
+                    ...gallery,
+                    ...gallery,
+                    ...gallery,
+                    ...gallery,
+                    ...gallery,
+                ]}
+            />
         </section>
     );
 };

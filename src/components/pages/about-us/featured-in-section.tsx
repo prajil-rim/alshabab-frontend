@@ -1,7 +1,6 @@
-import { StrapiImage } from "@/components/common/strapi-image";
 import { LinkProps, LogoProps } from "@/types";
-import Link from "next/link";
-import Markdown from "react-markdown";
+import FeaturedInCard from "./featured-in-card";
+import FeaturedInCarousel from "@/components/carousels/featured-in-carousel";
 
 interface FeaturedInSectionProps {
     title: string;
@@ -20,42 +19,21 @@ const FeaturedInSection = ({
     description,
     featured,
 }: Readonly<FeaturedInSectionProps>) => {
+    if (!title || !featured || featured.length === 0) return null;
     return (
-        <section className="max-w-6xl mx-auto py-20 space-y-6">
-            <h1 className="text-4xl font-semibold text-center">{title}</h1>
-            <p className="font-manrope text-center max-w-4xl mx-auto overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
+        <section className="max-w-6xl mx-auto py-10 space-y-3 lg:space-y-6 px-3 lg:px-2">
+            <h1 className="text-2xl lg:text-4xl font-semibold text-center">
+                {title}
+            </h1>
+            <p className="font-manrope text-center max-w-4xl mx-auto">
                 {description}
             </p>
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid-cols-4 gap-3 hidden lg:grid">
                 {featured.map((data) => (
-                    <Link
-                        href={data.url.href}
-                        target={data.url.isExternal ? "_blank" : "_self"}
-                        className="aspect-square group rounded-xl border-2 border-[#BDBDBD80] flex flex-col justify-center items-center p-4 hover:border-primary hover:shadow-xl"
-                        key={data.id}
-                    >
-                        <StrapiImage
-                            // src={data.logo.image.url}
-                            src="http://localhost:3000/images/logo/featured/travelbiz.webp"
-                            alt={
-                                data.logo.image.alternativeText ||
-                                data.logo.logoText
-                            }
-                            width={100}
-                            height={100}
-                            className="w-4/5 aspect-3/2 object-contain grayscale group-hover:grayscale-0 transform-all duration-300"
-                        />
-                        <span className="text-lg mb-1 font-semibold font-manrope text-center max-w-[15rem] overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
-                            <Markdown>{data.description}</Markdown>
-                        </span>
-                        <div className="h-fit overflow-hidden">
-                            <span className="font-manrope text-[#767676] font-medium group-hover:text-primary translate-y-5 block group-hover:translate-y-0 transition-transform duration-300">
-                                {data.url.text}
-                            </span>
-                        </div>
-                    </Link>
+                    <FeaturedInCard data={data} key={data.id} />
                 ))}
             </div>
+            <FeaturedInCarousel data={featured} />
         </section>
     );
 };

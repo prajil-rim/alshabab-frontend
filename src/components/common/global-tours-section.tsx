@@ -1,6 +1,7 @@
 import { TourProps } from "@/types";
-import GlobalTourGrid from "./global-tour-grid";
+import GlobalTourGrid from "./global-tours/global-tour-grid";
 import Leaf from "../icons/leaf";
+import GlobalTourCarousel from "../carousels/global-tour-carousel";
 
 interface GlobalToursProps {
     title: string;
@@ -15,11 +16,13 @@ const GlobalToursSection = ({
     tours,
     showLeaf = false,
 }: Readonly<GlobalToursProps>) => {
+    if (!title || !tours || tours.length === 0) return null;
+
     return (
-        <section className="max-w-6xl mx-auto py-20 space-y-12">
+        <section className="max-w-6xl mx-auto py-10 space-y-6 lg:space-y-12 px-3 lg:px-2">
             <div className="space-y-6">
                 <div className="relative">
-                    <h1 className="text-4xl font-semibold text-center">
+                    <h1 className="text-2xl lg:text-4xl font-semibold text-center">
                         {title}
                     </h1>
                     {showLeaf && (
@@ -28,11 +31,13 @@ const GlobalToursSection = ({
                         </div>
                     )}
                 </div>
-                <p className="font-manrope text-center max-w-4xl mx-auto overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
+                <p className="font-manrope text-center max-w-4xl mx-auto">
                     {description}
                 </p>
             </div>
+
             <GlobalTourGrid tours={tours || []} />
+            <GlobalTourCarousel tours={tours || []} />
         </section>
     );
 };

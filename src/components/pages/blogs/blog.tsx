@@ -54,6 +54,7 @@ const Blog = ({
     blog,
     recommendedBlogs,
 }: Readonly<BlogProps>) => {
+    console.log(image.id);
     const sections = getSections(blog);
     const [activeSection, setActiveSection] = useState(sections[0]?.id || "");
     const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
@@ -104,10 +105,10 @@ const Blog = ({
     };
 
     return (
-        <section className="max-w-6xl mx-auto pt-10 py-20">
-            <div className="flex gap-20">
+        <section className="max-w-6xl mx-auto pt-5 lg:pt-10 py-20 px-3 lg:px-2">
+            <div className="flex flex-wrap-reverse lg:flex-nowrap lg:gap-20 px-4 lg:px-0">
                 <div className="h-fit sticky top-0 pt-10">
-                    <div className="relative w-full">
+                    <div className="relative w-full hidden lg:block">
                         {/* Scroll indicator line */}
                         <ScrollIndicatorLine
                             activeSection={activeSection}
@@ -203,7 +204,7 @@ const Blog = ({
                 </div>
                 <BlogContent blog={blog} sectionRefs={sectionRefs} />
             </div>
-            <div className="space-y-6 mt-20">
+            <div className="space-y-6 mt-20 hidden lg:block">
                 <h3 className="text-2xl font-semibold">Recommended Articles</h3>
                 <div className="grid grid-cols-3 gap-10">
                     {recommendedBlogs?.slice(0, 3).map((blog) => (

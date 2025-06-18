@@ -25,34 +25,36 @@ const FormSection = ({
     const groupedContact = groupContactInfo(contact_info);
 
     return (
-        <div className="grid grid-cols-2 max-w-5xl mx-auto py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-5 md:gap-0 py-10 lg:py-24 px-5 lg:px-0">
             <div className="space-y-8">
-                <h3 className="text-4xl font-semibold">{contact_title}</h3>
+                <h3 className="text-2xl lg:text-4xl font-semibold">
+                    {contact_title}
+                </h3>
                 <div className="font-manrope">
-                    <dl className="space-y-5">
-                        <dt className="text-primary flex items-center gap-1 text-xl font-semibold">
+                    <dl className="space-y-2.5 lg:space-y-5">
+                        <dt className="text-primary flex items-center gap-1 lg:text-xl font-semibold">
                             <Call fill="#DA0720" className="size-5" />
                             <span>Phone</span>
                         </dt>
-                        <div className="space-y-2">
+                        <div className="space-y-2 text-sm lg:text-base">
                             {groupedContact.phone?.map((phone, i) => (
                                 <dd key={phone + i}>{phone}</dd>
                             ))}
                         </div>
-                        <dt className="text-primary flex items-center gap-1 text-xl font-semibold">
+                        <dt className="text-primary flex items-center gap-1 tlg:text-xl font-semibold">
                             <Mail fill="#DA0720" className="size-5" />
                             <span>Email</span>
                         </dt>
-                        <div className="space-y-2">
+                        <div className="space-y-2 text-sm lg:text-base">
                             {groupedContact.email?.map((mail, i) => (
                                 <dd key={mail + i}>{mail}</dd>
                             ))}
                         </div>
-                        <dt className="text-primary flex items-center gap-1 text-xl font-semibold">
+                        <dt className="text-primary flex items-center gap-1 lg:text-xl font-semibold">
                             <MapPin fill="#DA0720" className="size-5" />
                             <span>Location</span>
                         </dt>
-                        <div className="space-y-2">
+                        <div className="space-y-2 text-sm lg:text-base">
                             {groupedContact.location?.map((location, i) => (
                                 <dd
                                     className="max-w-[18rem]"
@@ -65,13 +67,11 @@ const FormSection = ({
                     </dl>
                 </div>
             </div>
-            <div className="space-y-8">
-                <ContactUsForm
-                    destinations={destinations}
-                    packages={packages}
-                    formType="form1"
-                />
-            </div>
+            <ContactUsForm
+                destinations={destinations}
+                packages={packages}
+                formType="form1"
+            />
         </div>
     );
 };

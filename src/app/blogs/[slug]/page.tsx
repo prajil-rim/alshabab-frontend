@@ -2,25 +2,47 @@ import BlogHero from "@/components/hero/blog-hero";
 import FooterCTA from "@/components/layout/footer-cta";
 import Blog from "@/components/pages/blogs/blog";
 import { getBlog } from "@/data/loaders";
+import { returnMetadata } from "@/lib/utils";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-async function loader(id: string) {
-    const [pageData] = await Promise.all([getBlog(id)]);
-    if (!pageData && pageData.data) notFound();
+export async function generateStaticParams() {
+    return [];
+}
+
+let blogDataPromise: ReturnType<typeof getBlog> | null = null;
+
+function getBlogDataOnce(slug: string) {
+    if (!blogDataPromise) {
+        blogDataPromise = getBlog(slug);
+    }
+    return blogDataPromise;
+}
+
+async function loader(slug: string) {
+    const [pageData] = await Promise.all([getBlogDataOnce(slug)]);
+    if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
     };
 }
 
-const BlogPage = async ({
-    searchParams,
+export async function generateMetadata({
+    params,
 }: {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) => {
-    const { id } = await searchParams;
-    if (!id) return notFound();
+    params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+    const { slug } = await params;
+    const { data } = await getBlogDataOnce(slug);
 
-    const { pageData } = await loader(id as string);
+    return returnMetadata(data);
+}
+
+const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+    const { slug } = await params;
+    if (!slug) return notFound();
+
+    const { pageData } = await loader(slug as string);
 
     return (
         <main>

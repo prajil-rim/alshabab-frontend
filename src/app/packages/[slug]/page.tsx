@@ -12,16 +12,31 @@ import {
     getPackagesList,
     getTestimonials,
 } from "@/data/loaders";
+import { returnMetadata } from "@/lib/utils";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-async function loader(id: string) {
+export async function generateStaticParams() {
+    return [];
+}
+
+let packageDataPromise: ReturnType<typeof getPackage> | null = null;
+
+function getPackageDataOnce(slug: string) {
+    if (!packageDataPromise) {
+        packageDataPromise = getPackage(slug);
+    }
+    return packageDataPromise;
+}
+
+async function loader(slug: string) {
     const [pageData, faqs, testimonials, packages] = await Promise.all([
-        getPackage(id),
+        getPackageDataOnce(slug),
         getFaqs(),
         getTestimonials(),
         getPackagesList(),
     ]);
-    if (!pageData && pageData.data) notFound();
+    if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
         faqs: faqs.data,
@@ -30,16 +45,27 @@ async function loader(id: string) {
     };
 }
 
-const PackagePage = async ({
-    searchParams,
+export async function generateMetadata({
+    params,
 }: {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+    params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+    const { slug } = await params;
+    const { data } = await getPackageDataOnce(slug);
+
+    return returnMetadata(data);
+}
+
+const PackagePage = async ({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
 }) => {
-    const { id } = await searchParams;
-    if (!id) return notFound();
+    const { slug } = await params;
+    if (!slug) return notFound();
 
     const { pageData, faqs, testimonials, packages } = await loader(
-        id as string
+        slug as string
     );
 
     return (
@@ -66,6 +92,7 @@ const PackagePage = async ({
             <FormSection {...pageData.form_section} packages={packages} />
             <PackageIncludesSection {...pageData.package_includes_section} />
             <TripDetailsSection {...pageData.trip_details} />
+            <div className="pt-10 lg:pt-20"></div>
             <Testimonials {...testimonials} />
             <BlogSection {...pageData.blog_section} />
             <FAQSection

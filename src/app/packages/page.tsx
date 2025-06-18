@@ -1,7 +1,7 @@
 import BlogSection from "@/components/common/blog-section/blog-section";
 import FAQSection from "@/components/common/faq/faq-section";
 import FormSectionWithPoints from "@/components/common/form-section-with-points";
-import PDListSection from "@/components/common/pd-list-section";
+import PDListSection from "@/components/common/pd-list-section/pd-list-section";
 import Testimonials from "@/components/common/testimonials/testimonials";
 import PDListingHero from "@/components/hero/pd-listing-hero";
 import FooterCTA from "@/components/layout/footer-cta";
@@ -14,17 +14,28 @@ import {
     getTestimonials,
 } from "@/data/loaders";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+import { returnMetadata } from "@/lib/utils";
+
+let packagesPageDataPromise: ReturnType<typeof getPackagesPage> | null = null;
+
+function getPackagesPageOnce() {
+    if (!packagesPageDataPromise) {
+        packagesPageDataPromise = getPackagesPage();
+    }
+    return packagesPageDataPromise;
+}
 
 async function loader() {
     const [pageData, faqs, testimonials, destinations, packages] =
         await Promise.all([
-            getPackagesPage(),
+            getPackagesPageOnce(),
             getFaqs(),
             getTestimonials(),
             getDestinationsList(),
             getPackagesList(),
         ]);
-    if (!pageData && pageData.data) notFound();
+    if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
         faqs: faqs.data,
@@ -34,6 +45,12 @@ async function loader() {
     };
 }
 
+export async function generateMetadata(): Promise<Metadata> {
+    const { data } = await getPackagesPageOnce();
+
+    return returnMetadata(data);
+}
+
 const PackageListingPage = async () => {
     const { pageData, faqs, testimonials, destinations, packages } =
         await loader();
@@ -41,11 +58,6 @@ const PackageListingPage = async () => {
     return (
         <main>
             <PDListingHero
-                cta={{
-                    text: "Get Free Consultation",
-                    href: "/contact-us",
-                    isExternal: false,
-                }}
                 hero={pageData.hero}
                 breadcrumbs={[
                     {

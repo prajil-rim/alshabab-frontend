@@ -24,31 +24,31 @@ const FooterCTA = ({
             style={
                 text_align === "center"
                     ? {
-                          backgroundImage:
-                              "url(/images/others/footer_cta_img2.webp)",
+                          backgroundImage: `url(${background?.url})`,
                       }
-                    : //   { backgroundImage: `url(${background?.url})` }
-                      {}
+                    : {}
             }
         >
             <div
                 className={cn(
-                    "max-w-6xl mx-auto relative z-10",
+                    "max-w-6xl mx-auto relative z-10 pt-10 lg:pt-0",
                     text_align === "center"
                         ? "flex flex-col justify-center items-center"
-                        : "grid grid-cols-2"
+                        : "grid grid-cols-1 lg:grid-cols-2"
                 )}
             >
                 <div
                     className={cn(
-                        "text-white my-auto h-fit space-y-8",
-                        text_align === "center" ? "text-center" : "w-full"
+                        "text-white my-auto h-fit space-y-4 lg:space-y-8",
+                        text_align === "center"
+                            ? "text-center"
+                            : "w-full text-center lg:text-left"
                     )}
                 >
-                    <h1 className="text-4xl font-black">{title}</h1>
+                    <h1 className="text-2xl lg:text-4xl font-black">{title}</h1>
                     <p
                         className={cn(
-                            "font-manrope font-medium overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:4] [-webkit-box-orient:vertical]",
+                            "font-manrope font-medium text-sm lg:text-base mx-auto lg:mx-0",
                             text_align === "center"
                                 ? "max-w-[59rem]"
                                 : "max-w-[22rem]"
@@ -56,9 +56,16 @@ const FooterCTA = ({
                     >
                         {description}
                     </p>
-                    <div className="space-x-6 font-manrope">
+                    <div
+                        className={cn(
+                            "flex flex-col lg:flex-row gap-3 lg:gap-6 font-manrope",
+                            text_align === "center"
+                                ? "justify-center"
+                                : "justify-start"
+                        )}
+                    >
                         <Link
-                            href={cta_call.href}
+                            href={cta_call?.href || ""}
                             target={cta_call.isExternal ? "_blank" : "_self"}
                         >
                             <Button
@@ -68,16 +75,16 @@ const FooterCTA = ({
                                 <div className="bg-primary rounded-full size-5 shrink-0 flex justify-center items-center">
                                     <Call />
                                 </div>
-                                {cta_call.text}
+                                {cta_call?.text}
                             </Button>
                         </Link>
                         <Link
-                            href={cta_chat.href}
-                            target={cta_chat.isExternal ? "_blank" : "_self"}
+                            href={cta_chat?.href || ""}
+                            target={cta_chat?.isExternal ? "_blank" : "_self"}
                         >
                             <Button className="bg-[#FFE9EC] rounded-full text-black hover:text-white cursor-pointer">
                                 <Whatsapp />
-                                {cta_chat.text}
+                                {cta_chat?.text}
                             </Button>
                         </Link>
                     </div>
@@ -85,9 +92,11 @@ const FooterCTA = ({
                 <div className="size-full">
                     {image && (
                         <StrapiImage
-                            alt="Footer cta"
-                            // src={image?.url}
-                            src="http://localhost:3000/images/others/footer_cta_img1.webp"
+                            alt={
+                                image.alternativeText ||
+                                "Alternative text not provided"
+                            }
+                            src={image?.url || process.env.PLACEHOLDER_IMAGE!}
                             width={760}
                             height={500}
                         />

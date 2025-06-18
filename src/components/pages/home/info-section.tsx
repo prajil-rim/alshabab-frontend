@@ -28,16 +28,15 @@ const InfoSection = ({
     cta,
 }: Readonly<InfoSectionProps>) => {
     return (
-        <div className="flex items-center my-20 flex-row-reverse">
-            <div className="shrink-0 w-1/2">
-                <div className="relative flex justify-end">
+        <div className="flex items-center my-20 flex-row-reverse flex-wrap-reverse lg:flex-nowrap gap-10 lg:gap-0">
+            <div className="shrink-0 w-[90%] md:w-3/5 lg:w-1/2 md:mx-auto">
+                <div className="relative flex justify-end w-fit ms-auto">
                     <StrapiImage
                         alt={
                             largeImage.alternativeText ||
                             "Alternative Text not provided"
                         }
-                        // src={largeImage.url}
-                        src="http://localhost:3000/images/others/info_block_1.webp"
+                        src={largeImage.url || process.env.PLACEHOLDER_IMAGE!}
                         width={430}
                         height={300}
                         className="rounded-lg h-80 object-cover"
@@ -47,28 +46,27 @@ const InfoSection = ({
                             smallImage.alternativeText ||
                             "Alternative Text not provided"
                         }
-                        // src={smallImage.url}
-                        src="http://localhost:3000/images/others/info_block_2.webp"
-                        className="absolute -bottom-1/4 rounded-lg border-2 border-white h-52 left-0"
+                        src={smallImage.url || process.env.PLACEHOLDER_IMAGE!}
+                        className="absolute -bottom-1/4 rounded-lg border-2 border-white h-52 -left-[12%] md:-left-1/5 object-cover"
                         width={250}
                         height={200}
                     />
                 </div>
             </div>
-            <div className="space-y-5">
+            <div className="space-y-2.5 lg:space-y-5">
                 <div className="relative w-fit">
-                    <h3 className="text-3xl font-semibold">{heading}</h3>
+                    <h3 className="text-2xl lg:text-3xl font-semibold">
+                        {heading}
+                    </h3>
                     <div className="absolute left-full -translate-x-[40%] bottom-0 origin-top-left z-10 pointer-events-none">
                         <Leaf />
                     </div>
                 </div>
-                <div className="text-xl font-manrope">
+                <div className="text-lg lg:text-xl font-manrope">
                     <Markdown>{heading_2}</Markdown>
                 </div>
-                <p className="font-manrope overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:7] [-webkit-box-orient:vertical]">
-                    {description}
-                </p>
-                <div className="flex items-center gap-9 font-manrope">
+                <p className="font-manrope">{description}</p>
+                <div className="flex items-center gap-9 font-manrope py-3 lg:py-0">
                     <div className="flex flex-col">
                         <span className="font-bold text-3xl">
                             {success_trips}
@@ -83,14 +81,14 @@ const InfoSection = ({
                     </div>
                 </div>
                 <Link
-                    href={cta.href}
-                    target={cta.isExternal ? "_blank" : "_self"}
+                    href={cta?.href}
+                    target={cta?.isExternal ? "_blank" : "_self"}
                 >
                     <Button
                         variant={"outline"}
                         className="border-primary text-primary rounded-full bg-transparent font-manrope cursor-pointer hover:bg-primary hover:text-white"
                     >
-                        {cta.text} <ArrowRightUp color="red" />
+                        {cta?.text} <ArrowRightUp color="red" />
                     </Button>
                 </Link>
             </div>

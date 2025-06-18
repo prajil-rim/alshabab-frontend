@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BlogCard from "./blog-card";
 import { BlogCardProps } from "@/types";
@@ -20,6 +20,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import BlogCardSm from "./blog-card-sm";
 
 interface BlogListSectionProps {
     blog_list: {
@@ -71,18 +72,18 @@ const BlogListSection = ({ blog_list, all_blogs }: BlogListSectionProps) => {
 
     const handleTabChange = (tab: string) => {
         setActiveTab(tab);
-        setCurrentPage(1); // reset page on tab change
+        setCurrentPage(1);
     };
 
     return (
-        <section className="max-w-6xl mx-auto py-20">
+        <section className="max-w-6xl mx-auto py-10 px-3 lg:px-2">
             <div>
-                <h2 className="font-semibold text-4xl mb-4">
+                <h2 className="font-semibold text-2xl lg:text-4xl mb-4">
                     {blog_list.title}
                 </h2>
-                <Tabs defaultValue="all" onValueChange={handleTabChange}>
-                    <div className="flex justify-between items-center">
-                        <TabsList className="space-x-3 font-manrope mb-6 max-w-full overflow-x-scroll scrollbar-none justify-start">
+                <Tabs value={activeTab} onValueChange={handleTabChange}>
+                    <div className="flex justify-between items-start">
+                        <TabsList className="space-x-3 font-manrope mb-6 max-w-full overflow-x-scroll scrollbar-none justify-start hidden md:block">
                             <TabsTrigger value="all">All</TabsTrigger>
                             {blog_list?.blog_categories?.map((category, i) => (
                                 <TabsTrigger
@@ -93,37 +94,74 @@ const BlogListSection = ({ blog_list, all_blogs }: BlogListSectionProps) => {
                                 </TabsTrigger>
                             ))}
                         </TabsList>
-                        <div className="font-manrope flex items-center gap-2">
-                            <span className="text-sm font-medium">
-                                Sort By:{" "}
-                            </span>
-                            <Select
-                                value={sortBy}
-                                onValueChange={(value) => {
-                                    setSortBy(value);
-                                    setCurrentPage(1); // Optional: Reset to first page on sort
-                                }}
-                            >
-                                <SelectTrigger className="w-fit shadow-none rounded-sm border-black/20 focus-visible:ring-0 text-sm font-medium">
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent className="font-manrope">
-                                    <SelectItem value="newest">
-                                        Newest
-                                    </SelectItem>
-                                    <SelectItem value="oldest">
-                                        Oldest
-                                    </SelectItem>
-                                </SelectContent>
-                            </Select>
+
+                        <div className="flex flex-col gap-2 w-full md:w-fit">
+                            <div className="font-manrope flex justify-between md:justify-start items-center gap-2 text-sm md:hidden">
+                                <span className="font-medium">Category: </span>
+                                <Select
+                                    value={activeTab}
+                                    onValueChange={(value) => {
+                                        handleTabChange(value);
+                                    }}
+                                >
+                                    <SelectTrigger className="w-fit shadow-none rounded-sm border-black/20 focus-visible:ring-0 text-sm font-medium">
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent className="font-manrope">
+                                        <SelectItem value="all">All</SelectItem>
+                                        {blog_list?.blog_categories?.map(
+                                            (category, i) => (
+                                                <SelectItem
+                                                    value={category.slug}
+                                                    key={
+                                                        category.documentId + i
+                                                    }
+                                                >
+                                                    {category.category}
+                                                </SelectItem>
+                                            )
+                                        )}
+                                    </SelectContent>
+                                </Select>
+                            </div>
+
+                            <div className="font-manrope flex items-center gap-2 text-sm justify-between md:justify-start">
+                                <span className="font-medium">Sort By: </span>
+                                <Select
+                                    value={sortBy}
+                                    onValueChange={(value) => {
+                                        setSortBy(value);
+                                        setCurrentPage(1); // Optional: Reset to first page on sort
+                                    }}
+                                >
+                                    <SelectTrigger className="w-fit shadow-none rounded-sm border-black/20 focus-visible:ring-0 text-sm font-medium">
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent className="font-manrope">
+                                        <SelectItem value="newest">
+                                            Newest
+                                        </SelectItem>
+                                        <SelectItem value="oldest">
+                                            Oldest
+                                        </SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         </div>
                     </div>
                     <TabsContent
                         value={activeTab}
-                        className="grid grid-cols-3 gap-x-6 gap-y-10"
+                        className="grid grid-cols-1 md:grid-cols-3 gap-x-6 md:gap-y-10 gap-y-3"
                     >
                         {currentBlogs.map((blog) => (
-                            <BlogCard key={blog.documentId} {...blog} />
+                            <Fragment key={blog.documentId}>
+                                <div className="hidden md:block">
+                                    <BlogCard {...blog} />
+                                </div>
+                                <div className="md:hidden">
+                                    <BlogCardSm {...blog} />
+                                </div>
+                            </Fragment>
                         ))}
                     </TabsContent>
                 </Tabs>

@@ -42,16 +42,14 @@ const SearchForm = ({
         event.preventDefault();
         const url =
             "/packages/" +
-            selectedPackage?.package.replaceAll(" ", "-").toLowerCase() +
-            "?id=" +
-            selectedPackage?.documentId;
+            selectedPackage?.package.replaceAll(" ", "-").toLowerCase();
         navigate.push(url);
     }
 
     return (
         <form
             onSubmit={handleSubmit}
-            className="bg-white p-2.5 rounded-full flex font-manrope gap-11"
+            className="bg-white p-7 lg:p-2.5 rounded-xl lg:rounded-full flex flex-col lg:flex-row font-manrope gap-7 lg:gap-11"
         >
             <div className="flex items-center gap-2">
                 <Target />
@@ -154,7 +152,7 @@ const SearchForm = ({
 
             <Button
                 type="submit"
-                className="rounded-full text-white text-lg bg-secondary items-center h-auto ms-auto cursor-pointer"
+                className="w-full lg:w-fit rounded-full text-white text-lg bg-secondary items-center h-auto ms-auto cursor-pointer"
             >
                 Find My Adventure
                 <div className="rounded-full aspect-square bg-white p-3 h-full flex items-center justify-center">

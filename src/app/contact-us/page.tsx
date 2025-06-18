@@ -7,20 +7,37 @@ import {
     getDestinationsList,
     getPackagesList,
 } from "@/data/loaders";
+import { returnMetadata } from "@/lib/utils";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+let contactUsPageDataPromise: ReturnType<typeof getContactUsPage> | null = null;
+
+function getContactUsPageOnce() {
+    if (!contactUsPageDataPromise) {
+        contactUsPageDataPromise = getContactUsPage();
+    }
+    return contactUsPageDataPromise;
+}
 
 async function loader() {
     const [data, destinations, packages] = await Promise.all([
-        getContactUsPage(),
+        getContactUsPageOnce(),
         getDestinationsList(),
         getPackagesList(),
     ]);
-    if (!data && data.data) notFound();
+    if (!data || !data.data) notFound();
     return {
         data: data.data,
         destinations: destinations.data,
         packages: packages.data,
     };
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+    const { data } = await getContactUsPageOnce();
+
+    return returnMetadata(data);
 }
 
 const ContactPage = async () => {

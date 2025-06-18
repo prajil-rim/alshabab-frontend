@@ -217,7 +217,7 @@ export interface RouteProps {
     id: number;
     title: string;
     description: string;
-    icon: MediaProps;
+    icon: LogoProps;
     google_map_link: LinkProps;
 }
 
@@ -240,3 +240,47 @@ export interface DealsProps extends Base {
         label: string;
     }[];
 }
+
+export interface GuideProps {
+    id: number;
+    name: string;
+    label: string;
+    image: MediaProps;
+    languages: {
+        id: number;
+        label: string;
+    }[];
+    expertise: {
+        id: number;
+        label: string;
+    }[];
+    socials: {
+        id: number;
+        href: string;
+        isExternal: boolean;
+        label: string;
+        icon: MediaProps;
+    }[];
+}
+
+export type GroupedContactInfo = {
+    [key in ContactInfoProps["contact"]]?: string[];
+};
+
+export type SeoMetadata = {
+    metaTitle: string;
+    metaDescription: string;
+    metaKeywords: string;
+    metaRobots: string;
+    canonicalUrl: string;
+    openGraph: {
+        ogTitle: string;
+        ogDescription: string;
+        ogUrl: string;
+        ogType: string;
+        ogImage: {
+            url: string;
+            alternativeText: string;
+        };
+    };
+};

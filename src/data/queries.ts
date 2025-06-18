@@ -128,6 +128,20 @@ export const homePageQuery = qs.stringify({
         },
         trending_search: true,
         price_range: true,
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
     },
 });
 
@@ -251,6 +265,20 @@ export const aboutUsPageQuery = qs.stringify({
             },
         },
         map_section: true,
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
     },
 });
 
@@ -298,18 +326,6 @@ export const globalSettingQuery = qs.stringify({
 export const partnerSectionQuery = qs.stringify({
     populate: {
         partner_logo: {
-            populate: {
-                image: {
-                    fields: ["url", "alternativeText"],
-                },
-            },
-        },
-    },
-});
-
-export const globalToursQuery = qs.stringify({
-    populate: {
-        destinations: {
             populate: {
                 image: {
                     fields: ["url", "alternativeText"],
@@ -391,6 +407,20 @@ export const blogQuery = qs.stringify({
                 blog_category: true,
             },
             fields: ["documentId", "blog_summary", "blog_title", "slug"],
+        },
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
         },
     },
 });
@@ -537,6 +567,20 @@ export const destinationQuery = qs.stringify({
                 },
             },
         },
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
     },
 });
 
@@ -626,6 +670,20 @@ export const destinationListingPageQuery = qs.stringify({
                 cta_chat: true,
             },
         },
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
     },
 });
 
@@ -712,6 +770,20 @@ export const packageQuery = qs.stringify({
                 },
             },
         },
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
     },
 });
 
@@ -790,6 +862,20 @@ export const packageListingPageQuery = qs.stringify({
                 cta_chat: true,
             },
         },
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
     },
 });
 
@@ -799,7 +885,7 @@ export const packageListQuery = qs.stringify({
             fields: ["documentId"],
         },
     },
-    fields: ["documentId", "package"],
+    fields: ["documentId", "package", "slug"],
     pagination: {
         pageSize: 100,
     },
@@ -839,6 +925,20 @@ export const contactUsPageQuery = qs.stringify({
                 cta_chat: true,
             },
         },
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
     },
 });
 
@@ -868,6 +968,20 @@ export const blogListPageQuery = qs.stringify({
             populate: {
                 blog_categories: {
                     fields: ["slug", "documentId", "category"],
+                },
+            },
+        },
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
                 },
             },
         },

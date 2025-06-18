@@ -14,11 +14,10 @@ const CardWithAnimatedParagraph = ({ card }: { card: CardProps }) => {
     return (
         <div
             className={cn(
-                "group w-full flex-1 flex justify-center items-end rounded-xl hover:flex-1/12 transition-all duration-500 bg-center bg-cover overflow-hidden relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/80 after:to-transparent"
+                "group w-full aspect-square lg:aspect-auto flex-1 flex justify-center items-end rounded-xl hover:flex-1/12 transition-all duration-500 bg-center bg-cover overflow-hidden relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/80 after:to-transparent"
             )}
             style={{
-                // backgroundImage: `url(${card.image.url})`,
-                backgroundImage: "url('/images/hover-slide/img1.webp')",
+                backgroundImage: `url(${card.image?.url})`,
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -40,9 +39,7 @@ const CardWithAnimatedParagraph = ({ card }: { card: CardProps }) => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden space-y-2"
                 >
-                    <p className="font-manrope text-sm overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:5] [-webkit-box-orient:vertical]">
-                        {card.description}
-                    </p>
+                    <p className="font-manrope text-sm">{card.description}</p>
                     {card.cta && (
                         <Link
                             href={card.cta.href}

@@ -1,5 +1,7 @@
 import { StrapiImage } from "@/components/common/strapi-image";
+import IndiaMappin from "@/components/icons/india-mappin";
 import JourneyLine from "@/components/icons/journey-line";
+import UAEMappin from "@/components/icons/uae-mappin";
 import { cn } from "@/lib/utils";
 import { MediaProps } from "@/types";
 import Markdown from "react-markdown";
@@ -21,14 +23,18 @@ const OurJourneySection = ({
     description,
     journey_details,
 }: Readonly<OurJourneySectionProps>) => {
+    if (!title || !journey_details || journey_details.length === 0) return null;
+
     return (
         <section className="bg-[#ECF4FF]">
-            <div className="max-w-6xl mx-auto py-20 space-y-6">
+            <div className="max-w-6xl mx-auto py-10 space-y-3 lg:space-y-6 px-3 lg:px-2">
                 <h1 className="font-semibold text-4xl text-center">{title}</h1>
                 <div className="font-manrope text-center max-w-4xl mx-auto overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
                     <Markdown>{description}</Markdown>
                 </div>
-                <div className="relative flex justify-center items-center">
+
+                {/* For Large Screen */}
+                <div className="relative justify-center items-center hidden lg:flex">
                     <JourneyLine />
                     <div className="absolute inset-0 size-full py-28">
                         {journey_details.map((journey, i) => (
@@ -43,11 +49,13 @@ const OurJourneySection = ({
                                     {journey.year}
                                 </span>
                                 <StrapiImage
-                                    // src={journey.image.url}
-                                    src="http://localhost:3000/images/others/table.webp"
+                                    src={
+                                        journey.image?.url ||
+                                        process.env.PLACEHOLDER_IMAGE!
+                                    }
                                     alt={
-                                        journey.image.alternativeText ||
-                                        journey.image.url
+                                        journey.image?.alternativeText ||
+                                        "Alternative Text not provided"
                                     }
                                     width={200}
                                     height={200}
@@ -67,6 +75,35 @@ const OurJourneySection = ({
                             </div>
                         ))}
                     </div>
+                </div>
+
+                {/* For Small Screen */}
+                <div className="relative py-20 lg:hidden">
+                    <ul className="relative z-10 space-y-8">
+                        {journey_details.map((journey) => (
+                            <li className="flex gap-4" key={journey.id}>
+                                <div className="size-4 rounded-full bg-[#C8CFD8] border-4 border-secondary shrink-0 ms-2 mt-2"></div>
+                                <div className="space-y-2">
+                                    <span className="font-extrabold text-2xl font-manrope block">
+                                        {journey.year}
+                                    </span>
+                                    <h1 className="text-xl font-semibold">
+                                        {journey.title}
+                                    </h1>
+                                    <p className="font-manrope">
+                                        {journey.description}
+                                    </p>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="absolute w-1 h-full border-2 border-dashed border-[#C8CFD8] left-0 top-0 ms-3.5"></div>
+                    <span className="absolute top-0 -left-1.5 bg-[#ECF4FF]">
+                        <UAEMappin />
+                    </span>
+                    <span className="absolute bottom-0 -left-1.5 bg-[#ECF4FF]">
+                        <IndiaMappin />
+                    </span>
                 </div>
             </div>
         </section>

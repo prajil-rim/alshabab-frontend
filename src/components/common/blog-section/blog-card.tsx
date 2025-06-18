@@ -11,8 +11,7 @@ const BlogCard = ({
             <div
                 className="bg-cover bg-center aspect-video w-full rounded-xl"
                 style={{
-                    backgroundImage: `url("/images/others/blog_card1.webp")`,
-                    // backgroundImage: `url("${hero.cover.url}")`,
+                    backgroundImage: `url("${hero.cover?.url}")`,
                 }}
             ></div>
             <h3 className="font-semibold text-xl overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">

@@ -1,4 +1,4 @@
-import { LinkProps, LogoProps } from "@/types";
+import { LinkProps, LogoProps, SocialsProps } from "@/types";
 import { StrapiImage } from "../common/strapi-image";
 import Link from "next/link";
 import Image from "next/image";
@@ -16,7 +16,7 @@ interface FooterProps {
     cookies: LinkProps;
     sitemap: LinkProps;
     copy: string;
-    socials: LinkProps[];
+    socials: SocialsProps[];
     contact_info: {
         id: number;
         contact: string;
@@ -25,13 +25,6 @@ interface FooterProps {
 }
 
 type ContactType = "phone" | "email" | "location";
-
-const devSocials = [
-    "http://localhost:3000/images/icons/instagram.svg",
-    "http://localhost:3000/images/icons/whatsapp.svg",
-    "http://localhost:3000/images/icons/facebook.svg",
-    "http://localhost:3000/images/icons/youtube.svg",
-];
 
 const contactIcons = {
     phone: <Call />,
@@ -55,21 +48,25 @@ const Footer = ({
     return (
         <footer className="bg-off-black text-primary-foreground font-manrope">
             <div className="max-w-6xl mx-auto px-2 py-8">
-                <div className="grid grid-cols-5 py-10">
-                    <div className="col-span-2 space-y-4">
+                <div className="grid grid-cols-1 lg:grid-cols-5 py-10 space-y-8 lg:space-y-0">
+                    <div className="lg:col-span-2 space-y-4 text-center lg:text-left">
                         <StrapiImage
-                            // src={logo.image.url}
-                            src="http://localhost:3000/images/logo/footer_logo.webp"
+                            src={
+                                logo.image.url || process.env.PLACEHOLDER_IMAGE!
+                            }
                             alt={logo.image.alternativeText || logo.logoText}
                             width={200}
                             height={150}
+                            className="mx-auto lg:mx-0"
                         />
-                        <p className="max-w-sm">{description}</p>
+                        <p className="max-w-sm mx-auto lg:mx-0">
+                            {description}
+                        </p>
                     </div>
-                    <div className="space-y-6">
+                    <div className="space-y-5 lg:space-y-6 text-center lg:text-left">
                         <div className="text-xl font-bold">Quick Links</div>
                         <ul className="space-y-3.5">
-                            {quick_links.map((link) => (
+                            {quick_links?.map((link) => (
                                 <li key={link.id}>
                                     <a
                                         href={link.href}
@@ -84,9 +81,11 @@ const Footer = ({
                         </ul>
                     </div>
                     <div className="space-y-6">
-                        <div className="text-xl font-bold">Support</div>
-                        <ul className="space-y-3.5">
-                            {support.map((link) => (
+                        <div className="text-xl font-bold text-center lg:text-left">
+                            Support
+                        </div>
+                        <ul className="space-y-3.5 text-center lg:text-left">
+                            {support?.map((link) => (
                                 <li key={link.id}>
                                     <a
                                         href={link.href}
@@ -101,46 +100,34 @@ const Footer = ({
                         </ul>
                     </div>
                     <div className="space-y-6">
-                        <div className="text-xl font-bold">Stay Connected</div>
+                        <div className="text-xl font-bold text-center lg:text-left">
+                            Stay Connected
+                        </div>
                         <div className="space-y-5">
-                            <ul className="flex items-center gap-3.5">
-                                {devSocials.map((social, i) => (
+                            <ul className="flex items-center gap-3.5 justify-center lg:justify-start">
+                                {socials?.map((social, i) => (
                                     <li key={i}>
                                         <Link href={"/"}>
                                             <StrapiImage
-                                                alt={"youtube"}
-                                                // src={social.icon.url}
-                                                src={social}
+                                                alt={
+                                                    social.icon
+                                                        .alternativeText ||
+                                                    "Alternative text not provided"
+                                                }
+                                                src={
+                                                    social.icon?.url ||
+                                                    process.env
+                                                        .PLACEHOLDER_IMAGE!
+                                                }
                                                 width={25}
                                                 height={25}
                                             />
                                         </Link>
                                     </li>
                                 ))}
-                                {/* {socials.map((social, i) => (
-                                <li key={social.id + i}>
-                                    <StrapiImage
-                                        alt={social.text}
-                                        // src={social.icon.url}
-                                        src="http://localhost:3000/images/icons/youtube.svg"
-                                        width={25}
-                                        height={25}
-                                    />
-                                    <Link
-                                        href={social.href}
-                                        target={
-                                            social.isExternal
-                                                ? "_blank"
-                                                : "_self"
-                                        }
-                                    >
-                                        {social.text}
-                                    </Link>
-                                </li>
-                            ))} */}
                             </ul>
-                            <ul className="space-y-3">
-                                {contact_info.map((contact) => (
+                            <ul className="space-y-3 flex flex-col justify-center items-center lg:items-start">
+                                {contact_info?.map((contact) => (
                                     <li
                                         key={contact.id}
                                         className="flex items-center gap-1"
@@ -160,37 +147,37 @@ const Footer = ({
                     </div>
                 </div>
                 <hr className="my-7 border-[#646D79]" />
-                <div className="flex items-center gap-5 justify-center">
+                <div className="flex flex-wrap items-center gap-2 lg:gap-5 justify-center">
                     <span>
                         &copy; {new Date().getFullYear()} {copy}. All rights
                         reserved.
                     </span>
                     <Link
-                        href={privacy_policy.href}
-                        target={privacy_policy.isExternal ? "_blank" : "_self"}
+                        href={privacy_policy?.href}
+                        target={privacy_policy?.isExternal ? "_blank" : "_self"}
                     >
-                        {privacy_policy.text}
+                        {privacy_policy?.text}
                     </Link>
-                    |
+                    <span>|</span>
                     <Link
-                        href={terms.href}
-                        target={terms.isExternal ? "_blank" : "_self"}
+                        href={terms?.href}
+                        target={terms?.isExternal ? "_blank" : "_self"}
                     >
-                        {terms.text}
+                        {terms?.text}
                     </Link>
-                    |
+                    <span>|</span>
                     <Link
-                        href={sitemap.href}
-                        target={sitemap.isExternal ? "_blank" : "_self"}
+                        href={sitemap?.href}
+                        target={sitemap?.isExternal ? "_blank" : "_self"}
                     >
-                        {sitemap.text}
+                        {sitemap?.text}
                     </Link>
-                    |
+                    <span className="hidden lg:block">|</span>
                     <Link
-                        href={cookies.href}
-                        target={cookies.isExternal ? "_blank" : "_self"}
+                        href={cookies?.href}
+                        target={cookies?.isExternal ? "_blank" : "_self"}
                     >
-                        {cookies.text}
+                        {cookies?.text}
                     </Link>
                 </div>
             </div>

@@ -47,14 +47,14 @@ const Form2 = ({
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="font-manrope border shadow-xl rounded-xl p-7 space-y-3.5 bg-white w-1/2 max-h-[calc(100%-1rem)] overflow-y-scroll scrollbar-none"
+                className="font-manrope border shadow-xl rounded-xl p-3 lg:p-7 space-y-3.5 bg-white w-full lg:w-1/2 max-h-[calc(100%-1rem)] overflow-y-scroll scrollbar-none"
             >
                 <StrapiImage
                     src="http://localhost:3000/images/logo/form_logo.webp"
                     width={100}
                     height={100}
                     alt="Footer logo"
-                    className="mx-auto"
+                    className="mx-auto hidden lg:block"
                 />
                 <FormField
                     control={form.control}
@@ -74,7 +74,7 @@ const Form2 = ({
                         </FormItem>
                     )}
                 />
-                <div className="grid grid-cols-2 gap-x-3">
+                <div className="grid grid-cols-1 gap-y-3 lg:gap-y-0 lg:grid-cols-2 gap-x-3">
                     <FormField
                         control={form.control}
                         name="email"
@@ -112,7 +112,7 @@ const Form2 = ({
                         )}
                     />
                 </div>
-                <div className="grid grid-cols-2 gap-x-3">
+                <div className="grid grid-cols-1 gap-y-3 lg:gap-y-0 lg:grid-cols-2 gap-x-3">
                     <FormField
                         control={form.control}
                         name="destination"

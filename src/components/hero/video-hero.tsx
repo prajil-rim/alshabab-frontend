@@ -35,7 +35,7 @@ const VideoHero = ({
 
     return (
         <section
-            className="h-[40rem] w-full relative flex flex-col justify-end items-center bg-no-repeat bg-center bg-cover"
+            className="h-[40rem] w-full relative flex flex-col justify-end items-center bg-no-repeat bg-center bg-cover px-3 lg:px-2"
             style={
                 background.type === "image"
                     ? {
@@ -46,8 +46,7 @@ const VideoHero = ({
         >
             {background.type === "video" && (
                 <video
-                    src="/videos/munnar.webm"
-                    // src={background.background.url}
+                    src={background.background?.url}
                     autoPlay
                     muted
                     loop
@@ -57,16 +56,16 @@ const VideoHero = ({
             <div className="absolute inset-0 size-full bg-black/40"></div>
 
             <div className="space-y-5 flex flex-col flex-1 justify-center items-center text-white relative z-10">
-                <h1 className="text-5xl font-bold overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] max-w-[44rem] text-center leading-tight">
+                <h1 className="text-2xl lg:text-5xl font-bold max-w-[44rem] text-center leading-tight">
                     {heading[0]}
                     {heading.length > 0 && <br />}
                     {heading.length > 0 && heading[1]}
                 </h1>
-                <p className="font-manrope text-lg max-w-2xl text-center overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
+                <p className="font-manrope lg:text-lg max-w-2xl text-center">
                     {description}
                 </p>
                 {cta && (
-                    <div className="font-manrope space-x-4">
+                    <div className="font-manrope flex flex-col lg:flex-row justify-center items-center gap-4">
                         <Link
                             href={cta.href}
                             target={cta.isExternal ? "_blank" : "_self"}

@@ -73,7 +73,7 @@ const PackageConsultationForm = ({
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="font-manrope bg-[#F5F5F5] w-sm mx-auto rounded-xl shadow-[20px_20px_0px_0px_rgba(0,0,0,0.13)] p-6 space-y-5"
+                className="font-manrope bg-[#F5F5F5] w-full max-w-sm mx-auto rounded-xl shadow-[20px_20px_0px_0px_rgba(0,0,0,0.13)] p-6 space-y-5"
             >
                 <h1 className="capitalize font-semibold text-xl">
                     Get free consultation now!

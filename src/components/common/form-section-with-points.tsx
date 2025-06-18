@@ -35,26 +35,28 @@ const FormSectionWithPoints = ({
 
     return (
         <section className="bg-gradient-to-t from-[#ECF4FF] to-white">
-            <div className="max-w-6xl mx-auto py-20 grid grid-cols-2 gap-5 ">
+            <div className="max-w-6xl mx-auto py-10 grid lg:grid-cols-2 gap-5 px-3 lg:px-2">
                 <div className="space-y-4">
-                    <h3 className="text-4xl font-semibold">{title}</h3>
+                    <h3 className="text-2xl lg:text-4xl font-semibold">
+                        {title}
+                    </h3>
                     <p className="font-manrope max-w-4xl">{description}</p>
-                    <ul className="space-y-8">
+                    <ul className="space-y-4 lg:space-y-8">
                         <li className="flex gap-2">
                             {pointer ? <Pointer /> : <Map />}
-                            <div className="space-y-4">
-                                <h6 className="font-semibold text-2xl">
+                            <div className="space-y-2 lg:space-y-4">
+                                <h6 className="font-semibold text-xl lg:text-2xl">
                                     {point_1_title}
                                 </h6>
-                                <p className="font-manrope overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
+                                <p className="font-manrope overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:4] [-webkit-box-orient:vertical]">
                                     {point_1_description}
                                 </p>
                             </div>
                         </li>
                         <li className="flex gap-2">
                             {pointer ? <Pointer /> : <Map />}
-                            <div className="space-y-4">
-                                <h6 className="font-semibold text-2xl">
+                            <div className="space-y-2 lg:space-y-4">
+                                <h6 className="font-semibold text-xl lg:text-2xl">
                                     {point_2_title}
                                 </h6>
                                 <p className="font-manrope overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
@@ -64,8 +66,8 @@ const FormSectionWithPoints = ({
                         </li>
                         <li className="flex gap-2">
                             {pointer ? <Pointer /> : <Map />}
-                            <div className="space-y-4">
-                                <h6 className="font-semibold text-2xl">
+                            <div className="space-y-2 lg:space-y-4">
+                                <h6 className="font-semibold text-xl lg:text-2xl">
                                     {point_3_title}
                                 </h6>
                                 <p className="font-manrope overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
@@ -75,10 +77,12 @@ const FormSectionWithPoints = ({
                         </li>
                     </ul>
                 </div>
-                <ConsultationForm
-                    packages={packages || []}
-                    destinations={destinations || []}
-                />
+                <div className="ps-1 pe-5 lg:ps-0 lg:pe-0">
+                    <ConsultationForm
+                        packages={packages || []}
+                        destinations={destinations || []}
+                    />
+                </div>
             </div>
         </section>
     );

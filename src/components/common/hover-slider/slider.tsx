@@ -19,7 +19,7 @@ export default function CardSlider({ slides }: { slides: SlideProps[] }) {
     };
 
     return (
-        <div className="w-full max-w-6xl mx-auto">
+        <div className="w-full max-w-6xl mx-auto hidden lg:block">
             <div
                 className="flex gap-4 overflow-hidden"
                 onMouseLeave={handleHoverOut}
@@ -39,10 +39,7 @@ export default function CardSlider({ slides }: { slides: SlideProps[] }) {
                         <div
                             className="h-full rounded-xl bg-cover bg-center text-[#F5F5F5] relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/80 after:to-transparent overflow-hidden flex justify-center items-end"
                             style={{
-                                // backgroundImage: `url(${slide.image.url})`,
-                                backgroundImage: `url(/images/hover-slide/img${
-                                    index + 1
-                                }.webp)`,
+                                backgroundImage: `url(${slide.image.url})`,
                             }}
                         >
                             <div className="relative z-10 space-y-3 p-4 flex flex-col justify-center items-center">

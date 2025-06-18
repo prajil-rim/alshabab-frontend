@@ -14,235 +14,99 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import { DestinationListProps, PackageListProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
-const FormSection = () => {
+interface FormSectionProps {
+    destinations: DestinationListProps[];
+    packages: PackageListProps[];
+}
+
+const FormSection = ({
+    destinations,
+    packages,
+}: Readonly<FormSectionProps>) => {
     return (
-        <section className="bg-[#ECF4FF]">
-            <div className="relative max-w-6xl mx-auto pt-28 space-y-6 bg-[#ECF4FF]">
-                <h1 className="font-extrabold text-5xl uppercase max-w-lg leading-tight absolute top-8 left-1/2 -translate-x-[70%]">
+        <section className="bg-[#ECF4FF] px-3 lg:px-2">
+            <div className="relative max-w-6xl mx-auto pb-16 lg:pb-0 pt-16 lg:pt-28 space-y-6 bg-[#ECF4FF]">
+                <h1 className="text-2xl font-extrabold lg:text-5xl uppercase max-w-xs mx-auto lg:mx-0 text-center lg:text-left md:max-w-lg leading-tight lg:absolute lg:top-8 lg:left-1/2 lg:-translate-x-[70%]">
                     Plan your dream trip with us
                 </h1>
-                <div className="grid grid-cols-2 gap-3">
-                    <div className="aspect-square w-full relative">
+                <div className="grid lg:grid-cols-2 gap-3">
+                    <div className="aspect-square w-full relative hidden lg:block">
                         <KeralaMap />
-                        <Tooltip>
-                            <TooltipTrigger className="absolute top-[72%] left-[61%]">
-                                <KovalamIcon />
-                            </TooltipTrigger>
-                            <TooltipContent
-                                align="center"
-                                side="right"
-                                className="p-0 rounded-lg"
-                            >
-                                <Link
-                                    href={"/"}
-                                    className="relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/50 via-black/30 after:to-transparent after:z-10 after:rounded-lg"
-                                >
-                                    <Image
-                                        src="/images/others/card_1.webp"
-                                        alt="Kovalam"
-                                        className="w-48 aspect-[1/0.7] rounded-lg object-cover object-center"
-                                        width={192}
-                                        height={190}
-                                    />
-                                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 font-manrope z-20 m-3 flex items-center gap-2 whitespace-nowrap">
-                                        KOVALAM BEACH{" "}
-                                        <ArrowRightUp color="red" />
-                                    </span>
-                                </Link>
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger className="absolute top-[56%] left-[68%]">
-                                <GaviIcon />
-                            </TooltipTrigger>
-                            <TooltipContent
-                                align="center"
-                                side="right"
-                                className="p-0 rounded-lg"
-                            >
-                                <Link
-                                    href={"/"}
-                                    className="relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/50 via-black/30 after:to-transparent after:z-10 after:rounded-lg"
-                                >
-                                    <Image
-                                        src="/images/others/card_1.webp"
-                                        alt="Gavi"
-                                        className="w-48 aspect-[1/0.7] rounded-lg object-cover object-center"
-                                        width={192}
-                                        height={190}
-                                    />
-                                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 font-manrope z-20 m-3 flex items-center gap-2 whitespace-nowrap uppercase">
-                                        Gavi <ArrowRightUp color="red" />
-                                    </span>
-                                </Link>
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger className="absolute top-[51%] left-[48%]">
-                                <AlleppyIcon />
-                            </TooltipTrigger>
-                            <TooltipContent
-                                align="center"
-                                side="right"
-                                className="p-0 rounded-lg"
-                            >
-                                <Link
-                                    href={"/"}
-                                    className="relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/50 via-black/30 after:to-transparent after:z-10 after:rounded-lg"
-                                >
-                                    <Image
-                                        src="/images/others/card_1.webp"
-                                        alt="Alleppy"
-                                        className="w-48 aspect-[1/0.7] rounded-lg object-cover object-center"
-                                        width={192}
-                                        height={190}
-                                    />
-                                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 font-manrope z-20 m-3 flex items-center gap-2 whitespace-nowrap uppercase">
-                                        Alleppy <ArrowRightUp color="red" />
-                                    </span>
-                                </Link>
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger className="absolute top-[44%] left-[67%]">
-                                <MunnarIcon />
-                            </TooltipTrigger>
-                            <TooltipContent
-                                align="center"
-                                side="right"
-                                className="p-0 rounded-lg"
-                            >
-                                <Link
-                                    href={"/"}
-                                    className="relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/50 via-black/30 after:to-transparent after:z-10 after:rounded-lg"
-                                >
-                                    <Image
-                                        src="/images/others/card_1.webp"
-                                        alt="Munnar"
-                                        className="w-48 aspect-[1/0.7] rounded-lg object-cover object-center"
-                                        width={192}
-                                        height={190}
-                                    />
-                                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 font-manrope z-20 m-3 flex items-center gap-2 whitespace-nowrap uppercase">
-                                        Munnar <ArrowRightUp color="red" />
-                                    </span>
-                                </Link>
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger className="absolute top-[38%] left-[45%]">
-                                <FortKochiIcon />
-                            </TooltipTrigger>
-                            <TooltipContent
-                                align="center"
-                                side="right"
-                                className="p-0 rounded-lg"
-                            >
-                                <Link
-                                    href={"/"}
-                                    className="relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/50 via-black/30 after:to-transparent after:z-10 after:rounded-lg"
-                                >
-                                    <Image
-                                        src="/images/others/card_1.webp"
-                                        alt="FortKochi"
-                                        className="w-48 aspect-[1/0.7] rounded-lg object-cover object-center"
-                                        width={192}
-                                        height={190}
-                                    />
-                                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 font-manrope z-20 m-3 flex items-center gap-2 whitespace-nowrap uppercase">
-                                        FortKochi <ArrowRightUp color="red" />
-                                    </span>
-                                </Link>
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger className="absolute top-[26%] left-[55%]">
-                                <AthirapallyIcon />
-                            </TooltipTrigger>
-                            <TooltipContent
-                                align="center"
-                                side="right"
-                                className="p-0 rounded-lg"
-                            >
-                                <Link
-                                    href={"/"}
-                                    className="relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/50 via-black/30 after:to-transparent after:z-10 after:rounded-lg"
-                                >
-                                    <Image
-                                        src="/images/others/card_1.webp"
-                                        alt="Athirapally"
-                                        className="w-48 aspect-[1/0.7] rounded-lg object-cover object-center"
-                                        width={192}
-                                        height={190}
-                                    />
-                                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 font-manrope z-20 m-3 flex items-center gap-2 whitespace-nowrap uppercase">
-                                        Athirapally <ArrowRightUp color="red" />
-                                    </span>
-                                </Link>
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger className="absolute top-[16%] left-[48%]">
-                                <NelliyampathyIcon />
-                            </TooltipTrigger>
-                            <TooltipContent
-                                align="center"
-                                side="right"
-                                className="p-0 rounded-lg"
-                            >
-                                <Link
-                                    href={"/"}
-                                    className="relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/50 via-black/30 after:to-transparent after:z-10 after:rounded-lg"
-                                >
-                                    <Image
-                                        src="/images/others/card_1.webp"
-                                        alt="Nelliyampathy"
-                                        className="w-48 aspect-[1/0.7] rounded-lg object-cover object-center"
-                                        width={192}
-                                        height={190}
-                                    />
-                                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 font-manrope z-20 m-3 flex items-center gap-2 whitespace-nowrap uppercase">
-                                        Nelliyampathy{" "}
-                                        <ArrowRightUp color="red" />
-                                    </span>
-                                </Link>
-                            </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                            <TooltipTrigger className="absolute top-[7%] left-[40%]">
-                                <WayandIcon />
-                            </TooltipTrigger>
-                            <TooltipContent
-                                align="center"
-                                side="right"
-                                className="p-0 rounded-lg"
-                            >
-                                <Link
-                                    href={"/"}
-                                    className="relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/50 via-black/30 after:to-transparent after:z-10 after:rounded-lg"
-                                >
-                                    <Image
-                                        src="/images/others/card_1.webp"
-                                        alt="Wayand"
-                                        className="w-48 aspect-[1/0.7] rounded-lg object-cover object-center"
-                                        width={192}
-                                        height={190}
-                                    />
-                                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 font-manrope z-20 m-3 flex items-center gap-2 whitespace-nowrap uppercase">
-                                        Wayand <ArrowRightUp color="red" />
-                                    </span>
-                                </Link>
-                            </TooltipContent>
-                        </Tooltip>
+
+                        <LocationToolTip
+                            className="absolute top-[72%] left-[61%]"
+                            icon={<KovalamIcon />}
+                            link={"/destinations/kovalam"}
+                            imageUrl="/images/destination-form/kovalam.jpg"
+                            imageTitle="Kovalam"
+                        />
+
+                        <LocationToolTip
+                            className="absolute top-[56%] left-[68%]"
+                            icon={<GaviIcon />}
+                            link={"/destinations/gavi"}
+                            imageUrl="/images/destination-form/gavi.webp"
+                            imageTitle="Gavi"
+                        />
+
+                        <LocationToolTip
+                            className="absolute top-[51%] left-[48%]"
+                            icon={<AlleppyIcon />}
+                            link={"/destinations/alleppy"}
+                            imageUrl="/images/destination-form/alleppy.jpg"
+                            imageTitle="Alleppy"
+                        />
+
+                        <LocationToolTip
+                            className="absolute top-[44%] left-[67%]"
+                            icon={<MunnarIcon />}
+                            link={"/destinations/munnar"}
+                            imageUrl="/images/destination-form/munnar.jpg"
+                            imageTitle="Munnar"
+                        />
+
+                        <LocationToolTip
+                            className="absolute top-[38%] left-[45%]"
+                            icon={<FortKochiIcon />}
+                            link={"/destinations/fort-kochi"}
+                            imageUrl="/images/destination-form/kochi.jpg"
+                            imageTitle="FortKochi"
+                        />
+
+                        <LocationToolTip
+                            className="absolute top-[26%] left-[55%]"
+                            icon={<AthirapallyIcon />}
+                            link={"/destinations/athirapally"}
+                            imageUrl="/images/destination-form/athirapally.jpg"
+                            imageTitle="Athirapally"
+                        />
+
+                        <LocationToolTip
+                            className="absolute top-[16%] left-[48%]"
+                            icon={<NelliyampathyIcon />}
+                            link={"/destinations/nelliyampathy"}
+                            imageUrl="/images/destination-form/nelliyampathy.jpg"
+                            imageTitle="Nelliyampathy"
+                        />
+
+                        <LocationToolTip
+                            className="absolute top-[7%] left-[40%]"
+                            icon={<WayandIcon />}
+                            link={"/destinations/wayand"}
+                            imageUrl="/images/destination-form/wayanad.jpg"
+                            imageTitle="Wayand"
+                        />
                     </div>
-                    <div className="w-[90%]">
+                    <div className="w-full md:w-9/12 md:mx-auto lg:mx-0 lg:w-[90%]">
                         <ContactUsForm
-                            destinations={[]}
+                            destinations={destinations || []}
                             formType="form1"
-                            packages={[]}
+                            packages={packages || []}
                         />
                     </div>
                 </div>
@@ -252,3 +116,46 @@ const FormSection = () => {
 };
 
 export default FormSection;
+
+function LocationToolTip({
+    className,
+    icon,
+    link,
+    imageUrl,
+    imageTitle,
+}: {
+    className: string;
+    icon: React.ReactNode;
+    link: string;
+    imageUrl: string;
+    imageTitle: string;
+}) {
+    return (
+        <Tooltip>
+            <TooltipTrigger className={cn("absolute", className)}>
+                {icon}
+            </TooltipTrigger>
+            <TooltipContent
+                align="center"
+                side="right"
+                className="p-0 rounded-lg"
+            >
+                <Link
+                    href={link}
+                    className="relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/50 via-black/30 after:to-transparent after:z-10 after:rounded-lg"
+                >
+                    <Image
+                        src={imageUrl || process.env.PLACEHOLDER_IMAGE!}
+                        alt={imageTitle}
+                        className="w-48 aspect-[1/0.7] rounded-lg object-cover object-center"
+                        width={100}
+                        height={100}
+                    />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 font-manrope z-20 m-3 flex items-center gap-2 whitespace-nowrap uppercase">
+                        {imageTitle} <ArrowRightUp color="red" />
+                    </span>
+                </Link>
+            </TooltipContent>
+        </Tooltip>
+    );
+}

@@ -17,12 +17,7 @@ const Packages = ({ packages }: { packages: PackageListProps[] }) => {
             <DropdownMenuContent className="font-manrope">
                 {packages?.map((package_) => (
                     <Link
-                        href={
-                            "/packages/" +
-                            package_.slug +
-                            "?id=" +
-                            package_.documentId
-                        }
+                        href={"/packages/" + package_.slug}
                         key={package_.documentId}
                     >
                         <DropdownMenuItem>{package_.package}</DropdownMenuItem>

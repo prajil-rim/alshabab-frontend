@@ -14,33 +14,36 @@ const InfoBlockCta = ({
     return (
         <div
             className={cn(
-                "flex items-center my-20",
+                "flex items-center my-10 lg:my-20 flex-wrap lg:flex-nowrap",
                 reversed && "flex-row-reverse"
             )}
         >
-            <div className="shrink-0 w-1/2">
-                <div className="relative">
+            <div
+                className={cn(
+                    "shrink-0 w-[85%] lg:w-1/2 mb-20 lg:mb-0",
+                    reversed && "ms-auto"
+                )}
+            >
+                <div className="relative w-fit mx-auto lg:mx-0">
                     <StrapiImage
                         alt={
-                            largeImage.alternativeText ||
+                            largeImage?.alternativeText ||
                             "Alternative Text not provided"
                         }
-                        // src={largeImage.url}
-                        src="http://localhost:3000/images/others/info_block_1.webp"
+                        src={largeImage?.url || process.env.PLACEHOLDER_IMAGE!}
                         width={430}
                         height={300}
-                        className="rounded-lg h-80 object-cover"
+                        className="rounded-lg h-60 lg:h-80 object-cover"
                     />
                     <StrapiImage
                         alt={
-                            smallImage.alternativeText ||
+                            smallImage?.alternativeText ||
                             "Alternative Text not provided"
                         }
-                        // src={smallImage.url}
-                        src="http://localhost:3000/images/others/info_block_2.webp"
+                        src={smallImage?.url || process.env.PLACEHOLDER_IMAGE!}
                         className={cn(
-                            "absolute -bottom-1/4 rounded-lg border-2 border-white h-52",
-                            reversed ? "-left-1/6" : "right-1/12"
+                            "absolute -bottom-1/4 rounded-lg border-2 border-white w-1/2 h-36 lg:h-52",
+                            reversed ? "lg:-left-1/6 -left-1/6" : "-right-1/6"
                         )}
                         width={250}
                         height={200}
@@ -48,7 +51,7 @@ const InfoBlockCta = ({
                 </div>
             </div>
             <div className="space-y-5">
-                <h3 className="text-3xl font-semibold">{title}</h3>
+                <h3 className="text-2xl lg:text-3xl font-semibold">{title}</h3>
                 <p className="font-manrope overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:7] [-webkit-box-orient:vertical]">
                     {description}
                 </p>

@@ -5,6 +5,7 @@ const Instagram = () => {
             height="25"
             viewBox="0 0 24 25"
             fill="none"
+            className="size-4 lg:size-auto"
             xmlns="http://www.w3.org/2000/svg"
         >
             <path

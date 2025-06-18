@@ -4,20 +4,16 @@ import { BlogCardProps } from "@/types";
 import { format } from "date-fns";
 import Link from "next/link";
 
-const BlogCard = ({
-    blog_title,
-    hero,
-    documentId,
-    blog_category,
-    slug,
-}: BlogCardProps) => {
+const BlogCard = ({ blog_title, hero, blog_category, slug }: BlogCardProps) => {
     return (
-        <Link href={`/blogs/${slug}?id=${documentId}`} className="space-y-3">
+        <Link href={`/blogs/${slug}`} className="space-y-3">
             <div className="relative">
                 <StrapiImage
-                    // src={hero.cover.url}
-                    src="http://localhost:3000/images/blog/blog_1.webp"
-                    alt={hero.cover.alternativeText || ""}
+                    src={hero.cover?.url || process.env.PLACEHOLDER_IMAGE!}
+                    alt={
+                        hero.cover?.alternativeText ||
+                        "Alternative Text not provided"
+                    }
                     className="rounded-xl aspect-video"
                     width={400}
                     height={225}

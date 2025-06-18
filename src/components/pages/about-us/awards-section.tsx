@@ -1,3 +1,4 @@
+import AwardsCarousel from "@/components/carousels/awards-carousel";
 import { StrapiImage } from "@/components/common/strapi-image";
 import { LogoProps } from "@/types";
 import Link from "next/link";
@@ -19,13 +20,17 @@ const AwardsSection = ({
     description,
     awards,
 }: Readonly<AwardsSectionProps>) => {
+    if (!title || !awards || awards.length === 0) return null;
+
     return (
-        <section className="max-w-6xl mx-auto py-20 space-y-6">
-            <h1 className="text-4xl font-semibold text-center">{title}</h1>
-            <p className="font-manrope text-center max-w-4xl mx-auto overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
+        <section className="max-w-6xl mx-auto py-10 space-y-3 lg:space-y-6 px-3 lg:px-2">
+            <h1 className="text-2xl lg:text-4xl font-semibold text-center">
+                {title}
+            </h1>
+            <p className="font-manrope text-center max-w-4xl mx-auto">
                 {description}
             </p>
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid-cols-4 gap-3 hidden lg:grid">
                 {awards.map((award) => (
                     <Link
                         href={award.url}
@@ -34,8 +39,10 @@ const AwardsSection = ({
                         key={award.id}
                     >
                         <StrapiImage
-                            // src={award.logo.image.url}
-                            src="http://localhost:3000/images/logo/awards/kerala.webp"
+                            src={
+                                award.logo?.image?.url ||
+                                process.env.PLACEHOLDER_IMAGE!
+                            }
                             alt={
                                 award.logo.image.alternativeText ||
                                 award.logo.logoText
@@ -53,6 +60,8 @@ const AwardsSection = ({
                     </Link>
                 ))}
             </div>
+
+            <AwardsCarousel awards={awards || []} />
         </section>
     );
 };

@@ -84,6 +84,8 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
         setMutedStates(initialMuted);
     }, [hero]);
 
+    if (!hero || hero.length === 0) return null;
+
     return (
         <section className="w-full h-[40rem] bg-black text-white">
             <Carousel
@@ -95,7 +97,7 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
             >
                 <CarouselContent className="ml-0">
                     {hero.map((data, index) => {
-                        if (data.background.type === "video") {
+                        if (data.background?.type === "video") {
                             videoRefs.current[index] ??= null;
                         }
 
@@ -107,18 +109,18 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                                 <div
                                     className="relative flex flex-col justify-center items-center h-full bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute gap-32 pb-10 font"
                                     style={
-                                        data.background.type === "image"
+                                        data.background?.type === "image"
                                             ? {
-                                                  backgroundImage: `url(/images/hero/contact_herp.webp)`,
-                                                  //   backgroundImage: `url(${data.background.background.url})`,
+                                                  backgroundImage: `url(${data.background?.background?.url})`,
                                               }
                                             : {}
                                     }
                                 >
-                                    {data.background.type === "video" && (
+                                    {data.background?.type === "video" && (
                                         <video
-                                            src="/videos/forest.webm"
-                                            // src={data.background.background.url}
+                                            src={
+                                                data.background?.background?.url
+                                            }
                                             ref={(el) => {
                                                 videoRefs.current[index] = el;
                                             }}
@@ -145,35 +147,35 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                                             }}
                                         ></video>
                                     )}
-                                    <div className="space-y-5 flex flex-col justify-center items-center text-white relative z-10">
-                                        <h1 className="text-5xl font-bold overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] max-w-[44rem] text-center leading-tight">
-                                            {data.title}
+                                    <div className="space-y-3 lg:space-y-5 flex flex-col justify-center items-center text-white relative z-10 px-3 lg:px-2">
+                                        <h1 className="text-3xl lg:text-5xl font-bold max-w-[44rem] text-center leading-tight">
+                                            {data?.title || "No Content!"}
                                         </h1>
-                                        <p className="font-manrope text-lg max-w-2xl text-center overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
-                                            {data.description}
+                                        <p className="font-manrope lg:text-lg max-w-2xl text-center">
+                                            {data?.description}
                                         </p>
                                         <div className="font-manrope space-x-4">
                                             <Link
-                                                href={data.cta.href}
+                                                href={data.cta?.href}
                                                 target={
-                                                    data.cta.isExternal
+                                                    data.cta?.isExternal
                                                         ? "_blank"
                                                         : "_self"
                                                 }
                                             >
                                                 <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
-                                                    {data.cta.text}{" "}
+                                                    {data.cta?.text}{" "}
                                                     <ArrowRightUp color="red" />
                                                 </Button>
                                             </Link>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-2.5 absolute bottom-0 left-0 p-10 z-10">
+                                    <div className="flex items-center gap-2.5 absolute bottom-0 left-0 p-3 pb-10 lg:p-10 z-10">
                                         <MapPin />
                                         <span className="font-manrope">
-                                            {data.destination}
+                                            {data?.destination}
                                         </span>
-                                        {data.background.type === "video" && (
+                                        {data.background?.type === "video" && (
                                             <div className="flex items-center gap-2.5">
                                                 {playingStates[index] ? (
                                                     <button
@@ -221,19 +223,19 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                         );
                     })}
                 </CarouselContent>
-                <div className="absolute bottom-0 p-10 w-fit right-0">
+                <div className="absolute bottom-0 p-3 pb-9 lg:pb-10 lg:p-10 w-fit right-0">
                     <div className="flex w-full justify-end max-w-6xl mx-auto">
                         <ul className="flex gap-6 text-sm text-white font-manrope items-center">
                             {hero.map((data, index) => (
                                 <li
-                                    key={data.id}
+                                    key={data?.id}
                                     className={
                                         index === current - 1
-                                            ? "font-semibold border-b-2 border-primary"
+                                            ? "font-semibold border-b-2 border-primary hidden lg:block"
                                             : ""
                                     }
                                 >
-                                    {data.attraction}
+                                    {data?.attraction}
                                 </li>
                             ))}
                             <li className="flex items-center gap-3">

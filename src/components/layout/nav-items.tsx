@@ -6,14 +6,25 @@ import Packages from "../dropdown/packages";
 import { DestinationListProps, PackageListProps } from "@/types";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { AnimatePresence, motion as m } from "framer-motion";
+import ContactFormSmModal from "../modal/contact-form-sm-modal";
 
 const NavItems = ({
     destinations,
     packages,
+    isMobile = false,
+    setOpen,
 }: {
     destinations: DestinationListProps[];
     packages: PackageListProps[];
+    isMobile?: boolean;
+    setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+    const [dOpen, setDOpen] = useState(false);
+    const [pOpen, setPOpen] = useState(false);
     const pathname = usePathname();
     const isActive = (path: string) => pathname === path;
 
@@ -25,37 +36,153 @@ const NavItems = ({
         );
     }
 
+    function closeMenu() {
+        if (!isMobile || !setOpen) return;
+        setOpen(false);
+    }
+
     return (
-        <ul className="flex text-white font-normal text-sm gap-5">
+        <ul
+            className={cn(
+                "flex text-white font-normal text-sm gap-5",
+                isMobile
+                    ? "flex-col font-manrope gap-3 text-[#202020] font-medium"
+                    : "flex-row"
+            )}
+        >
             <li className={activeStyle("/")}>
-                <Link href={"/"}>Home</Link>
+                <Link href={"/"} onClick={closeMenu}>
+                    Home
+                </Link>
             </li>
             <li className={activeStyle("/about-us")}>
-                <Link href={"/about-us"}>About Us</Link>
+                <Link href={"/about-us"} onClick={closeMenu}>
+                    About Us
+                </Link>
             </li>
-            <li
-                className={activeStyle(
-                    "/destinations",
-                    "flex items-center gap-1 cursor-pointer"
-                )}
-            >
-                <Link href={"/destinations"}>Destinations </Link>
-                <Destinations destinations={destinations || []} />
-            </li>
-            <li
-                className={activeStyle(
-                    "/packages",
-                    "flex items-center gap-1 cursor-pointer"
-                )}
-            >
-                <Link href={"/packages"}>Packages </Link>
-                <Packages packages={packages || []} />
-            </li>
+            {!isMobile && (
+                <li
+                    className={activeStyle(
+                        "/destinations",
+                        "flex items-center gap-1 cursor-pointer"
+                    )}
+                >
+                    <Link href={"/destinations"}>Destinations </Link>
+                    <Destinations destinations={destinations || []} />
+                </li>
+            )}
+            {isMobile && (
+                <li className={activeStyle("/destinations")}>
+                    <button
+                        className="flex items-center gap-1 cursor-pointer"
+                        onClick={() => setDOpen((prev) => !prev)}
+                    >
+                        <span>Destinations</span>
+                        <m.span
+                            animate={{ rotate: dOpen ? 180 : 0 }}
+                            transition={{ duration: 0.25 }}
+                        >
+                            <ChevronDown size={20} />
+                        </m.span>
+                    </button>
+                    <AnimatePresence initial={false}>
+                        {dOpen && (
+                            <m.ul
+                                key="content"
+                                initial={{ opacity: 0, maxHeight: 0 }}
+                                animate={{ opacity: 1, maxHeight: 500 }}
+                                exit={{ opacity: 0, maxHeight: 0 }}
+                                transition={{
+                                    duration: 0.4,
+                                    ease: "easeInOut",
+                                }}
+                                className="overflow-hidden px-0 py-2 space-y-2"
+                            >
+                                {destinations.map((destination) => (
+                                    <Link
+                                        href={
+                                            "/destinations/" + destination.slug
+                                        }
+                                        onClick={closeMenu}
+                                        key={destination.documentId}
+                                    >
+                                        <li>{destination.destination}</li>
+                                    </Link>
+                                ))}
+                            </m.ul>
+                        )}
+                    </AnimatePresence>
+                </li>
+            )}
+            {!isMobile && (
+                <li
+                    className={activeStyle(
+                        "/packages",
+                        "flex items-center gap-1 cursor-pointer"
+                    )}
+                >
+                    <Link href={"/packages"}>Packages </Link>
+                    <Packages packages={packages || []} />
+                </li>
+            )}
+            {isMobile && (
+                <li className={activeStyle("/packages")}>
+                    <button
+                        className="flex items-center gap-1 cursor-pointer"
+                        onClick={() => setPOpen((prev) => !prev)}
+                    >
+                        <span>Packages</span>
+                        <m.span
+                            animate={{ rotate: pOpen ? 180 : 0 }}
+                            transition={{ duration: 0.25 }}
+                        >
+                            <ChevronDown size={20} />
+                        </m.span>
+                    </button>
+                    <AnimatePresence initial={false}>
+                        {pOpen && (
+                            <m.ul
+                                key="content"
+                                initial={{ opacity: 0, maxHeight: 0 }}
+                                animate={{ opacity: 1, maxHeight: 500 }}
+                                exit={{ opacity: 0, maxHeight: 0 }}
+                                transition={{
+                                    duration: 0.4,
+                                    ease: "easeInOut",
+                                }}
+                                className="overflow-hidden px-0 py-2 space-y-2"
+                            >
+                                {packages.map((package_) => (
+                                    <Link
+                                        href={"/packages/" + package_.slug}
+                                        onClick={closeMenu}
+                                        key={package_.documentId}
+                                    >
+                                        <li>{package_.package}</li>
+                                    </Link>
+                                ))}
+                            </m.ul>
+                        )}
+                    </AnimatePresence>
+                </li>
+            )}
             <li className={activeStyle("/blogs")}>
-                <Link href={"/blogs"}>Insights</Link>
+                <Link href={"/blogs"} onClick={closeMenu}>
+                    Insights
+                </Link>
             </li>
             <li className={activeStyle("/contact-us")}>
-                <Link href={"/contact-us"}>Contact Us</Link>
+                <Link href={"/contact-us"} onClick={closeMenu}>
+                    Contact Us
+                </Link>
+            </li>
+            <li className="lg:hidden">
+                <ContactFormSmModal
+                    cta="Plan Your Trip"
+                    destinations={destinations}
+                    packages={packages}
+                    bg="black"
+                />
             </li>
         </ul>
     );

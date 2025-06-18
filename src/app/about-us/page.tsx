@@ -11,21 +11,38 @@ import GuidesSection from "@/components/pages/about-us/guides-section";
 import MapSection from "@/components/pages/about-us/map-section";
 import OurJourneySection from "@/components/pages/about-us/our-journey-section";
 import { getAboutUsPage, getPartners, getTestimonials } from "@/data/loaders";
+import { returnMetadata } from "@/lib/utils";
 import { InfoBlockProps } from "@/types";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+let aboutUsPageDataPromise: ReturnType<typeof getAboutUsPage> | null = null;
+
+function getAboutUsPageOnce() {
+    if (!aboutUsPageDataPromise) {
+        aboutUsPageDataPromise = getAboutUsPage();
+    }
+    return aboutUsPageDataPromise;
+}
 
 async function loader() {
     const [pageData, testimonials, partners] = await Promise.all([
-        getAboutUsPage(),
+        getAboutUsPageOnce(),
         getTestimonials(),
         getPartners(),
     ]);
-    if (!pageData && pageData.data) notFound();
+    if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
         testimonials: testimonials.data,
         partners: partners.data,
     };
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+    const { data } = await getAboutUsPageOnce();
+
+    return returnMetadata(data);
 }
 
 export default async function AboutUsPage() {
@@ -46,7 +63,7 @@ export default async function AboutUsPage() {
                 ]}
             />
             <AboutSection1 {...pageData.section_1} />
-            <section className="max-w-6xl mx-auto py-20 space-y-6">
+            <section className="max-w-6xl mx-auto py-10 space-y-6 px-3 lg:px-2">
                 {pageData.purpose?.map((data: Readonly<InfoBlockProps>) => (
                     <InfoBlock {...data} key={data.id} />
                 ))}

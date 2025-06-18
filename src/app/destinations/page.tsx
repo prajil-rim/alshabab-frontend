@@ -1,7 +1,7 @@
 import BlogSection from "@/components/common/blog-section/blog-section";
 import FAQSection from "@/components/common/faq/faq-section";
 import FormSectionWithPoints from "@/components/common/form-section-with-points";
-import PDListSection from "@/components/common/pd-list-section";
+import PDListSection from "@/components/common/pd-list-section/pd-list-section";
 import Testimonials from "@/components/common/testimonials/testimonials";
 import PDListingHero from "@/components/hero/pd-listing-hero";
 import FooterCTA from "@/components/layout/footer-cta";
@@ -16,17 +16,29 @@ import {
 import { notFound } from "next/navigation";
 import React from "react";
 import GlobalToursSection from "@/components/common/global-tours-section";
+import { Metadata } from "next";
+import { returnMetadata } from "@/lib/utils";
+
+let destinationsPageDataPromise: ReturnType<typeof getDestinationsPage> | null =
+    null;
+
+function getDestinationsPageOnce() {
+    if (!destinationsPageDataPromise) {
+        destinationsPageDataPromise = getDestinationsPage();
+    }
+    return destinationsPageDataPromise;
+}
 
 async function loader() {
     const [pageData, faqs, testimonials, destinations, packages] =
         await Promise.all([
-            getDestinationsPage(),
+            getDestinationsPageOnce(),
             getFaqs(),
             getTestimonials(),
             getDestinationsList(),
             getPackagesList(),
         ]);
-    if (!pageData && pageData.data) notFound();
+    if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
         faqs: faqs.data,
@@ -36,6 +48,12 @@ async function loader() {
     };
 }
 
+export async function generateMetadata(): Promise<Metadata> {
+    const { data } = await getDestinationsPageOnce();
+
+    return returnMetadata(data);
+}
+
 const DestinationListingPage = async () => {
     const { pageData, faqs, testimonials, destinations, packages } =
         await loader();
@@ -43,11 +61,6 @@ const DestinationListingPage = async () => {
     return (
         <main>
             <PDListingHero
-                cta={{
-                    text: "Get Free Consultation",
-                    href: "/contact-us",
-                    isExternal: false,
-                }}
                 hero={pageData.hero}
                 breadcrumbs={[
                     {

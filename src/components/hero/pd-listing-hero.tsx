@@ -22,6 +22,7 @@ import {
     CarouselPrevious,
 } from "../ui/carousel";
 import { PDHeroProps } from "@/types";
+import { cn } from "@/lib/utils";
 
 interface BreadcrumbProps {
     hero: PDHeroProps[];
@@ -47,8 +48,10 @@ const PDListingHero = ({ hero, breadcrumbs }: Readonly<BreadcrumbProps>) => {
         });
     }, [api]);
 
+    if (!hero || hero.length === 0) return null;
+
     return (
-        <section className="w-full h-[35rem] bg-black text-white">
+        <section className="w-full h-[40rem] lg:h-[35rem] bg-black text-white">
             <Carousel
                 setApi={setApi}
                 opts={{
@@ -58,38 +61,39 @@ const PDListingHero = ({ hero, breadcrumbs }: Readonly<BreadcrumbProps>) => {
             >
                 <CarouselContent className="ml-0">
                     {hero.map((data, index) => (
-                        <CarouselItem key={index} className="h-[35rem] pl-0">
+                        <CarouselItem
+                            key={index}
+                            className="h-[40rem] lg:h-[35rem] pl-0"
+                        >
                             <div
-                                className="relative flex flex-col justify-center items-center h-full bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute gap-32 pb-10 font"
+                                className="relative flex flex-col justify-center items-center h-full bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute gap-32 pb-10 font px-3 lg:px-2"
                                 style={{
-                                    // backgroundImage: `url(${data.background.url})`,
-                                    backgroundImage:
-                                        "url(/images/hero/contact_hero.webp)",
+                                    backgroundImage: `url(${data.background?.url})`,
                                 }}
                             >
                                 <div className="space-y-5 flex flex-col justify-center items-center text-white relative z-10">
-                                    <h1 className="text-5xl font-bold overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] max-w-[44rem] text-center leading-tight">
+                                    <h1 className="text-3xl lg:text-5xl font-bold max-w-[44rem] text-center leading-tight">
                                         {data.title}
                                     </h1>
-                                    <p className="font-manrope text-lg max-w-2xl text-center overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
+                                    <p className="font-manrope lg:text-lg max-w-2xl text-center overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:4] [-webkit-box-orient:vertical]">
                                         {data.description}
                                     </p>
-                                    <div className="font-manrope space-x-4">
+                                    <div className="font-manrope flex flex-col lg:flex-row justify-center items-center gap-4">
                                         <Link
-                                            href={data.cta_button.href}
+                                            href={data.cta_button?.href}
                                             target={
-                                                data.cta_button.isExternal
+                                                data.cta_button?.isExternal
                                                     ? "_blank"
                                                     : "_self"
                                             }
                                         >
                                             <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
-                                                {data.cta_button.text}{" "}
+                                                {data.cta_button?.text}{" "}
                                                 <ArrowRightUp color="red" />
                                             </Button>
                                         </Link>
                                         <Button className="rounded-full bg-[#FFE9EC] text-black hover:text-white cursor-pointer">
-                                            {data.cta_whatsapp.text}{" "}
+                                            {data.cta_whatsapp?.text}{" "}
                                             <Whatsapp />
                                         </Button>
                                     </div>
@@ -99,7 +103,7 @@ const PDListingHero = ({ hero, breadcrumbs }: Readonly<BreadcrumbProps>) => {
                     ))}
                 </CarouselContent>
                 <div className="absolute bottom-0 w-full py-10">
-                    <div className="flex w-full justify-between max-w-6xl mx-auto">
+                    <div className="flex w-full justify-between max-w-6xl mx-auto px-3 lg:px-2">
                         <Breadcrumb>
                             <BreadcrumbList className="font-manrope text-white">
                                 {breadcrumbs
@@ -128,11 +132,12 @@ const PDListingHero = ({ hero, breadcrumbs }: Readonly<BreadcrumbProps>) => {
                             {hero.map((data, index) => (
                                 <li
                                     key={data.id}
-                                    className={
+                                    className={cn(
+                                        "hidden lg:flex",
                                         index === current - 1
                                             ? "font-semibold border-b-2 border-primary"
                                             : ""
-                                    }
+                                    )}
                                 >
                                     {data.slide_name}
                                 </li>

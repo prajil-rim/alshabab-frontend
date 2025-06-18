@@ -62,8 +62,8 @@ export async function getDestinationsList() {
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getDestination(id: string) {
-    const path = `/api/destinations/${id}`;
+export async function getDestination(slug: string) {
+    const path = `/api/destinations/${slug}`;
     const url = new URL(path, BASE_URL);
     url.search = destinationQuery;
     return fetchAPI(url.href, { method: "GET" });
@@ -83,8 +83,8 @@ export async function getPackagesList() {
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getPackage(id: string) {
-    const path = `/api/packages/${id}`;
+export async function getPackage(slug: string) {
+    const path = `/api/packages/${slug}`;
     const url = new URL(path, BASE_URL);
     url.search = packageQuery;
     return fetchAPI(url.href, { method: "GET" });
@@ -158,8 +158,8 @@ export async function getTestimonials() {
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getBlog(id: string) {
-    const path = `/api/blogs/${id}`;
+export async function getBlog(slug: string) {
+    const path = `/api/blogs/${slug}`;
     const url = new URL(path, BASE_URL);
     url.search = blogQuery;
     return fetchAPI(url.href, { method: "GET" });

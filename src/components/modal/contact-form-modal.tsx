@@ -4,6 +4,7 @@ import {
     Dialog,
     DialogClose,
     DialogContent,
+    DialogDescription,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
@@ -26,17 +27,18 @@ const ContactFormModal = ({
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className="bg-white text-black rounded-full font-semibold !px-5 !py-2.5 cursor-pointer hover:bg-white">
+                <Button className="bg-white text-black rounded-full font-semibold lg:!px-5 lg:!py-2.5 cursor-pointer hover:bg-white">
                     {cta}
                     <ArrowRightUp color="red" />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="w-full max-w-6xl sm:max-w-4xl bg-cover max-h-[calc(100vh-1rem)] bg-[300%_0%] p-0 overflow-hidden border-0 bg-[#212121]">
+            <DialogContent className="w-full max-w-6xl sm:max-w-4xl bg-cover lg:max-h-[calc(100vh-1rem)] bg-[300%_0%] p-0 overflow-hidden border-0 bg-[#212121]">
                 <DialogTitle className="sr-only">Contact Us</DialogTitle>
+                <DialogDescription className="sr-only"></DialogDescription>
                 <Image
                     src={"/images/others/contact_modal.webp"}
-                    alt=""
-                    className="size-full relative -left-1/4"
+                    alt="Office lady"
+                    className="size-full relative -left-1/4 hidden lg:block"
                     width={500}
                     height={500}
                 />

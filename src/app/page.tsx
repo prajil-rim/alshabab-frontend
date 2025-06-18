@@ -20,19 +20,30 @@ import {
     getPartners,
     getTestimonials,
 } from "@/data/loaders";
+import { returnMetadata } from "@/lib/utils";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+let homePageDataPromise: ReturnType<typeof getHomePage> | null = null;
+
+function getHomePageOnce() {
+    if (!homePageDataPromise) {
+        homePageDataPromise = getHomePage();
+    }
+    return homePageDataPromise;
+}
 
 async function loader() {
     const [pageData, faqs, testimonials, partners, destinations, packages] =
         await Promise.all([
-            getHomePage(),
+            getHomePageOnce(),
             getFaqs(),
             getTestimonials(),
             getPartners(),
             getDestinationsList(),
             getPackagesList(),
         ]);
-    if (!pageData && pageData.data) notFound();
+    if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
         faqs: faqs.data,
@@ -43,6 +54,12 @@ async function loader() {
     };
 }
 
+export async function generateMetadata(): Promise<Metadata> {
+    const { data } = await getHomePageOnce();
+
+    return returnMetadata(data);
+}
+
 export default async function HomeRoute() {
     const { pageData, faqs, testimonials, partners, destinations, packages } =
         await loader();
@@ -51,7 +68,7 @@ export default async function HomeRoute() {
         <>
             <HomeHero hero={pageData.slides} />
             <section className="bg-gradient-to-t from-transparent via-[#F5F1E3] to-[#448CD9]/80">
-                <div className="max-w-6xl mx-auto py-20">
+                <div className="max-w-6xl mx-auto py-10 px-3 lg:px-2">
                     <SearchSection
                         destinations={destinations}
                         packages={packages}
@@ -64,8 +81,8 @@ export default async function HomeRoute() {
             <ReelsSection {...pageData.reels_section} />
             <PopularPD {...pageData.popular_destinations} showLeaf />
             <WhyUsSection {...pageData.why_us_section} />
-            <FormSection />
-            <ExperiencesSection {...pageData.package_section} />
+            <FormSection destinations={destinations} packages={packages} />
+            <ExperiencesSection {...pageData.package_section} showLeaf />
             <PartnerSection {...partners} showLeaf />
             <GlobalToursSection {...pageData.global_tour_section} showLeaf />
             <Testimonials {...testimonials} showLeaf />

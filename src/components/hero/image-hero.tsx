@@ -28,24 +28,23 @@ const ImageHero = ({
 >) => {
     return (
         <section
-            className="relative flex flex-col justify-end items-center h-[35rem] bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute gap-20 pb-10"
+            className="relative flex flex-col justify-end items-center h-[40rem] lg:h-[35rem] bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute gap-40 lg:gap-20 pb-10"
             style={{
-                // backgroundImage: `url(${background.url})`,
+                backgroundImage: `url(${background.url})`,
                 ...style,
-                backgroundImage: "url(/images/hero/contact_hero.webp)",
             }}
         >
-            <div className="space-y-5 flex flex-col justify-center items-center text-white relative z-10">
-                <h1 className="text-5xl font-bold overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] max-w-[44rem] text-center leading-tight">
+            <div className="space-y-5 flex flex-col justify-center items-center text-white relative z-10 px-3 lg:px-2">
+                <h1 className="text-2xl lg:text-5xl font-bold overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical] max-w-[44rem] text-center leading-tight">
                     {title}
                 </h1>
-                <p className="font-manrope text-lg max-w-2xl text-center overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
+                <p className="font-manrope lg:text-lg max-w-2xl text-center">
                     {description}
                 </p>
                 {cta && (
-                    <div className="font-manrope space-x-4">
+                    <div className="font-manrope flex flex-col gap-3 lg:flex-row items-center">
                         <Link
-                            href={cta.href}
+                            href={cta?.href}
                             target={cta.isExternal ? "_blank" : "_self"}
                         >
                             <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">

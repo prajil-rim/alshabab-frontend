@@ -26,20 +26,20 @@ const FAQSection = ({
     const secondHalf = faqs.slice(mid);
 
     return (
-        <section className="max-w-6xl mx-auto py-24 text-center space-y-6">
+        <section className="max-w-6xl mx-auto py-10 lg:py-24 text-center space-y-6 px-3 lg:px-2">
             <div className="relative">
-                <h1 className="text-4xl font-semibold">{title}</h1>
+                <h1 className="text-2xl lg:text-4xl font-semibold">{title}</h1>
                 {showLeaf && (
                     <div className="absolute left-1/2 -translate-x-1/2 bottom-full translate-y-[60%] -rotate-[30deg] origin-top-left z-10 pointer-events-none">
                         <Leaf />
                     </div>
                 )}
             </div>
-            <p className="font-manrope max-w-4xl mx-auto overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
+            <p className="font-manrope max-w-4xl mx-auto overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:7] [-webkit-box-orient:vertical]">
                 {description}
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left mt-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left mt-10 mb-10 lg:mb-0">
                 <div className="space-y-3">
                     {firstHalf.map((faq) => (
                         <FaqAccordion

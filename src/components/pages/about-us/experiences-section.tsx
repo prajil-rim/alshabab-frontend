@@ -1,4 +1,6 @@
+import ExperiencesCarousel from "@/components/carousels/experiences-carousel";
 import CardWithAnimatedParagraph from "@/components/common/card";
+import Leaf from "@/components/icons/leaf";
 import { CardProps } from "@/types";
 
 function splitIntoThreeParts(n: number): number[] {
@@ -30,22 +32,36 @@ interface ExperiencesSectionProps {
     title: string;
     description: string;
     hover_card: CardProps[];
+    showLeaf?: boolean;
 }
 
 const ExperiencesSection = ({
     title,
     description,
     hover_card,
+    showLeaf = false,
 }: Readonly<ExperiencesSectionProps>) => {
+    if (!title || !hover_card || hover_card.length === 0) return null;
+
     const cardsArray = chunkArray(hover_card);
 
     return (
-        <section className="max-w-6xl mx-auto py-20 space-y-6">
-            <h1 className="text-4xl font-semibold text-center">{title}</h1>
-            <p className="font-manrope text-center max-w-4xl mx-auto overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
+        <section className="max-w-6xl mx-auto py-16 space-y-3 md:space-y-6 px-3 lg:px-2">
+            <div className="relative">
+                <h1 className="text-2xl lg:text-4xl font-semibold text-center">
+                    {title}
+                </h1>
+                {showLeaf && (
+                    <div className="absolute left-1/2 -translate-x-1/2 bottom-full translate-y-[60%] -rotate-[30deg] origin-top-left z-10 pointer-events-none">
+                        <Leaf />
+                    </div>
+                )}
+            </div>
+            <p className="font-manrope text-center max-w-4xl mx-auto">
                 {description}
             </p>
-            <div className="grid grid-cols-3 gap-4 pt-5">
+
+            <div className="grid-cols-3 gap-4 pt-5 hidden lg:grid">
                 {cardsArray.map((cards, index) => (
                     <div
                         className={`flex flex-col gap-2`}
@@ -61,6 +77,8 @@ const ExperiencesSection = ({
                     </div>
                 ))}
             </div>
+
+            <ExperiencesCarousel hover_card={hover_card} />
         </section>
     );
 };

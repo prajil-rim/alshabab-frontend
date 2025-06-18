@@ -5,19 +5,14 @@ import { motion as m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { CardProps } from "@/types";
 
-const TOTAL_CARDS = 8;
 const CARDS_PER_ROW = 4;
 
 const Attractions = ({ cards }: { cards: CardProps[] }) => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-    // Create dummy cards
-    const cards_ = Array.from({ length: TOTAL_CARDS }, (_, i) => i + 1);
-
-    const rows: number[][] = [];
-    // const rows: CardProps[][] = [];
-    for (let i = 0; i < cards_.length; i += CARDS_PER_ROW) {
-        rows.push(cards_.slice(i, i + CARDS_PER_ROW));
+    const rows: CardProps[][] = [];
+    for (let i = 0; i < cards.length; i += CARDS_PER_ROW) {
+        rows.push(cards.slice(i, i + CARDS_PER_ROW));
     }
     return rows.map((row, rowIndex) => {
         const baseIndex = rowIndex * CARDS_PER_ROW;
@@ -28,7 +23,7 @@ const Attractions = ({ cards }: { cards: CardProps[] }) => {
 
         return (
             <div key={rowIndex} className="flex w-full overflow-hidden -ml-2">
-                {row.map((_, colIndex) => {
+                {row.map((data, colIndex) => {
                     const globalIndex = baseIndex + colIndex;
                     const isHovered = hoveredIndex === globalIndex;
 
@@ -41,7 +36,7 @@ const Attractions = ({ cards }: { cards: CardProps[] }) => {
                     return (
                         <div
                             key={globalIndex}
-                            className={`transition-all pl-2 duration-300 h-[21rem] text-white text-xl font-bold ${cardWidth}`}
+                            className={`transition-all pl-2 pb-2 duration-300 h-[21rem] text-white text-xl font-bold ${cardWidth}`}
                             onMouseEnter={() => setHoveredIndex(globalIndex)}
                             onMouseLeave={() => setHoveredIndex(null)}
                         >
@@ -53,8 +48,7 @@ const Attractions = ({ cards }: { cards: CardProps[] }) => {
                                         : "justify-start"
                                 )}
                                 style={{
-                                    // backgroundImage: `url(${data.image.url})`,
-                                    backgroundImage: `url(/images/others/hover_card_1.webp)`,
+                                    backgroundImage: `url(${data.image?.url})`,
                                 }}
                             >
                                 <m.div
@@ -66,23 +60,10 @@ const Attractions = ({ cards }: { cards: CardProps[] }) => {
                                 >
                                     <div className="w-72 px-6 py-4 space-y-3">
                                         <h3 className="font-semibold text-2xl">
-                                            Top Station
+                                            {data.title}
                                         </h3>
                                         <p className="font-manrope text-sm font-normal overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:13] [-webkit-box-orient:vertical]">
-                                            Perched at 1,880 meters above sea
-                                            level, Top Station is the highest
-                                            point in Munnar, offering
-                                            breathtaking panoramic views of the
-                                            Western Ghats and the neighboring
-                                            valleys of Tamil Nadu. Famous for
-                                            its mesmerizing sunrises, this
-                                            scenic spot is a paradise for
-                                            photographers and nature lovers. As
-                                            the morning mist slowly lifts,
-                                            visitors can witness the rolling tea
-                                            plantations, blue-hued Neelakurinji
-                                            flowers &#040;which bloom once in 12
-                                            years&#041;.
+                                            {data.description}
                                         </p>
                                     </div>
                                 </m.div>

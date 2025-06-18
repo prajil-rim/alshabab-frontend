@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 import {
     Ellipsis,
@@ -26,22 +27,32 @@ const Reel = ({
     arrayLength,
     videoRefs,
 }: Readonly<ReelProps>) => {
+    const breakpoint = useMediaQuery("(max-width: 768px)");
+    if (!url) return null;
     return (
         <div
-            className={cn(
-                "transition-transform duration-500 relative after:absolute after:inset-0 after:rounded-xl after:transition-colors after:duration-500",
-                isActive && "scale-110",
-                selectedIndex + 2 < arrayLength
-                    ? selectedIndex + 2 == index && "after:bg-black/40"
-                    : selectedIndex - 3 === index && "after:bg-black/40",
-                selectedIndex + 3 < arrayLength
-                    ? selectedIndex + 3 == index &&
-                          "after:bg-gradient-to-l after:from-black/90 after:to-black/40"
-                    : selectedIndex - 2 === index &&
-                          "after:bg-gradient-to-l after:from-black/90 after:to-black/40",
-                selectedIndex === index &&
-                    "after:bg-gradient-to-r after:from-black/90 after:to-black/40"
-            )}
+            className={
+                breakpoint
+                    ? isActive
+                        ? "scale-110 transition-transform duration-500"
+                        : ""
+                    : cn(
+                          "transition-transform duration-500 relative after:absolute after:inset-0 after:rounded-xl after:transition-colors after:duration-500",
+                          isActive && "scale-110",
+                          selectedIndex + 2 < arrayLength
+                              ? selectedIndex + 2 == index &&
+                                    "after:bg-black/40"
+                              : selectedIndex - 3 === index &&
+                                    "after:bg-black/40",
+                          selectedIndex + 3 < arrayLength
+                              ? selectedIndex + 3 == index &&
+                                    "after:bg-gradient-to-l after:from-black/90 after:to-black/40"
+                              : selectedIndex - 2 === index &&
+                                    "after:bg-gradient-to-l after:from-black/90 after:to-black/40",
+                          selectedIndex === index &&
+                              "after:bg-gradient-to-r after:from-black/90 after:to-black/40"
+                      )
+            }
         >
             <div className="relative flex rounded-xl aspect-[1/1.6] items-center justify-center overflow-hidden">
                 <video

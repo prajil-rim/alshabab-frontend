@@ -1,8 +1,11 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CardSlider from "./slider";
 import { TabProps } from "@/types";
+import HoverSliderCarousel from "@/components/carousels/hover-slider-carousel";
 
 const HoverSlider = ({ tabs }: { tabs: TabProps[] }) => {
+    if (!tabs || tabs.length === 0) return null;
+
     return (
         <Tabs
             defaultValue={tabs[0].tab_heading.toLowerCase().replace(" ", "-")}
@@ -27,6 +30,7 @@ const HoverSlider = ({ tabs }: { tabs: TabProps[] }) => {
                     key={tab.id}
                 >
                     <CardSlider slides={tab.slides || []} />
+                    <HoverSliderCarousel slides={tab.slides || []} />
                 </TabsContent>
             ))}
         </Tabs>
