@@ -6,8 +6,6 @@ import { returnMetadata } from "@/lib/utils";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export const runtime = "edge";
-
 export async function generateStaticParams() {
     return [];
 }

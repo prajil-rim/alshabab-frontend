@@ -5,7 +5,6 @@ import {
 } from "@/data/loaders";
 import { BlogCardProps, DestinationListProps, PackageListProps } from "@/types";
 
-export const runtime = "edge";
 export const dynamic = "force-dynamic"; // Required for ISR with tags
 export const fetchCache = "force-cache"; // Enables caching with tags
 

@@ -24,8 +24,6 @@ import { returnMetadata } from "@/lib/utils";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export const runtime = "edge";
-
 let homePageDataPromise: ReturnType<typeof getHomePage> | null = null;
 
 function getHomePageOnce() {
