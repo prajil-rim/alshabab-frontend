@@ -9,7 +9,6 @@ import {
 } from "@/data/loaders";
 import Footer from "@/components/layout/footer";
 import { Toaster } from "sonner";
-import Head from "next/head";
 
 const playFairDisplay = Playfair_Display({
     variable: "--font-playfair-display",
