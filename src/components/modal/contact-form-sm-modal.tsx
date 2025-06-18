@@ -13,6 +13,7 @@ import ContactUsForm from "../forms/contact-us-form";
 import { DestinationListProps, PackageListProps } from "@/types";
 import { StrapiImage } from "../common/strapi-image";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const ContactFormSmModal = ({
     cta,
@@ -44,8 +45,8 @@ const ContactFormSmModal = ({
                 <DialogTitle className="sr-only">Contact Us</DialogTitle>
                 <DialogDescription className="sr-only"></DialogDescription>
                 <div className="size-full flex flex-col gap-3 items-center">
-                    <StrapiImage
-                        src="http://localhost:3000/images/logo/form_logo.webp"
+                    <Image
+                        src="/images/logo/form_logo.webp"
                         width={100}
                         height={100}
                         alt="Footer logo"

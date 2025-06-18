@@ -20,6 +20,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { contactUsSchema } from "@/lib/zod";
 import { DestinationListProps, PackageListProps } from "@/types";
+import Image from "next/image";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
@@ -49,8 +50,8 @@ const Form2 = ({
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="font-manrope border shadow-xl rounded-xl p-3 lg:p-7 space-y-3.5 bg-white w-full lg:w-1/2 max-h-[calc(100%-1rem)] overflow-y-scroll scrollbar-none"
             >
-                <StrapiImage
-                    src="http://localhost:3000/images/logo/form_logo.webp"
+                <Image
+                    src="/images/logo/form_logo.webp"
                     width={100}
                     height={100}
                     alt="Footer logo"
