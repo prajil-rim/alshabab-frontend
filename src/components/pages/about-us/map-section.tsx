@@ -1,4 +1,3 @@
-import { StrapiImage } from "@/components/common/strapi-image";
 import {
     Popover,
     PopoverContent,
@@ -33,8 +32,8 @@ const MapSection = (props: Readonly<MapSectionProps>) => {
             </p>
             <div className="relative">
                 <div className="w-full overflow-hidden">
-                    <StrapiImage
-                        src="http://localhost:3000/images/others/global_map.jpg"
+                    <Image
+                        src="/images/others/global_map.jpg"
                         alt="Global Map"
                         width={1024}
                         height={960}

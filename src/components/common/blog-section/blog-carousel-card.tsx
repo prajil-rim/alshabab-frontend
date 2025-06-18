@@ -20,9 +20,7 @@ const BlogCarouselCard = ({
                 <div
                     className="w-full aspect-video lg:h-96 rounded-xl bg-cover bg-center"
                     style={{
-                        backgroundImage:
-                            'url("/images/others/footer_cta_img2.webp")',
-                        // `url("${blogs[0].hero.cover.url}")`,
+                        backgroundImage: `url("${blog.hero?.cover?.url}")`,
                     }}
                 ></div>
             </Link>
