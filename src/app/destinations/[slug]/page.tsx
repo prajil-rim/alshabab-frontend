@@ -22,6 +22,8 @@ import DealsSection from "@/components/pages/destinations/deals-section";
 import { Metadata } from "next";
 import { returnMetadata } from "@/lib/utils";
 
+export const runtime = "edge";
+
 export async function generateStaticParams() {
     return [];
 }

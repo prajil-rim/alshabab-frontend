@@ -17,6 +17,8 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { returnMetadata } from "@/lib/utils";
 
+export const runtime = "edge";
+
 let packagesPageDataPromise: ReturnType<typeof getPackagesPage> | null = null;
 
 function getPackagesPageOnce() {

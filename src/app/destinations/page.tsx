@@ -19,6 +19,8 @@ import GlobalToursSection from "@/components/common/global-tours-section";
 import { Metadata } from "next";
 import { returnMetadata } from "@/lib/utils";
 
+export const runtime = "edge";
+
 let destinationsPageDataPromise: ReturnType<typeof getDestinationsPage> | null =
     null;
 

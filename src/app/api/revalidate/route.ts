@@ -1,6 +1,8 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 const StaticModelMap = {
     "blog-page": "/blogs",
     "destination-listing-page": "/destinations",

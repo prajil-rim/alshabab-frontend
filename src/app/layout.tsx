@@ -10,6 +10,8 @@ import {
 import Footer from "@/components/layout/footer";
 import { Toaster } from "sonner";
 
+export const runtime = "edge";
+
 const playFairDisplay = Playfair_Display({
     variable: "--font-playfair-display",
     subsets: ["latin"],

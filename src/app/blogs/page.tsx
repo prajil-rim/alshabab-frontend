@@ -6,6 +6,8 @@ import { returnMetadata } from "@/lib/utils";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+export const runtime = "edge";
+
 let allBlogsPromise: ReturnType<typeof getAllBlogs> | null = null;
 
 function getAllBlogsOnce() {

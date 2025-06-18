@@ -16,6 +16,8 @@ import { InfoBlockProps } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+export const runtime = "edge";
+
 let aboutUsPageDataPromise: ReturnType<typeof getAboutUsPage> | null = null;
 
 function getAboutUsPageOnce() {
