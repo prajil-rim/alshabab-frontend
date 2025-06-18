@@ -1,4 +1,3 @@
-import { StrapiImage } from "@/components/common/strapi-image";
 import ArrowRightUp from "@/components/icons/arrow-right-up";
 import { Button } from "@/components/ui/button";
 import {

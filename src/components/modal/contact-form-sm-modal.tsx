@@ -11,7 +11,6 @@ import { Button } from "../ui/button";
 import ArrowRightUp from "../icons/arrow-right-up";
 import ContactUsForm from "../forms/contact-us-form";
 import { DestinationListProps, PackageListProps } from "@/types";
-import { StrapiImage } from "../common/strapi-image";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
