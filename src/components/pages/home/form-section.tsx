@@ -20,11 +20,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface FormSectionProps {
+    title: string;
     destinations: DestinationListProps[];
     packages: PackageListProps[];
 }
 
 const FormSection = ({
+    title,
     destinations,
     packages,
 }: Readonly<FormSectionProps>) => {
@@ -32,7 +34,7 @@ const FormSection = ({
         <section className="bg-[#ECF4FF] px-3 lg:px-2">
             <div className="relative max-w-6xl mx-auto pb-16 lg:pb-0 pt-16 lg:pt-28 space-y-6 bg-[#ECF4FF]">
                 <h1 className="text-2xl font-extrabold lg:text-5xl uppercase max-w-xs mx-auto lg:mx-0 text-center lg:text-left md:max-w-lg leading-tight lg:absolute lg:top-8 lg:left-1/2 lg:-translate-x-[70%]">
-                    Plan your dream trip with us
+                    {title || "No Title"}
                 </h1>
                 <div className="grid lg:grid-cols-2 gap-3">
                     <div className="aspect-square w-full relative hidden lg:block">

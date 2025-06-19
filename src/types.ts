@@ -41,6 +41,7 @@ export interface ImageHeroProps {
     description: string;
     background: MediaProps;
     cta?: LinkProps;
+    cta_whatsapp?: LinkProps;
     breadcrumbs?: {
         text: string;
         href?: string;

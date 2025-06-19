@@ -15,7 +15,7 @@ import Whatsapp from "../icons/whatsapp";
 
 type VideoHeroProps = Pick<
     ImageHeroProps,
-    "title" | "description" | "breadcrumbs" | "cta"
+    "title" | "description" | "breadcrumbs" | "cta" | "cta_whatsapp"
 > & {
     background: {
         id: number;
@@ -29,6 +29,7 @@ const VideoHero = ({
     description,
     breadcrumbs,
     cta,
+    cta_whatsapp,
     background,
 }: Readonly<VideoHeroProps>) => {
     const heading = title.split("\\n");
@@ -76,9 +77,20 @@ const VideoHero = ({
                                 {cta.text} <ArrowRightUp color="red" />
                             </Button>
                         </Link>
-                        <Button className="rounded-full bg-[#FFE9EC] text-black hover:text-white cursor-pointer">
-                            Get Free Consultation <Whatsapp />
-                        </Button>
+                        {cta_whatsapp && (
+                            <Link
+                                href={cta_whatsapp?.href}
+                                target={
+                                    cta_whatsapp?.isExternal
+                                        ? "_blank"
+                                        : "_self"
+                                }
+                            >
+                                <Button className="rounded-full bg-[#FFE9EC] text-black hover:text-white cursor-pointer">
+                                    {cta_whatsapp?.text} <Whatsapp />
+                                </Button>
+                            </Link>
+                        )}
                     </div>
                 )}
             </div>

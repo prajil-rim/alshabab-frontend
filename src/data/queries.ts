@@ -128,6 +128,11 @@ export const homePageQuery = qs.stringify({
         },
         trending_search: true,
         price_range: true,
+        faq_section: {
+            populate: {
+                faqs: true,
+            },
+        },
         seo: {
             populate: {
                 metaImage: {
@@ -153,6 +158,7 @@ export const aboutUsPageQuery = qs.stringify({
                     fields: ["url", "alternativeText"],
                 },
                 cta: true,
+                cta_whatsapp: true,
             },
         },
         section_1: {
@@ -347,12 +353,6 @@ export const testimonialQuery = qs.stringify({
     },
 });
 
-export const faqQuery = qs.stringify({
-    populate: {
-        faqs: true,
-    },
-});
-
 export const blogQuery = qs.stringify({
     populate: {
         image: {
@@ -436,6 +436,7 @@ export const destinationQuery = qs.stringify({
         hero: {
             populate: {
                 cta: true,
+                cta_whatsapp: true,
                 background: {
                     populate: {
                         background: {
@@ -567,6 +568,22 @@ export const destinationQuery = qs.stringify({
                 },
             },
         },
+        testimonials: {
+            populate: {
+                testimonials: {
+                    populate: {
+                        image: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
+        faq_section: {
+            populate: {
+                faqs: true,
+            },
+        },
         seo: {
             populate: {
                 metaImage: {
@@ -670,6 +687,11 @@ export const destinationListingPageQuery = qs.stringify({
                 cta_chat: true,
             },
         },
+        faq_section: {
+            populate: {
+                faqs: true,
+            },
+        },
         seo: {
             populate: {
                 metaImage: {
@@ -770,6 +792,22 @@ export const packageQuery = qs.stringify({
                 },
             },
         },
+        testimonials: {
+            populate: {
+                testimonials: {
+                    populate: {
+                        image: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
+        faq_section: {
+            populate: {
+                faqs: true,
+            },
+        },
         seo: {
             populate: {
                 metaImage: {
@@ -860,6 +898,11 @@ export const packageListingPageQuery = qs.stringify({
                 },
                 cta_call: true,
                 cta_chat: true,
+            },
+        },
+        faq_section: {
+            populate: {
+                faqs: true,
             },
         },
         seo: {

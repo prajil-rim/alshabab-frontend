@@ -8,7 +8,6 @@ import {
     contactUsPageQuery,
     destinationListingPageQuery,
     destinationQuery,
-    faqQuery,
     globalSettingQuery,
     homePageQuery,
     maxPaginationQuery,
@@ -141,13 +140,6 @@ export async function getLatestBlogs() {
     const path = "/api/blogs";
     const url = new URL(path, BASE_URL);
     url.search = blogListQuery;
-    return fetchAPI(url.href, { method: "GET" });
-}
-
-export async function getFaqs() {
-    const path = "/api/faq";
-    const url = new URL(path, BASE_URL);
-    url.search = faqQuery;
     return fetchAPI(url.href, { method: "GET" });
 }
 

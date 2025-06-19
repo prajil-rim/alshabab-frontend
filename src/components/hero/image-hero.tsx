@@ -19,11 +19,17 @@ const ImageHero = ({
     background,
     breadcrumbs,
     cta,
+    cta_whatsapp,
     style,
 }: Readonly<
     Pick<
         ImageHeroProps,
-        "title" | "description" | "background" | "breadcrumbs" | "cta"
+        | "title"
+        | "description"
+        | "background"
+        | "breadcrumbs"
+        | "cta"
+        | "cta_whatsapp"
     > & { style?: React.CSSProperties }
 >) => {
     return (
@@ -51,9 +57,18 @@ const ImageHero = ({
                                 {cta.text} <ArrowRightUp color="red" />
                             </Button>
                         </Link>
-                        <Button className="rounded-full bg-[#FFE9EC] text-black hover:text-white cursor-pointer">
-                            Get Free Consultation <Whatsapp />
-                        </Button>
+                        {cta_whatsapp && (
+                            <Link
+                                href={cta_whatsapp?.href}
+                                target={
+                                    cta_whatsapp.isExternal ? "_blank" : "_self"
+                                }
+                            >
+                                <Button className="rounded-full bg-[#FFE9EC] text-black hover:text-white cursor-pointer">
+                                    {cta_whatsapp?.text} <Whatsapp />
+                                </Button>
+                            </Link>
+                        )}
                     </div>
                 )}
             </div>

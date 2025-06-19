@@ -9,9 +9,7 @@ import TripDetailsSection from "@/components/pages/packages/trip-details-section
 import {
     getDestination,
     getDestinationsList,
-    getFaqs,
     getPackagesList,
-    getTestimonials,
 } from "@/data/loaders";
 import { notFound } from "next/navigation";
 import { ReelsSection } from "@/components/common/reels-section/reels-section";
@@ -36,19 +34,14 @@ function getDestinationDataOnce(slug: string) {
 }
 
 async function loader(slug: string) {
-    const [pageData, faqs, testimonials, destinations, packages] =
-        await Promise.all([
-            getDestinationDataOnce(slug),
-            getFaqs(),
-            getTestimonials(),
-            getDestinationsList(),
-            getPackagesList(),
-        ]);
+    const [pageData, destinations, packages] = await Promise.all([
+        getDestinationDataOnce(slug),
+        getDestinationsList(),
+        getPackagesList(),
+    ]);
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
-        faqs: faqs.data,
-        testimonials: testimonials.data,
         packages: packages.data,
         destinations: destinations.data,
     };
@@ -73,8 +66,7 @@ const DestinationPage = async ({
     const { slug } = await params;
     if (!slug) return notFound();
 
-    const { pageData, faqs, testimonials, destinations, packages } =
-        await loader(slug as string);
+    const { pageData, destinations, packages } = await loader(slug as string);
 
     return (
         <main>
@@ -113,11 +105,11 @@ const DestinationPage = async ({
             <GallerySection {...pageData.gallery_section} />
             <DealsSection {...pageData.deals_section} />
             <RouteSection {...pageData.route_section} />
-            <Testimonials {...testimonials} />
+            <Testimonials {...pageData.testimonials} />
             <FAQSection
-                title={faqs?.title}
-                description={faqs?.description}
-                faqs={faqs?.faqs}
+                title={pageData?.faq_section?.title}
+                description={pageData?.faq_section?.description}
+                faqs={pageData?.faq_section?.faqs}
             />
             <FooterCTA {...pageData.footer_cta_section} />
         </main>

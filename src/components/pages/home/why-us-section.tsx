@@ -101,9 +101,7 @@ function Card({
                 height={40}
             />
             <h6 className="text-2xl font-bold font-manrope">{title}</h6>
-            <p className="font-manrope overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
-                {description}
-            </p>
+            <p className="font-manrope">{description}</p>
         </div>
     );
 }

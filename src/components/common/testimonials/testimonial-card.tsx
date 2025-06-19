@@ -13,9 +13,7 @@ const TestimonialCard = ({
             <p className="mt-auto font-manrope">{testimonial}</p>
             <div className="flex items-center gap-2 mt-auto">
                 <StrapiImage
-                    alt={
-                        image.alternativeText || "Alternative Text not provided"
-                    }
+                    alt={image.alternativeText || ""}
                     src={image.url || process.env.PLACEHOLDER_IMAGE!}
                     width={40}
                     height={40}

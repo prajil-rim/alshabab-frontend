@@ -14,7 +14,6 @@ import SearchSection from "@/components/pages/home/search-section";
 import WhyUsSection from "@/components/pages/home/why-us-section";
 import {
     getDestinationsList,
-    getFaqs,
     getHomePage,
     getPackagesList,
     getPartners,
@@ -34,10 +33,9 @@ function getHomePageOnce() {
 }
 
 async function loader() {
-    const [pageData, faqs, testimonials, partners, destinations, packages] =
+    const [pageData, testimonials, partners, destinations, packages] =
         await Promise.all([
             getHomePageOnce(),
-            getFaqs(),
             getTestimonials(),
             getPartners(),
             getDestinationsList(),
@@ -46,7 +44,6 @@ async function loader() {
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
-        faqs: faqs.data,
         testimonials: testimonials.data,
         partners: partners.data,
         destinations: destinations.data,
@@ -61,7 +58,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomeRoute() {
-    const { pageData, faqs, testimonials, partners, destinations, packages } =
+    const { pageData, testimonials, partners, destinations, packages } =
         await loader();
 
     return (
@@ -81,14 +78,18 @@ export default async function HomeRoute() {
             <ReelsSection {...pageData.reels_section} />
             <PopularPD {...pageData.popular_destinations} showLeaf />
             <WhyUsSection {...pageData.why_us_section} />
-            <FormSection destinations={destinations} packages={packages} />
+            <FormSection
+                title={pageData.form_section_title}
+                destinations={destinations}
+                packages={packages}
+            />
             <ExperiencesSection {...pageData.package_section} showLeaf />
             <PartnerSection {...partners} showLeaf />
             <GlobalToursSection {...pageData.global_tour_section} showLeaf />
             <Testimonials {...testimonials} showLeaf />
             <div className="py-5"></div>
             <BlogSection {...pageData.blog_section} showLeaf />
-            <FAQSection {...faqs} showLeaf />
+            <FAQSection {...pageData.faq_section} showLeaf />
             <FooterCTA {...pageData.footer_cta_section} />
         </>
     );

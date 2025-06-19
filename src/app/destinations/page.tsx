@@ -9,7 +9,6 @@ import PopularPD from "@/components/common/pd-packages";
 import {
     getDestinationsList,
     getDestinationsPage,
-    getFaqs,
     getPackagesList,
     getTestimonials,
 } from "@/data/loaders";
@@ -30,18 +29,15 @@ function getDestinationsPageOnce() {
 }
 
 async function loader() {
-    const [pageData, faqs, testimonials, destinations, packages] =
-        await Promise.all([
-            getDestinationsPageOnce(),
-            getFaqs(),
-            getTestimonials(),
-            getDestinationsList(),
-            getPackagesList(),
-        ]);
+    const [pageData, testimonials, destinations, packages] = await Promise.all([
+        getDestinationsPageOnce(),
+        getTestimonials(),
+        getDestinationsList(),
+        getPackagesList(),
+    ]);
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
-        faqs: faqs.data,
         testimonials: testimonials.data,
         destinations: destinations.data,
         packages: packages.data,
@@ -55,8 +51,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const DestinationListingPage = async () => {
-    const { pageData, faqs, testimonials, destinations, packages } =
-        await loader();
+    const { pageData, testimonials, destinations, packages } = await loader();
 
     return (
         <main>
@@ -84,9 +79,9 @@ const DestinationListingPage = async () => {
             <Testimonials {...testimonials} />
             <BlogSection {...pageData.blog_section} />
             <FAQSection
-                title={faqs?.title}
-                description={faqs?.description}
-                faqs={faqs?.faqs}
+                title={pageData?.faq_section?.title}
+                description={pageData?.faq_section?.description}
+                faqs={pageData?.faq_section?.faqs}
             />
             <FooterCTA {...pageData.footer_cta_section} />
         </main>

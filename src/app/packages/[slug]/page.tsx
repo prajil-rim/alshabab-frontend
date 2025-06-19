@@ -6,12 +6,7 @@ import ImageHero from "@/components/hero/image-hero";
 import FooterCTA from "@/components/layout/footer-cta";
 import PackageIncludesSection from "@/components/pages/packages/package-includes-section";
 import TripDetailsSection from "@/components/pages/packages/trip-details-section";
-import {
-    getFaqs,
-    getPackage,
-    getPackagesList,
-    getTestimonials,
-} from "@/data/loaders";
+import { getPackage, getPackagesList } from "@/data/loaders";
 import { returnMetadata } from "@/lib/utils";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -30,17 +25,13 @@ function getPackageDataOnce(slug: string) {
 }
 
 async function loader(slug: string) {
-    const [pageData, faqs, testimonials, packages] = await Promise.all([
+    const [pageData, packages] = await Promise.all([
         getPackageDataOnce(slug),
-        getFaqs(),
-        getTestimonials(),
         getPackagesList(),
     ]);
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
-        faqs: faqs.data,
-        testimonials: testimonials.data,
         packages: packages.data,
     };
 }
@@ -64,9 +55,7 @@ const PackagePage = async ({
     const { slug } = await params;
     if (!slug) return notFound();
 
-    const { pageData, faqs, testimonials, packages } = await loader(
-        slug as string
-    );
+    const { pageData, packages } = await loader(slug as string);
 
     return (
         <main>
@@ -93,12 +82,12 @@ const PackagePage = async ({
             <PackageIncludesSection {...pageData.package_includes_section} />
             <TripDetailsSection {...pageData.trip_details} />
             <div className="pt-10 lg:pt-20"></div>
-            <Testimonials {...testimonials} />
+            <Testimonials {...pageData?.testimonials} />
             <BlogSection {...pageData.blog_section} />
             <FAQSection
-                title={faqs?.title}
-                description={faqs?.description}
-                faqs={faqs?.faqs}
+                title={pageData?.faq_section?.title}
+                description={pageData?.faq_section?.description}
+                faqs={pageData?.faq_section?.faqs}
             />
             <FooterCTA {...pageData.footer_cta_section} />
         </main>
