@@ -22,7 +22,7 @@ const Testimonials = ({
             <div className="relative w-fit">
                 <h1 className="text-2xl lg:text-4xl font-semibold">{title}</h1>
                 {showLeaf && (
-                    <div className="absolute left-full -translate-x-[40%] bottom-0 origin-top-left z-10 pointer-events-none">
+                    <div className="absolute left-full -translate-x-[40%] bottom-0 origin-top-left z-10 pointer-events-none hidden md:block">
                         <Leaf />
                     </div>
                 )}

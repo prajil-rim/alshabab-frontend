@@ -56,13 +56,15 @@ const BlogHero = ({
                     {description}
                 </p>
                 <div className="font-manrope text-center flex flex-col lg:flex-row items-center gap-3 lg:gap-0">
-                    <div>
+                    <div className="flex">
                         <span className="text-sm lg:text-base">
                             📅 {format(new Date(date), "MMMM dd, yyyy")}
                         </span>
                         <b className="mx-2">•</b>
                         <span className="text-sm lg:text-base">
-                            🕒 {read_time} read
+                            🕒 {read_time}{" "}
+                            <span className="rtl:hidden">read</span>
+                            <span className="ltr:hidden">يقرأ</span>
                         </span>
                     </div>
                     {cta && (

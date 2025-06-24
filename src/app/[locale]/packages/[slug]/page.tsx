@@ -7,26 +7,30 @@ import FooterCTA from "@/components/layout/footer-cta";
 import PackageIncludesSection from "@/components/pages/packages/package-includes-section";
 import TripDetailsSection from "@/components/pages/packages/trip-details-section";
 import { getPackage, getPackagesList } from "@/data/loaders";
+import { routing } from "@/i18n/routing";
 import { returnMetadata } from "@/lib/utils";
 import { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-    return [];
+    return routing.locales.map((locale) => ({ locale }));
 }
 
 let packageDataPromise: ReturnType<typeof getPackage> | null = null;
+let localeCache: string | null = null;
 
-function getPackageDataOnce(slug: string) {
-    if (!packageDataPromise) {
-        packageDataPromise = getPackage(slug);
+function getPackageDataOnce(slug: string, locale: string) {
+    if (!packageDataPromise || localeCache !== locale) {
+        packageDataPromise = getPackage(slug, locale);
+        localeCache = locale;
     }
     return packageDataPromise;
 }
 
-async function loader(slug: string) {
+async function loader(slug: string, locale: string) {
     const [pageData, packages] = await Promise.all([
-        getPackageDataOnce(slug),
+        getPackageDataOnce(slug, locale),
         getPackagesList(),
     ]);
     if (!pageData || !pageData.data) notFound();
@@ -39,10 +43,10 @@ async function loader(slug: string) {
 export async function generateMetadata({
     params,
 }: {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-    const { slug } = await params;
-    const { data } = await getPackageDataOnce(slug);
+    const { slug, locale } = await params;
+    const { data } = await getPackageDataOnce(slug, locale);
 
     return returnMetadata(data);
 }
@@ -50,12 +54,17 @@ export async function generateMetadata({
 const PackagePage = async ({
     params,
 }: {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string; locale: string }>;
 }) => {
-    const { slug } = await params;
+    const { slug, locale } = await params;
     if (!slug) return notFound();
 
-    const { pageData, packages } = await loader(slug as string);
+    const { pageData, packages } = await loader(slug as string, locale);
+
+    // Enable static rendering
+    setRequestLocale(locale);
+
+    const t = await getTranslations("homePage.header.navItems");
 
     return (
         <main>
@@ -65,11 +74,11 @@ const PackagePage = async ({
                 title={pageData.hero.title}
                 breadcrumbs={[
                     {
-                        text: "Home",
+                        text: t("home"),
                         href: "/",
                     },
                     {
-                        text: "Packages",
+                        text: t("packages"),
                         href: "/packages",
                     },
                     {

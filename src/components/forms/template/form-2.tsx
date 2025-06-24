@@ -19,6 +19,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { contactUsSchema } from "@/lib/zod";
 import { DestinationListProps, PackageListProps } from "@/types";
+import { dir } from "i18next";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
@@ -30,6 +32,7 @@ interface FormProps {
     packages: PackageListProps[];
     onSubmit: (values: z.infer<typeof contactUsSchema>) => Promise<void>;
     loading: boolean;
+    locale: string;
 }
 
 const Form2 = ({
@@ -38,22 +41,26 @@ const Form2 = ({
     packages,
     onSubmit,
     loading,
+    locale,
 }: Readonly<FormProps>) => {
     const [selectedPackages, setSelectedPackages] = useState<
         PackageListProps[]
     >([]);
 
+    const t = useTranslations("form");
+
     return (
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
+                dir={dir(locale)}
                 className="font-manrope border shadow-xl rounded-xl p-3 lg:p-7 space-y-3.5 bg-white w-full lg:w-1/2 max-h-[calc(100%-1rem)] overflow-y-scroll scrollbar-none"
             >
                 <Image
                     src="/images/logo/form_logo.webp"
                     width={100}
                     height={100}
-                    alt="Footer logo"
+                    alt="logo"
                     className="mx-auto hidden lg:block"
                 />
                 <FormField
@@ -61,12 +68,12 @@ const Form2 = ({
                     name="fullname"
                     render={({ field }) => (
                         <FormItem className="space-y-3.5">
-                            <FormLabel>Full Name*</FormLabel>
+                            <FormLabel>{t("fullname")}*</FormLabel>
                             <div className="space-y-1">
                                 <FormControl>
                                     <Input
                                         {...field}
-                                        placeholder="Enter full name"
+                                        placeholder={t("fullnamePlaceholder")}
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -80,12 +87,12 @@ const Form2 = ({
                         name="email"
                         render={({ field }) => (
                             <FormItem className="space-y-3.5">
-                                <FormLabel>Email Address*</FormLabel>
+                                <FormLabel>{t("email")}*</FormLabel>
                                 <div className="space-y-1">
                                     <FormControl>
                                         <Input
                                             {...field}
-                                            placeholder="Enter email address"
+                                            placeholder={t("emailPlaceholder")}
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -98,12 +105,12 @@ const Form2 = ({
                         name="phone"
                         render={({ field }) => (
                             <FormItem className="space-y-3.5">
-                                <FormLabel>Phone Number*</FormLabel>
+                                <FormLabel>{t("phone")}*</FormLabel>
                                 <div className="space-y-1">
                                     <FormControl>
                                         <Input
                                             {...field}
-                                            placeholder="Enter phone number"
+                                            placeholder={t("phonePlaceholder")}
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -118,7 +125,7 @@ const Form2 = ({
                         name="destination"
                         render={({ field }) => (
                             <FormItem className="space-y-3.5">
-                                <FormLabel>Destination</FormLabel>
+                                <FormLabel>{t("destination")}</FormLabel>
                                 <div className="space-y-1">
                                     <Select
                                         onValueChange={(value) => {
@@ -142,7 +149,11 @@ const Form2 = ({
                                                         "0 !important",
                                                 }}
                                             >
-                                                <SelectValue placeholder="Select a destination" />
+                                                <SelectValue
+                                                    placeholder={t(
+                                                        "destinationPlaceholder"
+                                                    )}
+                                                />
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent className="font-manrope">
@@ -174,7 +185,7 @@ const Form2 = ({
                         name="package"
                         render={({ field }) => (
                             <FormItem className="space-y-3.5">
-                                <FormLabel>Package</FormLabel>
+                                <FormLabel>{t("package")}</FormLabel>
                                 <div className="space-y-1">
                                     <Select
                                         onValueChange={field.onChange}
@@ -188,7 +199,11 @@ const Form2 = ({
                                                         "0 !important",
                                                 }}
                                             >
-                                                <SelectValue placeholder="Select a package" />
+                                                <SelectValue
+                                                    placeholder={t(
+                                                        "packagePlaceholder"
+                                                    )}
+                                                />
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent className="font-manrope">
@@ -211,7 +226,7 @@ const Form2 = ({
                                                     value="disabled"
                                                     disabled
                                                 >
-                                                    Select a destination first!
+                                                    {t("pError")}
                                                 </SelectItem>
                                             )}
                                         </SelectContent>
@@ -227,11 +242,11 @@ const Form2 = ({
                     name="message"
                     render={({ field }) => (
                         <FormItem className="space-y-3.5">
-                            <FormLabel>Message</FormLabel>
+                            <FormLabel>{t("message")}</FormLabel>
                             <div className="space-y-1">
                                 <FormControl>
                                     <Textarea
-                                        placeholder="Enter your message"
+                                        placeholder={t("messagePlaceholder")}
                                         rows={12}
                                         {...field}
                                         className="resize-none !h-[100px]"
@@ -247,7 +262,7 @@ const Form2 = ({
                     variant={"secondary"}
                     disabled={loading}
                 >
-                    Get Expert Consultation <ArrowRightUp color="blue" />
+                    {t("button2")} <ArrowRightUp color="blue" />
                 </Button>
             </form>
         </Form>

@@ -16,10 +16,12 @@ const ContactUsForm = ({
     destinations,
     packages,
     formType,
+    locale,
 }: Readonly<{
     destinations: DestinationListProps[];
     packages: PackageListProps[];
     formType: "form1" | "form2";
+    locale: string;
 }>) => {
     const [loading, setLoading] = useState(false);
     const path = usePathname();
@@ -73,6 +75,7 @@ const ContactUsForm = ({
                 packages={packages}
                 onSubmit={onSubmit}
                 loading={loading}
+                locale={locale}
             />
         );
     } else {

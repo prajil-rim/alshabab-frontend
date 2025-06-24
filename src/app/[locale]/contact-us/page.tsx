@@ -7,22 +7,30 @@ import {
     getDestinationsList,
     getPackagesList,
 } from "@/data/loaders";
+import { routing } from "@/i18n/routing";
 import { returnMetadata } from "@/lib/utils";
 import { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 let contactUsPageDataPromise: ReturnType<typeof getContactUsPage> | null = null;
+let localeCache: string | null = null;
 
-function getContactUsPageOnce() {
-    if (!contactUsPageDataPromise) {
-        contactUsPageDataPromise = getContactUsPage();
+export const generateStaticParams = () => {
+    return routing.locales.map((locale) => ({ locale }));
+};
+
+function getContactUsPageOnce(locale: string) {
+    if (!contactUsPageDataPromise || localeCache !== locale) {
+        contactUsPageDataPromise = getContactUsPage(locale);
+        localeCache = locale;
     }
     return contactUsPageDataPromise;
 }
 
-async function loader() {
+async function loader(locale: string) {
     const [data, destinations, packages] = await Promise.all([
-        getContactUsPageOnce(),
+        getContactUsPageOnce(locale),
         getDestinationsList(),
         getPackagesList(),
     ]);
@@ -34,14 +42,27 @@ async function loader() {
     };
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-    const { data } = await getContactUsPageOnce();
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+    const locale = (await params).locale;
+    const { data } = await getContactUsPageOnce(locale);
 
     return returnMetadata(data);
 }
 
-const ContactPage = async () => {
-    const { data, destinations, packages } = await loader();
+const ContactPage = async ({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}) => {
+    const locale = (await params).locale;
+    const { data, destinations, packages } = await loader(locale);
+
+    // Enable static rendering
+    setRequestLocale(locale);
 
     return (
         <>

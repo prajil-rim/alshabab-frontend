@@ -1,0 +1,68 @@
+{
+    "homePage": {
+        "header": {
+            "navItems": {
+                "home": "Home",
+                "aboutUs": "About Us",
+                "destinations": "Destinations",
+                "packages": "Packages",
+                "insights": "Insights",
+                "contactUs": "Contact Us",
+                "cta": "Plan Your Trip"
+            }
+        },
+        "searchSection": {
+            "destination": "Destination",
+            "ddes": "Select your destination",
+            "package": "Package",
+            "pdes": "Select your package",
+            "pError": "Select a destination first!",
+            "price": "Price",
+            "priceDes": "Select your budget",
+            "button": "Find My Adventure",
+            "trendingSearches": "Trending Searches",
+            "happyClients": "Happy Clients",
+            "successTrips": "Successful Trips"
+        }
+    },
+    "common": {
+        "exploreMore": "Explore more"
+    },
+    "footer": {
+        "quickLinks": "Quick Links",
+        "support": "Support",
+        "stayConnected": "Stay Connected",
+        "copy": "All rights reserved"
+    },
+    "form": {
+        "title1": "Get free consultation now!",
+        "fullname": "Full Name",
+        "fullnamePlaceholder": "Enter full name",
+        "email": "Email",
+        "emailPlaceholder": "Enter email address",
+        "phone": "Phone number",
+        "phonePlaceholder": "Enter phone number",
+        "message": "Message",
+        "messagePlaceholder": "Enter your message",
+        "package": "Package",
+        "packagePlaceholder": "Select a package",
+        "pError": "Select a destination first!",
+        "destination": "Destination",
+        "destinationPlaceholder": "Select a destination",
+        "date": "Choose your date",
+        "button1": "Get Free Consultation",
+        "button2": "Get Expert Consultation",
+        "button3": "Contact now"
+    },
+    "filter": {
+        "all": "All",
+        "sortBy": "Sort By",
+        "newest": "Newest",
+        "oldest": "Oldest"
+    },
+    "blog": {
+        "shareArticles": "Share Articles",
+        "meetTheAuthor": "Meet the Author",
+        "recommendedArticles": "Recommended Articles"
+    }
+}

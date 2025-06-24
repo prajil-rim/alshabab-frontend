@@ -19,25 +19,34 @@ import {
     getPartners,
     getTestimonials,
 } from "@/data/loaders";
+import { routing } from "@/i18n/routing";
 import { returnMetadata } from "@/lib/utils";
 import { Metadata } from "next";
+import { hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-let homePageDataPromise: ReturnType<typeof getHomePage> | null = null;
+export const generateStaticParams = () => {
+    return routing.locales.map((locale) => ({ locale }));
+};
 
-function getHomePageOnce() {
-    if (!homePageDataPromise) {
-        homePageDataPromise = getHomePage();
+let homePageDataPromise: ReturnType<typeof getHomePage> | null = null;
+let localeCache: string | null = null;
+
+function getHomePageOnce(locale: string) {
+    if (!homePageDataPromise || localeCache !== locale) {
+        homePageDataPromise = getHomePage(locale);
+        localeCache = locale;
     }
     return homePageDataPromise;
 }
 
-async function loader() {
+async function loader(locale: string) {
     const [pageData, testimonials, partners, destinations, packages] =
         await Promise.all([
-            getHomePageOnce(),
-            getTestimonials(),
-            getPartners(),
+            getHomePageOnce(locale),
+            getTestimonials(locale),
+            getPartners(locale),
             getDestinationsList(),
             getPackagesList(),
         ]);
@@ -51,15 +60,32 @@ async function loader() {
     };
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-    const { data } = await getHomePageOnce();
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+    const locale = (await params).locale;
+    const { data } = await getHomePageOnce(locale || "en");
 
     return returnMetadata(data);
 }
 
-export default async function HomeRoute() {
+export default async function HomeRoute({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}) {
+    const locale = (await params).locale;
     const { pageData, testimonials, partners, destinations, packages } =
-        await loader();
+        await loader(locale || "en");
+
+    if (!hasLocale(routing.locales, locale)) {
+        notFound();
+    }
+
+    // Enable static rendering
+    setRequestLocale(locale);
 
     return (
         <>
@@ -76,7 +102,11 @@ export default async function HomeRoute() {
                 </div>
             </section>
             <ReelsSection {...pageData.reels_section} />
-            <PopularPD {...pageData.popular_destinations} showLeaf />
+            <PopularPD
+                {...pageData.popular_destinations}
+                showLeaf
+                locale={locale}
+            />
             <WhyUsSection {...pageData.why_us_section} />
             <FormSection
                 title={pageData.form_section_title}

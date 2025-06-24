@@ -12,11 +12,14 @@ import { SlideProps } from "@/types";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import ArrowRightUp from "../icons/arrow-right-up";
+import { useTranslations } from "next-intl";
 
 const HoverSliderCarousel = ({ slides }: { slides: SlideProps[] }) => {
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
     const [count, setCount] = useState(0);
+
+    const t = useTranslations("common");
 
     useEffect(() => {
         if (!api) {
@@ -58,7 +61,7 @@ const HoverSliderCarousel = ({ slides }: { slides: SlideProps[] }) => {
                                                     size={"sm"}
                                                     className="bg-transparent rounded-full font-manrope text-xs cursor-pointer"
                                                 >
-                                                    Explore more{" "}
+                                                    {t("exploreMore")}{" "}
                                                     <ArrowRightUp color="red" />
                                                 </Button>
                                             </Link>

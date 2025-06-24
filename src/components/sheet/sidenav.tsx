@@ -12,6 +12,7 @@ import { StrapiImage } from "../common/strapi-image";
 import NavItems from "../layout/nav-items";
 import { DestinationListProps, LogoProps, PackageListProps } from "@/types";
 import { useState } from "react";
+import LocaleSwitcher from "../layout/language-switcher";
 
 interface SidenavProps {
     logo: LogoProps;
@@ -47,6 +48,7 @@ const Sidenav = ({ logo, destinations, packages }: Readonly<SidenavProps>) => {
                     isMobile
                     setOpen={setOpen}
                 />
+                <LocaleSwitcher />
             </SheetContent>
         </Sheet>
     );

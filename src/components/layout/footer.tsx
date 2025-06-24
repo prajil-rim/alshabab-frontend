@@ -5,6 +5,7 @@ import Image from "next/image";
 import Mail from "../icons/mail";
 import MapPin from "../icons/map-pin";
 import Call from "../icons/call";
+import { useTranslations } from "next-intl";
 
 interface FooterProps {
     description: string;
@@ -32,6 +33,12 @@ const contactIcons = {
     location: <MapPin />,
 };
 
+const contactLink = {
+    phone: "tel:",
+    email: "mailto:",
+    location: "https://www.google.com/maps/search/",
+};
+
 const Footer = ({
     cookies,
     copy,
@@ -45,6 +52,7 @@ const Footer = ({
     socials,
     contact_info,
 }: Readonly<FooterProps>) => {
+    const t = useTranslations("footer");
     return (
         <footer className="bg-off-black text-primary-foreground font-manrope">
             <div className="max-w-6xl mx-auto px-2 py-8">
@@ -64,25 +72,27 @@ const Footer = ({
                         </p>
                     </div>
                     <div className="space-y-5 lg:space-y-6 text-center lg:text-left">
-                        <div className="text-xl font-bold">Quick Links</div>
+                        <div className="text-xl font-bold">
+                            {t("quickLinks")}
+                        </div>
                         <ul className="space-y-3.5">
                             {quick_links?.map((link) => (
                                 <li key={link.id}>
-                                    <a
+                                    <Link
                                         href={link.href}
                                         target={
                                             link.isExternal ? "_blank" : "_self"
                                         }
                                     >
                                         {link.text}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
                     </div>
                     <div className="space-y-6">
                         <div className="text-xl font-bold text-center lg:text-left">
-                            Support
+                            {t("support")}
                         </div>
                         <ul className="space-y-3.5 text-center lg:text-left">
                             {support?.map((link) => (
@@ -101,7 +111,7 @@ const Footer = ({
                     </div>
                     <div className="space-y-6">
                         <div className="text-xl font-bold text-center lg:text-left">
-                            Stay Connected
+                            {t("stayConnected")}
                         </div>
                         <div className="space-y-5">
                             <ul className="flex items-center gap-3.5 justify-center lg:justify-start">
@@ -131,13 +141,20 @@ const Footer = ({
                                     <li
                                         key={contact.id}
                                         className="flex items-center gap-1"
+                                        dir="ltr"
                                     >
                                         {
                                             contactIcons[
                                                 contact.contact as ContactType
                                             ]
                                         }
-                                        <Link href="mailto:hello@rankin.to">
+                                        <Link
+                                            href={
+                                                contactLink[
+                                                    contact.contact as ContactType
+                                                ] + contact.contact_details
+                                            }
+                                        >
                                             {contact.contact_details}
                                         </Link>
                                     </li>
@@ -149,8 +166,7 @@ const Footer = ({
                 <hr className="my-7 border-[#646D79]" />
                 <div className="flex flex-wrap items-center gap-2 lg:gap-5 justify-center">
                     <span>
-                        &copy; {new Date().getFullYear()} {copy}. All rights
-                        reserved.
+                        &copy; {new Date().getFullYear()} {copy}. {t("copy")}.
                     </span>
                     <Link
                         href={privacy_policy?.href}

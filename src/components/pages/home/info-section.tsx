@@ -3,6 +3,7 @@ import ArrowRightUp from "@/components/icons/arrow-right-up";
 import Leaf from "@/components/icons/leaf";
 import { Button } from "@/components/ui/button";
 import { LinkProps, MediaProps } from "@/types";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
@@ -27,6 +28,7 @@ const InfoSection = ({
     happy_clients,
     cta,
 }: Readonly<InfoSectionProps>) => {
+    const t = useTranslations("homePage.searchSection");
     return (
         <div className="flex items-center my-20 flex-row-reverse flex-wrap-reverse lg:flex-nowrap gap-10 lg:gap-0">
             <div className="shrink-0 w-[90%] md:w-3/5 lg:w-1/2 md:mx-auto">
@@ -58,7 +60,7 @@ const InfoSection = ({
                     <h3 className="text-2xl lg:text-3xl font-semibold">
                         {heading}
                     </h3>
-                    <div className="absolute left-full -translate-x-[40%] bottom-0 origin-top-left z-10 pointer-events-none">
+                    <div className="absolute left-full -translate-x-[40%] bottom-0 origin-top-left z-10 pointer-events-none hidden md:block">
                         <Leaf />
                     </div>
                 </div>
@@ -71,13 +73,13 @@ const InfoSection = ({
                         <span className="font-bold text-3xl">
                             {success_trips}
                         </span>
-                        <span className="text-sm">Success Trips</span>
+                        <span className="text-sm">{t("successTrips")}</span>
                     </div>
                     <div className="flex flex-col">
                         <span className="font-bold text-3xl">
                             {happy_clients}
                         </span>
-                        <span className="text-sm">Happy Clients</span>
+                        <span className="text-sm">{t("happyClients")}</span>
                     </div>
                 </div>
                 <Link

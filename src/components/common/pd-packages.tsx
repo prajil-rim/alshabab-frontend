@@ -7,6 +7,7 @@ interface PopularPDProps {
     description: string;
     tabs: TabProps[];
     showLeaf?: boolean;
+    locale: string;
 }
 
 const PopularPD = ({
@@ -14,8 +15,10 @@ const PopularPD = ({
     description,
     tabs,
     showLeaf = false,
+    locale,
 }: Readonly<PopularPDProps>) => {
     if (!title || !tabs || !tabs.length) return null;
+
     return (
         <section className="max-w-6xl mx-auto py-14 space-y-3 lg:space-y-6 px-3 lg:px-2">
             <div className="relative w-fit">
@@ -29,7 +32,7 @@ const PopularPD = ({
             <p className="font-manrope max-w-4xl overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:8] [-webkit-box-orient:vertical]">
                 {description}
             </p>
-            <HoverSlider tabs={tabs} />
+            <HoverSlider tabs={tabs} locale={locale} />
         </section>
     );
 };

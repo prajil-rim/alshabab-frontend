@@ -1,0 +1,68 @@
+{
+    "homePage": {
+        "header": {
+            "navItems": {
+                "home": "بيت",
+                "aboutUs": "معلومات عنا",
+                "destinations": "الوجهات",
+                "packages": "الحزم",
+                "insights": "رؤى",
+                "contactUs": "اتصل بنا",
+                "cta": "خطط لرحلتك"
+            }
+        },
+        "searchSection": {
+            "destination": "وجهة",
+            "ddes": "حدد وجهتك",
+            "package": "طَرد",
+            "pdes": "حدد الحزمة الخاصة بك",
+            "pError": "حدد الوجهة أولا!",
+            "price": "سعر",
+            "priceDes": "حدد ميزانيتك",
+            "button": "ابحث عن مغامرتي",
+            "trendingSearches": "عمليات البحث الشائعة",
+            "happyClients": "عملاء سعداء",
+            "successTrips": "الرحلات الناجحة"
+        }
+    },
+    "common": {
+        "exploreMore": "اكتشف المزيد"
+    },
+    "footer": {
+        "quickLinks": "روابط سريعة",
+        "support": "الدعم",
+        "stayConnected": "ابق متصل",
+        "copy": "جميع الحقوق محفوظة"
+    },
+    "form": {
+        "title1": "احصل على استشارة مجانية الآن!",
+        "fullname": "الاسم الكامل",
+        "fullnamePlaceholder": "أدخل الاسم الكامل",
+        "email": "بريد إلكتروني",
+        "emailPlaceholder": "أدخل عنوان البريد الإلكتروني",
+        "phone": "هاتف",
+        "phonePlaceholder": "أدخل رقم الهاتف",
+        "message": "رسالة",
+        "messagePlaceholder": "أدخل رسالتك",
+        "package": "طَرد",
+        "packagePlaceholder": "حدد الحزمة",
+        "pError": "حدد الوجهة أولا!",
+        "destination": "وجهة",
+        "destinationPlaceholder": "اختر وجهة",
+        "date": "اختر تاريخك",
+        "button1": "احصل على استشارة مجانية",
+        "button2": "احصل على استشارة الخبراء",
+        "button3": "اتصل الآن"
+    },
+    "filter": {
+        "all": "الجميع",
+        "sortBy": "فرز حسب",
+        "newest": "الأحدث",
+        "oldest": "الأقدم"
+    },
+    "blog": {
+        "shareArticles": "مشاركة المقالات",
+        "meetTheAuthor": "تعرف على المؤلف",
+        "recommendedArticles": "المقالات الموصى بها"
+    }
+}

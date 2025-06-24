@@ -6,9 +6,11 @@ import { motion as m } from "framer-motion";
 import ArrowRightUp from "@/components/icons/arrow-right-up";
 import Link from "next/link";
 import { SlideProps } from "@/types";
+import { useTranslations } from "next-intl";
 
 export default function CardSlider({ slides }: { slides: SlideProps[] }) {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
+    const t = useTranslations("common");
 
     const handleHover = (index: number) => {
         setActiveIndex(index);
@@ -66,7 +68,7 @@ export default function CardSlider({ slides }: { slides: SlideProps[] }) {
                                             size={"sm"}
                                             className="bg-transparent rounded-full font-manrope text-xs cursor-pointer"
                                         >
-                                            Explore more{" "}
+                                            {t("exploreMore")}{" "}
                                             <ArrowRightUp color="red" />
                                         </Button>
                                     </Link>

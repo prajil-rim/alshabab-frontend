@@ -2,13 +2,14 @@
 
 import { type BlocksContent } from "@strapi/blocks-react-renderer";
 import { useEffect, useRef, useState } from "react";
-import { BlogCardProps, MediaProps, SocialsProps } from "@/types";
+import { BlogCardProps, LogoProps, SocialsProps } from "@/types";
 import { StrapiImage } from "@/components/common/strapi-image";
 import Link from "next/link";
 import ScrollIndicatorLine from "./scroll-indicator-line";
 import SectionLinks from "./section-links";
 import BlogContent from "./blog-content";
 import BlogCard from "./blog-card";
+import { useTranslations } from "next-intl";
 
 function getSections(blog: BlocksContent) {
     const sections: {
@@ -34,7 +35,7 @@ function getSections(blog: BlocksContent) {
 interface BlogProps {
     author: string;
     description: string;
-    image: MediaProps;
+    image: LogoProps;
     quote: string;
     profession: string;
     socials: SocialsProps[];
@@ -54,7 +55,6 @@ const Blog = ({
     blog,
     recommendedBlogs,
 }: Readonly<BlogProps>) => {
-    console.log(image.id);
     const sections = getSections(blog);
     const [activeSection, setActiveSection] = useState(sections[0]?.id || "");
     const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
@@ -104,6 +104,8 @@ const Blog = ({
         }
     };
 
+    const t = useTranslations("blog");
+
     return (
         <section className="max-w-6xl mx-auto pt-5 lg:pt-10 py-20 px-3 lg:px-2">
             <div className="flex flex-wrap-reverse lg:flex-nowrap lg:gap-20 px-4 lg:px-0">
@@ -125,17 +127,14 @@ const Blog = ({
 
                     <div className="mt-6 space-y-3">
                         <h6 className="font-manrope font-bold text-xl">
-                            Share Articles
+                            {t("shareArticles")}
                         </h6>
                         <ul className="flex gap-3 items-center">
                             {share_socials?.map((social) => (
                                 <li key={social.id}>
                                     <StrapiImage
                                         alt={social.label}
-                                        // src={social.icon.url}
-                                        src={
-                                            "http://localhost:3000/images/icons/whatsapp.svg"
-                                        }
+                                        src={social.icon.url}
                                         width={28}
                                         height={28}
                                     />
@@ -145,14 +144,13 @@ const Blog = ({
                     </div>
 
                     <div className="mt-6 space-y-3 font-manrope">
-                        <h6 className="font-bold text-xl">Meet the Author</h6>
+                        <h6 className="font-bold text-xl">
+                            {t("meetTheAuthor")}
+                        </h6>
                         <div className="rounded-lg bg-[#F5F5F5] p-5 space-y-5 max-w-sm">
                             <div className="flex items-center gap-2">
                                 <StrapiImage
-                                    // src={image.image.url}
-                                    src={
-                                        "http://localhost:3000/images/others/avatar.webp"
-                                    }
+                                    src={image.image.url}
                                     alt={author}
                                     className="rounded-full shrink-0"
                                     width={44}
@@ -184,10 +182,7 @@ const Blog = ({
                                             className="flex items-center gap-2"
                                         >
                                             <StrapiImage
-                                                src={
-                                                    "http://localhost:3000/images/icons/whatsapp.svg"
-                                                }
-                                                // src={social.icon.url}
+                                                src={social.icon.url}
                                                 alt={social.label}
                                                 width={28}
                                                 height={28}
@@ -205,7 +200,9 @@ const Blog = ({
                 <BlogContent blog={blog} sectionRefs={sectionRefs} />
             </div>
             <div className="space-y-6 mt-20 hidden lg:block">
-                <h3 className="text-2xl font-semibold">Recommended Articles</h3>
+                <h3 className="text-2xl font-semibold">
+                    {t("recommendedArticles")}
+                </h3>
                 <div className="grid grid-cols-3 gap-10">
                     {recommendedBlogs?.slice(0, 3).map((blog) => (
                         <BlogCard {...blog} key={blog.documentId} />

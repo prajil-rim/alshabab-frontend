@@ -55,6 +55,7 @@ const ContactFormSmModal = ({
                         destinations={destinations || []}
                         packages={packages || []}
                         formType="form2"
+                        locale=""
                     />
                 </div>
             </DialogContent>

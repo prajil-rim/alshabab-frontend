@@ -19,10 +19,12 @@ const ContactFormModal = ({
     cta,
     destinations,
     packages,
+    locale,
 }: {
     cta: string;
     destinations: DestinationListProps[];
     packages: PackageListProps[];
+    locale: string;
 }) => {
     return (
         <Dialog>
@@ -32,7 +34,10 @@ const ContactFormModal = ({
                     <ArrowRightUp color="red" />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="w-full max-w-6xl sm:max-w-4xl bg-cover lg:max-h-[calc(100vh-1rem)] bg-[300%_0%] p-0 overflow-hidden border-0 bg-[#212121]">
+            <DialogContent
+                dir="ltr"
+                className="w-full max-w-6xl sm:max-w-4xl bg-cover lg:max-h-[calc(100vh-1rem)] bg-[300%_0%] p-0 overflow-hidden border-0 bg-[#212121]"
+            >
                 <DialogTitle className="sr-only">Contact Us</DialogTitle>
                 <DialogDescription className="sr-only"></DialogDescription>
                 <Image
@@ -47,6 +52,7 @@ const ContactFormModal = ({
                         destinations={destinations || []}
                         packages={packages || []}
                         formType="form2"
+                        locale={locale}
                     />
                 </div>
                 <DialogClose className="z-50 absolute right-0 text-white m-3 cursor-pointer">

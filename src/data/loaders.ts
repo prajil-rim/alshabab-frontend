@@ -26,31 +26,35 @@ import {
 
 const BASE_URL = getStrapiURL();
 
-export async function getHomePage() {
+export async function getHomePage(locale: string) {
     const path = "/api/home-page";
     const url = new URL(path, BASE_URL);
     url.search = homePageQuery;
+    url.searchParams.append("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getAboutUsPage() {
+export async function getAboutUsPage(locale: string) {
     const path = "/api/about-us-page";
     const url = new URL(path, BASE_URL);
     url.search = aboutUsPageQuery;
+    url.searchParams.append("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getGlobalSettings() {
+export async function getGlobalSettings(locale: string) {
     const path = "/api/global";
     const url = new URL(path, BASE_URL);
     url.search = globalSettingQuery;
+    url.searchParams.append("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getContactUsPage() {
+export async function getContactUsPage(locale: string) {
     const path = "/api/contact-us-page";
     const url = new URL(path, BASE_URL);
     url.search = contactUsPageQuery;
+    url.searchParams.append("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }
 
@@ -61,17 +65,19 @@ export async function getDestinationsList() {
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getDestination(slug: string) {
+export async function getDestination(slug: string, locale: string) {
     const path = `/api/destinations/${slug}`;
     const url = new URL(path, BASE_URL);
     url.search = destinationQuery;
+    url.searchParams.set("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getDestinationsPage() {
+export async function getDestinationsPage(locale: string) {
     const path = `/api/destination-listing-page`;
     const url = new URL(path, BASE_URL);
     url.search = destinationListingPageQuery;
+    url.searchParams.append("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }
 
@@ -82,17 +88,19 @@ export async function getPackagesList() {
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getPackage(slug: string) {
+export async function getPackage(slug: string, locale: string) {
     const path = `/api/packages/${slug}`;
     const url = new URL(path, BASE_URL);
     url.search = packageQuery;
+    url.searchParams.set("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getPackagesPage() {
+export async function getPackagesPage(locale: string) {
     const path = `/api/package-listing-page`;
     const url = new URL(path, BASE_URL);
     url.search = packageListingPageQuery;
+    url.searchParams.set("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }
 
@@ -129,10 +137,11 @@ export async function submitConsultationForm(
     });
 }
 
-export async function getAllBlogs() {
+export async function getAllBlogs(locale: string) {
     const path = "/api/blog-page";
     const url = new URL(path, BASE_URL);
     url.search = blogListPageQuery;
+    url.searchParams.append("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }
 
@@ -143,23 +152,26 @@ export async function getLatestBlogs() {
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getTestimonials() {
+export async function getTestimonials(locale: string) {
     const path = "/api/testimonial";
     const url = new URL(path, BASE_URL);
     url.search = testimonialQuery;
+    url.searchParams.append("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getBlog(slug: string) {
+export async function getBlog(slug: string, locale: string) {
     const path = `/api/blogs/${slug}`;
     const url = new URL(path, BASE_URL);
     url.search = blogQuery;
+    url.searchParams.set("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }
 
-export async function getPartners() {
+export async function getPartners(locale: string) {
     const path = `/api/partner-section`;
     const url = new URL(path, BASE_URL);
     url.search = partnerSectionQuery;
+    url.searchParams.append("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }

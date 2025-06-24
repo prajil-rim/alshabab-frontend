@@ -15,20 +15,28 @@ import {
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { returnMetadata } from "@/lib/utils";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 
 let packagesPageDataPromise: ReturnType<typeof getPackagesPage> | null = null;
+let localeCache: string | null = null;
 
-function getPackagesPageOnce() {
-    if (!packagesPageDataPromise) {
-        packagesPageDataPromise = getPackagesPage();
+export const generateStaticParams = () => {
+    return routing.locales.map((locale) => ({ locale }));
+};
+
+function getPackagesPageOnce(locale: string) {
+    if (!packagesPageDataPromise || localeCache !== locale) {
+        packagesPageDataPromise = getPackagesPage(locale);
+        localeCache = locale;
     }
     return packagesPageDataPromise;
 }
 
-async function loader() {
+async function loader(locale: string) {
     const [pageData, testimonials, destinations, packages] = await Promise.all([
-        getPackagesPageOnce(),
-        getTestimonials(),
+        getPackagesPageOnce(locale),
+        getTestimonials(locale),
         getDestinationsList(),
         getPackagesList(),
     ]);
@@ -41,14 +49,31 @@ async function loader() {
     };
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-    const { data } = await getPackagesPageOnce();
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+    const locale = (await params).locale;
+    const { data } = await getPackagesPageOnce(locale);
 
     return returnMetadata(data);
 }
 
-const PackageListingPage = async () => {
-    const { pageData, testimonials, destinations, packages } = await loader();
+const PackageListingPage = async ({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}) => {
+    const locale = (await params).locale;
+    const { pageData, testimonials, destinations, packages } = await loader(
+        locale
+    );
+
+    // Enable static rendering
+    setRequestLocale(locale);
+
+    const t = await getTranslations("homePage.header.navItems");
 
     return (
         <main>
@@ -56,11 +81,11 @@ const PackageListingPage = async () => {
                 hero={pageData.hero}
                 breadcrumbs={[
                     {
-                        text: "Home",
+                        text: t("home"),
                         href: "/",
                     },
                     {
-                        text: "Packages",
+                        text: t("packages"),
                     },
                 ]}
             />
@@ -70,7 +95,7 @@ const PackageListingPage = async () => {
                 packages={packages}
                 destinations={destinations}
             />
-            <PopularPD {...pageData.popular_packages} />
+            <PopularPD {...pageData.popular_packages} locale={locale} />
             <Testimonials {...testimonials} />
             <BlogSection {...pageData.blog_section} />
             <FAQSection

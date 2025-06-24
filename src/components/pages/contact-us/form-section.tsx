@@ -38,7 +38,9 @@ const FormSection = ({
                         </dt>
                         <div className="space-y-2 text-sm lg:text-base">
                             {groupedContact.phone?.map((phone, i) => (
-                                <dd key={phone + i}>{phone}</dd>
+                                <dd dir="ltr" className="w-fit" key={phone + i}>
+                                    {phone}
+                                </dd>
                             ))}
                         </div>
                         <dt className="text-primary flex items-center gap-1 tlg:text-xl font-semibold">
@@ -71,6 +73,7 @@ const FormSection = ({
                 destinations={destinations}
                 packages={packages}
                 formType="form1"
+                locale={""}
             />
         </div>
     );

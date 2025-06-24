@@ -11,25 +11,33 @@ import GuidesSection from "@/components/pages/about-us/guides-section";
 import MapSection from "@/components/pages/about-us/map-section";
 import OurJourneySection from "@/components/pages/about-us/our-journey-section";
 import { getAboutUsPage, getPartners, getTestimonials } from "@/data/loaders";
+import { routing } from "@/i18n/routing";
 import { returnMetadata } from "@/lib/utils";
 import { InfoBlockProps } from "@/types";
 import { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 let aboutUsPageDataPromise: ReturnType<typeof getAboutUsPage> | null = null;
+let localeCache: string | null = null;
 
-function getAboutUsPageOnce() {
-    if (!aboutUsPageDataPromise) {
-        aboutUsPageDataPromise = getAboutUsPage();
+export const generateStaticParams = () => {
+    return routing.locales.map((locale) => ({ locale }));
+};
+
+function getAboutUsPageOnce(locale: string) {
+    if (!aboutUsPageDataPromise || localeCache !== locale) {
+        aboutUsPageDataPromise = getAboutUsPage(locale);
+        localeCache = locale;
     }
     return aboutUsPageDataPromise;
 }
 
-async function loader() {
+async function loader(locale: string) {
     const [pageData, testimonials, partners] = await Promise.all([
-        getAboutUsPageOnce(),
-        getTestimonials(),
-        getPartners(),
+        getAboutUsPageOnce(locale),
+        getTestimonials(locale),
+        getPartners(locale),
     ]);
     if (!pageData || !pageData.data) notFound();
     return {
@@ -39,14 +47,29 @@ async function loader() {
     };
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-    const { data } = await getAboutUsPageOnce();
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+    const locale = (await params).locale;
+    const { data } = await getAboutUsPageOnce(locale);
 
     return returnMetadata(data);
 }
 
-export default async function AboutUsPage() {
-    const { pageData, testimonials, partners } = await loader();
+export default async function AboutUsPage({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}) {
+    const locale = (await params).locale;
+    const { pageData, testimonials, partners } = await loader(locale);
+
+    // Enable static rendering
+    setRequestLocale(locale);
+
+    const t = await getTranslations("homePage.header.navItems");
 
     return (
         <>
@@ -54,11 +77,11 @@ export default async function AboutUsPage() {
                 {...pageData.hero}
                 breadcrumbs={[
                     {
-                        text: "Home",
+                        text: t("home"),
                         href: "/",
                     },
                     {
-                        text: "About Us",
+                        text: t("aboutUs"),
                     },
                 ]}
             />

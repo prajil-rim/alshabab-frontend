@@ -13,6 +13,7 @@ import {
 import { DestinationListProps, PackageListProps } from "@/types";
 import { SelectTrigger } from "@radix-ui/react-select";
 import { ChevronDown, Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -37,6 +38,7 @@ const SearchForm = ({
         PackageListProps | null | undefined
     >(null);
     const navigate = useRouter();
+    const t = useTranslations("homePage.searchSection");
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -67,10 +69,10 @@ const SearchForm = ({
                 >
                     <SelectTrigger className="flex flex-col justify-start items-start outline-none">
                         <span className="flex items-center gap-2 font-semibold text-lg">
-                            Destinations <ChevronDown />{" "}
+                            {t("destination")} <ChevronDown />{" "}
                         </span>
                         <SelectValue
-                            placeholder="Select your destination"
+                            placeholder={t("ddes")}
                             className="!text-[#8D9CC3] text-sm"
                         />
                     </SelectTrigger>
@@ -101,10 +103,10 @@ const SearchForm = ({
                 >
                     <SelectTrigger className="flex flex-col justify-start items-start outline-none">
                         <span className="flex items-center gap-2 font-semibold text-lg">
-                            Packages <ChevronDown />{" "}
+                            {t("package")} <ChevronDown />{" "}
                         </span>
                         <SelectValue
-                            placeholder="Select your package"
+                            placeholder={t("pdes")}
                             className="!text-[#8D9CC3] text-sm"
                         />
                     </SelectTrigger>
@@ -119,7 +121,7 @@ const SearchForm = ({
                         ))}
                         {selectedPackages?.length === 0 && (
                             <SelectItem value="disabled" disabled>
-                                Select a destination first!
+                                {t("pError")}
                             </SelectItem>
                         )}
                     </SelectContent>
@@ -130,10 +132,10 @@ const SearchForm = ({
                 <Select name="budget" required>
                     <SelectTrigger className="flex flex-col justify-start items-start outline-none">
                         <span className="flex items-center gap-2 font-semibold text-lg">
-                            Price <ChevronDown />{" "}
+                            {t("price")} <ChevronDown />{" "}
                         </span>
                         <SelectValue
-                            placeholder="Select your budget"
+                            placeholder={t("priceDes")}
                             className="!text-[#8D9CC3] text-sm"
                         />
                     </SelectTrigger>
@@ -154,7 +156,7 @@ const SearchForm = ({
                 type="submit"
                 className="w-full lg:w-fit rounded-full text-white text-lg bg-secondary items-center h-auto ms-auto cursor-pointer"
             >
-                Find My Adventure
+                {t("button")}
                 <div className="rounded-full aspect-square bg-white p-3 h-full flex items-center justify-center">
                     <Search className="text-secondary" />
                 </div>

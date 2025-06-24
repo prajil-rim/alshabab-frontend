@@ -11,6 +11,7 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion as m } from "framer-motion";
 import ContactFormSmModal from "../modal/contact-form-sm-modal";
+import { useTranslations } from "next-intl";
 
 const NavItems = ({
     destinations,
@@ -26,6 +27,7 @@ const NavItems = ({
     const [dOpen, setDOpen] = useState(false);
     const [pOpen, setPOpen] = useState(false);
     const pathname = usePathname();
+    const t = useTranslations("homePage.header.navItems");
     const isActive = (path: string) => pathname === path;
 
     function activeStyle(path: string, style?: string) {
@@ -52,12 +54,12 @@ const NavItems = ({
         >
             <li className={activeStyle("/")}>
                 <Link href={"/"} onClick={closeMenu}>
-                    Home
+                    {t("home")}
                 </Link>
             </li>
             <li className={activeStyle("/about-us")}>
                 <Link href={"/about-us"} onClick={closeMenu}>
-                    About Us
+                    {t("aboutUs")}
                 </Link>
             </li>
             {!isMobile && (
@@ -67,7 +69,7 @@ const NavItems = ({
                         "flex items-center gap-1 cursor-pointer"
                     )}
                 >
-                    <Link href={"/destinations"}>Destinations </Link>
+                    <Link href={"/destinations"}>{t("destinations")} </Link>
                     <Destinations destinations={destinations || []} />
                 </li>
             )}
@@ -77,7 +79,7 @@ const NavItems = ({
                         className="flex items-center gap-1 cursor-pointer"
                         onClick={() => setDOpen((prev) => !prev)}
                     >
-                        <span>Destinations</span>
+                        <span>{t("destinations")}</span>
                         <m.span
                             animate={{ rotate: dOpen ? 180 : 0 }}
                             transition={{ duration: 0.25 }}
@@ -121,7 +123,7 @@ const NavItems = ({
                         "flex items-center gap-1 cursor-pointer"
                     )}
                 >
-                    <Link href={"/packages"}>Packages </Link>
+                    <Link href={"/packages"}>{t("packages")} </Link>
                     <Packages packages={packages || []} />
                 </li>
             )}
@@ -131,7 +133,7 @@ const NavItems = ({
                         className="flex items-center gap-1 cursor-pointer"
                         onClick={() => setPOpen((prev) => !prev)}
                     >
-                        <span>Packages</span>
+                        <span>{t("packages")}</span>
                         <m.span
                             animate={{ rotate: pOpen ? 180 : 0 }}
                             transition={{ duration: 0.25 }}
@@ -168,17 +170,17 @@ const NavItems = ({
             )}
             <li className={activeStyle("/blogs")}>
                 <Link href={"/blogs"} onClick={closeMenu}>
-                    Insights
+                    {t("insights")}
                 </Link>
             </li>
             <li className={activeStyle("/contact-us")}>
                 <Link href={"/contact-us"} onClick={closeMenu}>
-                    Contact Us
+                    {t("contactUs")}
                 </Link>
             </li>
             <li className="lg:hidden">
                 <ContactFormSmModal
-                    cta="Plan Your Trip"
+                    cta={t("cta")}
                     destinations={destinations}
                     packages={packages}
                     bg="black"

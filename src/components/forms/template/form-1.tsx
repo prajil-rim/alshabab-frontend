@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { contactUsSchema } from "@/lib/zod";
 import { DestinationListProps, PackageListProps } from "@/types";
+import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
@@ -44,6 +45,7 @@ const Form1 = ({
         PackageListProps[]
     >([]);
     const path = usePathname();
+    const t = useTranslations("form");
 
     return (
         <Form {...form}>
@@ -56,12 +58,12 @@ const Form1 = ({
                     name="fullname"
                     render={({ field }) => (
                         <FormItem className="space-y-3.5">
-                            <FormLabel>Full Name*</FormLabel>
+                            <FormLabel>{t("fullname")}*</FormLabel>
                             <div className="space-y-1">
                                 <FormControl>
                                     <Input
                                         {...field}
-                                        placeholder="Enter full name"
+                                        placeholder={t("fullnamePlaceholder")}
                                         className="py-5"
                                     />
                                 </FormControl>
@@ -76,12 +78,12 @@ const Form1 = ({
                         name="email"
                         render={({ field }) => (
                             <FormItem className="space-y-3.5">
-                                <FormLabel>Email Address*</FormLabel>
+                                <FormLabel>{t("email")}*</FormLabel>
                                 <div className="space-y-1">
                                     <FormControl>
                                         <Input
                                             {...field}
-                                            placeholder="Enter email address"
+                                            placeholder={t("emailPlaceholder")}
                                             className="py-5"
                                         />
                                     </FormControl>
@@ -95,12 +97,12 @@ const Form1 = ({
                         name="phone"
                         render={({ field }) => (
                             <FormItem className="space-y-3.5">
-                                <FormLabel>Phone Number*</FormLabel>
+                                <FormLabel>{t("phone")}*</FormLabel>
                                 <div className="space-y-1">
                                     <FormControl>
                                         <Input
                                             {...field}
-                                            placeholder="Enter phone number"
+                                            placeholder={t("phonePlaceholder")}
                                             className="py-5"
                                         />
                                     </FormControl>
@@ -116,7 +118,7 @@ const Form1 = ({
                         name="destination"
                         render={({ field }) => (
                             <FormItem className="space-y-3.5">
-                                <FormLabel>Destination</FormLabel>
+                                <FormLabel>{t("destination")}</FormLabel>
                                 <div className="space-y-1">
                                     <Select
                                         onValueChange={(value) => {
@@ -140,7 +142,11 @@ const Form1 = ({
                                                         "0 !important",
                                                 }}
                                             >
-                                                <SelectValue placeholder="Select a destination" />
+                                                <SelectValue
+                                                    placeholder={t(
+                                                        "destinationPlaceholder"
+                                                    )}
+                                                />
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent className="font-manrope">
@@ -172,7 +178,7 @@ const Form1 = ({
                         name="package"
                         render={({ field }) => (
                             <FormItem className="space-y-3.5">
-                                <FormLabel>Package</FormLabel>
+                                <FormLabel>{t("package")}</FormLabel>
                                 <div className="space-y-1">
                                     <Select
                                         onValueChange={field.onChange}
@@ -186,7 +192,11 @@ const Form1 = ({
                                                         "0 !important",
                                                 }}
                                             >
-                                                <SelectValue placeholder="Select a package" />
+                                                <SelectValue
+                                                    placeholder={t(
+                                                        "packagePlaceholder"
+                                                    )}
+                                                />
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent className="font-manrope">
@@ -209,7 +219,7 @@ const Form1 = ({
                                                     value="disabled"
                                                     disabled
                                                 >
-                                                    Select a destination first!
+                                                    {t("pError")}
                                                 </SelectItem>
                                             )}
                                         </SelectContent>
@@ -225,11 +235,11 @@ const Form1 = ({
                     name="message"
                     render={({ field }) => (
                         <FormItem className="space-y-3.5">
-                            <FormLabel>Message</FormLabel>
+                            <FormLabel>{t("message")}</FormLabel>
                             <div className="space-y-1">
                                 <FormControl>
                                     <Textarea
-                                        placeholder="Enter your message"
+                                        placeholder={t("messagePlaceholder")}
                                         rows={12}
                                         {...field}
                                         className="resize-none !h-[140px]"
@@ -247,7 +257,7 @@ const Form1 = ({
                     )}
                     variant={path === "/" ? "secondary" : "default"}
                 >
-                    Get Free Consultation{" "}
+                    {t("button1")}{" "}
                     <ArrowRightUp color={path === "/" ? "blue" : "white"} />
                 </Button>
             </form>

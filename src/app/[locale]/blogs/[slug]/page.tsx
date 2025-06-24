@@ -2,25 +2,29 @@ import BlogHero from "@/components/hero/blog-hero";
 import FooterCTA from "@/components/layout/footer-cta";
 import Blog from "@/components/pages/blogs/blog";
 import { getBlog } from "@/data/loaders";
+import { routing } from "@/i18n/routing";
 import { returnMetadata } from "@/lib/utils";
 import { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-    return [];
+    return routing.locales.map((locale) => ({ locale }));
 }
 
 let blogDataPromise: ReturnType<typeof getBlog> | null = null;
+let localeCache: string | null = null;
 
-function getBlogDataOnce(slug: string) {
-    if (!blogDataPromise) {
-        blogDataPromise = getBlog(slug);
+function getBlogDataOnce(slug: string, locale: string) {
+    if (!blogDataPromise || localeCache !== locale) {
+        blogDataPromise = getBlog(slug, locale);
+        localeCache = locale;
     }
     return blogDataPromise;
 }
 
-async function loader(slug: string) {
-    const [pageData] = await Promise.all([getBlogDataOnce(slug)]);
+async function loader(slug: string, locale: string) {
+    const [pageData] = await Promise.all([getBlogDataOnce(slug, locale)]);
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
@@ -30,19 +34,28 @@ async function loader(slug: string) {
 export async function generateMetadata({
     params,
 }: {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string; locale: string }>;
 }): Promise<Metadata> {
-    const { slug } = await params;
-    const { data } = await getBlogDataOnce(slug);
+    const { slug, locale } = await params;
+    const { data } = await getBlogDataOnce(slug, locale);
 
     return returnMetadata(data);
 }
 
-const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
-    const { slug } = await params;
+const BlogPage = async ({
+    params,
+}: {
+    params: Promise<{ slug: string; locale: string }>;
+}) => {
+    const { slug, locale } = await params;
     if (!slug) return notFound();
 
-    const { pageData } = await loader(slug as string);
+    const { pageData } = await loader(slug as string, locale);
+
+    // Enable static rendering
+    setRequestLocale(locale);
+
+    const t = await getTranslations("homePage.header.navItems");
 
     return (
         <main>
@@ -51,11 +64,11 @@ const BlogPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 category={pageData.blog_category.category}
                 breadcrumbs={[
                     {
-                        text: "Home",
+                        text: t("home"),
                         href: "/",
                     },
                     {
-                        text: "Insights",
+                        text: t("insights"),
                         href: "/blogs",
                     },
                     {

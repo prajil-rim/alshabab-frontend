@@ -45,7 +45,9 @@ const FooterCTA = ({
                             : "w-full text-center lg:text-left"
                     )}
                 >
-                    <h1 className="text-2xl lg:text-4xl font-black">{title}</h1>
+                    <h1 className="text-2xl lg:text-4xl font-black w-fit">
+                        {title}
+                    </h1>
                     <p
                         className={cn(
                             "font-manrope font-medium text-sm lg:text-base mx-auto lg:mx-0",

@@ -5,12 +5,14 @@ import NavItems from "./nav-items";
 import Link from "next/link";
 import Sidenav from "../sheet/sidenav";
 import ContactFormSmModal from "../modal/contact-form-sm-modal";
+import LocaleSwitcher from "./language-switcher";
 
 interface HeaderProps {
     cta: string;
     logo: LogoProps;
     destinations: DestinationListProps[];
     packages: PackageListProps[];
+    locale: string;
 }
 
 export function Header({
@@ -18,6 +20,7 @@ export function Header({
     logo,
     destinations,
     packages,
+    locale,
 }: Readonly<HeaderProps>) {
     if (!cta || !logo) return null;
 
@@ -40,6 +43,7 @@ export function Header({
                         cta={cta}
                         destinations={destinations}
                         packages={packages}
+                        locale={locale}
                     />
                 </div>
                 <div className="lg:hidden">
@@ -54,6 +58,9 @@ export function Header({
                     destinations={destinations}
                     packages={packages}
                 />
+                <div className="hidden lg:block">
+                    <LocaleSwitcher />
+                </div>
             </div>
         </header>
     );

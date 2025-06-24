@@ -31,6 +31,7 @@ import { DestinationListProps, PackageListProps } from "@/types";
 import { submitConsultationForm } from "@/data/loaders";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const ConsultationForm = ({
     packages,
@@ -75,6 +76,9 @@ const ConsultationForm = ({
             setLoading(false);
         }
     }
+
+    const t = useTranslations("form");
+
     return (
         <Form {...form}>
             <form
@@ -82,7 +86,7 @@ const ConsultationForm = ({
                 className="font-manrope bg-[#F5F5F5] w-full max-w-sm mx-auto rounded-xl shadow-[20px_20px_0px_0px_rgba(0,0,0,0.13)] p-6 space-y-5 h-fit"
             >
                 <h1 className="capitalize font-semibold text-xl">
-                    Get free consultation now!
+                    {t("title1")}
                 </h1>
                 <FormField
                     control={form.control}
@@ -93,7 +97,7 @@ const ConsultationForm = ({
                                 <FormControl>
                                     <Input
                                         {...field}
-                                        placeholder="Full Name"
+                                        placeholder={t("fullname")}
                                         className="py-5 rounded-lg border-2 border-[#8D9CC380] bg-white text-[#8D9CC3] placeholder:text-[#8D9CC3] font-medium"
                                     />
                                 </FormControl>
@@ -111,7 +115,7 @@ const ConsultationForm = ({
                                 <FormControl>
                                     <Input
                                         {...field}
-                                        placeholder="Enter your number"
+                                        placeholder={t("phone")}
                                         className="py-5 rounded-lg border-2 border-[#8D9CC380] bg-white text-[#8D9CC3] placeholder:text-[#8D9CC3] font-medium"
                                     />
                                 </FormControl>
@@ -138,7 +142,7 @@ const ConsultationForm = ({
                                             {field.value ? (
                                                 format(field.value, "PPP")
                                             ) : (
-                                                <span>Choose your date</span>
+                                                <span>{t("date")}</span>
                                             )}
                                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                                         </Button>
@@ -200,7 +204,11 @@ const ConsultationForm = ({
                                                 marginBottom: "0 !important",
                                             }}
                                         >
-                                            <SelectValue placeholder="Select a destination" />
+                                            <SelectValue
+                                                placeholder={t(
+                                                    "destinationPlaceholder"
+                                                )}
+                                            />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent className="font-manrope">
@@ -236,7 +244,11 @@ const ConsultationForm = ({
                                                 marginBottom: "0 !important",
                                             }}
                                         >
-                                            <SelectValue placeholder="Select a package" />
+                                            <SelectValue
+                                                placeholder={t(
+                                                    "packagePlaceholder"
+                                                )}
+                                            />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent className="font-manrope">
@@ -253,7 +265,7 @@ const ConsultationForm = ({
                                                 value="disabled"
                                                 disabled
                                             >
-                                                Select a destination first!
+                                                {t("pError")}
                                             </SelectItem>
                                         )}
                                     </SelectContent>
@@ -269,7 +281,7 @@ const ConsultationForm = ({
                     size={"lg"}
                     disabled={loading}
                 >
-                    Contact Now <ArrowRightUp color="blue" />
+                    {t("button3")} <ArrowRightUp color="blue" />
                 </Button>
             </form>
         </Form>

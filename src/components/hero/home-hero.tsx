@@ -15,6 +15,7 @@ import {
 import { HomeHeroProps } from "@/types";
 import { CirclePause, CirclePlay, Volume2, VolumeOff } from "lucide-react";
 import MapPin from "../icons/map-pin";
+import { cn } from "@/lib/utils";
 
 interface BreadcrumbProps {
     hero: HomeHeroProps[];
@@ -225,15 +226,15 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                 </CarouselContent>
                 <div className="absolute bottom-0 p-3 pb-9 lg:pb-10 lg:p-10 w-fit right-0">
                     <div className="flex w-full justify-end max-w-6xl mx-auto">
-                        <ul className="flex gap-6 text-sm text-white font-manrope items-center">
+                        <ul className="gap-6 text-sm text-white font-manrope items-center flex">
                             {hero.map((data, index) => (
                                 <li
                                     key={data?.id}
-                                    className={
-                                        index === current - 1
-                                            ? "font-semibold border-b-2 border-primary hidden lg:block"
-                                            : ""
-                                    }
+                                    className={cn(
+                                        "hidden lg:block",
+                                        index === current - 1 &&
+                                            "font-semibold border-b-2 border-primary"
+                                    )}
                                 >
                                     {data?.attraction}
                                 </li>

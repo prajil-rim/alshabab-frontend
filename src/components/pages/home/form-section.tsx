@@ -109,6 +109,7 @@ const FormSection = ({
                             destinations={destinations || []}
                             formType="form1"
                             packages={packages || []}
+                            locale=""
                         />
                     </div>
                 </div>

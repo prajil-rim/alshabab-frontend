@@ -179,6 +179,7 @@ export interface SlideProps {
 export interface TabProps {
     id: number;
     tab_heading: string;
+    tab_value: string;
     slides: SlideProps[];
 }
 

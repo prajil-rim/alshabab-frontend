@@ -21,6 +21,8 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import BlogCardSm from "./blog-card-sm";
+import { dir } from "i18next";
+import { useTranslations } from "next-intl";
 
 interface BlogListSectionProps {
     blog_list: {
@@ -34,11 +36,16 @@ interface BlogListSectionProps {
         }[];
     };
     all_blogs: BlogCardProps[];
+    locale: string;
 }
 
 const ITEMS_PER_PAGE = 9;
 
-const BlogListSection = ({ blog_list, all_blogs }: BlogListSectionProps) => {
+const BlogListSection = ({
+    blog_list,
+    all_blogs,
+    locale,
+}: BlogListSectionProps) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [activeTab, setActiveTab] = useState("all");
     const [sortBy, setSortBy] = useState("newest");
@@ -75,16 +82,22 @@ const BlogListSection = ({ blog_list, all_blogs }: BlogListSectionProps) => {
         setCurrentPage(1);
     };
 
+    const t = useTranslations("filter");
+
     return (
         <section className="max-w-6xl mx-auto py-10 px-3 lg:px-2">
             <div>
                 <h2 className="font-semibold text-2xl lg:text-4xl mb-4">
                     {blog_list.title}
                 </h2>
-                <Tabs value={activeTab} onValueChange={handleTabChange}>
+                <Tabs
+                    value={activeTab}
+                    onValueChange={handleTabChange}
+                    dir={dir(locale)}
+                >
                     <div className="flex justify-between items-start">
                         <TabsList className="space-x-3 font-manrope mb-6 max-w-full overflow-x-scroll scrollbar-none justify-start hidden md:block">
-                            <TabsTrigger value="all">All</TabsTrigger>
+                            <TabsTrigger value="all">{t("all")}</TabsTrigger>
                             {blog_list?.blog_categories?.map((category, i) => (
                                 <TabsTrigger
                                     key={category.documentId + i}
@@ -126,7 +139,9 @@ const BlogListSection = ({ blog_list, all_blogs }: BlogListSectionProps) => {
                             </div>
 
                             <div className="font-manrope flex items-center gap-2 text-sm justify-between md:justify-start">
-                                <span className="font-medium">Sort By: </span>
+                                <span className="font-medium">
+                                    {t("sortBy")}:{" "}
+                                </span>
                                 <Select
                                     value={sortBy}
                                     onValueChange={(value) => {
@@ -139,10 +154,10 @@ const BlogListSection = ({ blog_list, all_blogs }: BlogListSectionProps) => {
                                     </SelectTrigger>
                                     <SelectContent className="font-manrope">
                                         <SelectItem value="newest">
-                                            Newest
+                                            {t("newest")}
                                         </SelectItem>
                                         <SelectItem value="oldest">
-                                            Oldest
+                                            {t("oldest")}
                                         </SelectItem>
                                     </SelectContent>
                                 </Select>

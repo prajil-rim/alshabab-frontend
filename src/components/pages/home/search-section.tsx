@@ -2,6 +2,7 @@ import TrendingUp from "@/components/icons/trending-up";
 import { DestinationListProps, LinkProps, PackageListProps } from "@/types";
 import Link from "next/link";
 import SearchForm from "./search-form";
+import { useTranslations } from "next-intl";
 
 interface SearchSectionProps {
     destinations: DestinationListProps[];
@@ -19,6 +20,7 @@ const SearchSection = ({
     trending_searches,
     price_range,
 }: Readonly<SearchSectionProps>) => {
+    const t = useTranslations("homePage.searchSection");
     return (
         <div className="space-y-3">
             <SearchForm
@@ -29,7 +31,7 @@ const SearchSection = ({
             {trending_searches && trending_searches.length !== 0 && (
                 <div className="backdrop-blur-xl rounded-md flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-14 font-manrope p-5 bg-white lg:bg-white/54 max-w-full lg:max-w-[95%] mx-auto">
                     <span className="font-semibold text-xl">
-                        Trending Searches
+                        {t("trendingSearches")}
                     </span>
                     <ul className="flex gap-5 items-center flex-1 overflow-x-scroll scrollbar-none">
                         {trending_searches.map((search, index) => (
