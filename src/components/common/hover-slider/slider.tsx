@@ -30,7 +30,7 @@ export default function CardSlider({ slides }: { slides: SlideProps[] }) {
                     <div
                         key={slide.id}
                         onMouseEnter={() => handleHover(index)}
-                        className={`transition-all duration-300 ease-in-out h-80 xl:h-[26rem] ${
+                        className={`transition-all duration-300 ease-in-out h-80 2xl:h-[26rem] ${
                             activeIndex === index
                                 ? "w-2/5"
                                 : activeIndex === null && index === 0

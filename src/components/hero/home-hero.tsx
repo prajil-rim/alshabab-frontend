@@ -88,7 +88,7 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
     if (!hero || hero.length === 0) return null;
 
     return (
-        <section className="w-full h-[40rem] xl:h-[50rem] bg-black text-white">
+        <section className="w-full h-[40rem] 2xl:h-[50rem] bg-black text-white">
             <Carousel
                 setApi={setApi}
                 opts={{
@@ -105,7 +105,7 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                         return (
                             <CarouselItem
                                 key={index}
-                                className="h-[40rem] xl:h-[50rem] pl-0"
+                                className="h-[40rem] 2xl:h-[50rem] pl-0"
                             >
                                 <div
                                     className="relative flex flex-col justify-center items-center h-full bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute gap-32 pb-10 font"
@@ -148,7 +148,7 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                                             }}
                                         ></video>
                                     )}
-                                    <div className="space-y-3 lg:space-y-5 flex flex-col justify-center items-center text-white relative z-10 px-3 lg:px-2">
+                                    <div className="space-y-3 lg:space-y-5 flex flex-col justify-center items-center text-white relative z-10 px-3">
                                         <h1 className="text-3xl lg:text-5xl font-bold max-w-[44rem] text-center leading-tight">
                                             {data?.title || "No Content!"}
                                         </h1>

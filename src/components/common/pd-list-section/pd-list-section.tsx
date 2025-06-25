@@ -15,7 +15,7 @@ const PDListSection = ({
 }: Readonly<PDListSectionProps>) => {
     if (!hover_card || hover_card.length === 0) return null;
     return (
-        <section className="max-w-[1824px] mx-auto py-10 space-y-3 lg:space-y-6 px-3 lg:px-2">
+        <section className="max-w-[1824px] mx-auto py-10 space-y-3 lg:space-y-6 px-3">
             <h1 className="text-2xl lg:text-4xl font-semibold">{title}</h1>
             <p className="font-manrope overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:6] [-webkit-box-orient:vertical]">
                 {description}

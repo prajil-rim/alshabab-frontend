@@ -19,7 +19,7 @@ const GlobalToursSection = ({
     if (!title || !tours || tours.length === 0) return null;
 
     return (
-        <section className="max-w-[1824px] mx-auto py-10 space-y-6 lg:space-y-12 px-3 lg:px-2">
+        <section className="max-w-[1824px] mx-auto py-10 space-y-6 lg:space-y-12 px-3">
             <div className="space-y-6">
                 <div className="relative">
                     <h1 className="text-2xl lg:text-4xl font-semibold text-center">

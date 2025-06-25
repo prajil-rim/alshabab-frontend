@@ -23,7 +23,7 @@ const AwardsSection = ({
     if (!title || !awards || awards.length === 0) return null;
 
     return (
-        <section className="max-w-7xl mx-auto py-10 space-y-3 lg:space-y-6 px-3 lg:px-2">
+        <section className="max-w-7xl mx-auto py-10 space-y-3 lg:space-y-6 px-3">
             <h1 className="text-2xl lg:text-4xl font-semibold text-center">
                 {title}
             </h1>

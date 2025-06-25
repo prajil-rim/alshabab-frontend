@@ -16,7 +16,7 @@ const PackageIncludesSection = ({
     if (!package_includes || package_includes.length === 0 || !title)
         return null;
     return (
-        <section className="max-w-[1824px] mx-auto pt-20 pb-24 space-y-6 px-3 lg:px-2">
+        <section className="max-w-[1824px] mx-auto pt-20 pb-24 space-y-6 px-3">
             <h2 className="text-2xl lg:text-4xl font-semibold">{title}</h2>
             <p className="font-manrope max-w-5xl overflow-hidden text-ellipsis [display:-webkit-box] lg:[-webkit-line-clamp:3] [-webkit-line-clamp:7] [-webkit-box-orient:vertical]">
                 {description}

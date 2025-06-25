@@ -27,7 +27,7 @@ const OurJourneySection = ({
 
     return (
         <section className="bg-[#ECF4FF]">
-            <div className="max-w-6xl mx-auto py-10 space-y-3 lg:space-y-6 px-3 lg:px-2">
+            <div className="max-w-6xl mx-auto py-10 space-y-3 lg:space-y-6 px-3">
                 <h1 className="font-semibold text-4xl text-center">{title}</h1>
                 <div className="font-manrope text-center max-w-4xl mx-auto overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:3] [-webkit-box-orient:vertical]">
                     <Markdown>{description}</Markdown>

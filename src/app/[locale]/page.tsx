@@ -91,7 +91,7 @@ export default async function HomeRoute({
         <>
             <HomeHero hero={pageData.slides} />
             <section className="bg-gradient-to-t from-transparent via-[#F5F1E3] to-[#448CD9]/80">
-                <div className="max-w-[1824px] mx-auto py-10 px-3 lg:px-2">
+                <div className="max-w-[1824px] mx-auto py-10 px-3">
                     <SearchSection
                         destinations={destinations}
                         packages={packages}

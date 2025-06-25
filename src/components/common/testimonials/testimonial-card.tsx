@@ -10,7 +10,7 @@ const TestimonialCard = ({
 }: Readonly<TestimonialProps>) => {
     return (
         <div className="border text-base md:text-sm h-full border-primary lg:border-[#666666]/20 rounded-[20px] aspect-square flex items-center justify-center p-5 text-center flex-col group hover:border-primary hover:shadow-xl">
-            <p className="mt-auto font-manrope xl:text-xl">{testimonial}</p>
+            <p className="mt-auto font-manrope 2xl:text-xl">{testimonial}</p>
             <div className="flex items-center gap-2 mt-auto">
                 <StrapiImage
                     alt={image.alternativeText || ""}

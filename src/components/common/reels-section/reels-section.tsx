@@ -98,7 +98,7 @@ export function ReelsSection({
                     setApi={(api) => setEmblaApi(api)}
                     className="w-full grid lg:grid-cols-3 gap-3 items-center"
                 >
-                    <div className="space-y-3 px-3 lg:px-2" dir={dir(locale)}>
+                    <div className="space-y-3 px-3" dir={dir(locale)}>
                         <h4 className="text-2xl lg:text-3xl font-semibold">
                             {title}
                         </h4>

@@ -32,7 +32,7 @@ const FormSection = ({
     return (
         <section
             className={cn(
-                "bg-gradient-to-t from-white to-[#F5F1E3] px-3 lg:px-2",
+                "bg-gradient-to-t from-white to-[#F5F1E3] px-3",
                 className
             )}
         >

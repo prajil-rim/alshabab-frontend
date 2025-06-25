@@ -15,7 +15,7 @@ const TripDetailsSection = ({
     if (!details || details.length === 0 || !title) return null;
 
     return (
-        <section className="bg-[#F5F5F5] px-3 lg:px-2">
+        <section className="bg-[#F5F5F5] px-3">
             <div className="max-w-[1824px] mx-auto py-10 space-y-6">
                 <h1 className="text-2xl lg:text-4xl font-semibold text-center">
                     {title}

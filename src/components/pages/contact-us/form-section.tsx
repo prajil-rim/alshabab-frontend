@@ -25,7 +25,7 @@ const FormSection = ({
     const groupedContact = groupContactInfo(contact_info);
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-5 md:gap-0 py-10 lg:py-24 px-5 lg:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-5 md:gap-0 py-10 lg:py-24 px-5 lg:px-3">
             <div className="space-y-8">
                 <h3 className="text-2xl lg:text-4xl font-semibold">
                     {contact_title}
