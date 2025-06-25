@@ -18,7 +18,7 @@ const FooterCTA = ({
     return (
         <section
             className={cn(
-                "bg-gradient-to-t from-[#202020] to-secondary min-h-96 bg-cover bg-center flex items-center relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#202020] after:via-[#202020]/50 after:to-transparent",
+                "bg-gradient-to-t from-[#202020] to-secondary min-h-96 xl:min-h-[26rem] bg-cover bg-center flex items-center relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#202020] after:via-[#202020]/50 after:to-transparent",
                 text_align === "center" ? "" : "after:hidden"
             )}
             style={
@@ -31,7 +31,7 @@ const FooterCTA = ({
         >
             <div
                 className={cn(
-                    "max-w-6xl mx-auto relative z-10 pt-10 lg:pt-0",
+                    "max-w-[1824px] mx-auto relative z-10 pt-10 lg:pt-0",
                     text_align === "center"
                         ? "flex flex-col justify-center items-center"
                         : "grid grid-cols-1 lg:grid-cols-2"
@@ -45,7 +45,12 @@ const FooterCTA = ({
                             : "w-full text-center lg:text-left"
                     )}
                 >
-                    <h1 className="text-2xl lg:text-4xl font-black w-fit">
+                    <h1
+                        className={cn(
+                            "text-2xl lg:text-4xl font-black w-fit",
+                            text_align === "center" && "mx-auto"
+                        )}
+                    >
                         {title}
                     </h1>
                     <p

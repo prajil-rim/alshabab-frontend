@@ -35,7 +35,7 @@ const FormSectionWithPoints = ({
 
     return (
         <section className="bg-gradient-to-t from-[#ECF4FF] to-white">
-            <div className="max-w-6xl mx-auto py-10 grid lg:grid-cols-2 gap-5 px-3 lg:px-2">
+            <div className="max-w-[1824px] mx-auto py-10 grid lg:grid-cols-2 gap-5 px-3 lg:px-2">
                 <div className="space-y-4">
                     <h3 className="text-2xl lg:text-4xl font-semibold">
                         {title}

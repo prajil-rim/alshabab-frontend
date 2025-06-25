@@ -36,7 +36,7 @@ const Attractions = ({ cards }: { cards: CardProps[] }) => {
                     return (
                         <div
                             key={globalIndex}
-                            className={`transition-all pl-2 pb-2 duration-300 h-[21rem] text-white text-xl font-bold ${cardWidth}`}
+                            className={`transition-all pl-2 pb-2 duration-300 h-[21rem] xl:h-[30rem] text-white text-xl font-bold ${cardWidth}`}
                             onMouseEnter={() => setHoveredIndex(globalIndex)}
                             onMouseLeave={() => setHoveredIndex(null)}
                         >

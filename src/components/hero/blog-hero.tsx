@@ -40,12 +40,12 @@ const BlogHero = ({
 }: BlogHeroProps) => {
     return (
         <div
-            className="relative flex flex-col justify-end items-center h-[40rem] lg:h-[35rem] bg-no-repeat bg-[0%_60%] bg-cover after:inset-0 after:bg-black/50 after:absolute gap-28 lg:gap-20 pb-10"
+            className="relative flex flex-col justify-end items-center h-[40rem] lg:h-[35rem] xl:h-[50rem] bg-no-repeat bg-[0%_60%] bg-cover after:inset-0 after:bg-black/50 after:absolute pb-10"
             style={{
                 backgroundImage: `url(${cover.url})`,
             }}
         >
-            <div className="space-y-4 flex flex-col justify-center items-center text-white relative z-10">
+            <div className="space-y-4 flex flex-col justify-center items-center text-white relative z-10 flex-1">
                 <span className="text-black bg-white rounded-full px-3 py-1 font-manrope text-xs lg:text-sm font-bold">
                     {category}
                 </span>

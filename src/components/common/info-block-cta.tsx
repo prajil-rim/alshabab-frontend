@@ -24,7 +24,7 @@ const InfoBlockCta = ({
                     reversed && "ms-auto"
                 )}
             >
-                <div className="relative w-fit mx-auto lg:mx-0">
+                <div className="relative w-fit mx-auto lg:mx-0 xl:mx-auto">
                     <StrapiImage
                         alt={
                             largeImage?.alternativeText ||

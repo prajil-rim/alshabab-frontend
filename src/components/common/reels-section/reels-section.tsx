@@ -16,6 +16,7 @@ import { ReelsSectionProps } from "@/types";
 import Link from "next/link";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import SlideIndicator from "@/components/carousels/slide-indicator";
+import { dir } from "i18next";
 
 export function ReelsSection({
     title,
@@ -23,7 +24,8 @@ export function ReelsSection({
     button,
     reels,
     background,
-}: Readonly<ReelsSectionProps>) {
+    locale,
+}: Readonly<ReelsSectionProps> & { locale: string }) {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [emblaApi, setEmblaApi] = useState<CarouselApi | null>(null);
     const [current, setCurrent] = useState(0);
@@ -81,12 +83,13 @@ export function ReelsSection({
 
     return (
         <section
+            dir="ltr"
             className="bg-cover bg-center relative after:absolute after:inset-0 after:bg-black/70"
             style={{
                 backgroundImage: `url(${background?.url})`,
             }}
         >
-            <div className="relative z-10 max-w-6xl mx-auto py-12 lg:py-32 text-white">
+            <div className="relative z-10 max-w-[1824px] mx-auto py-12 lg:py-32 text-white">
                 <Carousel
                     opts={{
                         align: breakpoint ? "center" : "start",
@@ -95,7 +98,7 @@ export function ReelsSection({
                     setApi={(api) => setEmblaApi(api)}
                     className="w-full grid lg:grid-cols-3 gap-3 items-center"
                 >
-                    <div className="space-y-3 px-3 lg:px-2">
+                    <div className="space-y-3 px-3 lg:px-2" dir={dir(locale)}>
                         <h4 className="text-2xl lg:text-3xl font-semibold">
                             {title}
                         </h4>

@@ -9,7 +9,7 @@ const TourCard = ({ tour, index }: { tour: TourProps; index: number }) => {
     return (
         <div
             className={cn(
-                "rounded-xl aspect-[1/0.7] lg:aspect-auto lg:h-72 bg-cover bg-center flex items-end p-5",
+                "rounded-xl aspect-[1/0.7] lg:aspect-auto lg:h-72 xl:h-96 bg-cover bg-center flex items-end p-5",
                 tour.layout === "rectangle" ? "col-span-3" : "col-span-2"
             )}
             key={tour.id}

@@ -34,7 +34,7 @@ const ImageHero = ({
 >) => {
     return (
         <section
-            className="relative flex flex-col justify-center items-center h-[40rem] lg:h-[35rem] bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute pb-10"
+            className="relative flex flex-col justify-center items-center h-[40rem] lg:h-[35rem] xl:h-[50rem] bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute pb-10"
             style={{
                 backgroundImage: `url(${background.url})`,
                 ...style,

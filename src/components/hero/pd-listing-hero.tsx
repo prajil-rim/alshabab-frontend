@@ -51,7 +51,7 @@ const PDListingHero = ({ hero, breadcrumbs }: Readonly<BreadcrumbProps>) => {
     if (!hero || hero.length === 0) return null;
 
     return (
-        <section className="w-full h-[40rem] lg:h-[35rem] bg-black text-white">
+        <section className="w-full h-[40rem] lg:h-[35rem] xl:h-[50rem] bg-black text-white">
             <Carousel
                 setApi={setApi}
                 opts={{
@@ -63,7 +63,7 @@ const PDListingHero = ({ hero, breadcrumbs }: Readonly<BreadcrumbProps>) => {
                     {hero.map((data, index) => (
                         <CarouselItem
                             key={index}
-                            className="h-[40rem] lg:h-[35rem] pl-0"
+                            className="h-[40rem] lg:h-[35rem] xl:h-[50rem] pl-0"
                         >
                             <div
                                 className="relative flex flex-col justify-center items-center h-full bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute gap-32 pb-10 font px-3 lg:px-2"
@@ -103,7 +103,7 @@ const PDListingHero = ({ hero, breadcrumbs }: Readonly<BreadcrumbProps>) => {
                     ))}
                 </CarouselContent>
                 <div className="absolute bottom-0 w-full py-10">
-                    <div className="flex w-full justify-between max-w-6xl mx-auto px-3 lg:px-2">
+                    <div className="flex w-full justify-between max-w-[1824px] mx-auto px-3 lg:px-2">
                         <Breadcrumb>
                             <BreadcrumbList className="font-manrope text-white">
                                 {breadcrumbs

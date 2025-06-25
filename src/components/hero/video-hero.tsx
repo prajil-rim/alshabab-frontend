@@ -36,7 +36,7 @@ const VideoHero = ({
 
     return (
         <section
-            className="h-[40rem] w-full relative flex flex-col justify-end items-center bg-no-repeat bg-center bg-cover px-3 lg:px-2"
+            className="h-[40rem] xl:h-[50rem] w-full relative flex flex-col justify-end items-center bg-no-repeat bg-center bg-cover px-3 lg:px-2"
             style={
                 background.type === "image"
                     ? {

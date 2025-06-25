@@ -49,7 +49,7 @@ const InfoSection = ({
                             "Alternative Text not provided"
                         }
                         src={smallImage.url || process.env.PLACEHOLDER_IMAGE!}
-                        className="absolute -bottom-1/4 rounded-lg border-2 border-white h-52 -left-[12%] md:-left-1/5 object-cover"
+                        className="absolute -bottom-1/4 rounded-lg border-2 border-white h-52 -left-[12%] rtl:-right-[12%] md:-left-1/5 rtl:md:-right-1/5 object-cover"
                         width={250}
                         height={200}
                     />

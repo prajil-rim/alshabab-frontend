@@ -88,7 +88,7 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
     if (!hero || hero.length === 0) return null;
 
     return (
-        <section className="w-full h-[40rem] bg-black text-white">
+        <section className="w-full h-[40rem] xl:h-[50rem] bg-black text-white">
             <Carousel
                 setApi={setApi}
                 opts={{
@@ -105,7 +105,7 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                         return (
                             <CarouselItem
                                 key={index}
-                                className="h-[40rem] pl-0"
+                                className="h-[40rem] xl:h-[50rem] pl-0"
                             >
                                 <div
                                     className="relative flex flex-col justify-center items-center h-full bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute gap-32 pb-10 font"

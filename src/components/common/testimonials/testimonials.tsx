@@ -18,7 +18,7 @@ const Testimonials = ({
     if (!testimonials || testimonials.length === 0 || !title) return null;
 
     return (
-        <section className="max-w-6xl mx-auto space-y-3 lg:space-y-6 px-2 lg:px-0">
+        <section className="max-w-[1824px] mx-auto space-y-3 lg:space-y-6 px-2 lg:px-0">
             <div className="relative w-fit">
                 <h1 className="text-2xl lg:text-4xl font-semibold">{title}</h1>
                 {showLeaf && (

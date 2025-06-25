@@ -32,7 +32,7 @@ const FormSection = ({
 }: Readonly<FormSectionProps>) => {
     return (
         <section className="bg-[#ECF4FF] px-3 lg:px-2">
-            <div className="relative max-w-6xl mx-auto pb-16 lg:pb-0 pt-16 lg:pt-28 space-y-6 bg-[#ECF4FF]">
+            <div className="relative max-w-7xl mx-auto pb-16 lg:pb-0 pt-16 lg:pt-28 space-y-6 bg-[#ECF4FF]">
                 <h1 className="text-2xl font-extrabold lg:text-5xl uppercase max-w-xs mx-auto lg:mx-0 text-center lg:text-left md:max-w-lg leading-tight lg:absolute lg:top-8 lg:left-1/2 lg:-translate-x-[70%]">
                     {title || "No Title"}
                 </h1>
