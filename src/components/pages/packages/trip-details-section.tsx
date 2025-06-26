@@ -16,7 +16,7 @@ const TripDetailsSection = ({
 
     return (
         <section className="bg-[#F5F5F5] px-3">
-            <div className="max-w-[1824px] mx-auto py-10 space-y-6">
+            <div className="max-w-7xl mx-auto py-10 space-y-6">
                 <h1 className="text-2xl lg:text-4xl font-semibold text-center">
                     {title}
                 </h1>

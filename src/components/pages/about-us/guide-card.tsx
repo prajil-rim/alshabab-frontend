@@ -6,7 +6,7 @@ import Link from "next/link";
 const GuideCard = ({ guide }: { guide: GuideProps }) => {
     return (
         <div
-            className="rounded-xl bg-cover bg-center aspect-[1/1.3] lg:aspect-auto lg:h-96 2xl:h-[28rem] relative overflow-hidden group"
+            className="rounded-xl bg-cover bg-center aspect-[1/1.3] lg:aspect-auto lg:h-96 relative overflow-hidden group"
             style={{
                 backgroundImage: `url(${guide.image?.url})`,
             }}

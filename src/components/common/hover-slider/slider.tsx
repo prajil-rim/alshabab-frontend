@@ -21,7 +21,7 @@ export default function CardSlider({ slides }: { slides: SlideProps[] }) {
     };
 
     return (
-        <div className="w-full max-w-[1824px] mx-auto hidden lg:block">
+        <div className="w-full max-w-7xl mx-auto hidden lg:block">
             <div
                 className="flex gap-4 overflow-hidden"
                 onMouseLeave={handleHoverOut}
@@ -30,7 +30,7 @@ export default function CardSlider({ slides }: { slides: SlideProps[] }) {
                     <div
                         key={slide.id}
                         onMouseEnter={() => handleHover(index)}
-                        className={`transition-all duration-300 ease-in-out h-80 2xl:h-[26rem] ${
+                        className={`transition-all duration-300 ease-in-out h-80 ${
                             activeIndex === index
                                 ? "w-2/5"
                                 : activeIndex === null && index === 0

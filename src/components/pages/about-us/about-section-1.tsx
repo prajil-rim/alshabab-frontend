@@ -31,7 +31,7 @@ const AboutSection1 = ({
     if (!title || !image_1 || !image_2) return null;
     return (
         <section className="py-10 lg:py-20 px-3 bg-[#F5F1E3] lg:bg-white">
-            <div className="max-w-[1824px] mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-3">
+            <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-3">
                 <div className="row-span-2 rounded-xl overflow-hidden hidden lg:block">
                     <StrapiImage
                         src={image_1?.url || process.env.PLACEHOLDER_IMAGE!}

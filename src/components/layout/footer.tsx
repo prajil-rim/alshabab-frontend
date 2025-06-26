@@ -55,7 +55,7 @@ const Footer = ({
     const t = useTranslations("footer");
     return (
         <footer className="bg-off-black text-primary-foreground font-manrope">
-            <div className="max-w-[1824px] mx-auto px-3 py-8">
+            <div className="max-w-7xl mx-auto px-3 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-5 py-10 space-y-8 lg:space-y-0">
                     <div className="lg:col-span-2 space-y-4 text-center lg:text-left">
                         <StrapiImage

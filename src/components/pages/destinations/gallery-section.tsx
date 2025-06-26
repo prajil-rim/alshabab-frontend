@@ -31,7 +31,7 @@ const GallerySection = ({
     const hasMoreToShow = visibleCount < gallery.length;
 
     return (
-        <section className="max-w-[1824px] mx-auto py-10 space-y-12 text-center px-3">
+        <section className="max-w-7xl mx-auto py-10 space-y-12 text-center px-3">
             <div className="space-y-6">
                 <h1 className="text-2xl lg:text-4xl font-semibold">{title}</h1>
                 <p className="font-manrope overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">

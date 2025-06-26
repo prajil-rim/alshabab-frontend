@@ -31,16 +31,14 @@ export async function POST(request: NextRequest) {
     if (Object.keys(StaticModelMap).includes(body.model)) {
         // Revalidate the specific blog path
         const path = StaticModelMap[body.model as keyof typeof StaticModelMap];
-        revalidatePath("/en" + path);
-        revalidatePath("/ar" + path);
+        revalidatePath("/" + body.entry.locale + path);
         console.log("Revalidated " + path);
     } else if (Object.keys(DynamicModelMap).includes(body.model)) {
         // Revalidate the specific blog path
         const path =
             DynamicModelMap[body.model as keyof typeof DynamicModelMap] +
             body.entry.slug;
-        revalidatePath("/en" + path);
-        revalidatePath("/ar" + path);
+        revalidatePath("/" + body.entry.locale + path);
         revalidateTag("sitemap"); // Revalidate sitemap after every blog, destination, or package update or creation
         console.log("Revalidated " + path);
     } else {

@@ -14,7 +14,7 @@ export default function AttractionsSection({
     cards,
 }: Readonly<AttractionsSectionProps>) {
     return (
-        <section className="max-w-[1824px] mx-auto py-10 flex flex-col gap-4 px-3">
+        <section className="max-w-7xl mx-auto py-10 flex flex-col gap-4 px-3">
             <div className="space-y-3 lg:space-y-6 py-6">
                 <h3 className="font-semibold text-2xl lg:text-4xl text-center">
                     {title}

@@ -88,7 +88,7 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
     if (!hero || hero.length === 0) return null;
 
     return (
-        <section className="w-full h-[40rem] 2xl:h-[50rem] bg-black text-white">
+        <section className="w-full h-screen bg-black text-white">
             <Carousel
                 setApi={setApi}
                 opts={{
@@ -103,10 +103,7 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                         }
 
                         return (
-                            <CarouselItem
-                                key={index}
-                                className="h-[40rem] 2xl:h-[50rem] pl-0"
-                            >
+                            <CarouselItem key={index} className="h-screen pl-0">
                                 <div
                                     className="relative flex flex-col justify-center items-center h-full bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute gap-32 pb-10 font"
                                     style={
@@ -171,7 +168,7 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                                             </Link>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-2.5 absolute bottom-0 left-0 p-3 pb-10 lg:p-10 z-10">
+                                    <div className="flex items-center gap-2.5 absolute bottom-0 left-0 p-3 pb-10 lg:p-10 z-10 w-full">
                                         <MapPin />
                                         <span className="font-manrope">
                                             {data?.destination}

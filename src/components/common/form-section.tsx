@@ -36,7 +36,7 @@ const FormSection = ({
                 className
             )}
         >
-            <div className="max-w-[1824px] mx-auto py-10 sm:py-20 grid grid-cols-1 lg:grid-cols-2 gap-5 ">
+            <div className="max-w-7xl mx-auto py-10 sm:py-20 grid grid-cols-1 lg:grid-cols-2 gap-5 ">
                 <div className="space-y-4 lg:space-y-6">
                     <h3 className="text-2xl lg:text-4xl font-semibold">
                         {heading}

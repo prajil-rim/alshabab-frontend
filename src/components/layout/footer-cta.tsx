@@ -31,7 +31,7 @@ const FooterCTA = ({
         >
             <div
                 className={cn(
-                    "max-w-[1824px] mx-auto relative z-10 pt-10 lg:pt-0",
+                    "max-w-7xl mx-auto relative z-10 pt-10 lg:pt-0",
                     text_align === "center"
                         ? "flex flex-col justify-center items-center"
                         : "grid grid-cols-1 lg:grid-cols-2"

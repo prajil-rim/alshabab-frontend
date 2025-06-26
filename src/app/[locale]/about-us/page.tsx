@@ -86,7 +86,7 @@ export default async function AboutUsPage({
                 ]}
             />
             <AboutSection1 {...pageData.section_1} />
-            <section className="max-w-[1824px] mx-auto py-10 space-y-6 px-3">
+            <section className="max-w-7xl mx-auto py-10 space-y-6 px-3">
                 {pageData.purpose?.map((data: Readonly<InfoBlockProps>) => (
                     <InfoBlock {...data} key={data.id} />
                 ))}
