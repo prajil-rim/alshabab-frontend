@@ -14,6 +14,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
+import Script from "next/script";
 
 const playFairDisplay = Playfair_Display({
     variable: "--font-playfair-display",
@@ -71,9 +72,31 @@ export default async function RootLayout({
     return (
         <NextIntlClientProvider>
             <html lang={locale || "en"} dir={dir(locale)}>
+                <head>
+                    {/* GTM Script (Head) */}
+                    <Script id="gtm-script" strategy="afterInteractive">
+                        {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-TNGFMDZL');
+          `}
+                    </Script>
+                </head>
                 <body
                     className={`${playFairDisplay.variable} ${manrope.variable} antialiased max-w-screen`}
                 >
+                    {/* GTM noscript (Body) */}
+                    <noscript>
+                        <iframe
+                            src="https://www.googletagmanager.com/ns.html?id=GTM-TNGFMDZL"
+                            height="0"
+                            width="0"
+                            style={{ display: "none", visibility: "hidden" }}
+                        ></iframe>
+                    </noscript>
+
                     <Header
                         {...header}
                         destinations={destinations}
