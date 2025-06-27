@@ -89,7 +89,7 @@ export function ReelsSection({
                 backgroundImage: `url(${background?.url})`,
             }}
         >
-            <div className="relative z-10 max-w-7xl mx-auto py-12 lg:py-32 text-white">
+            <div className="relative z-10 max-w-7xl mx-auto py-12 lg:py-32 text-white lg:px-6 2xl:px-0">
                 <Carousel
                     opts={{
                         align: breakpoint ? "center" : "start",

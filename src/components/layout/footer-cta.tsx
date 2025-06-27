@@ -18,7 +18,7 @@ const FooterCTA = ({
     return (
         <section
             className={cn(
-                "bg-gradient-to-t from-[#202020] to-secondary min-h-96 2xl:min-h-[26rem] bg-cover bg-center flex items-center relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#202020] after:via-[#202020]/50 after:to-transparent px-3",
+                "bg-gradient-to-t from-[#202020] to-secondary min-h-96 2xl:min-h-[26rem] bg-cover bg-center flex items-center relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-[#202020] after:via-[#202020]/50 after:to-transparent px-3 lg:px-6 2xl:px-0",
                 text_align === "center" ? "" : "after:hidden"
             )}
             style={

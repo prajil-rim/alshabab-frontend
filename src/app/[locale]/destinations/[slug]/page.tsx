@@ -99,7 +99,7 @@ const DestinationPage = async ({
                 ]}
             />
             <section className="bg-gradient-to-t from-transparent via-[#F5F1E3] to-[#448CD9]/80">
-                <div className="max-w-7xl mx-auto py-5 lg:py-10 px-3">
+                <div className="max-w-7xl mx-auto py-5 lg:py-10 px-3 lg:px-6 2xl:px-0">
                     <InfoBlockCta {...pageData.info_section} />
                 </div>
             </section>

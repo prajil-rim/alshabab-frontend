@@ -20,7 +20,7 @@ const PopularPD = ({
     if (!title || !tabs || !tabs.length) return null;
 
     return (
-        <section className="max-w-7xl mx-auto py-14 space-y-3 lg:space-y-6 px-3">
+        <section className="max-w-7xl mx-auto py-14 space-y-3 lg:space-y-6 px-3 lg:px-6 2xl:px-0">
             <div className="relative w-fit">
                 <h1 className="text-2xl lg:text-4xl font-semibold">{title}</h1>
                 {showLeaf && (

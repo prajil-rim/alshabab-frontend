@@ -26,7 +26,7 @@ const FAQSection = ({
     const secondHalf = faqs.slice(mid);
 
     return (
-        <section className="max-w-7xl mx-auto py-10 lg:py-24 text-center space-y-6 px-3">
+        <section className="max-w-7xl mx-auto py-10 lg:py-24 text-center space-y-6 px-3 lg:px-6 2xl:px-0">
             <div className="relative">
                 <h1 className="text-2xl lg:text-4xl font-semibold">{title}</h1>
                 {showLeaf && (

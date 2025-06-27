@@ -19,7 +19,7 @@ const PartnerSection = ({
     }
 
     return (
-        <section className="max-w-7xl mx-auto py-10 space-y-6">
+        <section className="max-w-7xl mx-auto py-10 space-y-6 lg:px-6 2xl:px-0">
             <div className="relative">
                 <h1 className="text-2xl lg:text-4xl font-semibold text-center">
                     {title}

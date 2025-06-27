@@ -107,7 +107,7 @@ const Blog = ({
     const t = useTranslations("blog");
 
     return (
-        <section className="max-w-6xl mx-auto pt-5 lg:pt-10 py-20 px-3">
+        <section className="max-w-6xl mx-auto pt-5 lg:pt-10 py-20 px-3 lg:px-6 2xl:px-0">
             <div className="flex flex-wrap-reverse lg:flex-nowrap lg:gap-20 px-4 lg:px-0">
                 <div className="h-fit sticky top-0 pt-10">
                     <div className="relative w-full hidden lg:block">

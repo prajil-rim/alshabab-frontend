@@ -85,7 +85,7 @@ const BlogListSection = ({
     const t = useTranslations("filter");
 
     return (
-        <section className="max-w-7xl mx-auto py-10 px-3">
+        <section className="max-w-7xl mx-auto py-10 px-3 lg:px-6 2xl:px-0">
             <div>
                 <h2 className="font-semibold text-2xl lg:text-4xl mb-4">
                     {blog_list.title}

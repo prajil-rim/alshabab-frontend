@@ -25,7 +25,7 @@ const WhyUsSection = ({
     if (!title || !cards || cards.length === 0) return null;
 
     return (
-        <section className="max-w-7xl mx-auto py-10 md:pb-20 space-y-3 lg:space-y-6 px-3">
+        <section className="max-w-7xl mx-auto py-10 md:pb-20 space-y-3 lg:space-y-6 px-3 lg:px-6 2xl:px-0">
             <div className="relative">
                 <h1 className="text-2xl font-semibold lg:text-4xl text-center">
                     {title}

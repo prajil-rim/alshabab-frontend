@@ -24,7 +24,7 @@ const MapSection = (props: Readonly<MapSectionProps>) => {
 
     return (
         <section className="max-w-6xl mx-auto py-10 space-y-3 lg:space-y-6">
-            <h1 className="text-2xl lg:text-4xl font-semibold text-center px-3">
+            <h1 className="text-2xl lg:text-4xl font-semibold text-center px-3 lg:px-6 2xl:px-0">
                 {props?.title}
             </h1>
             <p className="font-manrope text-center px-3">

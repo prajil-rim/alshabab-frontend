@@ -46,7 +46,7 @@ const ExperiencesSection = ({
     const cardsArray = chunkArray(hover_card);
 
     return (
-        <section className="max-w-7xl mx-auto py-16 space-y-3 md:space-y-6 px-3">
+        <section className="max-w-7xl mx-auto py-16 space-y-3 md:space-y-6 px-3 lg:px-6 2xl:px-0">
             <div className="relative">
                 <h1 className="text-2xl lg:text-4xl font-semibold text-center">
                     {title}

@@ -25,13 +25,14 @@ export function Header({
     if (!cta || !logo) return null;
 
     return (
-        <header className="absolute z-50 w-full flex justify-between items-center p-4 max-w-7xl left-1/2 -translate-x-1/2 font-manrope">
+        <header className="absolute z-50 w-full flex justify-between items-center p-4 max-w-7xl lg:px-6 2xl:px-4 left-1/2 -translate-x-1/2 font-manrope">
             <Link href={"/"}>
                 <StrapiImage
                     src={logo.image?.url || process.env.PLACEHOLDER_IMAGE!}
                     alt={logo.image.alternativeText || logo.logoText}
                     width={70}
                     height={40}
+                    priority
                 />
             </Link>
             <div className="hidden lg:block">
