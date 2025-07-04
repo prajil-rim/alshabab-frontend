@@ -10,7 +10,13 @@ import FeaturedInSection from "@/components/pages/about-us/featured-in-section";
 import GuidesSection from "@/components/pages/about-us/guides-section";
 import MapSection from "@/components/pages/about-us/map-section";
 import OurJourneySection from "@/components/pages/about-us/our-journey-section";
-import { getAboutUsPage, getPartners, getTestimonials } from "@/data/loaders";
+import {
+    getAboutUsPage,
+    getDestinationsList,
+    getPackagesList,
+    getPartners,
+    getTestimonials,
+} from "@/data/loaders";
 import { routing } from "@/i18n/routing";
 import { returnMetadata } from "@/lib/utils";
 import { InfoBlockProps } from "@/types";
@@ -34,16 +40,21 @@ function getAboutUsPageOnce(locale: string) {
 }
 
 async function loader(locale: string) {
-    const [pageData, testimonials, partners] = await Promise.all([
-        getAboutUsPageOnce(locale),
-        getTestimonials(locale),
-        getPartners(locale),
-    ]);
+    const [pageData, testimonials, partners, destinations, packages] =
+        await Promise.all([
+            getAboutUsPageOnce(locale),
+            getTestimonials(locale),
+            getPartners(locale),
+            getDestinationsList(),
+            getPackagesList(),
+        ]);
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
         testimonials: testimonials.data,
         partners: partners.data,
+        destinations: destinations.data,
+        packages: packages.data,
     };
 }
 
@@ -64,7 +75,8 @@ export default async function AboutUsPage({
     params: Promise<{ locale: string }>;
 }) {
     const locale = (await params).locale;
-    const { pageData, testimonials, partners } = await loader(locale);
+    const { pageData, testimonials, partners, destinations, packages } =
+        await loader(locale);
 
     // Enable static rendering
     setRequestLocale(locale);
@@ -75,6 +87,9 @@ export default async function AboutUsPage({
         <>
             <ImageHero
                 {...pageData.hero}
+                destinations={destinations}
+                packages={packages}
+                locale={locale}
                 breadcrumbs={[
                     {
                         text: t("home"),

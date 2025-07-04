@@ -40,7 +40,7 @@ export interface ImageHeroProps {
     title: string;
     description: string;
     background: MediaProps;
-    cta?: LinkProps;
+    cta_button: string;
     cta_whatsapp?: LinkProps;
     breadcrumbs?: {
         text: string;
@@ -149,7 +149,7 @@ export interface PDHeroProps {
     title: string;
     description: string;
     slide_name: string;
-    cta_button: LinkProps;
+    cta_button: string;
     cta_whatsapp: LinkProps;
     background: MediaProps;
 }
@@ -206,6 +206,7 @@ export interface GalleryProps {
 
 export interface DealsProps extends Base {
     package: string;
+    slug: string;
     summary: string;
     price: number;
     price_per: string;

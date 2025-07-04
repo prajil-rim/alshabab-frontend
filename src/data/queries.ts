@@ -157,7 +157,6 @@ export const aboutUsPageQuery = qs.stringify({
                 background: {
                     fields: ["url", "alternativeText"],
                 },
-                cta: true,
                 cta_whatsapp: true,
             },
         },
@@ -435,7 +434,6 @@ export const destinationQuery = qs.stringify({
     populate: {
         hero: {
             populate: {
-                cta: true,
                 cta_whatsapp: true,
                 background: {
                     populate: {
@@ -564,7 +562,13 @@ export const destinationQuery = qs.stringify({
                         },
                         packages_for: true,
                     },
-                    fields: ["package", "summary", "price", "price_per"],
+                    fields: [
+                        "package",
+                        "slug",
+                        "summary",
+                        "price",
+                        "price_per",
+                    ],
                 },
             },
         },
@@ -605,7 +609,6 @@ export const destinationListingPageQuery = qs.stringify({
     populate: {
         hero: {
             populate: {
-                cta_button: true,
                 cta_whatsapp: true,
                 background: {
                     fields: ["url", "alternativeText"],
@@ -722,7 +725,6 @@ export const packageQuery = qs.stringify({
                 background: {
                     fields: ["url", "alternativeText"],
                 },
-                cta: true,
             },
         },
         package_includes_section: {
@@ -829,7 +831,6 @@ export const packageListingPageQuery = qs.stringify({
     populate: {
         hero: {
             populate: {
-                cta_button: true,
                 cta_whatsapp: true,
                 background: {
                     fields: ["url", "alternativeText"],
@@ -941,7 +942,6 @@ export const contactUsPageQuery = qs.stringify({
                 background: {
                     fields: ["url", "alternativeText"],
                 },
-                cta: true,
             },
         },
         contact_info: true,

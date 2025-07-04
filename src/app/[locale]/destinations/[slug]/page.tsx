@@ -84,6 +84,9 @@ const DestinationPage = async ({
         <main>
             <VideoHero
                 {...pageData.hero}
+                destinations={destinations}
+                packages={packages}
+                locale={locale}
                 breadcrumbs={[
                     {
                         text: t("home"),

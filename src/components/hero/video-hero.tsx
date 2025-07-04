@@ -7,16 +7,26 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "../ui/breadcrumb";
-import { ImageHeroProps, MediaProps } from "@/types";
+import {
+    DestinationListProps,
+    ImageHeroProps,
+    MediaProps,
+    PackageListProps,
+} from "@/types";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import ArrowRightUp from "../icons/arrow-right-up";
 import Whatsapp from "../icons/whatsapp";
+import ContactFormModal from "../modal/contact-form-modal";
+import ContactFormSmModal from "../modal/contact-form-sm-modal";
 
 type VideoHeroProps = Pick<
     ImageHeroProps,
-    "title" | "description" | "breadcrumbs" | "cta" | "cta_whatsapp"
+    "title" | "description" | "breadcrumbs" | "cta_button" | "cta_whatsapp"
 > & {
+    destinations: DestinationListProps[];
+    packages: PackageListProps[];
+    locale: string;
     background: {
         id: number;
         type: "image" | "video";
@@ -28,9 +38,12 @@ const VideoHero = ({
     title,
     description,
     breadcrumbs,
-    cta,
+    cta_button,
     cta_whatsapp,
     background,
+    destinations,
+    packages,
+    locale,
 }: Readonly<VideoHeroProps>) => {
     const heading = title.split("\\n");
 
@@ -67,16 +80,30 @@ const VideoHero = ({
                 <p className="font-manrope lg:text-lg max-w-2xl text-center">
                     {description}
                 </p>
-                {cta && (
+                {cta_button && (
                     <div className="font-manrope flex flex-col lg:flex-row justify-center items-center gap-4">
-                        <Link
-                            href={cta.href}
-                            target={cta.isExternal ? "_blank" : "_self"}
-                        >
-                            <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
-                                {cta.text} <ArrowRightUp color="red" />
-                            </Button>
-                        </Link>
+                        <div className="hidden lg:block">
+                            <ContactFormModal
+                                destinations={destinations || []}
+                                packages={packages || []}
+                                locale={locale}
+                            >
+                                <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
+                                    {cta_button} <ArrowRightUp color="red" />
+                                </Button>
+                            </ContactFormModal>
+                        </div>
+                        <div className="lg:hidden">
+                            <ContactFormSmModal
+                                destinations={destinations || []}
+                                packages={packages || []}
+                                locale={locale}
+                            >
+                                <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
+                                    {cta_button} <ArrowRightUp color="red" />
+                                </Button>
+                            </ContactFormSmModal>
+                        </div>
                         {cta_whatsapp && (
                             <Link
                                 href={cta_whatsapp?.href}

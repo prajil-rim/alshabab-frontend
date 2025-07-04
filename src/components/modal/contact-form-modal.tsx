@@ -8,32 +8,25 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "../ui/button";
-import ArrowRightUp from "../icons/arrow-right-up";
 import ContactUsForm from "../forms/contact-us-form";
 import { X } from "lucide-react";
 import { DestinationListProps, PackageListProps } from "@/types";
 import Image from "next/image";
 
 const ContactFormModal = ({
-    cta,
     destinations,
     packages,
     locale,
+    children,
 }: {
-    cta: string;
     destinations: DestinationListProps[];
     packages: PackageListProps[];
     locale: string;
+    children?: React.ReactNode;
 }) => {
     return (
         <Dialog>
-            <DialogTrigger asChild>
-                <Button className="bg-white text-black rounded-full font-semibold lg:!px-5 lg:!py-2.5 cursor-pointer hover:bg-white">
-                    {cta}
-                    <ArrowRightUp color="red" />
-                </Button>
-            </DialogTrigger>
+            <DialogTrigger asChild>{children}</DialogTrigger>
             <DialogContent
                 dir="ltr"
                 className="w-full max-w-6xl sm:max-w-4xl bg-cover lg:max-h-[calc(100vh-1rem)] bg-[300%_0%] p-0 overflow-hidden border-0 bg-[#212121]"

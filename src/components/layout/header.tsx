@@ -6,6 +6,8 @@ import Link from "next/link";
 import Sidenav from "../sheet/sidenav";
 import ContactFormSmModal from "../modal/contact-form-sm-modal";
 import LocaleSwitcher from "./language-switcher";
+import { Button } from "../ui/button";
+import ArrowRightUp from "../icons/arrow-right-up";
 
 interface HeaderProps {
     cta: string;
@@ -36,28 +38,42 @@ export function Header({
                 />
             </Link>
             <div className="hidden lg:block">
-                <NavItems destinations={destinations} packages={packages} />
+                <NavItems
+                    destinations={destinations}
+                    packages={packages}
+                    locale={locale}
+                />
             </div>
             <div className="flex items-center gap-3">
                 <div className="hidden lg:block">
                     <ContactFormModal
-                        cta={cta}
                         destinations={destinations}
                         packages={packages}
                         locale={locale}
-                    />
+                    >
+                        <Button className="bg-white text-black rounded-full font-semibold lg:!px-5 lg:!py-2.5 cursor-pointer hover:bg-white">
+                            {cta}
+                            <ArrowRightUp color="red" />
+                        </Button>
+                    </ContactFormModal>
                 </div>
                 <div className="lg:hidden">
                     <ContactFormSmModal
-                        cta={cta}
                         destinations={destinations}
                         packages={packages}
-                    />
+                        locale={locale}
+                    >
+                        <Button className="rounded-full font-semibold lg:!px-5 lg:!py-2.5 cursor-pointer hover:bg-white bg-white text-black">
+                            {cta}
+                            <ArrowRightUp color="red" />
+                        </Button>
+                    </ContactFormSmModal>
                 </div>
                 <Sidenav
                     logo={logo}
                     destinations={destinations}
                     packages={packages}
+                    locale={locale}
                 />
                 <div className="hidden lg:block">
                     <LocaleSwitcher />

@@ -12,17 +12,21 @@ import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion as m } from "framer-motion";
 import ContactFormSmModal from "../modal/contact-form-sm-modal";
 import { useTranslations } from "next-intl";
+import { Button } from "../ui/button";
+import ArrowRightUp from "../icons/arrow-right-up";
 
 const NavItems = ({
     destinations,
     packages,
     isMobile = false,
     setOpen,
+    locale,
 }: {
     destinations: DestinationListProps[];
     packages: PackageListProps[];
     isMobile?: boolean;
     setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+    locale: string;
 }) => {
     const [dOpen, setDOpen] = useState(false);
     const [pOpen, setPOpen] = useState(false);
@@ -180,11 +184,15 @@ const NavItems = ({
             </li>
             <li className="lg:hidden">
                 <ContactFormSmModal
-                    cta={t("cta")}
                     destinations={destinations}
                     packages={packages}
-                    bg="black"
-                />
+                    locale={locale}
+                >
+                    <Button className="rounded-full font-semibold lg:!px-5 lg:!py-2.5 cursor-pointer hover:bg-white bg-[#202020] text-white !px-5">
+                        {t("cta")}
+                        <ArrowRightUp color="red" />
+                    </Button>
+                </ContactFormSmModal>
             </li>
         </ul>
     );

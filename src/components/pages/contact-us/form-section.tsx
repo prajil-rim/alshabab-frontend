@@ -8,6 +8,7 @@ import {
     DestinationListProps,
     PackageListProps,
 } from "@/types";
+import Link from "next/link";
 
 interface FormSectionProps {
     contact_title: string;
@@ -39,7 +40,7 @@ const FormSection = ({
                         <div className="space-y-2 text-sm lg:text-base">
                             {groupedContact.phone?.map((phone, i) => (
                                 <dd dir="ltr" className="w-fit" key={phone + i}>
-                                    {phone}
+                                    <Link href={`tel:${phone}`}>{phone}</Link>
                                 </dd>
                             ))}
                         </div>
@@ -49,7 +50,9 @@ const FormSection = ({
                         </dt>
                         <div className="space-y-2 text-sm lg:text-base">
                             {groupedContact.email?.map((mail, i) => (
-                                <dd key={mail + i}>{mail}</dd>
+                                <dd key={mail + i}>
+                                    <Link href={`mailto:${mail}`}>{mail}</Link>
+                                </dd>
                             ))}
                         </div>
                         <dt className="text-primary flex items-center gap-1 lg:text-xl font-semibold">
@@ -62,7 +65,12 @@ const FormSection = ({
                                     className="max-w-[18rem]"
                                     key={location + i}
                                 >
-                                    {location}
+                                    <Link
+                                        href={`https://www.google.com/maps/search/${location}`}
+                                        target="_blank"
+                                    >
+                                        {location}
+                                    </Link>
                                 </dd>
                             ))}
                         </div>

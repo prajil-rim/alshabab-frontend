@@ -70,6 +70,7 @@ const ContactPage = async ({
                 background={data.hero?.background}
                 description={data.hero?.description}
                 title={data.hero?.title}
+                locale={locale}
                 breadcrumbs={[
                     {
                         text: "Home",

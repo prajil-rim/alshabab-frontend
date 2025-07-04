@@ -6,7 +6,11 @@ import ImageHero from "@/components/hero/image-hero";
 import FooterCTA from "@/components/layout/footer-cta";
 import PackageIncludesSection from "@/components/pages/packages/package-includes-section";
 import TripDetailsSection from "@/components/pages/packages/trip-details-section";
-import { getPackage, getPackagesList } from "@/data/loaders";
+import {
+    getDestinationsList,
+    getPackage,
+    getPackagesList,
+} from "@/data/loaders";
 import { routing } from "@/i18n/routing";
 import { returnMetadata } from "@/lib/utils";
 import { Metadata } from "next";
@@ -29,14 +33,16 @@ function getPackageDataOnce(slug: string, locale: string) {
 }
 
 async function loader(slug: string, locale: string) {
-    const [pageData, packages] = await Promise.all([
+    const [pageData, packages, destinations] = await Promise.all([
         getPackageDataOnce(slug, locale),
         getPackagesList(),
+        getDestinationsList(),
     ]);
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
         packages: packages.data,
+        destinations: destinations.data,
     };
 }
 
@@ -59,7 +65,10 @@ const PackagePage = async ({
     const { slug, locale } = await params;
     if (!slug) return notFound();
 
-    const { pageData, packages } = await loader(slug as string, locale);
+    const { pageData, packages, destinations } = await loader(
+        slug as string,
+        locale
+    );
 
     // Enable static rendering
     setRequestLocale(locale);
@@ -72,6 +81,10 @@ const PackagePage = async ({
                 background={pageData.hero.background}
                 description={pageData.hero.description}
                 title={pageData.hero.title}
+                cta_button={pageData.hero.cta_button}
+                destinations={destinations}
+                packages={packages}
+                locale={locale}
                 breadcrumbs={[
                     {
                         text: t("home"),
@@ -85,7 +98,6 @@ const PackagePage = async ({
                         text: pageData.package,
                     },
                 ]}
-                cta={pageData.hero.cta}
             />
             <FormSection {...pageData.form_section} packages={packages} />
             <PackageIncludesSection {...pageData.package_includes_section} />

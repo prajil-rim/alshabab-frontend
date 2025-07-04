@@ -6,31 +6,41 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { ImageHeroProps } from "@/types";
+import {
+    DestinationListProps,
+    ImageHeroProps,
+    PackageListProps,
+} from "@/types";
 import { Fragment } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import ArrowRightUp from "../icons/arrow-right-up";
 import Whatsapp from "../icons/whatsapp";
+import ContactFormModal from "../modal/contact-form-modal";
+import ContactFormSmModal from "../modal/contact-form-sm-modal";
 
 const ImageHero = ({
     title,
     description,
     background,
     breadcrumbs,
-    cta,
+    cta_button,
     cta_whatsapp,
     style,
+    destinations,
+    packages,
+    locale,
 }: Readonly<
     Pick<
         ImageHeroProps,
-        | "title"
-        | "description"
-        | "background"
-        | "breadcrumbs"
-        | "cta"
-        | "cta_whatsapp"
-    > & { style?: React.CSSProperties }
+        "title" | "description" | "background" | "breadcrumbs" | "cta_whatsapp"
+    > & {
+        style?: React.CSSProperties;
+        destinations?: DestinationListProps[];
+        packages?: PackageListProps[];
+        cta_button?: string;
+        locale: string;
+    }
 >) => {
     return (
         <section
@@ -47,16 +57,30 @@ const ImageHero = ({
                 <p className="font-manrope lg:text-lg max-w-2xl text-center">
                     {description}
                 </p>
-                {cta && (
+                {cta_button && (
                     <div className="font-manrope flex flex-col gap-3 lg:flex-row items-center">
-                        <Link
-                            href={cta?.href}
-                            target={cta.isExternal ? "_blank" : "_self"}
-                        >
-                            <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
-                                {cta.text} <ArrowRightUp color="red" />
-                            </Button>
-                        </Link>
+                        <div className="hidden lg:block">
+                            <ContactFormModal
+                                destinations={destinations || []}
+                                packages={packages || []}
+                                locale={locale}
+                            >
+                                <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
+                                    {cta_button} <ArrowRightUp color="red" />
+                                </Button>
+                            </ContactFormModal>
+                        </div>
+                        <div className="lg:hidden">
+                            <ContactFormSmModal
+                                destinations={destinations || []}
+                                packages={packages || []}
+                                locale={locale}
+                            >
+                                <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
+                                    {cta_button} <ArrowRightUp color="red" />
+                                </Button>
+                            </ContactFormSmModal>
+                        </div>
                         {cta_whatsapp && (
                             <Link
                                 href={cta_whatsapp?.href}

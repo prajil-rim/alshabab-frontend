@@ -36,7 +36,7 @@ const DealsSection = ({
                     const isLong = redIndexes.includes(index);
                     return (
                         <Link
-                            href={"/"}
+                            href={`/packages/${package_.slug}`}
                             className={isLong ? "col-span-3" : "col-span-2"}
                             key={package_.id}
                         >

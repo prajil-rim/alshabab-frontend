@@ -18,9 +18,15 @@ interface SidenavProps {
     logo: LogoProps;
     destinations: DestinationListProps[];
     packages: PackageListProps[];
+    locale: string;
 }
 
-const Sidenav = ({ logo, destinations, packages }: Readonly<SidenavProps>) => {
+const Sidenav = ({
+    logo,
+    destinations,
+    packages,
+    locale,
+}: Readonly<SidenavProps>) => {
     const [open, setOpen] = useState(false);
 
     return (
@@ -47,6 +53,7 @@ const Sidenav = ({ logo, destinations, packages }: Readonly<SidenavProps>) => {
                     packages={packages}
                     isMobile
                     setOpen={setOpen}
+                    locale={locale}
                 />
                 <LocaleSwitcher />
             </SheetContent>

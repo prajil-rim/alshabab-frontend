@@ -82,6 +82,9 @@ const DestinationListingPage = async ({
         <main>
             <PDListingHero
                 hero={pageData.hero}
+                destinations={destinations}
+                packages={packages}
+                locale={locale}
                 breadcrumbs={[
                     {
                         text: t("home"),

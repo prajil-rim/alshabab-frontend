@@ -21,8 +21,10 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "../ui/carousel";
-import { PDHeroProps } from "@/types";
+import { DestinationListProps, PackageListProps, PDHeroProps } from "@/types";
 import { cn } from "@/lib/utils";
+import ContactFormModal from "../modal/contact-form-modal";
+import ContactFormSmModal from "../modal/contact-form-sm-modal";
 
 interface BreadcrumbProps {
     hero: PDHeroProps[];
@@ -30,9 +32,18 @@ interface BreadcrumbProps {
         text: string;
         href?: string;
     }[];
+    destinations: DestinationListProps[];
+    packages: PackageListProps[];
+    locale: string;
 }
 
-const PDListingHero = ({ hero, breadcrumbs }: Readonly<BreadcrumbProps>) => {
+const PDListingHero = ({
+    hero,
+    breadcrumbs,
+    destinations,
+    packages,
+    locale,
+}: Readonly<BreadcrumbProps>) => {
     const [api, setApi] = React.useState<CarouselApi>();
     const [current, setCurrent] = React.useState(0);
 
@@ -76,23 +87,40 @@ const PDListingHero = ({ hero, breadcrumbs }: Readonly<BreadcrumbProps>) => {
                                         {data.description}
                                     </p>
                                     <div className="font-manrope flex flex-col lg:flex-row justify-center items-center gap-4">
-                                        <Link
-                                            href={data.cta_button?.href}
-                                            target={
-                                                data.cta_button?.isExternal
-                                                    ? "_blank"
-                                                    : "_self"
-                                            }
-                                        >
-                                            <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
-                                                {data.cta_button?.text}{" "}
-                                                <ArrowRightUp color="red" />
+                                        <div className="hidden lg:block">
+                                            <ContactFormModal
+                                                destinations={
+                                                    destinations || []
+                                                }
+                                                packages={packages || []}
+                                                locale={locale}
+                                            >
+                                                <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
+                                                    {data.cta_button}{" "}
+                                                    <ArrowRightUp color="red" />
+                                                </Button>
+                                            </ContactFormModal>
+                                        </div>
+                                        <div className="lg:hidden">
+                                            <ContactFormSmModal
+                                                destinations={
+                                                    destinations || []
+                                                }
+                                                packages={packages || []}
+                                                locale={locale}
+                                            >
+                                                <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
+                                                    {data.cta_button}{" "}
+                                                    <ArrowRightUp color="red" />
+                                                </Button>
+                                            </ContactFormSmModal>
+                                        </div>
+                                        <Link href={data.cta_whatsapp?.href}>
+                                            <Button className="rounded-full bg-[#FFE9EC] text-black hover:text-white cursor-pointer">
+                                                {data.cta_whatsapp?.text}{" "}
+                                                <Whatsapp />
                                             </Button>
                                         </Link>
-                                        <Button className="rounded-full bg-[#FFE9EC] text-black hover:text-white cursor-pointer">
-                                            {data.cta_whatsapp?.text}{" "}
-                                            <Whatsapp />
-                                        </Button>
                                     </div>
                                 </div>
                             </div>
