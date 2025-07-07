@@ -1,6 +1,16 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
+// List all static paths that should revalidate if global (header/footer) is updated
+const GlobalDependentPaths = [
+    "/",
+    "/about-us",
+    "/contact-us",
+    "/blogs",
+    "/destinations",
+    "/packages",
+];
+
 const StaticModelMap = {
     "blog-page": "/blogs",
     "destination-listing-page": "/destinations",
@@ -41,6 +51,9 @@ export async function POST(request: NextRequest) {
         revalidatePath("/" + body.entry.locale + path);
         revalidateTag("sitemap"); // Revalidate sitemap after every blog, destination, or package update or creation
         console.log("Revalidated " + path);
+    } else if (body.model === "global") {
+        revalidateTag("global");
+        console.log("Revalidated all pages using global tag");
     } else {
         console.log("Not Revalidated any path");
     }

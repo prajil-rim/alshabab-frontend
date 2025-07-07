@@ -15,6 +15,9 @@ export async function fetchAPI(url: string, options: FetchAPIOptions) {
 
     const headers: RequestInit & { next?: NextFetchRequestConfig } = {
         method,
+        next: {
+            tags: ["global"],
+        },
         headers: {
             "Content-Type": "application/json",
             ...(authToken && { Authorization: `Bearer ${authToken}` }),

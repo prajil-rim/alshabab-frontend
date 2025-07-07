@@ -132,12 +132,14 @@ const Blog = ({
                         <ul className="flex gap-3 items-center">
                             {share_socials?.map((social) => (
                                 <li key={social.id}>
-                                    <StrapiImage
-                                        alt={social.label}
-                                        src={social.icon.url}
-                                        width={28}
-                                        height={28}
-                                    />
+                                    <Link href={social.href} target="_blank">
+                                        <StrapiImage
+                                            alt={social.label}
+                                            src={social.icon.url}
+                                            width={28}
+                                            height={28}
+                                        />
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
