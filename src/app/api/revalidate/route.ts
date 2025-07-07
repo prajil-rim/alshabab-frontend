@@ -1,16 +1,6 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
-// List all static paths that should revalidate if global (header/footer) is updated
-const GlobalDependentPaths = [
-    "/",
-    "/about-us",
-    "/contact-us",
-    "/blogs",
-    "/destinations",
-    "/packages",
-];
-
 const StaticModelMap = {
     "blog-page": "/blogs",
     "destination-listing-page": "/destinations",
