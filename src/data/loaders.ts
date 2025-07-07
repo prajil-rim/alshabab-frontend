@@ -47,7 +47,10 @@ export async function getGlobalSettings(locale: string) {
     const url = new URL(path, BASE_URL);
     url.search = globalSettingQuery;
     url.searchParams.append("locale", locale);
-    return fetchAPI(url.href, { method: "GET" });
+    return fetchAPI(url.href, {
+        method: "GET",
+        next: { tags: ["global"] },
+    });
 }
 
 export async function getContactUsPage(locale: string) {
@@ -157,7 +160,10 @@ export async function getTestimonials(locale: string) {
     const url = new URL(path, BASE_URL);
     url.search = testimonialQuery;
     url.searchParams.append("locale", locale);
-    return fetchAPI(url.href, { method: "GET" });
+    return fetchAPI(url.href, {
+        method: "GET",
+        next: { tags: ["testimonial"] },
+    });
 }
 
 export async function getBlog(slug: string, locale: string) {
@@ -173,5 +179,8 @@ export async function getPartners(locale: string) {
     const url = new URL(path, BASE_URL);
     url.search = partnerSectionQuery;
     url.searchParams.append("locale", locale);
-    return fetchAPI(url.href, { method: "GET" });
+    return fetchAPI(url.href, {
+        method: "GET",
+        next: { tags: ["partner-section"] },
+    });
 }

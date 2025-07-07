@@ -41,9 +41,13 @@ export async function POST(request: NextRequest) {
         revalidatePath("/" + body.entry.locale + path);
         revalidateTag("sitemap"); // Revalidate sitemap after every blog, destination, or package update or creation
         console.log("Revalidated " + path);
-    } else if (body.model === "global") {
-        revalidateTag("global");
-        console.log("Revalidated all pages using global tag");
+    } else if (
+        body.model === "global" ||
+        body.model === "testimonial" ||
+        body.model === "partner-section"
+    ) {
+        revalidateTag(body.model);
+        console.log(`Revalidated pages using ${body.model} tag`);
     } else {
         console.log("Not Revalidated any path");
     }
