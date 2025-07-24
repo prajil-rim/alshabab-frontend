@@ -71,29 +71,37 @@ const FooterCTA = ({
                                 : "justify-start"
                         )}
                     >
-                        <Link
-                            href={cta_call?.href || ""}
-                            target={cta_call.isExternal ? "_blank" : "_self"}
-                        >
-                            <Button
-                                className="bg-transparent rounded-full cursor-pointer hover:text-black hover:bg-white"
-                                variant={"outline"}
+                        {cta_call && (
+                            <Link
+                                href={cta_call?.href || ""}
+                                target={
+                                    cta_call.isExternal ? "_blank" : "_self"
+                                }
                             >
-                                <div className="bg-primary rounded-full size-5 shrink-0 flex justify-center items-center">
-                                    <Call />
-                                </div>
-                                {cta_call?.text}
-                            </Button>
-                        </Link>
-                        <Link
-                            href={cta_chat?.href || ""}
-                            target={cta_chat?.isExternal ? "_blank" : "_self"}
-                        >
-                            <Button className="bg-[#FFE9EC] rounded-full text-black hover:text-white cursor-pointer">
-                                <Whatsapp />
-                                {cta_chat?.text}
-                            </Button>
-                        </Link>
+                                <Button
+                                    className="bg-transparent rounded-full cursor-pointer hover:text-black hover:bg-white"
+                                    variant={"outline"}
+                                >
+                                    <div className="bg-primary rounded-full size-5 shrink-0 flex justify-center items-center">
+                                        <Call />
+                                    </div>
+                                    {cta_call?.text}
+                                </Button>
+                            </Link>
+                        )}
+                        {cta_chat && (
+                            <Link
+                                href={cta_chat?.href || ""}
+                                target={
+                                    cta_chat?.isExternal ? "_blank" : "_self"
+                                }
+                            >
+                                <Button className="bg-[#FFE9EC] rounded-full text-black hover:text-white cursor-pointer">
+                                    <Whatsapp />
+                                    {cta_chat?.text}
+                                </Button>
+                            </Link>
+                        )}
                     </div>
                 </div>
                 <div className="size-full">
