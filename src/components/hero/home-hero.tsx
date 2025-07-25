@@ -15,7 +15,7 @@ import {
 import { HomeHeroProps } from "@/types";
 import { CirclePause, CirclePlay, Volume2, VolumeOff } from "lucide-react";
 import MapPin from "../icons/map-pin";
-import { cn } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
 
 interface BreadcrumbProps {
     hero: HomeHeroProps[];
@@ -109,16 +109,25 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                                     style={
                                         data.background?.type === "image"
                                             ? {
-                                                  backgroundImage: `url(${data.background?.background?.url})`,
+                                                  backgroundImage: `url(${getImage(
+                                                      {
+                                                          local: process.env
+                                                              .PLACEHOLDER_IMAGE!,
+                                                          prod: data.background
+                                                              ?.background?.url,
+                                                      }
+                                                  )})`,
                                               }
                                             : {}
                                     }
                                 >
                                     {data.background?.type === "video" && (
                                         <video
-                                            src={
-                                                data.background?.background?.url
-                                            }
+                                            src={getImage({
+                                                local: "/video/dummy.mp4",
+                                                prod: data.background
+                                                    ?.background?.url,
+                                            })}
                                             ref={(el) => {
                                                 videoRefs.current[index] = el;
                                             }}

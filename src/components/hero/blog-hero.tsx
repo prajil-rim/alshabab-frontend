@@ -12,6 +12,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { format } from "date-fns";
 import { Fragment } from "react";
+import { getImage } from "@/lib/utils";
 
 interface BlogHeroProps {
     id: number;
@@ -42,7 +43,10 @@ const BlogHero = ({
         <div
             className="relative flex flex-col justify-end items-center h-screen bg-no-repeat bg-[0%_60%] bg-cover after:inset-0 after:bg-black/50 after:absolute pb-10"
             style={{
-                backgroundImage: `url(${cover.url})`,
+                backgroundImage: `url(${getImage({
+                    local: process.env.PLACEHOLDER_IMAGE!,
+                    prod: cover.url,
+                })})`,
             }}
         >
             <div className="space-y-4 flex flex-col justify-center items-center text-white relative z-10 flex-1">

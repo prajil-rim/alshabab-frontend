@@ -2,6 +2,7 @@ import { StrapiImage } from "@/components/common/strapi-image";
 import ArrowRightUp from "@/components/icons/arrow-right-up";
 import { NumberTicker } from "@/components/magicui/number-ticker";
 import { Button } from "@/components/ui/button";
+import { getImage } from "@/lib/utils";
 import { LinkProps, MediaProps } from "@/types";
 import Link from "next/link";
 
@@ -34,7 +35,10 @@ const AboutSection1 = ({
             <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-3">
                 <div className="row-span-2 rounded-xl overflow-hidden hidden lg:block">
                     <StrapiImage
-                        src={image_1?.url || process.env.PLACEHOLDER_IMAGE!}
+                        src={getImage({
+                            local: process.env.PLACEHOLDER_IMAGE!,
+                            prod: image_1?.url,
+                        })}
                         alt={
                             image_1?.alternativeText ||
                             "Alternative Text not provided"
@@ -46,7 +50,10 @@ const AboutSection1 = ({
                 </div>
                 <div className="rounded-xl overflow-hidden order-1 lg:order-none">
                     <StrapiImage
-                        src={image_2?.url || process.env.PLACEHOLDER_IMAGE!}
+                        src={getImage({
+                            local: process.env.PLACEHOLDER_IMAGE!,
+                            prod: image_2?.url,
+                        })}
                         alt={
                             image_2?.alternativeText ||
                             "Alternative Text not provided"

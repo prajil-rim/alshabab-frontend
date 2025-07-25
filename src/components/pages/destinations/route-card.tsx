@@ -1,4 +1,5 @@
 import { StrapiImage } from "@/components/common/strapi-image";
+import { getImage } from "@/lib/utils";
 import { RouteProps } from "@/types";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
@@ -13,7 +14,10 @@ const RouteCard = ({
         <div className="rounded-xl border-2 border-primary lg:border-[#666666]/20 px-3 py-8 font-manrope text-center relative space-y-3.5 group hover:border-primary hover:shadow-xl transition-colors duration-200 active:border-primary">
             <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-white p-1">
                 <StrapiImage
-                    src={icon?.image?.url || process.env.PLACEHOLDER_IMAGE!}
+                    src={getImage({
+                        local: process.env.PLACEHOLDER_IMAGE!,
+                        prod: icon?.image?.url,
+                    })}
                     alt={icon?.image?.alternativeText || ""}
                     className="group-hover:filter-[sepia(1)_hue-rotate(-50deg)_saturate(3.6)] filter-[sepia(1)_hue-rotate(-50deg)_saturate(3.6)] lg:[filter:none] transition-all duration-200"
                     width={40}

@@ -6,6 +6,7 @@ import Mail from "../icons/mail";
 import MapPin from "../icons/map-pin";
 import Call from "../icons/call";
 import { useTranslations } from "next-intl";
+import { getImage } from "@/lib/utils";
 
 interface FooterProps {
     description: string;
@@ -59,9 +60,10 @@ const Footer = ({
                 <div className="grid grid-cols-1 lg:grid-cols-5 py-10 space-y-8 lg:space-y-0">
                     <div className="lg:col-span-2 space-y-4 text-center lg:text-left">
                         <StrapiImage
-                            src={
-                                logo.image.url || process.env.PLACEHOLDER_IMAGE!
-                            }
+                            src={getImage({
+                                local: process.env.PLACEHOLDER_IMAGE!,
+                                prod: logo.image.url,
+                            })}
                             alt={logo.image.alternativeText || logo.logoText}
                             width={200}
                             height={150}
@@ -124,11 +126,11 @@ const Footer = ({
                                                         .alternativeText ||
                                                     "Alternative text not provided"
                                                 }
-                                                src={
-                                                    social.icon?.url ||
-                                                    process.env
-                                                        .PLACEHOLDER_IMAGE!
-                                                }
+                                                src={getImage({
+                                                    local: process.env
+                                                        .PLACEHOLDER_IMAGE!,
+                                                    prod: social.icon?.url,
+                                                })}
                                                 width={25}
                                                 height={25}
                                             />

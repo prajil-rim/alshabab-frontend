@@ -1,5 +1,6 @@
 import { StrapiImage } from "@/components/common/strapi-image";
 import Leaf from "@/components/icons/leaf";
+import { getImage } from "@/lib/utils";
 import { MediaProps } from "@/types";
 
 interface WhyUsSectionProps {
@@ -51,7 +52,10 @@ const WhyUsSection = ({
                 )}
                 <div className="rounded-xl aspect-[1/1.3] min-[1150px]:aspect-auto row-span-2 min-[1150px]:row-span-3 overflow-hidden">
                     <video
-                        src={video.url}
+                        src={getImage({
+                            local: "/video/dummy.mp4",
+                            prod: video.url,
+                        })}
                         className="size-full object-center object-cover pointer-events-none"
                         autoPlay
                         muted
@@ -95,7 +99,10 @@ function Card({
     return (
         <div className="rounded-xl space-y-2 bg-[#F5F1E3]/60 p-6">
             <StrapiImage
-                src={icon?.url || process.env.PLACEHOLDER_IMAGE!}
+                src={getImage({
+                    local: process.env.PLACEHOLDER_IMAGE!,
+                    prod: icon?.url,
+                })}
                 alt={icon?.alternativeText || "Alternative Text not provided"}
                 width={40}
                 height={40}
@@ -110,7 +117,10 @@ function ImageOnlyCard({ url, alt }: { url: string; alt: string }) {
     return (
         <div className="rounded-xl overflow-hidden aspect-video hidden min-[1150px]:block">
             <StrapiImage
-                src={url || process.env.PLACEHOLDER_IMAGE!}
+                src={getImage({
+                    local: process.env.PLACEHOLDER_IMAGE!,
+                    prod: url,
+                })}
                 alt={alt || "Alternative Text not provided"}
                 width={200}
                 height={150}

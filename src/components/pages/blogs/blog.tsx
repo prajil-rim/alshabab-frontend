@@ -10,6 +10,7 @@ import SectionLinks from "./section-links";
 import BlogContent from "./blog-content";
 import BlogCard from "./blog-card";
 import { useTranslations } from "next-intl";
+import { getImage } from "@/lib/utils";
 
 function getSections(blog: BlocksContent) {
     const sections: {
@@ -135,7 +136,11 @@ const Blog = ({
                                     <Link href={social.href} target="_blank">
                                         <StrapiImage
                                             alt={social.label}
-                                            src={social.icon.url}
+                                            src={getImage({
+                                                local: process.env
+                                                    .PLACEHOLDER_IMAGE!,
+                                                prod: social.icon.url,
+                                            })}
                                             width={28}
                                             height={28}
                                         />
@@ -152,7 +157,10 @@ const Blog = ({
                         <div className="rounded-lg bg-[#F5F5F5] p-5 space-y-5 max-w-sm">
                             <div className="flex items-center gap-2">
                                 <StrapiImage
-                                    src={image.image.url}
+                                    src={getImage({
+                                        local: process.env.PLACEHOLDER_IMAGE!,
+                                        prod: image.image.url,
+                                    })}
                                     alt={author}
                                     className="rounded-full shrink-0"
                                     width={44}
@@ -184,7 +192,11 @@ const Blog = ({
                                             className="flex items-center gap-2"
                                         >
                                             <StrapiImage
-                                                src={social.icon.url}
+                                                src={getImage({
+                                                    local: process.env
+                                                        .PLACEHOLDER_IMAGE!,
+                                                    prod: social.icon.url,
+                                                })}
                                                 alt={social.label}
                                                 width={28}
                                                 height={28}

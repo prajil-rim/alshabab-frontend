@@ -9,6 +9,7 @@ import {
 } from "../ui/carousel";
 import SlideIndicator from "./slide-indicator";
 import { CardProps } from "@/types";
+import { getImage } from "@/lib/utils";
 
 const AttractionsCarousel = ({ cards }: { cards: CardProps[] }) => {
     const [api, setApi] = useState<CarouselApi>();
@@ -41,7 +42,11 @@ const AttractionsCarousel = ({ cards }: { cards: CardProps[] }) => {
                                 <div
                                     className="size-full overflow-hidden rounded-xl flex items-end bg-cover"
                                     style={{
-                                        backgroundImage: `url(${card.image?.url})`,
+                                        backgroundImage: `url(${getImage({
+                                            local: process.env
+                                                .PLACEHOLDER_IMAGE!,
+                                            prod: card.image?.url,
+                                        })})`,
                                     }}
                                 >
                                     <div className="bg-black overflow-hidden">

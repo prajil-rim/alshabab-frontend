@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
 import { CardProps } from "@/types";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -17,7 +17,10 @@ const CardWithAnimatedParagraph = ({ card }: { card: CardProps }) => {
                 "group w-full aspect-square lg:aspect-auto flex-1 flex justify-center items-end rounded-xl hover:flex-1/12 transition-all duration-500 bg-center bg-cover overflow-hidden relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/80 after:to-transparent"
             )}
             style={{
-                backgroundImage: `url(${card.image?.url})`,
+                backgroundImage: `url(${getImage({
+                    local: process.env.PLACEHOLDER_IMAGE!,
+                    prod: card.image?.url,
+                })})`,
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}

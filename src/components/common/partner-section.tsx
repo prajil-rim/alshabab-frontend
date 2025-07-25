@@ -2,6 +2,7 @@ import { LogoProps } from "@/types";
 import { StrapiImage } from "./strapi-image";
 import Leaf from "../icons/leaf";
 import { Marquee } from "../magicui/marquee";
+import { getImage } from "@/lib/utils";
 
 interface PartnerSectionProps {
     title: string;
@@ -34,10 +35,10 @@ const PartnerSection = ({
             <Marquee pauseOnHover className="[--duration:20s]">
                 {partner_logo.map((partner) => (
                     <StrapiImage
-                        src={
-                            partner.image?.url ||
-                            "http://localhost:3000/images/partner-logo.png"
-                        }
+                        src={getImage({
+                            local: process.env.PLACEHOLDER_IMAGE!,
+                            prod: partner.image?.url,
+                        })}
                         alt={partner.image?.alternativeText || partner.logoText}
                         key={partner.id}
                         width={100}

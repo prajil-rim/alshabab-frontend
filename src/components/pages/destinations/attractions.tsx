@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion as m } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
 import { CardProps } from "@/types";
 
 const CARDS_PER_ROW = 4;
@@ -48,7 +48,10 @@ const Attractions = ({ cards }: { cards: CardProps[] }) => {
                                         : "justify-start"
                                 )}
                                 style={{
-                                    backgroundImage: `url(${data.image?.url})`,
+                                    backgroundImage: `url(${getImage({
+                                        local: process.env.PLACEHOLDER_IMAGE!,
+                                        prod: data.image?.url,
+                                    })})`,
                                 }}
                             >
                                 <m.div

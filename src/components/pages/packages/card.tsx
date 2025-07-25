@@ -1,3 +1,4 @@
+import { getImage } from "@/lib/utils";
 import { CardProps } from "@/types";
 import { Star } from "lucide-react";
 import Image from "next/image";
@@ -7,7 +8,10 @@ const Card = ({ title, description, image, label }: Readonly<CardProps>) => {
         <div className="group relative aspect-[1/1.35] overflow-hidden rounded-xl scale-y-100 hover:scale-y-105 transition-all duration-500 origin-bottom">
             <div className="size-full">
                 <Image
-                    src={image?.url}
+                    src={getImage({
+                        local: process.env.PLACEHOLDER_IMAGE!,
+                        prod: image?.url,
+                    })}
                     alt={
                         image?.alternativeText ||
                         "Alternative Text not provided"

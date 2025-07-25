@@ -11,7 +11,7 @@ import SlideIndicator from "./slide-indicator";
 import { LogoProps } from "@/types";
 import { StrapiImage } from "../common/strapi-image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
 
 const AwardsCarousel = ({
     awards,
@@ -57,10 +57,10 @@ const AwardsCarousel = ({
                                 key={award.id}
                             >
                                 <StrapiImage
-                                    src={
-                                        award.logo?.image?.url ||
-                                        process.env.PLACEHOLDER_IMAGE!
-                                    }
+                                    src={getImage({
+                                        local: process.env.PLACEHOLDER_IMAGE!,
+                                        prod: award.logo?.image?.url,
+                                    })}
                                     alt={
                                         award.logo.image.alternativeText ||
                                         award.logo.logoText

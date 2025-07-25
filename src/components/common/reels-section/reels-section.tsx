@@ -17,6 +17,7 @@ import Link from "next/link";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import SlideIndicator from "@/components/carousels/slide-indicator";
 import { dir } from "i18next";
+import { getImage } from "@/lib/utils";
 
 export function ReelsSection({
     title,
@@ -86,7 +87,10 @@ export function ReelsSection({
             dir="ltr"
             className="bg-cover bg-center relative after:absolute after:inset-0 after:bg-black/70"
             style={{
-                backgroundImage: `url(${background?.url})`,
+                backgroundImage: `url(${getImage({
+                    local: process.env.PLACEHOLDER_IMAGE!,
+                    prod: background?.url,
+                })})`,
             }}
         >
             <div className="relative z-10 max-w-7xl mx-auto py-12 lg:py-32 text-white lg:px-6 2xl:px-0">

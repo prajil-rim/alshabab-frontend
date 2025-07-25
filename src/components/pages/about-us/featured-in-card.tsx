@@ -1,4 +1,5 @@
 import { StrapiImage } from "@/components/common/strapi-image";
+import { getImage } from "@/lib/utils";
 import { LinkProps, LogoProps } from "@/types";
 import Link from "next/link";
 import Markdown from "react-markdown";
@@ -22,7 +23,10 @@ const FeaturedInCard = ({
             key={data.id}
         >
             <StrapiImage
-                src={data.logo?.image?.url || process.env.PLACEHOLDER_IMAGE!}
+                src={getImage({
+                    local: process.env.PLACEHOLDER_IMAGE!,
+                    prod: data.logo?.image?.url,
+                })}
                 alt={data.logo.image.alternativeText || data.logo.logoText}
                 width={100}
                 height={100}

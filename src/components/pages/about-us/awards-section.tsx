@@ -1,5 +1,6 @@
 import AwardsCarousel from "@/components/carousels/awards-carousel";
 import { StrapiImage } from "@/components/common/strapi-image";
+import { getImage } from "@/lib/utils";
 import { LogoProps } from "@/types";
 import Link from "next/link";
 
@@ -39,10 +40,10 @@ const AwardsSection = ({
                         key={award.id}
                     >
                         <StrapiImage
-                            src={
-                                award.logo?.image?.url ||
-                                process.env.PLACEHOLDER_IMAGE!
-                            }
+                            src={getImage({
+                                local: process.env.PLACEHOLDER_IMAGE!,
+                                prod: award.logo?.image?.url,
+                            })}
                             alt={
                                 award.logo.image.alternativeText ||
                                 award.logo.logoText

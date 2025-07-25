@@ -4,7 +4,7 @@ import Call from "../icons/call";
 import Whatsapp from "../icons/whatsapp";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
 
 const FooterCTA = ({
     title,
@@ -24,7 +24,10 @@ const FooterCTA = ({
             style={
                 text_align === "center"
                     ? {
-                          backgroundImage: `url(${background?.url})`,
+                          backgroundImage: `url(${getImage({
+                              local: process.env.PLACEHOLDER_IMAGE!,
+                              prod: background?.url,
+                          })})`,
                       }
                     : {}
             }
@@ -93,7 +96,7 @@ const FooterCTA = ({
                             <Link
                                 href={cta_chat?.href || ""}
                                 target={
-                                    cta_chat?.isExternal ? "_blank" : "_self"
+                                    cta_chat?.isExternal ? "_blank" : "_self" // 7650
                                 }
                             >
                                 <Button className="bg-[#FFE9EC] rounded-full text-black hover:text-white cursor-pointer">
@@ -111,7 +114,10 @@ const FooterCTA = ({
                                 image.alternativeText ||
                                 "Alternative text not provided"
                             }
-                            src={image?.url || process.env.PLACEHOLDER_IMAGE!}
+                            src={getImage({
+                                local: process.env.PLACEHOLDER_IMAGE!,
+                                prod: image?.url,
+                            })}
                             width={760}
                             height={500}
                         />

@@ -1,5 +1,6 @@
 import ArrowRightUp from "@/components/icons/arrow-right-up";
 import Tags from "@/components/icons/tags";
+import { getImage } from "@/lib/utils";
 import { DealsProps } from "@/types";
 import { Fragment } from "react";
 
@@ -8,7 +9,10 @@ const DealCard = ({ package_ }: { package_: DealsProps }) => {
         <div
             className="h-96 lg:h-80 rounded-xl bg-cover bg-center relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/80 after:to-transparent overflow-hidden"
             style={{
-                backgroundImage: `url(${package_.hero?.background?.url})`,
+                backgroundImage: `url(${getImage({
+                    local: process.env.PLACEHOLDER_IMAGE!,
+                    prod: package_.hero?.background?.url,
+                })})`,
             }}
         >
             <div className="flex flex-col justify-between text-white relative z-10 h-full">

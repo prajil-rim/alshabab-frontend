@@ -39,6 +39,16 @@ export async function POST(request: NextRequest) {
             DynamicModelMap[body.model as keyof typeof DynamicModelMap] +
             body.entry.slug;
         revalidatePath("/" + body.entry.locale + path);
+
+        // Revalidate tags
+        if (path.includes("destinations")) {
+            revalidateTag("destinationList");
+        } else if (path.includes("packages")) {
+            revalidateTag("packageList");
+        } else if (path.includes("blog")) {
+            revalidateTag("blogList");
+        }
+
         revalidateTag("sitemap"); // Revalidate sitemap after every blog, destination, or package update or creation
         console.log("Revalidated " + path);
     } else if (

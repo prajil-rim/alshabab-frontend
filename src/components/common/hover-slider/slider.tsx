@@ -7,6 +7,7 @@ import ArrowRightUp from "@/components/icons/arrow-right-up";
 import Link from "next/link";
 import { SlideProps } from "@/types";
 import { useTranslations } from "next-intl";
+import { getImage } from "@/lib/utils";
 
 export default function CardSlider({ slides }: { slides: SlideProps[] }) {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -41,7 +42,10 @@ export default function CardSlider({ slides }: { slides: SlideProps[] }) {
                         <div
                             className="h-full rounded-xl bg-cover bg-center text-[#F5F5F5] relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/80 after:to-transparent overflow-hidden flex justify-center items-end"
                             style={{
-                                backgroundImage: `url(${slide.image.url})`,
+                                backgroundImage: `url(${getImage({
+                                    local: process.env.PLACEHOLDER_IMAGE!,
+                                    prod: slide.image.url,
+                                })})`,
                             }}
                         >
                             <div className="relative z-10 space-y-3 p-4 flex flex-col justify-center items-center">

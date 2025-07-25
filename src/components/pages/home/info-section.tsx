@@ -2,6 +2,7 @@ import { StrapiImage } from "@/components/common/strapi-image";
 import ArrowRightUp from "@/components/icons/arrow-right-up";
 import Leaf from "@/components/icons/leaf";
 import { Button } from "@/components/ui/button";
+import { getImage } from "@/lib/utils";
 import { LinkProps, MediaProps } from "@/types";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -38,7 +39,10 @@ const InfoSection = ({
                             largeImage.alternativeText ||
                             "Alternative Text not provided"
                         }
-                        src={largeImage.url || process.env.PLACEHOLDER_IMAGE!}
+                        src={getImage({
+                            local: process.env.PLACEHOLDER_IMAGE!,
+                            prod: largeImage.url,
+                        })}
                         width={430}
                         height={300}
                         className="rounded-lg h-80 object-cover"
@@ -48,7 +52,10 @@ const InfoSection = ({
                             smallImage.alternativeText ||
                             "Alternative Text not provided"
                         }
-                        src={smallImage.url || process.env.PLACEHOLDER_IMAGE!}
+                        src={getImage({
+                            local: process.env.PLACEHOLDER_IMAGE!,
+                            prod: smallImage.url,
+                        })}
                         className="absolute -bottom-1/4 rounded-lg border-2 border-white h-52 -left-[12%] rtl:-right-[12%] md:-left-1/5 rtl:md:-right-1/5 object-cover"
                         width={250}
                         height={200}

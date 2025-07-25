@@ -1,6 +1,7 @@
 import Quote from "@/components/icons/quote";
 import { StrapiImage } from "../strapi-image";
 import { TestimonialProps } from "@/types";
+import { getImage } from "@/lib/utils";
 
 const TestimonialCard = ({
     image,
@@ -14,7 +15,10 @@ const TestimonialCard = ({
             <div className="flex items-center gap-2 mt-auto">
                 <StrapiImage
                     alt={image.alternativeText || ""}
-                    src={image.url || process.env.PLACEHOLDER_IMAGE!}
+                    src={getImage({
+                        local: process.env.PLACEHOLDER_IMAGE!,
+                        prod: image.url,
+                    })}
                     width={40}
                     height={40}
                     className="rounded-full"

@@ -1,4 +1,5 @@
 import { StrapiImage } from "@/components/common/strapi-image";
+import { getImage } from "@/lib/utils";
 import { GuideProps } from "@/types";
 import { Globe, Star } from "lucide-react";
 import Link from "next/link";
@@ -8,7 +9,10 @@ const GuideCard = ({ guide }: { guide: GuideProps }) => {
         <div
             className="rounded-xl bg-cover bg-center aspect-[1/1.3] lg:aspect-auto lg:h-96 relative overflow-hidden group"
             style={{
-                backgroundImage: `url(${guide.image?.url})`,
+                backgroundImage: `url(${getImage({
+                    local: process.env.PLACEHOLDER_IMAGE!,
+                    prod: guide.image?.url,
+                })})`,
             }}
             key={guide.id}
         >
@@ -42,10 +46,11 @@ const GuideCard = ({ guide }: { guide: GuideProps }) => {
                                     className="shrink-0"
                                 >
                                     <StrapiImage
-                                        src={
-                                            social.icon?.url ||
-                                            process.env.PLACEHOLDER_IMAGE!
-                                        }
+                                        src={getImage({
+                                            local: process.env
+                                                .PLACEHOLDER_IMAGE!,
+                                            prod: social.icon?.url,
+                                        })}
                                         alt={""}
                                         width={20}
                                         height={20}

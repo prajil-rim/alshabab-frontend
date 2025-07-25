@@ -2,7 +2,7 @@ import { StrapiImage } from "@/components/common/strapi-image";
 import IndiaMappin from "@/components/icons/india-mappin";
 import JourneyLine from "@/components/icons/journey-line";
 import UAEMappin from "@/components/icons/uae-mappin";
-import { cn } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
 import { MediaProps } from "@/types";
 import Markdown from "react-markdown";
 
@@ -49,10 +49,10 @@ const OurJourneySection = ({
                                     {journey.year}
                                 </span>
                                 <StrapiImage
-                                    src={
-                                        journey.image?.url ||
-                                        process.env.PLACEHOLDER_IMAGE!
-                                    }
+                                    src={getImage({
+                                        local: process.env.PLACEHOLDER_IMAGE!,
+                                        prod: journey.image?.url,
+                                    })}
                                     alt={
                                         journey.image?.alternativeText ||
                                         "Alternative Text not provided"

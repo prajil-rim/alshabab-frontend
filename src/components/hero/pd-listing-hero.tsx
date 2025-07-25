@@ -22,7 +22,7 @@ import {
     CarouselPrevious,
 } from "../ui/carousel";
 import { DestinationListProps, PackageListProps, PDHeroProps } from "@/types";
-import { cn } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
 import ContactFormModal from "../modal/contact-form-modal";
 import ContactFormSmModal from "../modal/contact-form-sm-modal";
 
@@ -76,7 +76,10 @@ const PDListingHero = ({
                             <div
                                 className="relative flex flex-col justify-center items-center h-full bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute gap-32 pb-10 font px-3"
                                 style={{
-                                    backgroundImage: `url(${data.background?.url})`,
+                                    backgroundImage: `url(${getImage({
+                                        local: process.env.PLACEHOLDER_IMAGE!,
+                                        prod: data.background?.url,
+                                    })})`,
                                 }}
                             >
                                 <div className="space-y-5 flex flex-col justify-center items-center text-white relative z-10">

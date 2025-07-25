@@ -13,6 +13,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import ArrowRightUp from "../icons/arrow-right-up";
 import { useTranslations } from "next-intl";
+import { getImage } from "@/lib/utils";
 
 const HoverSliderCarousel = ({ slides }: { slides: SlideProps[] }) => {
     const [api, setApi] = useState<CarouselApi>();
@@ -44,7 +45,11 @@ const HoverSliderCarousel = ({ slides }: { slides: SlideProps[] }) => {
                                 <div
                                     className="h-full rounded-xl bg-cover bg-center text-[#F5F5F5] relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/80 after:to-transparent overflow-hidden flex justify-center items-end"
                                     style={{
-                                        backgroundImage: `url(${slide.image?.url})`,
+                                        backgroundImage: `url(${getImage({
+                                            local: process.env
+                                                .PLACEHOLDER_IMAGE!,
+                                            prod: slide.image?.url,
+                                        })})`,
                                     }}
                                 >
                                     <div className="relative z-10 space-y-3 p-4 flex flex-col justify-center items-center">

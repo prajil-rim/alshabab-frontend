@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
 import { TourProps } from "@/types";
 import { useState } from "react";
 
@@ -14,7 +14,10 @@ const TourCard = ({ tour, index }: { tour: TourProps; index: number }) => {
             )}
             key={tour.id}
             style={{
-                backgroundImage: `url(${tour.image.url})`,
+                backgroundImage: `url(${getImage({
+                    local: process.env.PLACEHOLDER_IMAGE!,
+                    prod: tour.image.url,
+                })})`,
             }}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}

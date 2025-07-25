@@ -13,6 +13,7 @@ import NavItems from "../layout/nav-items";
 import { DestinationListProps, LogoProps, PackageListProps } from "@/types";
 import { useState } from "react";
 import LocaleSwitcher from "../layout/language-switcher";
+import { getImage } from "@/lib/utils";
 
 interface SidenavProps {
     logo: LogoProps;
@@ -38,7 +39,10 @@ const Sidenav = ({
                 <SheetTitle className="sr-only">Menu</SheetTitle>
                 <div className="flex justify-between items-center px-3">
                     <StrapiImage
-                        src={logo.image.url || process.env.PLACEHOLDER_IMAGE!}
+                        src={getImage({
+                            local: process.env.PLACEHOLDER_IMAGE!,
+                            prod: logo.image?.url,
+                        })}
                         alt={logo.image.alternativeText || logo.logoText}
                         className="brightness-0"
                         width={70}

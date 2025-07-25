@@ -14,7 +14,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
 import { DestinationListProps, PackageListProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -148,7 +148,10 @@ function LocationToolTip({
                     className="relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/50 via-black/30 after:to-transparent after:z-10 after:rounded-lg"
                 >
                     <Image
-                        src={imageUrl || process.env.PLACEHOLDER_IMAGE!}
+                        src={getImage({
+                            local: process.env.PLACEHOLDER_IMAGE!,
+                            prod: imageUrl,
+                        })}
                         alt={imageTitle}
                         className="w-48 aspect-[1/0.7] rounded-lg object-cover object-center"
                         width={100}

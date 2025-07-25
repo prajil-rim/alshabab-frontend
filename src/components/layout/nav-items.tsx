@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Destinations from "../dropdown/destinations";
-import Packages from "../dropdown/packages";
 import { DestinationListProps, PackageListProps } from "@/types";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -67,15 +65,32 @@ const NavItems = ({
                 </Link>
             </li>
             {!isMobile && (
-                <li
-                    className={activeStyle(
-                        "/destinations",
-                        "flex items-center gap-1 cursor-pointer"
-                    )}
+                <div
+                    onMouseEnter={() => setDOpen(true)}
+                    onMouseLeave={() => setDOpen(false)}
+                    className={activeStyle("/destinations", "relative group")}
                 >
-                    <Link href={"/destinations"}>{t("destinations")} </Link>
-                    <Destinations destinations={destinations || []} />
-                </li>
+                    {/* Link and Chevron */}
+                    <div className="flex items-center gap-1 cursor-pointer">
+                        <Link href="/destinations">{t("destinations")}</Link>
+                        <ChevronDown size={16} />
+                    </div>
+
+                    {/* Dropdown */}
+                    {dOpen && (
+                        <div className="absolute left-0 top-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
+                            {destinations?.map((destination) => (
+                                <Link
+                                    href={"/destinations/" + destination.slug}
+                                    key={destination.documentId}
+                                    className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
+                                >
+                                    {destination.destination}
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+                </div>
             )}
             {isMobile && (
                 <li className={activeStyle("/destinations")}>
@@ -121,15 +136,32 @@ const NavItems = ({
                 </li>
             )}
             {!isMobile && (
-                <li
-                    className={activeStyle(
-                        "/packages",
-                        "flex items-center gap-1 cursor-pointer"
-                    )}
+                <div
+                    onMouseEnter={() => setPOpen(true)}
+                    onMouseLeave={() => setPOpen(false)}
+                    className={activeStyle("/packages", "relative group")}
                 >
-                    <Link href={"/packages"}>{t("packages")} </Link>
-                    <Packages packages={packages || []} />
-                </li>
+                    {/* Link and Chevron */}
+                    <div className="flex items-center gap-1 cursor-pointer">
+                        <Link href="/packages">{t("packages")}</Link>
+                        <ChevronDown size={16} />
+                    </div>
+
+                    {/* Dropdown */}
+                    {pOpen && (
+                        <div className="absolute left-0 top-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
+                            {packages?.map((package_) => (
+                                <Link
+                                    href={"/packages/" + package_.slug}
+                                    key={package_.documentId}
+                                    className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
+                                >
+                                    {package_.package}
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+                </div>
             )}
             {isMobile && (
                 <li className={activeStyle("/packages")}>

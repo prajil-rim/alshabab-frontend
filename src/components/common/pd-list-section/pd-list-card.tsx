@@ -1,5 +1,6 @@
 import ArrowRightUp from "@/components/icons/arrow-right-up";
 import { Button } from "@/components/ui/button";
+import { getImage } from "@/lib/utils";
 import { CardProps } from "@/types";
 import Link from "next/link";
 
@@ -8,7 +9,10 @@ const PDListCard = ({ card }: { card: CardProps }) => {
         <div
             className="rounded-xl aspect-[1/1.5] bg-cover bg-center flex items-end relative after:absolute after:h-3/4 after:w-full after:bg-gradient-to-t after:from-black after:to-transparent overflow-hidden"
             style={{
-                backgroundImage: `url(${card.image?.url})`,
+                backgroundImage: `url(${getImage({
+                    local: process.env.PLACEHOLDER_IMAGE!,
+                    prod: card.image?.url,
+                })})`,
             }}
             key={card.id}
         >

@@ -1,5 +1,5 @@
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { cn } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
 import {
     Ellipsis,
     FileMusic,
@@ -59,7 +59,10 @@ const Reel = ({
                     ref={(el) => {
                         if (el) videoRefs.current[index] = el;
                     }}
-                    src={url}
+                    src={getImage({
+                        local: "/video/dummy.mp4",
+                        prod: url,
+                    })}
                     className="w-full pointer-events-none"
                     muted
                     loop

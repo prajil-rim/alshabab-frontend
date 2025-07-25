@@ -1,4 +1,5 @@
 import ArrowRightUp from "@/components/icons/arrow-right-up";
+import { getImage } from "@/lib/utils";
 import { BlogCardProps } from "@/types";
 import { format } from "date-fns";
 
@@ -11,7 +12,10 @@ const BlogCard = ({
             <div
                 className="bg-cover bg-center aspect-video w-full rounded-xl"
                 style={{
-                    backgroundImage: `url("${hero.cover?.url}")`,
+                    backgroundImage: `url("${getImage({
+                        local: process.env.PLACEHOLDER_IMAGE!,
+                        prod: hero.cover?.url,
+                    })}")`,
                 }}
             ></div>
             <h3 className="font-semibold text-xl overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">

@@ -18,6 +18,7 @@ import ArrowRightUp from "../icons/arrow-right-up";
 import Whatsapp from "../icons/whatsapp";
 import ContactFormModal from "../modal/contact-form-modal";
 import ContactFormSmModal from "../modal/contact-form-sm-modal";
+import { getImage } from "@/lib/utils";
 
 const ImageHero = ({
     title,
@@ -46,7 +47,10 @@ const ImageHero = ({
         <section
             className="relative flex flex-col justify-center items-center h-screen bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute pb-10"
             style={{
-                backgroundImage: `url(${background.url})`,
+                backgroundImage: `url(${getImage({
+                    local: process.env.PLACEHOLDER_IMAGE!,
+                    prod: background.url,
+                })})`,
                 ...style,
             }}
         >

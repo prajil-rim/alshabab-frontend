@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
 import { OfficesProps } from "@/types";
 import Image from "next/image";
 import { useState } from "react";
@@ -28,10 +28,10 @@ const LocationSection = ({ offices, title }: Readonly<OfficesProps>) => {
                             }}
                         >
                             <Image
-                                src={
-                                    office.icon?.url ||
-                                    process.env.PLACEHOLDER_IMAGE!
-                                }
+                                src={getImage({
+                                    local: process.env.PLACEHOLDER_IMAGE!,
+                                    prod: office.icon?.url,
+                                })}
                                 alt={office.icon?.alternativeText || ""}
                                 className="w-5 h-3.5"
                                 width={20}

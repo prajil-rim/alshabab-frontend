@@ -8,6 +8,7 @@ import ContactFormSmModal from "../modal/contact-form-sm-modal";
 import LocaleSwitcher from "./language-switcher";
 import { Button } from "../ui/button";
 import ArrowRightUp from "../icons/arrow-right-up";
+import { getImage } from "@/lib/utils";
 
 interface HeaderProps {
     cta: string;
@@ -30,7 +31,10 @@ export function Header({
         <header className="absolute z-50 w-full flex justify-between items-center p-4 max-w-7xl lg:px-6 2xl:px-4 left-1/2 -translate-x-1/2 font-manrope">
             <Link href={"/"}>
                 <StrapiImage
-                    src={logo.image?.url || process.env.PLACEHOLDER_IMAGE!}
+                    src={getImage({
+                        local: process.env.PLACEHOLDER_IMAGE!,
+                        prod: logo.image?.url,
+                    })}
                     alt={logo.image.alternativeText || logo.logoText}
                     width={70}
                     height={40}

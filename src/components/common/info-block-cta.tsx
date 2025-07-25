@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
 import { StrapiImage } from "./strapi-image";
 import { InfoBlockProps } from "@/types";
 import { Button } from "../ui/button";
@@ -30,7 +30,10 @@ const InfoBlockCta = ({
                             largeImage?.alternativeText ||
                             "Alternative Text not provided"
                         }
-                        src={largeImage?.url || process.env.PLACEHOLDER_IMAGE!}
+                        src={getImage({
+                            local: process.env.PLACEHOLDER_IMAGE!,
+                            prod: largeImage?.url,
+                        })}
                         width={430}
                         height={300}
                         className="rounded-lg h-60 lg:h-80 object-cover"
@@ -40,7 +43,10 @@ const InfoBlockCta = ({
                             smallImage?.alternativeText ||
                             "Alternative Text not provided"
                         }
-                        src={smallImage?.url || process.env.PLACEHOLDER_IMAGE!}
+                        src={getImage({
+                            local: process.env.PLACEHOLDER_IMAGE!,
+                            prod: smallImage?.url,
+                        })}
                         className={cn(
                             "absolute -bottom-1/4 rounded-lg border-2 border-white w-1/2 h-36 lg:h-52",
                             reversed ? "lg:-left-1/6 -left-1/6" : "-right-1/6"

@@ -19,6 +19,7 @@ import ArrowRightUp from "../icons/arrow-right-up";
 import Whatsapp from "../icons/whatsapp";
 import ContactFormModal from "../modal/contact-form-modal";
 import ContactFormSmModal from "../modal/contact-form-sm-modal";
+import { getImage } from "@/lib/utils";
 
 type VideoHeroProps = Pick<
     ImageHeroProps,
@@ -53,7 +54,10 @@ const VideoHero = ({
             style={
                 background.type === "image"
                     ? {
-                          backgroundImage: `url(${background.background.url})`,
+                          backgroundImage: `url(${getImage({
+                              local: process.env.PLACEHOLDER_IMAGE!,
+                              prod: background.background?.url,
+                          })})`,
                       }
                     : {}
             }

@@ -65,7 +65,10 @@ export async function getDestinationsList() {
     const path = "/api/destinations";
     const url = new URL(path, BASE_URL);
     url.search = maxPaginationQuery;
-    return fetchAPI(url.href, { method: "GET" });
+    return fetchAPI(url.href, {
+        method: "GET",
+        next: { tags: ["destinationList"] },
+    });
 }
 
 export async function getDestination(slug: string, locale: string) {
@@ -88,7 +91,10 @@ export async function getPackagesList() {
     const path = "/api/packages";
     const url = new URL(path, BASE_URL);
     url.search = packageListQuery;
-    return fetchAPI(url.href, { method: "GET" });
+    return fetchAPI(url.href, {
+        method: "GET",
+        next: { tags: ["destinationList"] },
+    });
 }
 
 export async function getPackage(slug: string, locale: string) {
@@ -152,7 +158,7 @@ export async function getLatestBlogs() {
     const path = "/api/blogs";
     const url = new URL(path, BASE_URL);
     url.search = blogListQuery;
-    return fetchAPI(url.href, { method: "GET" });
+    return fetchAPI(url.href, { method: "GET", next: { tags: ["blogList"] } });
 }
 
 export async function getTestimonials(locale: string) {

@@ -1,5 +1,6 @@
 import { StrapiImage } from "@/components/common/strapi-image";
 import ArrowRightUp from "@/components/icons/arrow-right-up";
+import { getImage } from "@/lib/utils";
 import { BlogCardProps } from "@/types";
 import { format } from "date-fns";
 import Link from "next/link";
@@ -9,7 +10,10 @@ const BlogCard = ({ blog_title, hero, blog_category, slug }: BlogCardProps) => {
         <Link href={`/blogs/${slug}`} className="space-y-3">
             <div className="relative">
                 <StrapiImage
-                    src={hero.cover?.url || process.env.PLACEHOLDER_IMAGE!}
+                    src={getImage({
+                        local: process.env.PLACEHOLDER_IMAGE!,
+                        prod: hero.cover?.url,
+                    })}
                     alt={
                         hero.cover?.alternativeText ||
                         "Alternative Text not provided"

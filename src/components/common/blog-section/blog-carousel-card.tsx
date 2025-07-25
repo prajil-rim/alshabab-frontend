@@ -1,4 +1,5 @@
 import ArrowRightUp from "@/components/icons/arrow-right-up";
+import { getImage } from "@/lib/utils";
 import { BlogCardProps } from "@/types";
 import { format } from "date-fns";
 import Link from "next/link";
@@ -20,7 +21,10 @@ const BlogCarouselCard = ({
                 <div
                     className="w-full aspect-video lg:h-96 rounded-xl bg-cover bg-center"
                     style={{
-                        backgroundImage: `url("${blog.hero?.cover?.url}")`,
+                        backgroundImage: `url("${getImage({
+                            local: process.env.PLACEHOLDER_IMAGE!,
+                            prod: blog.hero?.cover?.url,
+                        })}")`,
                     }}
                 ></div>
             </Link>
