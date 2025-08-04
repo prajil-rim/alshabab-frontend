@@ -60,9 +60,10 @@ const SearchForm = ({
                     required
                     onValueChange={(value) => {
                         setSelectedPackages(
-                            packages.filter(
-                                (package_) =>
-                                    package_.destination.documentId === value
+                            packages.filter((package_) =>
+                                package_.destination
+                                    ? package_.destination.documentId === value
+                                    : value
                             )
                         );
                     }}

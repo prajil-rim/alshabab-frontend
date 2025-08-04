@@ -15,6 +15,13 @@ const nextConfig: NextConfig = {
             },
         ],
     },
+    redirects: async () => [
+        {
+            source: "/author/:path*",
+            destination: "/", // or '/404'
+            permanent: false, // temporary so Google drops it
+        },
+    ],
 };
 
 const withNextIntl = createNextIntlPlugin();
