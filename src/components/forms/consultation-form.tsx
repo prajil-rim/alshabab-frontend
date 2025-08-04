@@ -188,10 +188,11 @@ const ConsultationForm = ({
                                     onValueChange={(value) => {
                                         field.onChange(value);
                                         setSelectedPackages(
-                                            packages.filter(
-                                                (package_) =>
-                                                    package_.destination
-                                                        .documentId === value
+                                            packages.filter((package_) =>
+                                                package_.destination
+                                                    ? package_.destination
+                                                          .documentId === value
+                                                    : value
                                             )
                                         );
                                     }}
