@@ -6,7 +6,13 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
-export function getImage({ local, prod }: { local?: string; prod?: string }) {
+export function getImage({
+    local,
+    prod,
+}: {
+    local?: string | null;
+    prod?: string;
+}) {
     const imgUrl = process.env.NODE_ENV === "development" ? local : prod;
 
     return imgUrl || (process.env.PLACEHOLDER_IMAGE as string);

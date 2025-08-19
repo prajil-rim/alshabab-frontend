@@ -21,6 +21,8 @@ import { Metadata } from "next";
 import { returnMetadata } from "@/lib/utils";
 import { routing } from "@/i18n/routing";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ImageZoom } from "@/components/ui/kibo-ui/image-zoom";
+import Image from "next/image";
 
 export async function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }));

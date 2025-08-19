@@ -9,7 +9,7 @@ const Card = ({ title, description, image, label }: Readonly<CardProps>) => {
             <div className="size-full">
                 <Image
                     src={getImage({
-                        local: process.env.PLACEHOLDER_IMAGE!,
+                        local: null,
                         prod: image?.url,
                     })}
                     alt={

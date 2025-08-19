@@ -33,7 +33,7 @@ const DealCard = ({ package_ }: { package_: DealsProps }) => {
                     <p className="font-manrope text-sm">{package_.summary}</p>
                     <div className="flex items-center justify-between font-manrope">
                         <span className="flex items-center lg:text-lg gap-2 font-bold lowercase">
-                            <Tags /> ₹ {package_.price}/{package_.price_per}
+                            <Tags /> AED {package_.price}/{package_.price_per}
                         </span>
                         <ArrowRightUp />
                     </div>

@@ -74,7 +74,9 @@ const InfoSection = ({
                 <div className="text-lg lg:text-xl font-manrope">
                     <Markdown>{heading_2}</Markdown>
                 </div>
-                <p className="font-manrope">{description}</p>
+                <div className="font-manrope">
+                    <Markdown>{description}</Markdown>
+                </div>
                 <div className="flex items-center gap-9 font-manrope py-3 lg:py-0">
                     <div className="flex flex-col">
                         <span className="font-bold text-3xl">
