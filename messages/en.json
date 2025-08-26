@@ -2,6 +2,7 @@
     "homePage": {
         "header": {
             "navItems": {
+                "home": "Home",
                 "aboutUs": "About Us",
                 "destinations": "Destinations",
                 "packages": "Packages",
