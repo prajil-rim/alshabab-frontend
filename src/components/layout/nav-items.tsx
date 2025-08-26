@@ -54,16 +54,6 @@ const NavItems = ({
                     : "flex-row"
             )}
         >
-            <li className={activeStyle("/")}>
-                <Link href={"/"} onClick={closeMenu}>
-                    {t("home")}
-                </Link>
-            </li>
-            <li className={activeStyle("/about-us")}>
-                <Link href={"/about-us"} onClick={closeMenu}>
-                    {t("aboutUs")}
-                </Link>
-            </li>
             {!isMobile && (
                 <div
                     onMouseEnter={() => setDOpen(true)}
@@ -207,6 +197,11 @@ const NavItems = ({
             <li className={activeStyle("/blogs")}>
                 <Link href={"/blogs"} onClick={closeMenu}>
                     {t("insights")}
+                </Link>
+            </li>
+            <li className={activeStyle("/about-us")}>
+                <Link href={"/about-us"} onClick={closeMenu}>
+                    {t("aboutUs")}
                 </Link>
             </li>
             <li className={activeStyle("/contact-us")}>

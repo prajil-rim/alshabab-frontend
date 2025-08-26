@@ -124,7 +124,7 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                                     {data.background?.type === "video" && (
                                         <video
                                             src={getImage({
-                                                local: "/video/dummy.mp4",
+                                                local: "/local/dummy.webm",
                                                 prod: data.background
                                                     ?.background?.url,
                                             })}
@@ -237,10 +237,11 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                                 <li
                                     key={data?.id}
                                     className={cn(
-                                        "hidden lg:block",
+                                        "hidden lg:block cursor-pointer",
                                         index === current - 1 &&
                                             "font-semibold border-b-2 border-primary"
                                     )}
+                                    onClick={() => api?.scrollTo(index)}
                                 >
                                     {data?.attraction}
                                 </li>

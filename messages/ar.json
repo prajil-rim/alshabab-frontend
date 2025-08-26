@@ -2,7 +2,6 @@
     "homePage": {
         "header": {
             "navItems": {
-                "home": "بيت",
                 "aboutUs": "معلومات عنا",
                 "destinations": "الوجهات",
                 "packages": "الحزم",

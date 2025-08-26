@@ -66,13 +66,14 @@ export default function CardSlider({ slides }: { slides: SlideProps[] }) {
                                     <p className="text-center text-sm font-manrope max-w-[21rem] overflow-hidden text-ellipsis [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]">
                                         {slide.description}
                                     </p>
-                                    <Link href={"/"}>
+                                    <Link href={slide.cta?.href || "/"}>
                                         <Button
                                             variant="outline"
                                             size={"sm"}
                                             className="bg-transparent rounded-full font-manrope text-xs cursor-pointer"
                                         >
-                                            {t("exploreMore")}{" "}
+                                            {slide.cta?.text ||
+                                                t("exploreMore")}{" "}
                                             <ArrowRightUp color="red" />
                                         </Button>
                                     </Link>

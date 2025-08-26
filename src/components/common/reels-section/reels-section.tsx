@@ -88,7 +88,7 @@ export function ReelsSection({
             className="bg-cover bg-center relative after:absolute after:inset-0 after:bg-black/70"
             style={{
                 backgroundImage: `url(${getImage({
-                    local: process.env.PLACEHOLDER_IMAGE!,
+                    local: "/local/g.jpg",
                     prod: background?.url,
                 })})`,
             }}
