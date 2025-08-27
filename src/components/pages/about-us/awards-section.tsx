@@ -34,7 +34,7 @@ const AwardsSection = ({
             <div className="grid-cols-4 gap-3 hidden lg:grid">
                 {awards.map((award) => (
                     <Link
-                        href={award.url}
+                        href={award?.url}
                         target="_blank"
                         className="aspect-square group rounded-xl border-2 border-[#BDBDBD80] flex flex-col justify-center items-center p-6 hover:border-primary hover:shadow-xl"
                         key={award.id}

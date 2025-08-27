@@ -56,7 +56,7 @@ const Footer = ({
     const t = useTranslations("footer");
     return (
         <footer className="bg-off-black text-primary-foreground font-manrope">
-            <div className="max-w-7xl mx-auto px-3 py-8 lg:px-6 2xl:px-0">
+            <div className="-mb-5 max-w-7xl mx-auto px-3 py-8 lg:px-6 2xl:px-0">
                 <div className="grid grid-cols-1 lg:grid-cols-5 py-10 space-y-8 lg:space-y-0">
                     <div className="lg:col-span-2 space-y-4 text-center lg:text-left">
                         <StrapiImage
@@ -200,7 +200,7 @@ const Footer = ({
                 </div>
             </div>
             <Image
-                src={"/images/logo/footer_banner.webp"}
+                src={"/images/logo/footer_banner_new.webp"}
                 alt={"footer"}
                 width={1500}
                 height={500}

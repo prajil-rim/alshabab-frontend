@@ -49,7 +49,7 @@ const ImageHero = ({
             style={{
                 backgroundImage: `url(${getImage({
                     local: process.env.PLACEHOLDER_IMAGE!,
-                    prod: background.url,
+                    prod: background?.url,
                 })})`,
                 ...style,
             }}

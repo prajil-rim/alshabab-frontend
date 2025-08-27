@@ -17,8 +17,8 @@ const FeaturedInCard = ({
 }) => {
     return (
         <Link
-            href={data.url.href}
-            target={data.url.isExternal ? "_blank" : "_self"}
+            href={data.url?.href}
+            target={data.url?.isExternal ? "_blank" : "_self"}
             className="h-full group rounded-xl border-2 border-primary lg:border-[#BDBDBD80] flex flex-col justify-center items-center p-2 lg:p-4 hover:border-primary hover:shadow-xl"
             key={data.id}
         >
@@ -37,7 +37,7 @@ const FeaturedInCard = ({
             </span>
             <div className="h-fit overflow-hidden">
                 <span className="font-manrope text-[#767676] font-medium group-hover:text-primary translate-y-5 block group-hover:translate-y-0 transition-transform duration-300">
-                    {data.url.text}
+                    {data.url?.text}
                 </span>
             </div>
         </Link>
