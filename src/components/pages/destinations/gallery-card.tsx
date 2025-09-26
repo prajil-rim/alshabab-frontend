@@ -8,21 +8,15 @@ import Image from "next/image";
 
 const GalleryCard = ({ label, image }: GalleryProps) => {
     return (
-        <div
-            className="rounded-xl bg-cover bg-center aspect-[1/1.1] flex items-end text-white font-manrope relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/50 after:to-transparent overflow-hidden"
-            style={{
-                backgroundImage: `url(${getImage({
-                    local: "/images/destination-form/alleppy.jpg",
-                    prod: image?.url,
-                })})`,
-            }}
-        >
+        <div className="rounded-xl bg-cover bg-center aspect-[1/1.1] flex items-end text-white font-manrope relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black/50 after:to-transparent overflow-hidden">
             <ImageZoom className="cursor-pointer z-20 size-full">
                 <Image
-                    alt="Placeholder image"
+                    alt="Gallery image"
                     fill
-                    src={image?.url}
-                    unoptimized
+                    src={getImage({
+                        local: "/images/destination-form/alleppy.jpg",
+                        prod: image?.url,
+                    })}
                     className="size-full cursor-pointer"
                 />
             </ImageZoom>

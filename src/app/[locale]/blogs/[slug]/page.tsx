@@ -1,5 +1,6 @@
 import BlogHero from "@/components/hero/blog-hero";
 import FooterCTA from "@/components/layout/footer-cta";
+import InternalLinks from "@/components/layout/internal-links";
 import Blog from "@/components/pages/blogs/blog";
 import { getBlog } from "@/data/loaders";
 import { routing } from "@/i18n/routing";
@@ -88,6 +89,7 @@ const BlogPage = async ({
                 recommendedBlogs={pageData.recommended_blogs}
             />
             <FooterCTA {...pageData.footer_cta_section} />
+            <InternalLinks internal_links={pageData.internal_links || []} />
         </main>
     );
 };

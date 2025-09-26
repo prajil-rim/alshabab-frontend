@@ -8,12 +8,15 @@ const StaticModelMap = {
     "about-us-page": "/about-us",
     "home-page": "/",
     "contact-us-page": "/contact-us",
+    "international-package-listing-page":
+        "/packages/international-tour-packages",
 };
 
 const DynamicModelMap = {
     blog: "/blogs/",
     destination: "/destinations/",
     package: "/packages/",
+    "parent-package": "/packages/international-tour-packages/",
 };
 
 export async function POST(request: NextRequest) {
@@ -34,10 +37,10 @@ export async function POST(request: NextRequest) {
         revalidatePath("/" + body.entry.locale + path);
         console.log("Revalidated " + path);
     } else if (Object.keys(DynamicModelMap).includes(body.model)) {
-        // Revalidate the specific blog path
+        // Revalidate the specific path
         const path =
             DynamicModelMap[body.model as keyof typeof DynamicModelMap] +
-            body.entry.slug;
+            (body.entry.slug ?? body.entry.package_slug);
         revalidatePath("/" + body.entry.locale + path);
 
         // Revalidate tags
@@ -45,6 +48,8 @@ export async function POST(request: NextRequest) {
             revalidateTag("destinationList");
         } else if (path.includes("packages")) {
             revalidateTag("packageList");
+        } else if (path.includes("international-tour-packages")) {
+            revalidateTag("parentPackageList");
         } else if (path.includes("blog")) {
             revalidateTag("blogList");
         }
@@ -54,7 +59,8 @@ export async function POST(request: NextRequest) {
     } else if (
         body.model === "global" ||
         body.model === "testimonial" ||
-        body.model === "partner-section"
+        body.model === "partner-section" ||
+        body.model === "package-category"
     ) {
         revalidateTag(body.model);
         console.log(`Revalidated pages using ${body.model} tag`);

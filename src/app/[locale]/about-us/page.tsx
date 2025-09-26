@@ -3,6 +3,7 @@ import PartnerSection from "@/components/common/partner-section";
 import Testimonials from "@/components/common/testimonials/testimonials";
 import ImageHero from "@/components/hero/image-hero";
 import FooterCTA from "@/components/layout/footer-cta";
+import InternalLinks from "@/components/layout/internal-links";
 import AboutSection1 from "@/components/pages/about-us/about-section-1";
 import AwardsSection from "@/components/pages/about-us/awards-section";
 import ExperiencesSection from "@/components/pages/about-us/experiences-section";
@@ -115,6 +116,7 @@ export default async function AboutUsPage({
             <Testimonials {...testimonials} />
             <MapSection {...pageData.map_section} />
             <FooterCTA {...pageData.footer_cta_section} />
+            <InternalLinks internal_links={pageData.internal_links || []} />
         </>
     );
 }

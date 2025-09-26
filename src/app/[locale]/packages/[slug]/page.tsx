@@ -4,6 +4,8 @@ import FormSection from "@/components/common/form-section";
 import Testimonials from "@/components/common/testimonials/testimonials";
 import ImageHero from "@/components/hero/image-hero";
 import FooterCTA from "@/components/layout/footer-cta";
+import InternalLinks from "@/components/layout/internal-links";
+import PackageDetailsSection from "@/components/pages/packages/package-details";
 import PackageIncludesSection from "@/components/pages/packages/package-includes-section";
 import TripDetailsSection from "@/components/pages/packages/trip-details-section";
 import {
@@ -23,11 +25,13 @@ export async function generateStaticParams() {
 
 let packageDataPromise: ReturnType<typeof getPackage> | null = null;
 let localeCache: string | null = null;
+let slugCache: string | null = null;
 
 function getPackageDataOnce(slug: string, locale: string) {
-    if (!packageDataPromise || localeCache !== locale) {
+    if (!packageDataPromise || localeCache !== locale || slugCache !== slug) {
         packageDataPromise = getPackage(slug, locale);
         localeCache = locale;
+        slugCache = slug;
     }
     return packageDataPromise;
 }
@@ -98,8 +102,21 @@ const PackagePage = async ({
                         text: pageData.package,
                     },
                 ]}
+                showPrice
+                showBadge
             />
             <FormSection {...pageData.form_section} packages={packages} />
+            {pageData.package_general_info && (
+                <PackageDetailsSection
+                    package_general_info={pageData.package_general_info}
+                    package_itinerary={pageData.package_itinerary}
+                    package_day_chart={pageData.package_day_chart}
+                    package_inc_and_exc={pageData.package_inc_and_exc}
+                    package_policies={pageData.package_policies}
+                    packages={packages}
+                    locale={locale}
+                />
+            )}
             <PackageIncludesSection {...pageData.package_includes_section} />
             <TripDetailsSection {...pageData.trip_details} />
             <div className="pt-10 lg:pt-20"></div>
@@ -111,6 +128,7 @@ const PackagePage = async ({
                 faqs={pageData?.faq_section?.faqs}
             />
             <FooterCTA {...pageData.footer_cta_section} />
+            <InternalLinks internal_links={pageData.internal_links || []} />
         </main>
     );
 };

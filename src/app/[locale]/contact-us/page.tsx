@@ -1,5 +1,6 @@
 import ImageHero from "@/components/hero/image-hero";
 import FooterCTA from "@/components/layout/footer-cta";
+import InternalLinks from "@/components/layout/internal-links";
 import FormSection from "@/components/pages/contact-us/form-section";
 import LocationSection from "@/components/pages/contact-us/location-section";
 import {
@@ -89,6 +90,7 @@ const ContactPage = async ({
             />
             <LocationSection {...data.offices_section} />
             <FooterCTA {...data.footer_cta_section} />
+            <InternalLinks internal_links={data.internal_links || []} />
         </>
     );
 };

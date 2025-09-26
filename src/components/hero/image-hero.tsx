@@ -19,6 +19,7 @@ import Whatsapp from "../icons/whatsapp";
 import ContactFormModal from "../modal/contact-form-modal";
 import ContactFormSmModal from "../modal/contact-form-sm-modal";
 import { getImage } from "@/lib/utils";
+import { Badge } from "../ui/badge";
 
 const ImageHero = ({
     title,
@@ -31,6 +32,8 @@ const ImageHero = ({
     destinations,
     packages,
     locale,
+    showPrice = false,
+    showBadge = false,
 }: Readonly<
     Pick<
         ImageHeroProps,
@@ -40,6 +43,8 @@ const ImageHero = ({
         destinations?: DestinationListProps[];
         packages?: PackageListProps[];
         cta_button?: string;
+        showPrice?: boolean;
+        showBadge?: boolean;
         locale: string;
     }
 >) => {
@@ -99,7 +104,42 @@ const ImageHero = ({
                         )}
                     </div>
                 )}
+                {showBadge && (
+                    <div className="flex gap-2 font-manrope">
+                        <Badge className="rounded-full bg-white text-black px-3 py-1">
+                            Family with kids
+                        </Badge>
+                        <Badge className="rounded-full bg-white text-black px-3 py-1">
+                            Family
+                        </Badge>
+                    </div>
+                )}
+
+                {showPrice && (
+                    <div className="lg:hidden relative font-manrope text-white max-w-7xl w-full">
+                        <div className="text-center lg:text-right flex flex-col gap-1">
+                            <span>Starting Price Per Adult</span>
+                            <span className="line-through font-semibold text-white/50">
+                                AED 659
+                            </span>
+                            <span className="text-lg font-bold">AED 559</span>
+                        </div>
+                    </div>
+                )}
             </div>
+            {showPrice && (
+                <div className="hidden lg:block relative font-manrope text-white max-w-7xl w-full">
+                    <div className="absolute bottom-10 right-10 text-right flex flex-col gap-1 z-10">
+                        <span className="text-lg font-medium">
+                            Starting Price Per Adult
+                        </span>
+                        <span className="line-through text-xl font-semibold">
+                            AED 659
+                        </span>
+                        <span className="text-2xl font-bold">AED 559</span>
+                    </div>
+                </div>
+            )}
             <Breadcrumb className="relative z-10">
                 <BreadcrumbList className="font-manrope text-white">
                     {breadcrumbs?.slice(0, -1).map(({ text, href }, i) => (

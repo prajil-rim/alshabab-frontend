@@ -21,6 +21,7 @@ import { Metadata } from "next";
 import { returnMetadata } from "@/lib/utils";
 import { routing } from "@/i18n/routing";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import InternalLinks from "@/components/layout/internal-links";
 
 export async function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }));
@@ -127,6 +128,7 @@ const DestinationPage = async ({
                 faqs={pageData?.faq_section?.faqs}
             />
             <FooterCTA {...pageData.footer_cta_section} />
+            <InternalLinks internal_links={pageData.internal_links || []} />
         </main>
     );
 };

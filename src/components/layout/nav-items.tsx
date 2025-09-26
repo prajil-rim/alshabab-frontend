@@ -140,6 +140,12 @@ const NavItems = ({
                     {/* Dropdown */}
                     {pOpen && (
                         <div className="absolute left-0 top-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
+                            <Link
+                                href={"/packages/international-tour-packages"}
+                                className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
+                            >
+                                International Tour Package
+                            </Link>
                             {packages?.map((package_) => (
                                 <Link
                                     href={"/packages/" + package_.slug}
@@ -180,6 +186,14 @@ const NavItems = ({
                                 }}
                                 className="overflow-hidden px-0 py-2 space-y-2"
                             >
+                                <Link
+                                    href={
+                                        "/packages/international-tour-packages"
+                                    }
+                                    onClick={closeMenu}
+                                >
+                                    <li>International Tour Package</li>
+                                </Link>
                                 {packages.map((package_) => (
                                     <Link
                                         href={"/packages/" + package_.slug}

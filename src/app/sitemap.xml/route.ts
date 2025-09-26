@@ -2,17 +2,23 @@ import {
     getDestinationsList,
     getLatestBlogs,
     getPackagesList,
+    getParentPackagesList,
 } from "@/data/loaders";
-import { BlogCardProps, DestinationListProps, PackageListProps } from "@/types";
+import {
+    BlogCardProps,
+    DestinationListProps,
+    PackageListProps,
+    ParentPackageListProps,
+} from "@/types";
 
 export const dynamic = "force-dynamic"; // Required for ISR with tags
 export const fetchCache = "force-cache"; // Enables caching with tags
 
 export async function GET() {
     const baseUrl =
-        process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com";
+        process.env.NEXT_PUBLIC_SITE_URL || "https://alshababtours.ae";
 
-    const { destinations, packages, blogs } = await loader();
+    const { destinations, packages, blogs, parentPackages } = await loader();
 
     const destinationUrls = destinations
         .map(
@@ -30,6 +36,19 @@ export async function GET() {
             (package_: PackageListProps) => `
     <url>
       <loc>${baseUrl}/packages/${package_.slug}</loc>
+      <lastmod>${package_.updatedAt || new Date()}</lastmod>
+    </url>
+  `
+        )
+        .join("");
+
+    const parentPackageUrls = parentPackages
+        .map(
+            (package_: ParentPackageListProps) => `
+    <url>
+      <loc>${baseUrl}/packages/international-tour-packages/${
+                package_.package_slug
+            }</loc>
       <lastmod>${package_.updatedAt || new Date()}</lastmod>
     </url>
   `
@@ -70,10 +89,14 @@ export async function GET() {
       <priority>0.9</priority>
     </url>
     <url>
+      <loc>${baseUrl}/packages/international-tour-packages</loc>
+      <priority>0.8</priority>
+    </url>
+    <url>
       <loc>${baseUrl}/blogs</loc>
       <priority>0.7</priority>
     </url>
-    ${destinationUrls + packageUrls + blogUrls}
+    ${destinationUrls + packageUrls + parentPackageUrls + blogUrls}
   </urlset>`;
 
     return new Response(sitemap, {
@@ -86,15 +109,17 @@ export async function GET() {
 }
 
 async function loader() {
-    const [destinations, packages, blogs] = await Promise.all([
+    const [destinations, packages, blogs, parentPackages] = await Promise.all([
         getDestinationsList(),
         getPackagesList(),
         getLatestBlogs(),
+        getParentPackagesList(),
     ]);
 
     return {
         destinations: destinations.data,
         packages: packages.data,
         blogs: blogs.data,
+        parentPackages: parentPackages.data,
     };
 }

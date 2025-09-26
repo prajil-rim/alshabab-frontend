@@ -8,12 +8,15 @@ import {
     contactUsPageQuery,
     destinationListingPageQuery,
     destinationQuery,
+    filterPackageResultsQuery,
     globalSettingQuery,
     homePageQuery,
     maxPaginationQuery,
     packageListingPageQuery,
     packageListQuery,
     packageQuery,
+    parentPackageListQuery,
+    parentPackageQuery,
     partnerSectionQuery,
     testimonialQuery,
 } from "./queries";
@@ -22,6 +25,7 @@ import {
     consultationSchema,
     contactUsSchema,
     packageConsultationSchema,
+    packageFormSchema,
 } from "@/lib/zod";
 
 const BASE_URL = getStrapiURL();
@@ -93,7 +97,17 @@ export async function getPackagesList() {
     url.search = packageListQuery;
     return fetchAPI(url.href, {
         method: "GET",
-        next: { tags: ["destinationList"] },
+        next: { tags: ["packageList"] },
+    });
+}
+
+export async function getParentPackagesList() {
+    const path = "/api/parent-packages";
+    const url = new URL(path, BASE_URL);
+    url.search = parentPackageListQuery;
+    return fetchAPI(url.href, {
+        method: "GET",
+        next: { tags: ["parentPackageList"] },
     });
 }
 
@@ -105,8 +119,51 @@ export async function getPackage(slug: string, locale: string) {
     return fetchAPI(url.href, { method: "GET" });
 }
 
+export async function getParentPackage(
+    parentPackage: string,
+    locale: string,
+    query = parentPackageQuery
+) {
+    const path = `/api/parent-packages/${parentPackage}`;
+    const url = new URL(path, BASE_URL);
+    url.search = query;
+    url.searchParams.set("locale", locale);
+    return fetchAPI(url.href, { method: "GET" });
+}
+
+export async function getAllPackageCategories() {
+    const path = "/api/package-categories";
+    const url = new URL(path, BASE_URL);
+    return fetchAPI(url.href, {
+        method: "GET",
+        next: { tags: ["package-category"] },
+    });
+}
+
 export async function getPackagesPage(locale: string) {
     const path = `/api/package-listing-page`;
+    const url = new URL(path, BASE_URL);
+    url.search = packageListingPageQuery;
+    url.searchParams.set("locale", locale);
+    return fetchAPI(url.href, { method: "GET" });
+}
+
+export async function getPackageResults(
+    package_: string,
+    category: string,
+    locale: string
+) {
+    const path = `/api/packages/filter`;
+    const url = new URL(path, BASE_URL);
+    url.search = filterPackageResultsQuery;
+    url.searchParams.set("parentPackage", package_);
+    url.searchParams.set("packageCategories", category);
+    url.searchParams.set("locale", locale);
+    return fetchAPI(url.href, { method: "GET" });
+}
+
+export async function getIntlPackagesPage(locale: string) {
+    const path = `/api/international-package-listing-page`;
     const url = new URL(path, BASE_URL);
     url.search = packageListingPageQuery;
     url.searchParams.set("locale", locale);
@@ -117,6 +174,15 @@ export async function submitContactUsForm(
     data: z.infer<typeof contactUsSchema>
 ) {
     const path = "/api/contact-forms";
+    const url = new URL(path, BASE_URL);
+    return fetchAPI(url.href, {
+        method: "POST",
+        body: { data },
+    });
+}
+
+export async function packageForm(data: z.infer<typeof packageFormSchema>) {
+    const path = "/api/package-forms";
     const url = new URL(path, BASE_URL);
     return fetchAPI(url.href, {
         method: "POST",

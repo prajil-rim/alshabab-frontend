@@ -147,6 +147,11 @@ export const homePageQuery = qs.stringify({
                 },
             },
         },
+        internal_links: {
+            populate: {
+                links: true,
+            },
+        },
     },
 });
 
@@ -284,6 +289,11 @@ export const aboutUsPageQuery = qs.stringify({
                 },
             },
         },
+        internal_links: {
+            populate: {
+                links: true,
+            },
+        },
     },
 });
 
@@ -419,6 +429,11 @@ export const blogQuery = qs.stringify({
                         },
                     },
                 },
+            },
+        },
+        internal_links: {
+            populate: {
+                links: true,
             },
         },
     },
@@ -602,6 +617,11 @@ export const destinationQuery = qs.stringify({
                 },
             },
         },
+        internal_links: {
+            populate: {
+                links: true,
+            },
+        },
     },
 });
 
@@ -707,6 +727,11 @@ export const destinationListingPageQuery = qs.stringify({
                         },
                     },
                 },
+            },
+        },
+        internal_links: {
+            populate: {
+                links: true,
             },
         },
     },
@@ -824,7 +849,163 @@ export const packageQuery = qs.stringify({
                 },
             },
         },
+        package_general_info: {
+            populate: {
+                duration: true,
+                location_details: true,
+                pay_with: true,
+                price_details: true,
+                more_about_trip: true,
+                package_includes: {
+                    populate: {
+                        icon: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+                package_categories: {
+                    fields: ["slug", "category", "documentId"],
+                },
+            },
+        },
+        package_itinerary: {
+            populate: {
+                images: {
+                    fields: ["url", "alternativeText"],
+                },
+            },
+        },
+        package_day_chart: {
+            populate: {
+                day_chart_card: true,
+            },
+        },
+        package_inc_and_exc: {
+            populate: {
+                inclusion: {
+                    populate: {
+                        points: true,
+                    },
+                },
+                exclusion: {
+                    populate: {
+                        points: true,
+                    },
+                },
+            },
+        },
+        package_policies: {
+            populate: {
+                cancellation_policy: {
+                    populate: {
+                        column_1: true,
+                        column_2: true,
+                    },
+                },
+                payment_policy: {
+                    populate: {
+                        column_1: true,
+                        column_2: true,
+                    },
+                },
+                payment_policy_points: true,
+                term_and_conditions: {
+                    populate: {
+                        terms: {
+                            populate: {
+                                points: true,
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        internal_links: {
+            populate: {
+                links: true,
+            },
+        },
     },
+});
+
+export const parentPackageQuery = qs.stringify({
+    populate: {
+        hero_background: {
+            fields: ["url", "alternativeText"],
+        },
+        testimonial: {
+            populate: {
+                testimonials: {
+                    populate: {
+                        image: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
+        footer_cta_section: {
+            populate: {
+                image: {
+                    fields: ["url", "alternativeText"],
+                },
+                background: {
+                    fields: ["url", "alternativeText"],
+                },
+                cta_call: true,
+                cta_chat: true,
+            },
+        },
+        package_card_banner: {
+            populate: {
+                image: {
+                    fields: ["url", "alternativeText"],
+                },
+                button: true,
+            },
+        },
+        package_banner: {
+            populate: {
+                image: {
+                    fields: ["url", "alternativeText"],
+                },
+                button: true,
+            },
+        },
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
+        internal_links: {
+            populate: {
+                links: true,
+            },
+        },
+    },
+});
+
+export const parentPackageSelectQuery = qs.stringify({
+    populate: {
+        package_banner: {
+            populate: {
+                image: {
+                    fields: ["url", "alternativeText"],
+                },
+                button: true,
+            },
+        },
+    },
+    fields: ["destination"],
 });
 
 export const packageListingPageQuery = qs.stringify({
@@ -920,6 +1101,41 @@ export const packageListingPageQuery = qs.stringify({
                 },
             },
         },
+        internal_links: {
+            populate: {
+                links: true,
+            },
+        },
+    },
+});
+
+export const filterPackageResultsQuery = qs.stringify({
+    populate: {
+        hero: {
+            populate: {
+                background: {
+                    fields: ["url", "alternativeText"],
+                },
+            },
+        },
+        package_general_info: {
+            populate: {
+                duration: true,
+                location_details: true,
+                package_includes: {
+                    populate: {
+                        icon: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+                pay_with: true,
+                price_details: true,
+                package_categories: {
+                    populate: true,
+                },
+            },
+        },
     },
 });
 
@@ -930,6 +1146,18 @@ export const packageListQuery = qs.stringify({
         },
     },
     fields: ["documentId", "package", "slug"],
+    pagination: {
+        pageSize: 100,
+    },
+});
+
+export const parentPackageListQuery = qs.stringify({
+    // populate: {
+    //     destination: {
+    //         fields: ["documentId"],
+    //     },
+    // },
+    fields: ["documentId", "package", "package_slug"],
     pagination: {
         pageSize: 100,
     },
@@ -982,6 +1210,11 @@ export const contactUsPageQuery = qs.stringify({
                 },
             },
         },
+        internal_links: {
+            populate: {
+                links: true,
+            },
+        },
     },
 });
 
@@ -1026,6 +1259,11 @@ export const blogListPageQuery = qs.stringify({
                         },
                     },
                 },
+            },
+        },
+        internal_links: {
+            populate: {
+                links: true,
             },
         },
     },

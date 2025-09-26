@@ -19,6 +19,7 @@ import { Metadata } from "next";
 import { returnMetadata } from "@/lib/utils";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import InternalLinks from "@/components/layout/internal-links";
 
 let destinationsPageDataPromise: ReturnType<typeof getDestinationsPage> | null =
     null;
@@ -112,6 +113,7 @@ const DestinationListingPage = async ({
                 faqs={pageData?.faq_section?.faqs}
             />
             <FooterCTA {...pageData.footer_cta_section} />
+            <InternalLinks internal_links={pageData.internal_links || []} />
         </main>
     );
 };

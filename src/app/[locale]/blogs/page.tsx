@@ -1,5 +1,6 @@
 import BlogHero from "@/components/hero/blog-hero";
 import FooterCTA from "@/components/layout/footer-cta";
+import InternalLinks from "@/components/layout/internal-links";
 import BlogListSection from "@/components/pages/blogs/blog-list-section";
 import { getAllBlogs, getLatestBlogs } from "@/data/loaders";
 import { routing } from "@/i18n/routing";
@@ -77,6 +78,7 @@ const BlogListingPage = async ({
                 locale={locale}
             />
             <FooterCTA {...pageData.footer_cta_section} />
+            <InternalLinks internal_links={pageData.internal_links || []} />
         </main>
     );
 };

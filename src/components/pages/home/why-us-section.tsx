@@ -53,7 +53,7 @@ const WhyUsSection = ({
                 <div className="rounded-xl aspect-[1/1.3] min-[1150px]:aspect-auto row-span-2 min-[1150px]:row-span-3 overflow-hidden">
                     <video
                         src={getImage({
-                            local: "/video/dummy.mp4",
+                            local: "/local/dummy.webm",
                             prod: video.url,
                         })}
                         className="size-full object-center object-cover pointer-events-none"

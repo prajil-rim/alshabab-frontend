@@ -41,7 +41,9 @@ const SearchSection = ({
                                 target={search.isExternal ? "_blank" : "_self"}
                             >
                                 <li className="flex items-center gap-1.5 bg-[#EBF4FF] rounded-md px-3 py-1 text-sm font-medium group hover:bg-primary hover:text-white transition-colors duration-300">
-                                    <span>{search.text}</span>
+                                    <span className="whitespace-nowrap">
+                                        {search.text}
+                                    </span>
                                     <TrendingUp />
                                 </li>
                             </Link>

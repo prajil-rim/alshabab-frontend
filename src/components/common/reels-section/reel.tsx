@@ -60,7 +60,7 @@ const Reel = ({
                         if (el) videoRefs.current[index] = el;
                     }}
                     src={getImage({
-                        local: "/video/dummy.mp4",
+                        local: "/local/dummy.webm",
                         prod: url,
                     })}
                     className="w-full pointer-events-none"

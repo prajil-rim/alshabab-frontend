@@ -50,8 +50,8 @@ const FooterCTA = ({
                 >
                     <h1
                         className={cn(
-                            "text-2xl lg:text-4xl font-black w-fit",
-                            text_align === "center" && "mx-auto"
+                            "text-2xl lg:text-4xl font-black w-fit mx-auto lg:mx-0",
+                            text_align === "center" && "mx-auto lg:mx-auto"
                         )}
                     >
                         {title}

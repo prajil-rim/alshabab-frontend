@@ -5,6 +5,11 @@ export interface LinkProps {
     isExternal: boolean;
 }
 
+export interface LabelProps {
+    id: number;
+    label: string;
+}
+
 export interface MediaProps {
     id: number;
     documentId: string;
@@ -65,6 +70,11 @@ export interface PackageListProps extends Base {
     destination: {
         documentId: string;
     };
+}
+
+export interface ParentPackageListProps extends Base {
+    package: string;
+    package_slug: string;
 }
 
 export interface FooterCTAProps {
@@ -261,4 +271,92 @@ export type SeoMetadata = {
             alternativeText: string;
         };
     };
+};
+
+export type Policy = {
+    id: number;
+    title: string;
+    column_1: {
+        id: number;
+        label: string;
+    }[];
+    column_2: {
+        id: number;
+        label: string;
+    }[];
+};
+
+export type TermsAndConditionsProps = {
+    id: number;
+    title: string;
+    description: string;
+    disclaimer: string;
+    terms: {
+        id: number;
+        title: string;
+        points: LabelProps[];
+    }[];
+};
+
+export type PackagePriceDetails = {
+    base_price_per_adult: string;
+    offer_price_per_adult: string;
+    price_per_room: string;
+    discount_percentage: number;
+};
+
+export type PackageGeneralInfo = {
+    from_city: string;
+    price_category: string;
+    flights: "With Flight" | "Without Flight";
+    more_about_trip: {
+        id: number;
+        title: string;
+        description: string;
+    };
+    whatsapp: string;
+    call_us_on: string;
+    timing: string;
+    price_details: PackagePriceDetails;
+    duration: {
+        number_of_nights: number;
+        number_of_days: number;
+    };
+    location_details: {
+        from_location: string;
+        to_location: string;
+    };
+    package_includes: {
+        id: number;
+        label: string;
+        icon: MediaProps;
+    }[];
+    package_categories: {
+        slug: string;
+        category: string;
+    }[];
+    pay_with: {
+        id: number;
+        tabby: boolean;
+        tamara: boolean;
+    };
+    form_modal_title: string;
+    form_modal_phone: string;
+};
+
+export type PackageCardProps = {
+    id: number;
+    package: string;
+    slug: string;
+    hero: {
+        background: MediaProps;
+    };
+    package_general_info: PackageGeneralInfo;
+};
+
+export type PackageBannerProps = {
+    id: number;
+    title: string;
+    image: MediaProps;
+    button: LinkProps;
 };

@@ -7,6 +7,7 @@ import { ReelsSection } from "@/components/common/reels-section/reels-section";
 import Testimonials from "@/components/common/testimonials/testimonials";
 import HomeHero from "@/components/hero/home-hero";
 import FooterCTA from "@/components/layout/footer-cta";
+import InternalLinks from "@/components/layout/internal-links";
 import ExperiencesSection from "@/components/pages/about-us/experiences-section";
 import FormSection from "@/components/pages/home/form-section";
 import InfoSection from "@/components/pages/home/info-section";
@@ -121,6 +122,7 @@ export default async function HomeRoute({
             <BlogSection {...pageData.blog_section} showLeaf />
             <FAQSection {...pageData.faq_section} showLeaf />
             <FooterCTA {...pageData.footer_cta_section} />
+            <InternalLinks internal_links={pageData.internal_links || []} />
         </>
     );
 }

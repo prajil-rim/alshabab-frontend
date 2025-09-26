@@ -9,7 +9,7 @@ const Card = ({ title, description, image, label }: Readonly<CardProps>) => {
             <div className="size-full">
                 <Image
                     src={getImage({
-                        local: null,
+                        local: "/local/image1.webp",
                         prod: image?.url,
                     })}
                     alt={
