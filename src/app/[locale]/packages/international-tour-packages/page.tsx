@@ -84,7 +84,11 @@ const InternationalPackageListingPage = async ({
                 description={pageData.hero.description}
                 locale={locale}
                 title={pageData.hero.title}
-                breadcrumbs={[{ text: t("home"), href: "/" }]}
+                breadcrumbs={[
+                    { text: t("home"), href: "/" },
+                    { text: t("packages"), href: "/packages" },
+                    { text: "International Tour Packages" },
+                ]}
                 cta_button={pageData.hero.cta_button}
                 cta_whatsapp={pageData.hero.cta_whatsapp}
                 destinations={destinations}

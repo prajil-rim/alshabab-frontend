@@ -22,6 +22,7 @@ import Image from "next/image";
 import { useState } from "react";
 import ItineraryCarousel from "../carousels/itinerary-carousel";
 import { MediaProps } from "@/types";
+import { getImage } from "@/lib/utils";
 
 export function ImageViewer({ images }: { images: MediaProps[] }) {
     const [open, setOpen] = useState(false);
@@ -33,7 +34,10 @@ export function ImageViewer({ images }: { images: MediaProps[] }) {
                 <DialogTrigger>
                     <div className="size-full relative after:absolute after:inset-0 after:bg-black/50 after:rounded-md after:content-['2+'] after:text-white after:flex after:justify-center after:items-center">
                         <Image
-                            src={"/local/image2.webp"}
+                            src={getImage({
+                                local: "/local/image2.webp",
+                                prod: images[3].url,
+                            })}
                             alt="image"
                             width={100}
                             height={70}

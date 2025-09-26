@@ -18,6 +18,7 @@ import { PackageFilterProvider } from "@/provider/package-filter-context";
 import InternalLinks from "@/components/layout/internal-links";
 import { Metadata } from "next";
 import { returnMetadata } from "@/lib/utils";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 let parentPackagePageDataPromise: ReturnType<typeof getParentPackage> | null =
     null;
@@ -71,6 +72,11 @@ export default async function DashboardLayout({
     const locale = (await params).locale;
     const { packageCategories, pageData } = await loader(parentPackage, locale);
 
+    // Enable static rendering
+    setRequestLocale(locale);
+
+    const t = await getTranslations("homePage.header.navItems");
+
     return (
         <main>
             <PackageFilterHero
@@ -80,8 +86,15 @@ export default async function DashboardLayout({
                 locale={locale}
                 breadcrumbs={[
                     {
-                        text: "Home",
+                        text: t("home"),
                         href: "/",
+                    },
+                    {
+                        text: t("packages"),
+                        href: "/packages",
+                    },
+                    {
+                        text: pageData.package,
                     },
                 ]}
                 cta_button="Read more"

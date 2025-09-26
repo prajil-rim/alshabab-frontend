@@ -62,7 +62,7 @@ function ItineraryCard({
                     </p>
                     <div className="grid grid-cols-3 gap-2">
                         {images[1] && (
-                            <ImageZoom className="w-full laspect-[1/0.9]">
+                            <ImageZoom className="w-full aspect-[1/0.9]">
                                 <Image
                                     src={getImage({
                                         local: "/local/image2.webp",

@@ -19,7 +19,7 @@ const HighlightPackageCard = ({
             style={{
                 backgroundImage: getImage({
                     local: `url(/local/image1.webp)`,
-                    prod: image.url,
+                    prod: `url(${image.url})`,
                 }),
                 backgroundSize: "cover",
                 backgroundPosition: "center",
