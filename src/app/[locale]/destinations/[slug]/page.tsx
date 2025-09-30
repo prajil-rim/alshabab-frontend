@@ -9,7 +9,7 @@ import TripDetailsSection from "@/components/pages/packages/trip-details-section
 import {
     getDestination,
     getDestinationsList,
-    getPackagesList,
+    getParentPackagesList,
 } from "@/data/loaders";
 import { notFound } from "next/navigation";
 import { ReelsSection } from "@/components/common/reels-section/reels-section";
@@ -42,7 +42,7 @@ async function loader(slug: string, locale: string) {
     const [pageData, destinations, packages] = await Promise.all([
         getDestinationDataOnce(slug, locale),
         getDestinationsList(),
-        getPackagesList(),
+        getParentPackagesList(),
     ]);
     if (!pageData || !pageData.data) notFound();
     return {

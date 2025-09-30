@@ -10,6 +10,7 @@ import {
     getDestinationsList,
     getPackagesList,
     getPackagesPage,
+    getParentPackagesList,
     getTestimonials,
 } from "@/data/loaders";
 import { notFound } from "next/navigation";
@@ -35,18 +36,21 @@ function getPackagesPageOnce(locale: string) {
 }
 
 async function loader(locale: string) {
-    const [pageData, testimonials, destinations, packages] = await Promise.all([
-        getPackagesPageOnce(locale),
-        getTestimonials(locale),
-        getDestinationsList(),
-        getPackagesList(),
-    ]);
+    const [pageData, testimonials, destinations, parentPackages, packages] =
+        await Promise.all([
+            getPackagesPageOnce(locale),
+            getTestimonials(locale),
+            getDestinationsList(),
+            getParentPackagesList(),
+            getPackagesList(),
+        ]);
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
         testimonials: testimonials.data,
         destinations: destinations.data,
         packages: packages.data,
+        parentPackages: parentPackages.data,
     };
 }
 
@@ -67,9 +71,8 @@ const PackageListingPage = async ({
     params: Promise<{ locale: string }>;
 }) => {
     const locale = (await params).locale;
-    const { pageData, testimonials, destinations, packages } = await loader(
-        locale
-    );
+    const { pageData, testimonials, destinations, packages, parentPackages } =
+        await loader(locale);
 
     // Enable static rendering
     setRequestLocale(locale);
@@ -81,7 +84,7 @@ const PackageListingPage = async ({
             <PDListingHero
                 hero={pageData.hero}
                 destinations={destinations}
-                packages={packages}
+                packages={parentPackages}
                 locale={locale}
                 breadcrumbs={[
                     {

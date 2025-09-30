@@ -17,7 +17,7 @@ const TravelPackagesListing = ({
         slug: string;
     }[];
     parentPackageData: {
-        destination: string;
+        destination_label: string;
         package_banner: PackageBannerProps;
     };
 }) => {
@@ -27,7 +27,7 @@ const TravelPackagesListing = ({
             <div className="flex items-center justify-between mb-6">
                 <h1 className="text-xl font-semibold text-gray-900">
                     <span className="text-primary text-sm">
-                        {parentPackageData.destination} Travel Packages{" "}
+                        {parentPackageData?.destination_label} Travel Packages{" "}
                         <span>&#040;{packages.length}&#041;</span>
                     </span>
                 </h1>

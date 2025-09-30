@@ -59,7 +59,7 @@ const PackageHeader = ({
             </div>
 
             {/* Large screen */}
-            <div className="hidden lg:flex justify-between items-center bg-[#FAFAFA] border border-[#757272]/10 rounded-full px-6 py-4">
+            <div className="hidden lg:flex justify-between items-center bg-[#FAFAFA] border border-[#757272]/10 rounded-full px-6 py-4 shadow">
                 <InfoRow items={data} />
                 <ButtonGroup
                     packages={packages}
@@ -74,7 +74,18 @@ const PackageHeader = ({
 export default PackageHeader;
 
 function InfoBlock({ label, value }: { label: string; value: string }) {
-    return (
+    return label === "Tour Date" || label === "Rooms & Guests" ? (
+        <PackageModifyModal>
+            <button className="text-left cursor-pointer">
+                <div className="flex flex-col">
+                    <span className="text-sm font-semibold text-[#202020]/50">
+                        {label}
+                    </span>
+                    <span className="font-bold">{value}</span>
+                </div>
+            </button>
+        </PackageModifyModal>
+    ) : (
         <div className="flex flex-col">
             <span className="text-sm font-semibold text-[#202020]/50">
                 {label}

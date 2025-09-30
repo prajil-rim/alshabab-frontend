@@ -14,7 +14,7 @@ import OurJourneySection from "@/components/pages/about-us/our-journey-section";
 import {
     getAboutUsPage,
     getDestinationsList,
-    getPackagesList,
+    getParentPackagesList,
     getPartners,
     getTestimonials,
 } from "@/data/loaders";
@@ -47,7 +47,7 @@ async function loader(locale: string) {
             getTestimonials(locale),
             getPartners(locale),
             getDestinationsList(),
-            getPackagesList(),
+            getParentPackagesList(),
         ]);
     if (!pageData || !pageData.data) notFound();
     return {

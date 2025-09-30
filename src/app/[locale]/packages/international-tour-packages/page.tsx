@@ -7,9 +7,10 @@ import FooterCTA from "@/components/layout/footer-cta";
 import PopularPD from "@/components/common/pd-packages";
 import {
     getDestinationsList,
-    getPackagesList,
     getIntlPackagesPage,
     getTestimonials,
+    getParentPackagesList,
+    getPackagesList,
 } from "@/data/loaders";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
@@ -36,18 +37,21 @@ function getIntlPackagesPageOnce(locale: string) {
 }
 
 async function loader(locale: string) {
-    const [pageData, testimonials, destinations, packages] = await Promise.all([
-        getIntlPackagesPageOnce(locale),
-        getTestimonials(locale),
-        getDestinationsList(),
-        getPackagesList(),
-    ]);
+    const [pageData, testimonials, destinations, parentPackages, packages] =
+        await Promise.all([
+            getIntlPackagesPageOnce(locale),
+            getTestimonials(locale),
+            getDestinationsList(),
+            getParentPackagesList(),
+            getPackagesList(),
+        ]);
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
         testimonials: testimonials.data,
         destinations: destinations.data,
         packages: packages.data,
+        parentPackages: parentPackages.data,
     };
 }
 
@@ -68,9 +72,8 @@ const InternationalPackageListingPage = async ({
     params: Promise<{ locale: string }>;
 }) => {
     const locale = (await params).locale;
-    const { pageData, testimonials, destinations, packages } = await loader(
-        locale
-    );
+    const { pageData, testimonials, destinations, packages, parentPackages } =
+        await loader(locale);
 
     // Enable static rendering
     setRequestLocale(locale);
@@ -92,7 +95,7 @@ const InternationalPackageListingPage = async ({
                 cta_button={pageData.hero.cta_button}
                 cta_whatsapp={pageData.hero.cta_whatsapp}
                 destinations={destinations}
-                packages={packages}
+                packages={parentPackages}
             />
             <PDListSection {...pageData.packages} />
             <FormSectionWithPoints

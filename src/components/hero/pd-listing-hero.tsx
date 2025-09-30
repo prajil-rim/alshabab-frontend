@@ -21,7 +21,11 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "../ui/carousel";
-import { DestinationListProps, PackageListProps, PDHeroProps } from "@/types";
+import {
+    DestinationListProps,
+    ParentPackageListProps,
+    PDHeroProps,
+} from "@/types";
 import { cn, getImage } from "@/lib/utils";
 import ContactFormModal from "../modal/contact-form-modal";
 import ContactFormSmModal from "../modal/contact-form-sm-modal";
@@ -33,7 +37,7 @@ interface BreadcrumbProps {
         href?: string;
     }[];
     destinations: DestinationListProps[];
-    packages: PackageListProps[];
+    packages: ParentPackageListProps[];
     locale: string;
 }
 

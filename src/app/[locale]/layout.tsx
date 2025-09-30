@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/header";
 import {
     getDestinationsList,
     getGlobalSettings,
-    getPackagesList,
+    getParentPackagesList,
 } from "@/data/loaders";
 import Footer from "@/components/layout/footer";
 import { Toaster } from "sonner";
@@ -39,7 +39,7 @@ async function loader(locale: string) {
     const [data, destinations, packages] = await Promise.all([
         getGlobalSettings(locale),
         getDestinationsList(),
-        getPackagesList(),
+        getParentPackagesList(),
     ]);
     if (!data && data.data) throw new Error("Failed to fetch global settings");
     return {

@@ -31,9 +31,6 @@ const SearchForm = ({
     packages,
     price_range,
 }: Readonly<SearchFormProps>) => {
-    const [selectedPackages, setSelectedPackages] = useState<
-        PackageListProps[]
-    >([]);
     const [selectedPackage, setSelectedPackage] = useState<
         PackageListProps | null | undefined
     >(null);
@@ -55,19 +52,7 @@ const SearchForm = ({
         >
             <div className="flex items-center gap-2">
                 <Target />
-                <Select
-                    name="destination"
-                    required
-                    onValueChange={(value) => {
-                        setSelectedPackages(
-                            packages.filter((package_) =>
-                                package_.destination
-                                    ? package_.destination.documentId === value
-                                    : value
-                            )
-                        );
-                    }}
-                >
+                <Select name="destination" required>
                     <SelectTrigger className="flex flex-col justify-start items-start outline-none">
                         <span className="flex items-center gap-2 font-semibold text-lg">
                             {t("destination")} <ChevronDown />{" "}
@@ -112,7 +97,7 @@ const SearchForm = ({
                         />
                     </SelectTrigger>
                     <SelectContent className="font-manrope w-full">
-                        {selectedPackages?.map((package_) => (
+                        {packages?.map((package_) => (
                             <SelectItem
                                 value={package_.documentId}
                                 key={package_.documentId}
@@ -120,11 +105,6 @@ const SearchForm = ({
                                 {package_.package}
                             </SelectItem>
                         ))}
-                        {selectedPackages?.length === 0 && (
-                            <SelectItem value="disabled" disabled>
-                                {t("pError")}
-                            </SelectItem>
-                        )}
                     </SelectContent>
                 </Select>
             </div>

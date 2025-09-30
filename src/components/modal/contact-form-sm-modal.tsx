@@ -8,7 +8,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import ContactUsForm from "../forms/contact-us-form";
-import { DestinationListProps, PackageListProps } from "@/types";
+import { DestinationListProps, ParentPackageListProps } from "@/types";
 import Image from "next/image";
 
 const ContactFormSmModal = ({
@@ -19,7 +19,7 @@ const ContactFormSmModal = ({
 }: {
     children: React.ReactNode;
     destinations: DestinationListProps[];
-    packages: PackageListProps[];
+    packages: ParentPackageListProps[];
     locale: string;
 }) => {
     return (

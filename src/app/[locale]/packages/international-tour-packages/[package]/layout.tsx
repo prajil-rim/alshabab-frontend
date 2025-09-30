@@ -141,7 +141,7 @@ export default async function DashboardLayout({
                                     <div className="hidden lg:block bg-[#f8f8f8] rounded-xl p-4 col-span-2 h-fit">
                                         <FilterHeader
                                             destination_label={
-                                                pageData.destination
+                                                pageData.destination_label
                                             }
                                         />
                                         <hr className="mt-6 mb-4 border-black/10" />

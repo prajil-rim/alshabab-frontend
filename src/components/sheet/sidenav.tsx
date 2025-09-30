@@ -10,7 +10,11 @@ import {
 import { Menu } from "lucide-react";
 import { StrapiImage } from "../common/strapi-image";
 import NavItems from "../layout/nav-items";
-import { DestinationListProps, LogoProps, PackageListProps } from "@/types";
+import {
+    DestinationListProps,
+    LogoProps,
+    ParentPackageListProps,
+} from "@/types";
 import { useState } from "react";
 import LocaleSwitcher from "../layout/language-switcher";
 import { getImage } from "@/lib/utils";
@@ -18,7 +22,7 @@ import { getImage } from "@/lib/utils";
 interface SidenavProps {
     logo: LogoProps;
     destinations: DestinationListProps[];
-    packages: PackageListProps[];
+    packages: ParentPackageListProps[];
     locale: string;
 }
 

@@ -1005,7 +1005,7 @@ export const parentPackageSelectQuery = qs.stringify({
             },
         },
     },
-    fields: ["destination"],
+    fields: ["destination_label"],
 });
 
 export const packageListingPageQuery = qs.stringify({
@@ -1152,11 +1152,11 @@ export const packageListQuery = qs.stringify({
 });
 
 export const parentPackageListQuery = qs.stringify({
-    // populate: {
-    //     destination: {
-    //         fields: ["documentId"],
-    //     },
-    // },
+    populate: {
+        destination: {
+            fields: ["documentId"],
+        },
+    },
     fields: ["documentId", "package", "package_slug"],
     pagination: {
         pageSize: 100,

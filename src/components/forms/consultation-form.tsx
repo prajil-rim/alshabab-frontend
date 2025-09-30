@@ -41,9 +41,6 @@ const ConsultationForm = ({
     destinations: DestinationListProps[];
 }) => {
     const [loading, setLoading] = useState(false);
-    const [selectedPackages, setSelectedPackages] = useState<
-        PackageListProps[]
-    >([]);
 
     const path = usePathname();
     const form = useForm<z.infer<typeof consultationSchema>>({
@@ -185,17 +182,7 @@ const ConsultationForm = ({
                         <FormItem>
                             <div className="space-y-1">
                                 <Select
-                                    onValueChange={(value) => {
-                                        field.onChange(value);
-                                        setSelectedPackages(
-                                            packages.filter((package_) =>
-                                                package_.destination
-                                                    ? package_.destination
-                                                          .documentId === value
-                                                    : value
-                                            )
-                                        );
-                                    }}
+                                    onValueChange={field.onChange}
                                     defaultValue={field.value}
                                 >
                                     <FormControl>
@@ -253,7 +240,7 @@ const ConsultationForm = ({
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent className="font-manrope">
-                                        {selectedPackages?.map((package_) => (
+                                        {packages?.map((package_) => (
                                             <SelectItem
                                                 value={package_.documentId}
                                                 key={package_.documentId}
@@ -261,14 +248,6 @@ const ConsultationForm = ({
                                                 {package_.package}
                                             </SelectItem>
                                         ))}
-                                        {selectedPackages?.length === 0 && (
-                                            <SelectItem
-                                                value="disabled"
-                                                disabled
-                                            >
-                                                {t("pError")}
-                                            </SelectItem>
-                                        )}
                                     </SelectContent>
                                 </Select>
                                 <FormMessage />

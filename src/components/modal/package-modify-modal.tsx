@@ -20,13 +20,13 @@ import {
     DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { ChevronDownIcon, Minus, Plus } from "lucide-react";
 import { usePackagePriceContext } from "@/provider/package-price-context";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
 
-export function PackageModifyModal() {
+export function PackageModifyModal({ children }: { children?: ReactNode }) {
     const [open, setOpen] = useState(false);
     const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -34,12 +34,14 @@ export function PackageModifyModal() {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button
-                        className="rounded-full cursor-pointer flex-2/5 md:flex-auto"
-                        variant="secondary"
-                    >
-                        Modify
-                    </Button>
+                    {children || (
+                        <Button
+                            className="rounded-full cursor-pointer flex-2/5 md:flex-auto"
+                            variant="secondary"
+                        >
+                            Modify
+                        </Button>
+                    )}
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>

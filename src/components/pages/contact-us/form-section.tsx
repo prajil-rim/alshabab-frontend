@@ -6,7 +6,7 @@ import { groupContactInfo } from "@/lib/utils";
 import {
     ContactInfoProps,
     DestinationListProps,
-    PackageListProps,
+    ParentPackageListProps,
 } from "@/types";
 import Link from "next/link";
 
@@ -14,7 +14,7 @@ interface FormSectionProps {
     contact_title: string;
     contact_info: ContactInfoProps[];
     destinations: DestinationListProps[];
-    packages: PackageListProps[];
+    packages: ParentPackageListProps[];
 }
 
 const FormSection = ({

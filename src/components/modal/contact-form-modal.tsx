@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import ContactUsForm from "../forms/contact-us-form";
 import { X } from "lucide-react";
-import { DestinationListProps, PackageListProps } from "@/types";
+import { DestinationListProps, ParentPackageListProps } from "@/types";
 import Image from "next/image";
 
 const ContactFormModal = ({
@@ -20,7 +20,7 @@ const ContactFormModal = ({
     children,
 }: {
     destinations: DestinationListProps[];
-    packages: PackageListProps[];
+    packages: ParentPackageListProps[];
     locale: string;
     children?: React.ReactNode;
 }) => {

@@ -6,7 +6,7 @@ import LocationSection from "@/components/pages/contact-us/location-section";
 import {
     getContactUsPage,
     getDestinationsList,
-    getPackagesList,
+    getParentPackagesList,
 } from "@/data/loaders";
 import { routing } from "@/i18n/routing";
 import { returnMetadata } from "@/lib/utils";
@@ -33,7 +33,7 @@ async function loader(locale: string) {
     const [data, destinations, packages] = await Promise.all([
         getContactUsPageOnce(locale),
         getDestinationsList(),
-        getPackagesList(),
+        getParentPackagesList(),
     ]);
     if (!data || !data.data) notFound();
     return {
@@ -81,6 +81,7 @@ const ContactPage = async ({
                         text: "Contact Us",
                     },
                 ]}
+                packages={packages}
             />
             <FormSection
                 contact_info={data.contact_info || []}

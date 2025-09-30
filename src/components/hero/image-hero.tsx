@@ -9,7 +9,7 @@ import {
 import {
     DestinationListProps,
     ImageHeroProps,
-    PackageListProps,
+    ParentPackageListProps,
 } from "@/types";
 import { Fragment } from "react";
 import { Button } from "../ui/button";
@@ -41,7 +41,7 @@ const ImageHero = ({
     > & {
         style?: React.CSSProperties;
         destinations?: DestinationListProps[];
-        packages?: PackageListProps[];
+        packages?: ParentPackageListProps[];
         cta_button?: string;
         showPrice?: boolean;
         showBadge?: boolean;

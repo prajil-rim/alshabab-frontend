@@ -11,7 +11,7 @@ import {
     DestinationListProps,
     ImageHeroProps,
     MediaProps,
-    PackageListProps,
+    ParentPackageListProps,
 } from "@/types";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -26,7 +26,7 @@ type VideoHeroProps = Pick<
     "title" | "description" | "breadcrumbs" | "cta_button" | "cta_whatsapp"
 > & {
     destinations: DestinationListProps[];
-    packages: PackageListProps[];
+    packages: ParentPackageListProps[];
     locale: string;
     background: {
         id: number;

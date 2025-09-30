@@ -1,6 +1,6 @@
 "use client";
 
-import { DestinationListProps, PackageListProps } from "@/types";
+import { DestinationListProps, ParentPackageListProps } from "@/types";
 import { contactUsSchema } from "@/lib/zod";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,7 +19,7 @@ const ContactUsForm = ({
     locale,
 }: Readonly<{
     destinations: DestinationListProps[];
-    packages: PackageListProps[];
+    packages: ParentPackageListProps[];
     formType: "form1" | "form2";
     locale: string;
 }>) => {

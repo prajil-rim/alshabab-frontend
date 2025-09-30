@@ -18,18 +18,17 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { contactUsSchema } from "@/lib/zod";
-import { DestinationListProps, PackageListProps } from "@/types";
+import { DestinationListProps, ParentPackageListProps } from "@/types";
 import { dir } from "i18next";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 
 interface FormProps {
     form: UseFormReturn<z.infer<typeof contactUsSchema>>;
     destinations: DestinationListProps[];
-    packages: PackageListProps[];
+    packages: ParentPackageListProps[];
     onSubmit: (values: z.infer<typeof contactUsSchema>) => Promise<void>;
     loading: boolean;
     locale: string;
@@ -43,10 +42,6 @@ const Form2 = ({
     loading,
     locale,
 }: Readonly<FormProps>) => {
-    const [selectedPackages, setSelectedPackages] = useState<
-        PackageListProps[]
-    >([]);
-
     const t = useTranslations("form");
 
     return (
@@ -128,18 +123,7 @@ const Form2 = ({
                                 <FormLabel>{t("destination")}</FormLabel>
                                 <div className="space-y-1">
                                     <Select
-                                        onValueChange={(value) => {
-                                            field.onChange(value);
-                                            setSelectedPackages(
-                                                packages.filter((package_) =>
-                                                    package_.destination
-                                                        ? package_.destination
-                                                              .documentId ===
-                                                          value
-                                                        : value
-                                                )
-                                            );
-                                        }}
+                                        onValueChange={field.onChange}
                                         defaultValue={field.value}
                                     >
                                         <FormControl>
@@ -208,28 +192,14 @@ const Form2 = ({
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent className="font-manrope">
-                                            {selectedPackages?.map(
-                                                (package_) => (
-                                                    <SelectItem
-                                                        value={
-                                                            package_.documentId
-                                                        }
-                                                        key={
-                                                            package_.documentId
-                                                        }
-                                                    >
-                                                        {package_.package}
-                                                    </SelectItem>
-                                                )
-                                            )}
-                                            {selectedPackages?.length === 0 && (
+                                            {packages?.map((package_) => (
                                                 <SelectItem
-                                                    value="disabled"
-                                                    disabled
+                                                    value={package_.documentId}
+                                                    key={package_.documentId}
                                                 >
-                                                    {t("pError")}
+                                                    {package_.package}
                                                 </SelectItem>
-                                            )}
+                                            ))}
                                         </SelectContent>
                                     </Select>
                                     <FormMessage />

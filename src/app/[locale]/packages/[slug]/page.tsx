@@ -11,7 +11,7 @@ import TripDetailsSection from "@/components/pages/packages/trip-details-section
 import {
     getDestinationsList,
     getPackage,
-    getPackagesList,
+    getParentPackagesList,
 } from "@/data/loaders";
 import { routing } from "@/i18n/routing";
 import { returnMetadata } from "@/lib/utils";
@@ -39,7 +39,7 @@ function getPackageDataOnce(slug: string, locale: string) {
 async function loader(slug: string, locale: string) {
     const [pageData, packages, destinations] = await Promise.all([
         getPackageDataOnce(slug, locale),
-        getPackagesList(),
+        getParentPackagesList(),
         getDestinationsList(),
     ]);
     if (!pageData || !pageData.data) notFound();

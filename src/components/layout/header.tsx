@@ -1,4 +1,8 @@
-import { DestinationListProps, LogoProps, PackageListProps } from "@/types";
+import {
+    DestinationListProps,
+    LogoProps,
+    ParentPackageListProps,
+} from "@/types";
 import { StrapiImage } from "../common/strapi-image";
 import ContactFormModal from "../modal/contact-form-modal";
 import NavItems from "./nav-items";
@@ -14,7 +18,7 @@ interface HeaderProps {
     cta: string;
     logo: LogoProps;
     destinations: DestinationListProps[];
-    packages: PackageListProps[];
+    packages: ParentPackageListProps[];
     locale: string;
 }
 

@@ -17,6 +17,7 @@ import {
     getDestinationsList,
     getHomePage,
     getPackagesList,
+    getParentPackagesList,
     getPartners,
     getTestimonials,
 } from "@/data/loaders";
@@ -43,14 +44,21 @@ function getHomePageOnce(locale: string) {
 }
 
 async function loader(locale: string) {
-    const [pageData, testimonials, partners, destinations, packages] =
-        await Promise.all([
-            getHomePageOnce(locale),
-            getTestimonials(locale),
-            getPartners(locale),
-            getDestinationsList(),
-            getPackagesList(),
-        ]);
+    const [
+        pageData,
+        testimonials,
+        partners,
+        destinations,
+        parentPackages,
+        packages,
+    ] = await Promise.all([
+        getHomePageOnce(locale),
+        getTestimonials(locale),
+        getPartners(locale),
+        getDestinationsList(),
+        getParentPackagesList(),
+        getPackagesList(),
+    ]);
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
@@ -58,6 +66,7 @@ async function loader(locale: string) {
         partners: partners.data,
         destinations: destinations.data,
         packages: packages.data,
+        parentPackages: parentPackages.data,
     };
 }
 
@@ -78,8 +87,14 @@ export default async function HomeRoute({
     params: Promise<{ locale: string }>;
 }) {
     const locale = (await params).locale;
-    const { pageData, testimonials, partners, destinations, packages } =
-        await loader(locale || "en");
+    const {
+        pageData,
+        testimonials,
+        partners,
+        destinations,
+        packages,
+        parentPackages,
+    } = await loader(locale || "en");
 
     if (!hasLocale(routing.locales, locale)) {
         notFound();
@@ -90,7 +105,7 @@ export default async function HomeRoute({
 
     return (
         <>
-            <HomeHero hero={pageData.slides} />
+            <HomeHero hero={pageData.slides} locale={locale} />
             <section className="bg-gradient-to-t from-transparent via-[#F5F1E3] to-[#448CD9]/80">
                 <div className="max-w-7xl mx-auto py-10 px-3 lg:px-6 2xl:px-0">
                     <SearchSection
@@ -112,7 +127,7 @@ export default async function HomeRoute({
             <FormSection
                 title={pageData.form_section_title}
                 destinations={destinations}
-                packages={packages}
+                packages={parentPackages}
             />
             <ExperiencesSection {...pageData.package_section} showLeaf />
             <PartnerSection {...partners} showLeaf />

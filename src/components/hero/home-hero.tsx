@@ -19,9 +19,10 @@ import { cn, getImage } from "@/lib/utils";
 
 interface BreadcrumbProps {
     hero: HomeHeroProps[];
+    locale: string;
 }
 
-const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
+const HomeHero = ({ hero, locale }: Readonly<BreadcrumbProps>) => {
     const [api, setApi] = React.useState<CarouselApi>();
     const [current, setCurrent] = React.useState(0);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -230,7 +231,12 @@ const HomeHero = ({ hero }: Readonly<BreadcrumbProps>) => {
                         );
                     })}
                 </CarouselContent>
-                <div className="absolute bottom-0 p-3 pb-9 lg:pb-10 lg:p-10 w-fit right-0">
+                <div
+                    className={cn(
+                        "absolute bottom-0 p-3 pb-9 lg:pb-10 lg:p-10 w-fit",
+                        locale === "ar" ? "left-0" : "right-0"
+                    )}
+                >
                     <div className="flex w-full justify-end max-w-6xl mx-auto">
                         <ul className="gap-6 text-sm text-white font-manrope items-center flex">
                             {hero.map((data, index) => (

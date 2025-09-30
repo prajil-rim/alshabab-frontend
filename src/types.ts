@@ -73,6 +73,9 @@ export interface PackageListProps extends Base {
 }
 
 export interface ParentPackageListProps extends Base {
+    destination: {
+        documentId: string;
+    };
     package: string;
     package_slug: string;
 }

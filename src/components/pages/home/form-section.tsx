@@ -1,11 +1,11 @@
 import ContactUsForm from "@/components/forms/contact-us-form";
-import { DestinationListProps, PackageListProps } from "@/types";
+import { DestinationListProps, ParentPackageListProps } from "@/types";
 import Earth from "./earth";
 
 interface FormSectionProps {
     title: string;
     destinations: DestinationListProps[];
-    packages: PackageListProps[];
+    packages: ParentPackageListProps[];
 }
 
 const FormSection = ({

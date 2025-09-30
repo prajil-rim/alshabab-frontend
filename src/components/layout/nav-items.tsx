@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { DestinationListProps, PackageListProps } from "@/types";
+import { DestinationListProps, ParentPackageListProps } from "@/types";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { cn } from "@/lib/utils";
@@ -21,7 +21,7 @@ const NavItems = ({
     locale,
 }: {
     destinations: DestinationListProps[];
-    packages: PackageListProps[];
+    packages: ParentPackageListProps[];
     isMobile?: boolean;
     setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
     locale: string;
@@ -148,7 +148,10 @@ const NavItems = ({
                             </Link>
                             {packages?.map((package_) => (
                                 <Link
-                                    href={"/packages/" + package_.slug}
+                                    href={
+                                        "/packages/international-tour-packages/" +
+                                        package_.package_slug
+                                    }
                                     key={package_.documentId}
                                     className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
                                 >
@@ -196,7 +199,10 @@ const NavItems = ({
                                 </Link>
                                 {packages.map((package_) => (
                                     <Link
-                                        href={"/packages/" + package_.slug}
+                                        href={
+                                            "/packages/international-tour-packages/" +
+                                            package_.package_slug
+                                        }
                                         onClick={closeMenu}
                                         key={package_.documentId}
                                     >

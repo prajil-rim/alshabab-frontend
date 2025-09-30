@@ -7,6 +7,7 @@ import FareSummary from "./fare-summary";
 import type { PackageListProps, PackagePriceDetails } from "@/types";
 import PackageFormModal from "@/components/modal/package-form-modal";
 import PackageFormSmModal from "@/components/modal/package-form-sm-modal";
+import { Link } from "@/i18n/navigation";
 
 type PackageSidebarProps = {
     call_us_on: string;
@@ -58,10 +59,9 @@ const PackageSidebar = ({
                     </PackageFormSmModal>
                 </div>
                 <div className="hidden lg:block">
-                    <PackageFormModal
-                        packages={packages || []}
-                        locale={locale}
-                        modalData={modalData}
+                    <Link
+                        href={`https://api.whatsapp.com/send/?phone=${whatsapp}&text=Hi, I would like to know some details about a package.&type=phone_number&app_absent=0`}
+                        target="_blank"
                     >
                         <Button
                             className="w-full bg-transparent border border-secondary text-secondary hover:text-white cursor-pointer"
@@ -69,7 +69,7 @@ const PackageSidebar = ({
                         >
                             Send Enquiry
                         </Button>
-                    </PackageFormModal>
+                    </Link>
                 </div>
                 <div className="lg:hidden">
                     <PackageFormSmModal

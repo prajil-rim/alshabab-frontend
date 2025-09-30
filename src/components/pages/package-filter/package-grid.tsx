@@ -15,6 +15,7 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination";
 import { useEffect, useState } from "react";
+import { Link } from "@/i18n/navigation";
 
 const PAGE_SIZE = 12; // adjust per your design
 
@@ -24,7 +25,7 @@ const PackageGrid = ({
 }: {
     packages: PackageCardProps[];
     parentPackageData: {
-        destination: string;
+        destination_label: string;
         package_banner: PackageBannerProps;
     };
 }) => {
@@ -140,25 +141,23 @@ const PackageGrid = ({
                     <Info size={16} /> No packages found!
                 </div>
             ) : (
-                currentPageData
-                    .slice(0, 6)
-                    .map((pkg) => (
+                currentPageData.slice(0, 6).map((pkg) => (
+                    <Link key={pkg.id} href={`/packages/${pkg.slug}`}>
                         <PackageCard
-                            key={pkg.id}
                             slug={pkg.slug}
                             package={pkg.package}
                             hero={pkg.hero}
                             package_general_info={pkg.package_general_info}
                         />
-                    ))
+                    </Link>
+                ))
             )}
 
             <Banner data={parentPackageData.package_banner} />
 
             {currentPageData.length > 6 &&
-                currentPageData
-                    .slice(6)
-                    .map((pkg) => (
+                currentPageData.slice(6).map((pkg) => (
+                    <Link key={pkg.id} href={`/packages/${pkg.slug}`}>
                         <PackageCard
                             key={pkg.id}
                             slug={pkg.slug}
@@ -166,7 +165,8 @@ const PackageGrid = ({
                             hero={pkg.hero}
                             package_general_info={pkg.package_general_info}
                         />
-                    ))}
+                    </Link>
+                ))}
 
             {totalPages > 1 && (
                 <Pagination className="md:col-span-2">
