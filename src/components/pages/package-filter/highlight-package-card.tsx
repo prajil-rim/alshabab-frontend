@@ -13,6 +13,7 @@ const HighlightPackageCard = ({
     title: string;
     button: LinkProps;
 }) => {
+    if (!image || !image.url || !title || !button) return null;
     return (
         <div
             className="h-[350px] rounded-lg mt-10 relative after:absolute after:inset-0 after:bg-gradient-to-t after:from-black after:to-black/0 overflow-hidden"
