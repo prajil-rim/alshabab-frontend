@@ -208,7 +208,7 @@
 .prose h4,
 .prose h5,
 .prose h6 {
-    font-family: "Playfair Display", serif;
+    font-family: "Playfair Display", serif !important;
 }
 
 .outlined-text {
@@ -220,4 +220,16 @@
     color: white; /* Fill color */
     -webkit-text-stroke: 1px transparent; /* Border width and color */
     text-stroke: 1px transparent; /* For extra support (optional) */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    border: 1px solid #333;
+    padding: 10px 15px;
+    text-align: left;
 }

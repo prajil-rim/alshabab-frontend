@@ -19,6 +19,7 @@ import InternalLinks from "@/components/layout/internal-links";
 import { Metadata } from "next";
 import { returnMetadata } from "@/lib/utils";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import SeoContent from "@/components/pages/packages/seo-content";
 
 let parentPackagePageDataPromise: ReturnType<typeof getParentPackage> | null =
     null;
@@ -97,7 +98,7 @@ export default async function DashboardLayout({
                         text: pageData.package,
                     },
                 ]}
-                cta_button="Read more"
+                cta_button="Get Consultation"
             />
 
             <section className="relative">
@@ -188,6 +189,8 @@ export default async function DashboardLayout({
                     </PackageTab>
                 </div>
             </section>
+
+            <SeoContent content={pageData.contents} />
 
             <Testimonials {...pageData.testimonial} />
             <FooterCTA {...pageData.footer_cta_section} />
