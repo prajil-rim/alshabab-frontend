@@ -41,7 +41,7 @@ const CancellationPolicy = ({
                                             ?.label ?? ""}
                                     </td>
                                     <td className="px-4 py-2">
-                                        {cancellation_policy.column_1[index]
+                                        {cancellation_policy.column_2[index]
                                             ?.label ?? ""}
                                     </td>
                                 </tr>

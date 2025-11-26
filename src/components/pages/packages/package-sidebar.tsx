@@ -98,14 +98,20 @@ const PackageSidebar = ({
                         </div>
                     </div>
                     <Separator className="my-5" />
-                    <div className="flex items-center gap-3">
-                        <ColoredClock />
-                        <div className="text-[#202020]">
-                            <p className="text-sm opacity-50">Timings</p>
-                            <span className="font-bold">{timing}</span>
-                        </div>
-                    </div>
-                    <Separator className="my-5" />
+                    {timing && (
+                        <>
+                            <div className="flex items-center gap-3">
+                                <ColoredClock />
+                                <div className="text-[#202020]">
+                                    <p className="text-sm opacity-50">
+                                        Timings
+                                    </p>
+                                    <span className="font-bold">{timing}</span>
+                                </div>
+                            </div>
+                            <Separator className="my-5" />
+                        </>
+                    )}
                     <div className="flex items-center gap-3 [&_svg:not([class*='size-'])]:size-10">
                         <WhatsappOutline />
                         <div className="text-[#202020]">

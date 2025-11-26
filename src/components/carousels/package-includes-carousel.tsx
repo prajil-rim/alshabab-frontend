@@ -12,9 +12,9 @@ import Card from "../pages/packages/card";
 import SlideIndicator from "./slide-indicator";
 
 const PackageIncludesCarousel = ({
-    package_includes,
+    trip_highlights,
 }: {
-    package_includes: CardProps[];
+    trip_highlights: CardProps[];
 }) => {
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
@@ -37,7 +37,7 @@ const PackageIncludesCarousel = ({
         <div className="mx-auto max-w-xs sm:hidden">
             <Carousel setApi={setApi} className="w-full max-w-xs">
                 <CarouselContent>
-                    {package_includes?.map((card) => (
+                    {trip_highlights?.map((card) => (
                         <CarouselItem key={card.id}>
                             <Card {...card} />
                         </CarouselItem>

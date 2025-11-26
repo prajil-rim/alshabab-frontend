@@ -7,6 +7,13 @@ const PaymentPolicy = ({
     payment_policy: Policy;
     payment_policy_points: LabelProps[];
 }) => {
+    if (
+        !payment_policy ||
+        payment_policy.column_1?.length === 0 ||
+        payment_policy.column_2?.length === 0
+    )
+        return null;
+
     const maxPaymentPolicyRows = Math.max(
         payment_policy.column_1.length,
         payment_policy.column_2.length

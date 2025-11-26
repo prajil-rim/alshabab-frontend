@@ -10,8 +10,8 @@ const FareSummary = ({
     price_details: PackagePriceDetails;
 }) => {
     const { packageDetail } = usePackagePriceContext();
-    const pricePerRoom = Number(price_details.price_per_room || 1);
-    const pricePerAdult = Number(price_details.base_price_per_adult || 1);
+    const pricePerRoom = Number(price_details.price_per_room || 0);
+    const pricePerAdult = Number(price_details.offer_price_per_adult || 1);
     const totalPrice =
         pricePerRoom * packageDetail.room +
         pricePerAdult * packageDetail.guests;

@@ -15,7 +15,6 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination";
 import { useEffect, useState } from "react";
-import { Link } from "@/i18n/navigation";
 
 const PAGE_SIZE = 12; // adjust per your design
 
@@ -25,6 +24,7 @@ const PackageGrid = ({
 }: {
     packages: PackageCardProps[];
     parentPackageData: {
+        package_slug: string;
         destination_label: string;
         package_banner: PackageBannerProps;
     };
@@ -142,14 +142,19 @@ const PackageGrid = ({
                 </div>
             ) : (
                 currentPageData.slice(0, 6).map((pkg) => (
-                    <Link key={pkg.id} href={`/packages/${pkg.slug}`}>
-                        <PackageCard
-                            slug={pkg.slug}
-                            package={pkg.package}
-                            hero={pkg.hero}
-                            package_general_info={pkg.package_general_info}
-                        />
-                    </Link>
+                    // <Link
+                    //     key={pkg.id}
+                    //     href={`/packages/${parentPackageData.package_slug}/${pkg.slug}`}
+                    // >
+                    <PackageCard
+                        slug={pkg.slug}
+                        package={pkg.package}
+                        hero={pkg.hero}
+                        package_general_info={pkg.package_general_info}
+                        package_slug={parentPackageData.package_slug}
+                        key={pkg.id}
+                    />
+                    // </Link>
                 ))
             )}
 
@@ -157,15 +162,19 @@ const PackageGrid = ({
 
             {currentPageData.length > 6 &&
                 currentPageData.slice(6).map((pkg) => (
-                    <Link key={pkg.id} href={`/packages/${pkg.slug}`}>
-                        <PackageCard
-                            key={pkg.id}
-                            slug={pkg.slug}
-                            package={pkg.package}
-                            hero={pkg.hero}
-                            package_general_info={pkg.package_general_info}
-                        />
-                    </Link>
+                    // <Link
+                    //     key={pkg.id}
+                    //     href={`/packages/${parentPackageData.package_slug}/${pkg.slug}`}
+                    // >
+                    <PackageCard
+                        key={pkg.id}
+                        slug={pkg.slug}
+                        package={pkg.package}
+                        hero={pkg.hero}
+                        package_general_info={pkg.package_general_info}
+                        package_slug={parentPackageData.package_slug}
+                    />
+                    // </Link>
                 ))}
 
             {totalPages > 1 && (

@@ -7,6 +7,7 @@ import MapPin from "../icons/map-pin";
 import Call from "../icons/call";
 import { useTranslations } from "next-intl";
 import { getImage } from "@/lib/utils";
+import TrustBox from "./trust-pilot";
 
 interface FooterProps {
     description: string;
@@ -72,6 +73,9 @@ const Footer = ({
                         <p className="max-w-sm mx-auto lg:mx-0">
                             {description}
                         </p>
+                        <div className="w-fit">
+                            <TrustBox />
+                        </div>
                     </div>
                     <div className="space-y-5 lg:space-y-6 text-center lg:text-left">
                         <div className="text-xl font-bold">

@@ -752,9 +752,9 @@ export const packageQuery = qs.stringify({
                 },
             },
         },
-        package_includes_section: {
+        trip_highlights_section: {
             populate: {
-                package_includes: {
+                trip_highlights: {
                     populate: {
                         image: {
                             fields: ["url", "alternativeText"],
@@ -1005,7 +1005,7 @@ export const parentPackageSelectQuery = qs.stringify({
             },
         },
     },
-    fields: ["destination_label"],
+    fields: ["destination_label", "package_slug"],
 });
 
 export const packageListingPageQuery = qs.stringify({

@@ -29,7 +29,7 @@ const PackageHeader = ({
     const { packageDetail } = usePackagePriceContext();
     const data = [
         { label: "From City", value: from_city },
-        { label: "Price Category", value: price_category },
+        { label: "Price Category", value: price_category || "Standard" },
         {
             label: "Tour Date",
             value: format(

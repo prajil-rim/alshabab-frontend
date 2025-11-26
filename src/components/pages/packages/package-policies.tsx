@@ -16,12 +16,16 @@ const PackagePolicies = ({
 }) => {
     return (
         <div className="md:space-y-4">
-            <CancellationPolicy cancellation_policy={cancellation_policy} />
+            {cancellation_policy && (
+                <CancellationPolicy cancellation_policy={cancellation_policy} />
+            )}
             <PaymentPolicy
                 payment_policy={payment_policy}
                 payment_policy_points={payment_policy_points}
             />
-            <TermsAndConditions term_and_conditions={term_and_conditions} />
+            {term_and_conditions && (
+                <TermsAndConditions term_and_conditions={term_and_conditions} />
+            )}
         </div>
     );
 };

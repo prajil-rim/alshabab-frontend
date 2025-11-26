@@ -8,7 +8,10 @@
                 "packages": "Packages",
                 "insights": "Insights",
                 "contactUs": "Contact Us",
-                "cta": "Plan Your Trip"
+                "cta": "Plan Your Trip",
+                "visaServices": "Visa Services",
+                "intlPackage": "International Tour Package",
+                "airTicketing": "Air Ticketing"
             }
         },
         "searchSection": {

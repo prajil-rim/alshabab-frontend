@@ -8,7 +8,10 @@
                 "packages": "الحزم",
                 "insights": "رؤى",
                 "contactUs": "اتصل بنا",
-                "cta": "خطط لرحلتك"
+                "cta": "خطط لرحلتك",
+                "visaServices": "خدمات التأشيرات",
+                "intlPackage": "باقة الرحلات الدولية",
+                "airTicketing": "تذاكر الطيران"
             }
         },
         "searchSection": {

@@ -18,6 +18,7 @@ const TravelPackagesListing = ({
     }[];
     parentPackageData: {
         destination_label: string;
+        package_slug: string;
         package_banner: PackageBannerProps;
     };
 }) => {

@@ -26,8 +26,9 @@ const NavItems = ({
     setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
     locale: string;
 }) => {
-    const [dOpen, setDOpen] = useState(false);
+    // const [dOpen, setDOpen] = useState(false);
     const [pOpen, setPOpen] = useState(false);
+    const [intlOpen, setIntlOpen] = useState(false);
     const pathname = usePathname();
     const t = useTranslations("homePage.header.navItems");
     const isActive = (path: string) => pathname === path;
@@ -54,19 +55,17 @@ const NavItems = ({
                     : "flex-row"
             )}
         >
-            {!isMobile && (
+            {/* {!isMobile && (
                 <div
                     onMouseEnter={() => setDOpen(true)}
                     onMouseLeave={() => setDOpen(false)}
                     className={activeStyle("/destinations", "relative group")}
                 >
-                    {/* Link and Chevron */}
                     <div className="flex items-center gap-1 cursor-pointer">
                         <Link href="/destinations">{t("destinations")}</Link>
                         <ChevronDown size={16} />
                     </div>
 
-                    {/* Dropdown */}
                     {dOpen && (
                         <div className="absolute left-0 top-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
                             {destinations?.map((destination) => (
@@ -81,8 +80,8 @@ const NavItems = ({
                         </div>
                     )}
                 </div>
-            )}
-            {isMobile && (
+            )} */}
+            {/* {isMobile && (
                 <li className={activeStyle("/destinations")}>
                     <button
                         className="flex items-center gap-1 cursor-pointer"
@@ -124,7 +123,7 @@ const NavItems = ({
                         )}
                     </AnimatePresence>
                 </li>
-            )}
+            )} */}
             {!isMobile && (
                 <div
                     onMouseEnter={() => setPOpen(true)}
@@ -140,24 +139,43 @@ const NavItems = ({
                     {/* Dropdown */}
                     {pOpen && (
                         <div className="absolute left-0 top-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
-                            <Link
-                                href={"/packages/international-tour-packages"}
-                                className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
+                            <div
+                                className="relative"
+                                onMouseEnter={() => setIntlOpen(true)}
+                                onMouseLeave={() => setIntlOpen(false)}
                             >
-                                International Tour Package
-                            </Link>
-                            {packages?.map((package_) => (
                                 <Link
                                     href={
-                                        "/packages/international-tour-packages/" +
-                                        package_.package_slug
+                                        "/packages/international-tour-packages"
                                     }
-                                    key={package_.documentId}
                                     className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
                                 >
-                                    {package_.package}
+                                    {t("intlPackage")}
                                 </Link>
-                            ))}
+
+                                {intlOpen && (
+                                    <div className="absolute top-0 left-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
+                                        {packages?.map((package_) => (
+                                            <Link
+                                                href={
+                                                    "/packages/" +
+                                                    package_.package_slug
+                                                }
+                                                key={package_.documentId}
+                                                className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
+                                            >
+                                                {package_.package}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                            <Link
+                                href={"/"}
+                                className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
+                            >
+                                {t("airTicketing")}
+                            </Link>
                         </div>
                     )}
                 </div>
@@ -168,7 +186,7 @@ const NavItems = ({
                         className="flex items-center gap-1 cursor-pointer"
                         onClick={() => setPOpen((prev) => !prev)}
                     >
-                        <span>{t("packages")}</span>
+                        <span>{t("intlPackage")}</span>
                         <m.span
                             animate={{ rotate: pOpen ? 180 : 0 }}
                             transition={{ duration: 0.25 }}
@@ -189,19 +207,18 @@ const NavItems = ({
                                 }}
                                 className="overflow-hidden px-0 py-2 space-y-2"
                             >
-                                <Link
+                                {/* <Link
                                     href={
                                         "/packages/international-tour-packages"
                                     }
                                     onClick={closeMenu}
                                 >
-                                    <li>International Tour Package</li>
-                                </Link>
+                                    <li>{t("intlPackage")}</li>
+                                </Link> */}
                                 {packages.map((package_) => (
                                     <Link
                                         href={
-                                            "/packages/international-tour-packages/" +
-                                            package_.package_slug
+                                            "/packages/" + package_.package_slug
                                         }
                                         onClick={closeMenu}
                                         key={package_.documentId}
@@ -214,6 +231,16 @@ const NavItems = ({
                     </AnimatePresence>
                 </li>
             )}
+            <li className={activeStyle("/visa-services") && "md:hidden"}>
+                <Link href={"/"} onClick={closeMenu} target="_blank">
+                    {t("airTicketing")}
+                </Link>
+            </li>
+            <li className={activeStyle("/visa-services")}>
+                <Link href={"/visa-services"} onClick={closeMenu}>
+                    {t("visaServices")}
+                </Link>
+            </li>
             <li className={activeStyle("/blogs")}>
                 <Link href={"/blogs"} onClick={closeMenu}>
                     {t("insights")}

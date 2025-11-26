@@ -16,6 +16,7 @@ type PackageCardProps = {
         background: MediaProps;
     };
     package_general_info: PackageGeneralInfo;
+    package_slug: string;
 };
 
 const PackageCard = (pkg: PackageCardProps) => {
@@ -82,7 +83,7 @@ const PackageCard = (pkg: PackageCardProps) => {
                     This package is customizable
                 </p>
                 <div className="flex items-center gap-3 mb-4 bg-[#F5F1E3] rounded-full w-fit px-2 py-1.5">
-                    {pkg.package_general_info.package_includes.map(
+                    {pkg.package_general_info?.package_includes?.map(
                         (service) => (
                             <div
                                 key={service.id}
@@ -149,7 +150,10 @@ const PackageCard = (pkg: PackageCardProps) => {
                     </div>
                 </div>
                 <div className="pt-3 flex-1 flex items-end">
-                    <Link href={`/packages/${pkg.slug}`} className="w-full">
+                    <Link
+                        href={`/packages/${pkg.package_slug}/${pkg.slug}`}
+                        className="w-full"
+                    >
                         <Button
                             variant={"secondary"}
                             className="w-full font-bold cursor-pointer"

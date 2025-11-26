@@ -5,16 +5,15 @@ import PackageIncludesCarousel from "@/components/carousels/package-includes-car
 interface PackageIncludesProps {
     title: string;
     description: string;
-    package_includes: CardProps[];
+    trip_highlights: CardProps[];
 }
 
 const PackageIncludesSection = ({
     title,
     description,
-    package_includes,
+    trip_highlights,
 }: Readonly<PackageIncludesProps>) => {
-    if (!package_includes || package_includes.length === 0 || !title)
-        return null;
+    if (!trip_highlights || trip_highlights.length === 0 || !title) return null;
     return (
         <section className="max-w-7xl mx-auto pt-20 pb-24 space-y-6 px-3 lg:px-6 2xl:px-0">
             <h2 className="text-2xl lg:text-4xl font-semibold">{title}</h2>
@@ -22,13 +21,11 @@ const PackageIncludesSection = ({
                 {description}
             </p>
             <div className="grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-7 hidden sm:grid">
-                {package_includes.map((card) => (
+                {trip_highlights.map((card) => (
                     <Card key={card.id} {...card} />
                 ))}
             </div>
-            <PackageIncludesCarousel
-                package_includes={package_includes || []}
-            />
+            <PackageIncludesCarousel trip_highlights={trip_highlights || []} />
         </section>
     );
 };

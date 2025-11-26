@@ -9,14 +9,17 @@ export const generateStaticParams = () => {
 
 const SubPackagePage = async ({
     params,
+    searchParams,
 }: {
     params: Promise<{ package: string; locale: string }>;
+    searchParams: Promise<{ category: string }>;
 }) => {
     const package_ = (await params).package;
     const locale = (await params).locale;
+    const category = (await searchParams).category;
     const { packages, packageCategories, parentPackageData } = await loader(
         package_,
-        "",
+        category || "",
         locale
     );
 

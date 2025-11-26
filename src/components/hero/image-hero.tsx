@@ -34,6 +34,8 @@ const ImageHero = ({
     locale,
     showPrice = false,
     showBadge = false,
+    base_price_per_adult,
+    offer_price_per_adult,
 }: Readonly<
     Pick<
         ImageHeroProps,
@@ -46,6 +48,8 @@ const ImageHero = ({
         showPrice?: boolean;
         showBadge?: boolean;
         locale: string;
+        base_price_per_adult?: number;
+        offer_price_per_adult?: number;
     }
 >) => {
     return (
@@ -120,9 +124,11 @@ const ImageHero = ({
                         <div className="text-center lg:text-right flex flex-col gap-1">
                             <span>Starting Price Per Adult</span>
                             <span className="line-through font-semibold text-white/50">
-                                AED 659
+                                AED {base_price_per_adult}
                             </span>
-                            <span className="text-lg font-bold">AED 559</span>
+                            <span className="text-lg font-bold">
+                                AED {offer_price_per_adult}
+                            </span>
                         </div>
                     </div>
                 )}
@@ -134,9 +140,11 @@ const ImageHero = ({
                             Starting Price Per Adult
                         </span>
                         <span className="line-through text-xl font-semibold">
-                            AED 659
+                            AED {base_price_per_adult}
                         </span>
-                        <span className="text-2xl font-bold">AED 559</span>
+                        <span className="text-2xl font-bold">
+                            AED {offer_price_per_adult}
+                        </span>
                     </div>
                 </div>
             )}

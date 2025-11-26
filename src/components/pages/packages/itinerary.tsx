@@ -39,6 +39,7 @@ function ItineraryCard({
     description: string;
     images: MediaProps[];
 }) {
+    if (!title || !images || images.length === 0) return null;
     return (
         <div className="bg-white rounded-xl border hover:border-primary hover:shadow-lg p-3 space-y-4">
             <h4 className="font-playfair-display font-bold text-primary text-lg">

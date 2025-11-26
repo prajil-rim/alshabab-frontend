@@ -102,6 +102,14 @@ const PackagePage = async ({
                         text: pageData.package,
                     },
                 ]}
+                base_price_per_adult={
+                    pageData.package_general_info?.price_details
+                        ?.base_price_per_adult || 0
+                }
+                offer_price_per_adult={
+                    pageData.package_general_info?.price_details
+                        ?.offer_price_per_adult || 0
+                }
                 showPrice
                 showBadge
             />
@@ -117,7 +125,7 @@ const PackagePage = async ({
                     locale={locale}
                 />
             )}
-            <PackageIncludesSection {...pageData.package_includes_section} />
+            <PackageIncludesSection {...pageData.trip_highlights_section} />
             <TripDetailsSection {...pageData.trip_details} />
             <div className="pt-10 lg:pt-20"></div>
             <Testimonials {...pageData?.testimonials} />
