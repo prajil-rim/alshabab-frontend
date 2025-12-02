@@ -18,7 +18,7 @@ const FAQSection = ({
     faqs,
     showLeaf = false,
 }: Readonly<FAQProps>) => {
-    if (!faqs || faqs.length === 0 || !title || !description) return null;
+    if (!faqs || faqs.length === 0 || !title) return null;
 
     // Split FAQs into two columns
     const mid = Math.ceil(faqs.length / 2);

@@ -19,6 +19,7 @@ import {
     parentPackageQuery,
     partnerSectionQuery,
     testimonialQuery,
+    visaQuery,
 } from "./queries";
 import { z } from "zod";
 import {
@@ -255,4 +256,12 @@ export async function getPartners(locale: string) {
         method: "GET",
         next: { tags: ["partner-section"] },
     });
+}
+
+export async function getVisa(slug: string, locale: string) {
+    const path = `/api/visa-pages/${slug}`;
+    const url = new URL(path, BASE_URL);
+    url.search = visaQuery;
+    url.searchParams.set("locale", locale);
+    return fetchAPI(url.href, { method: "GET" });
 }

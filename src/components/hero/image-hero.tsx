@@ -70,44 +70,48 @@ const ImageHero = ({
                 <p className="font-manrope lg:text-lg max-w-2xl text-center">
                     {description}
                 </p>
-                {cta_button && (
-                    <div className="font-manrope flex flex-col gap-3 lg:flex-row items-center">
-                        <div className="hidden lg:block">
-                            <ContactFormModal
-                                destinations={destinations || []}
-                                packages={packages || []}
-                                locale={locale}
-                            >
-                                <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
-                                    {cta_button} <ArrowRightUp color="red" />
-                                </Button>
-                            </ContactFormModal>
-                        </div>
-                        <div className="lg:hidden">
-                            <ContactFormSmModal
-                                destinations={destinations || []}
-                                packages={packages || []}
-                                locale={locale}
-                            >
-                                <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
-                                    {cta_button} <ArrowRightUp color="red" />
-                                </Button>
-                            </ContactFormSmModal>
-                        </div>
-                        {cta_whatsapp && (
-                            <Link
-                                href={cta_whatsapp?.href}
-                                target={
-                                    cta_whatsapp.isExternal ? "_blank" : "_self"
-                                }
-                            >
-                                <Button className="rounded-full bg-[#FFE9EC] text-black hover:text-white cursor-pointer">
-                                    {cta_whatsapp?.text} <Whatsapp />
-                                </Button>
-                            </Link>
-                        )}
-                    </div>
-                )}
+                <div className="font-manrope flex flex-col gap-3 lg:flex-row items-center">
+                    {cta_button && (
+                        <>
+                            <div className="hidden lg:block">
+                                <ContactFormModal
+                                    destinations={destinations || []}
+                                    packages={packages || []}
+                                    locale={locale}
+                                >
+                                    <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
+                                        {cta_button}{" "}
+                                        <ArrowRightUp color="red" />
+                                    </Button>
+                                </ContactFormModal>
+                            </div>
+                            <div className="lg:hidden">
+                                <ContactFormSmModal
+                                    destinations={destinations || []}
+                                    packages={packages || []}
+                                    locale={locale}
+                                >
+                                    <Button className="bg-transparent rounded-full cursor-pointer border border-[#F5F1E3] hover:bg-white hover:text-black">
+                                        {cta_button}{" "}
+                                        <ArrowRightUp color="red" />
+                                    </Button>
+                                </ContactFormSmModal>
+                            </div>
+                        </>
+                    )}
+                    {cta_whatsapp && (
+                        <Link
+                            href={cta_whatsapp?.href}
+                            target={
+                                cta_whatsapp.isExternal ? "_blank" : "_self"
+                            }
+                        >
+                            <Button className="rounded-full bg-[#FFE9EC] text-black hover:text-white cursor-pointer">
+                                {cta_whatsapp?.text} <Whatsapp />
+                            </Button>
+                        </Link>
+                    )}
+                </div>
                 {showBadge && (
                     <div className="flex gap-2 font-manrope">
                         <Badge className="rounded-full bg-white text-black px-3 py-1">

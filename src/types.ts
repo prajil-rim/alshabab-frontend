@@ -363,3 +363,20 @@ export type PackageBannerProps = {
     image: MediaProps;
     button: LinkProps;
 };
+
+export type TeamProfileCardProps = {
+    id: number;
+    image: MediaProps;
+    name: string;
+    role: string;
+    social_links: {
+        id: number;
+        href: string;
+        isExternal: boolean;
+        label: string;
+        icon: MediaProps;
+    }[];
+    bio: string;
+    experience: string;
+    specialization?: string;
+};

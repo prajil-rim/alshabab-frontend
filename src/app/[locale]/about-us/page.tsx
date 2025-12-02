@@ -8,7 +8,7 @@ import AboutSection1 from "@/components/pages/about-us/about-section-1";
 import AwardsSection from "@/components/pages/about-us/awards-section";
 import ExperiencesSection from "@/components/pages/about-us/experiences-section";
 import FeaturedInSection from "@/components/pages/about-us/featured-in-section";
-import GuidesSection from "@/components/pages/about-us/guides-section";
+// import GuidesSection from "@/components/pages/about-us/guides-section";
 import MapSection from "@/components/pages/about-us/map-section";
 import OurJourneySection from "@/components/pages/about-us/our-journey-section";
 import {
@@ -109,7 +109,7 @@ export default async function AboutUsPage({
             </section>
             <OurJourneySection {...pageData.our_journey_section} />
             <PartnerSection {...partners} />
-            <GuidesSection {...pageData.guides_section} />
+            {/* <GuidesSection {...pageData.guides_section} /> */}
             <AwardsSection {...pageData.awards_section} />
             <ExperiencesSection {...pageData.experiences_section} />
             <FeaturedInSection {...pageData.featured_in_section} />

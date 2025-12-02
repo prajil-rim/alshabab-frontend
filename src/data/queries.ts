@@ -1288,3 +1288,67 @@ export const blogListQuery = qs.stringify({
     },
     fields: ["slug", "blog_title"],
 });
+
+export const visaQuery = qs.stringify({
+    populate: {
+        hero: {
+            populate: {
+                background: {
+                    fields: ["url", "alternativeText"],
+                },
+                button: true,
+            },
+        },
+        team_profile_section: {
+            populate: {
+                teams: {
+                    populate: {
+                        image: {
+                            fields: ["url", "alternativeText"],
+                        },
+                        social_links: {
+                            populate: {
+                                icon: {
+                                    fields: ["url", "alternativeText"],
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+        faq_section: {
+            populate: {
+                faqs: true,
+            },
+        },
+        footer_cta_section: {
+            populate: {
+                background: {
+                    fields: ["url", "alternativeText"],
+                },
+                cta_call: true,
+                cta_chat: true,
+            },
+        },
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
+        internal_links: {
+            populate: {
+                links: true,
+            },
+        },
+    },
+});
