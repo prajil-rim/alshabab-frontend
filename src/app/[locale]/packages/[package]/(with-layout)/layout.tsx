@@ -21,8 +21,6 @@ import { returnMetadata } from "@/lib/utils";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import SeoContent from "@/components/pages/packages/seo-content";
 
-export const dynamic = "force-dynamic";
-
 let parentPackagePageDataPromise: ReturnType<typeof getParentPackage> | null =
     null;
 let localeCache: string | null = null;

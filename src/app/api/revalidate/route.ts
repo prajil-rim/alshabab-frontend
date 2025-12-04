@@ -10,6 +10,7 @@ const StaticModelMap = {
     "contact-us-page": "/contact-us",
     "international-package-listing-page":
         "/packages/international-tour-packages",
+    "visa-listing-page": "/visa-services",
 };
 
 const DynamicModelMap = {
@@ -17,6 +18,7 @@ const DynamicModelMap = {
     destination: "/destinations/",
     package: "/packages/",
     "parent-package": "/packages/international-tour-packages/",
+    "visa-page": "/visa-services/",
 };
 
 export async function POST(request: NextRequest) {

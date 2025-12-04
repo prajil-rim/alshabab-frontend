@@ -1352,3 +1352,40 @@ export const visaQuery = qs.stringify({
         },
     },
 });
+
+export const visaListingQuery = qs.stringify({
+    populate: {
+        hero: {
+            populate: {
+                background: {
+                    fields: ["url", "alternativeText"],
+                },
+                cta_whatsapp: true,
+            },
+        },
+        core_services_section: {
+            populate: {
+                cta_button: true,
+            },
+        },
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
+        internal_links: {
+            populate: {
+                links: true,
+            },
+        },
+    },
+});

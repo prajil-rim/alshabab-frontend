@@ -19,6 +19,7 @@ import {
     parentPackageQuery,
     partnerSectionQuery,
     testimonialQuery,
+    visaListingQuery,
     visaQuery,
 } from "./queries";
 import { z } from "zod";
@@ -262,6 +263,14 @@ export async function getVisa(slug: string, locale: string) {
     const path = `/api/visa-pages/${slug}`;
     const url = new URL(path, BASE_URL);
     url.search = visaQuery;
+    url.searchParams.set("locale", locale);
+    return fetchAPI(url.href, { method: "GET" });
+}
+
+export async function getVisaListing(locale: string) {
+    const path = "/api/visa-listing-page";
+    const url = new URL(path, BASE_URL);
+    url.search = visaListingQuery;
     url.searchParams.set("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }

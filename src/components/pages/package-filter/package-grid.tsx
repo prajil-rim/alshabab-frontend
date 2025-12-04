@@ -4,7 +4,7 @@ import type { PackageBannerProps, PackageCardProps } from "@/types";
 import Banner from "./banner";
 import PackageCard from "./package-card";
 import { usePackageFilterContext } from "@/provider/package-filter-context";
-import { Info } from "lucide-react";
+import { Info, Loader, TriangleAlert } from "lucide-react";
 import {
     Pagination,
     PaginationContent,
@@ -15,14 +15,14 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination";
 import { useEffect, useState } from "react";
+import { getPackageResults } from "@/data/loaders";
+import { useParams, useSearchParams } from "next/navigation";
 
 const PAGE_SIZE = 12; // adjust per your design
 
 const PackageGrid = ({
-    packages,
     parentPackageData,
 }: {
-    packages: PackageCardProps[];
     parentPackageData: {
         package_slug: string;
         destination_label: string;
@@ -31,8 +31,34 @@ const PackageGrid = ({
 }) => {
     const { packageFilter } = usePackageFilterContext();
     const [page, setPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
+    const [packages, setPackages] = useState<PackageCardProps[] | undefined>();
 
-    const filteredPackages = packages.filter((pkg) => {
+    const package_ = useParams().package as string;
+    const locale = useParams().locale as string;
+    const category = useSearchParams().get("category") as string;
+
+    useEffect(() => {
+        try {
+            async function fetchPackages() {
+                const packages_ = await getPackageResults(
+                    package_,
+                    category,
+                    locale
+                );
+                setPackages(packages_.data);
+            }
+
+            fetchPackages();
+        } catch {
+            setIsError(true);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [category, locale, package_]);
+
+    const filteredPackages = packages?.filter((pkg) => {
         const { withFlights, budget, duration, recommendedFor } = packageFilter;
 
         // ✅ 1. Flights filter
@@ -90,7 +116,7 @@ const PackageGrid = ({
         return true;
     });
 
-    const sortedPackages = [...filteredPackages].sort((a, b) => {
+    const sortedPackages = filteredPackages?.sort((a, b) => {
         const sortBy = packageFilter.sortBy; // "price" or "duration"
 
         if (sortBy.value === "price") {
@@ -129,104 +155,126 @@ const PackageGrid = ({
     }, [packageFilter]);
 
     // ✅ Pagination logic
-    const totalPages = Math.ceil(sortedPackages.length / PAGE_SIZE);
+    const totalPages = Math.ceil(sortedPackages?.length ?? 1 / PAGE_SIZE);
     const start = (page - 1) * PAGE_SIZE;
     const end = start + PAGE_SIZE;
-    const currentPageData = sortedPackages.slice(start, end);
+    const currentPageData = sortedPackages?.slice(start, end);
+
+    if (isError)
+        return (
+            <div className="flex justify-center items-center py-20 gap-2">
+                <TriangleAlert className="text-primary" size={17} />
+                <span className="text-sm">
+                    Error loading packages! Please try again.
+                </span>
+            </div>
+        );
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {currentPageData.length === 0 ? (
-                <div className="md:col-span-2 flex gap-2 items-center justify-center py-10">
-                    <Info size={16} /> No packages found!
+        <>
+            {isLoading ? (
+                <div className="flex justify-center items-center py-20 gap-2">
+                    <Loader className="animate-spin text-primary" size={17} />
+                    <span className="text-sm">Loading packages....</span>
                 </div>
             ) : (
-                currentPageData.slice(0, 6).map((pkg) => (
-                    // <Link
-                    //     key={pkg.id}
-                    //     href={`/packages/${parentPackageData.package_slug}/${pkg.slug}`}
-                    // >
-                    <PackageCard
-                        slug={pkg.slug}
-                        package={pkg.package}
-                        hero={pkg.hero}
-                        package_general_info={pkg.package_general_info}
-                        package_slug={parentPackageData.package_slug}
-                        key={pkg.id}
-                    />
-                    // </Link>
-                ))
-            )}
-
-            <Banner data={parentPackageData.package_banner} />
-
-            {currentPageData.length > 6 &&
-                currentPageData.slice(6).map((pkg) => (
-                    // <Link
-                    //     key={pkg.id}
-                    //     href={`/packages/${parentPackageData.package_slug}/${pkg.slug}`}
-                    // >
-                    <PackageCard
-                        key={pkg.id}
-                        slug={pkg.slug}
-                        package={pkg.package}
-                        hero={pkg.hero}
-                        package_general_info={pkg.package_general_info}
-                        package_slug={parentPackageData.package_slug}
-                    />
-                    // </Link>
-                ))}
-
-            {totalPages > 1 && (
-                <Pagination className="md:col-span-2">
-                    <PaginationContent className="mx-auto">
-                        {/* Previous */}
-                        <PaginationItem>
-                            <PaginationPrevious
-                                href="#"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setPage((p) => Math.max(p - 1, 1));
-                                }}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {currentPageData?.length === 0 ? (
+                        <div className="md:col-span-2 flex gap-2 items-center justify-center py-10">
+                            <Info size={16} /> No packages found!
+                        </div>
+                    ) : (
+                        currentPageData?.slice(0, 6).map((pkg) => (
+                            // <Link
+                            //     key={pkg.id}
+                            //     href={`/packages/${parentPackageData.package_slug}/${pkg.slug}`}
+                            // >
+                            <PackageCard
+                                slug={pkg.slug}
+                                package={pkg.package}
+                                hero={pkg.hero}
+                                package_general_info={pkg.package_general_info}
+                                package_slug={parentPackageData.package_slug}
+                                key={pkg.id}
                             />
-                        </PaginationItem>
+                            // </Link>
+                        ))
+                    )}
 
-                        {/* Page numbers */}
-                        {Array.from(
-                            { length: totalPages },
-                            (_, i) => i + 1
-                        ).map((p) => (
-                            <PaginationItem key={p}>
-                                <PaginationLink
-                                    href="#"
-                                    isActive={p === page}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setPage(p);
-                                    }}
-                                >
-                                    {p}
-                                </PaginationLink>
-                            </PaginationItem>
+                    <Banner data={parentPackageData.package_banner} />
+
+                    {currentPageData?.length &&
+                        currentPageData?.length > 6 &&
+                        currentPageData?.slice(6).map((pkg) => (
+                            // <Link
+                            //     key={pkg.id}
+                            //     href={`/packages/${parentPackageData.package_slug}/${pkg.slug}`}
+                            // >
+                            <PackageCard
+                                key={pkg.id}
+                                slug={pkg.slug}
+                                package={pkg.package}
+                                hero={pkg.hero}
+                                package_general_info={pkg.package_general_info}
+                                package_slug={parentPackageData.package_slug}
+                            />
+                            // </Link>
                         ))}
 
-                        {/* Ellipsis (optional if too many pages) */}
-                        {totalPages > 5 && <PaginationEllipsis />}
+                    {totalPages > 1 && (
+                        <Pagination className="md:col-span-2">
+                            <PaginationContent className="mx-auto">
+                                {/* Previous */}
+                                <PaginationItem>
+                                    <PaginationPrevious
+                                        href="#"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setPage((p) => Math.max(p - 1, 1));
+                                        }}
+                                    />
+                                </PaginationItem>
 
-                        {/* Next */}
-                        <PaginationItem>
-                            <PaginationNext
-                                href="#"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setPage((p) => Math.min(p + 1, totalPages));
-                                }}
-                            />
-                        </PaginationItem>
-                    </PaginationContent>
-                </Pagination>
+                                {/* Page numbers */}
+                                {Array.from(
+                                    { length: totalPages },
+                                    (_, i) => i + 1
+                                ).map((p) => (
+                                    <PaginationItem key={p}>
+                                        <PaginationLink
+                                            href="#"
+                                            isActive={p === page}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setPage(p);
+                                            }}
+                                        >
+                                            {p}
+                                        </PaginationLink>
+                                    </PaginationItem>
+                                ))}
+
+                                {/* Ellipsis (optional if too many pages) */}
+                                {totalPages > 5 && <PaginationEllipsis />}
+
+                                {/* Next */}
+                                <PaginationItem>
+                                    <PaginationNext
+                                        href="#"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setPage((p) =>
+                                                Math.min(p + 1, totalPages)
+                                            );
+                                        }}
+                                    />
+                                </PaginationItem>
+                            </PaginationContent>
+                        </Pagination>
+                    )}
+                </div>
             )}
-        </div>
+        </>
     );
 };
 

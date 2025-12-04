@@ -28,23 +28,23 @@ export function groupContactInfo(data: ContactInfoProps[]): GroupedContactInfo {
     }, {});
 }
 
-export function returnMetadata(data: { seo: SeoMetadata }) {
+export function returnMetadata(data: { seo: SeoMetadata } | undefined) {
     return {
-        title: data.seo?.metaTitle || "Al Shabab Tours",
-        description: data.seo?.metaDescription || "",
-        keywords: data.seo?.metaKeywords || "",
-        robots: data.seo?.metaRobots || "",
+        title: data?.seo?.metaTitle || "Al Shabab Tours",
+        description: data?.seo?.metaDescription || "",
+        keywords: data?.seo?.metaKeywords || "",
+        robots: data?.seo?.metaRobots || "",
         alternates: {
-            canonical: data.seo?.canonicalUrl || "",
+            canonical: data?.seo?.canonicalUrl || "",
         },
         openGraph: {
-            title: data.seo?.openGraph?.ogTitle || "Al Shabab Tours",
-            description: data.seo?.openGraph?.ogDescription || "",
-            url: data.seo?.openGraph?.ogUrl || "",
-            type: data.seo?.openGraph?.ogType || "website",
+            title: data?.seo?.openGraph?.ogTitle || "Al Shabab Tours",
+            description: data?.seo?.openGraph?.ogDescription || "",
+            url: data?.seo?.openGraph?.ogUrl || "",
+            type: data?.seo?.openGraph?.ogType || "website",
             images: {
-                url: data.seo?.openGraph?.ogImage?.url || "",
-                alt: data.seo?.openGraph?.ogImage?.alternativeText || "",
+                url: data?.seo?.openGraph?.ogImage?.url || "",
+                alt: data?.seo?.openGraph?.ogImage?.alternativeText || "",
             },
         },
         other: {

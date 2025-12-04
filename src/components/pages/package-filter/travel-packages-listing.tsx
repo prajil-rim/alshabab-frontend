@@ -2,16 +2,14 @@ import { ArrowUpDown, Filter } from "lucide-react";
 import SortFilter from "@/components/sheet/sort-filter";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import type { PackageBannerProps, PackageCardProps } from "@/types";
+import type { PackageBannerProps } from "@/types";
 import PackageGrid from "./package-grid";
 import PackageSort from "./package-sort";
 
 const TravelPackagesListing = ({
-    packages,
     packageCategories,
     parentPackageData,
 }: {
-    packages: PackageCardProps[];
     packageCategories: {
         category: string;
         slug: string;
@@ -29,7 +27,7 @@ const TravelPackagesListing = ({
                 <h1 className="text-xl font-semibold text-gray-900">
                     <span className="text-primary text-sm">
                         {parentPackageData?.destination_label} Travel Packages{" "}
-                        <span>&#040;{packages.length}&#041;</span>
+                        {/* <span>&#040;{packages.length}&#041;</span> */}
                     </span>
                 </h1>
 
@@ -73,10 +71,7 @@ const TravelPackagesListing = ({
             </div>
 
             {/* Package Grid */}
-            <PackageGrid
-                packages={packages}
-                parentPackageData={parentPackageData}
-            />
+            <PackageGrid parentPackageData={parentPackageData} />
         </div>
     );
 };

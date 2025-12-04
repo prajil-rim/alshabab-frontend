@@ -9,17 +9,13 @@ export const generateStaticParams = () => {
 
 const SubPackagePage = async ({
     params,
-    searchParams,
 }: {
     params: Promise<{ package: string; locale: string }>;
-    searchParams: Promise<{ category: string }>;
 }) => {
     const package_ = (await params).package;
     const locale = (await params).locale;
-    const category = (await searchParams).category;
-    const { packages, packageCategories, parentPackageData } = await loader(
+    const { packageCategories, parentPackageData } = await loader(
         package_,
-        category || "",
         locale
     );
 
@@ -29,7 +25,6 @@ const SubPackagePage = async ({
     return (
         <div className="lg:col-span-5">
             <TravelPackagesListing
-                packages={packages}
                 packageCategories={packageCategories}
                 parentPackageData={parentPackageData}
             />
