@@ -1,6 +1,9 @@
+import FAQSection from "@/components/common/faq/faq-section";
+import Testimonials from "@/components/common/testimonials/testimonials";
 import ImageHero from "@/components/hero/image-hero";
 import ArrowRightUp from "@/components/icons/arrow-right-up";
 import InternalLinks from "@/components/layout/internal-links";
+import TeamProfile from "@/components/pages/visa/team-profile";
 import { Button } from "@/components/ui/button";
 import { getVisaListing } from "@/data/loaders";
 import { routing } from "@/i18n/routing";
@@ -103,6 +106,9 @@ const VisaServicesPage = async ({
                     }}
                 ></div>
             </div>
+            <Testimonials {...pageData.testimonials} />
+            <TeamProfile {...pageData.team_section} />
+            <FAQSection {...pageData.faq_section} />
             <InternalLinks internal_links={pageData.internal_links || []} />
         </main>
     );

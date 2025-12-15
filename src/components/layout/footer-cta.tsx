@@ -15,6 +15,7 @@ const FooterCTA = ({
     cta_chat,
     text_align,
 }: Readonly<FooterCTAProps>) => {
+    if (!title || !description) return null;
     return (
         <section
             className={cn(

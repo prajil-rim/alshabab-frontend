@@ -1,4 +1,5 @@
 import FAQSection from "@/components/common/faq/faq-section";
+import Testimonials from "@/components/common/testimonials/testimonials";
 import ImageHero from "@/components/hero/image-hero";
 import FooterCTA from "@/components/layout/footer-cta";
 import InternalLinks from "@/components/layout/internal-links";
@@ -73,6 +74,7 @@ const VisaPage = async ({
                 ></div>
             </div>
             <TeamProfile {...pageData.team_profile_section} />
+            <Testimonials {...pageData.testimonials} />
             <FAQSection {...pageData.faq_section} />
             <FooterCTA {...pageData.footer_cta_section} />
             <div className="py-10 max-w-7xl mx-auto px-3 lg:px-6 2xl:px-0 space-y-2">

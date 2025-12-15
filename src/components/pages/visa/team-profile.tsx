@@ -12,6 +12,7 @@ const TeamProfile = ({
     description,
     teams,
 }: Readonly<TeamProfileProps>) => {
+    if (!teams || teams.length === 0 || !title) return null;
     return (
         <section className="max-w-7xl mx-auto py-10 space-y-3 lg:space-y-6 px-3 lg:px-6 2xl:px-0">
             <h1 className="text-2xl lg:text-4xl font-semibold">{title}</h1>

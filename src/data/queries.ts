@@ -1299,6 +1299,17 @@ export const visaQuery = qs.stringify({
                 button: true,
             },
         },
+        testimonials: {
+            populate: {
+                testimonials: {
+                    populate: {
+                        image: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
         team_profile_section: {
             populate: {
                 teams: {
@@ -1313,6 +1324,7 @@ export const visaQuery = qs.stringify({
                                 },
                             },
                         },
+                        button: true,
                     },
                 },
             },
@@ -1366,6 +1378,41 @@ export const visaListingQuery = qs.stringify({
         core_services_section: {
             populate: {
                 cta_button: true,
+            },
+        },
+        testimonials: {
+            populate: {
+                testimonials: {
+                    populate: {
+                        image: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
+        team_section: {
+            populate: {
+                teams: {
+                    populate: {
+                        image: {
+                            fields: ["url", "alternativeText"],
+                        },
+                        social_links: {
+                            populate: {
+                                icon: {
+                                    fields: ["url", "alternativeText"],
+                                },
+                            },
+                        },
+                        button: true,
+                    },
+                },
+            },
+        },
+        faq_section: {
+            populate: {
+                faqs: true,
             },
         },
         seo: {

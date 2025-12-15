@@ -379,4 +379,5 @@ export type TeamProfileCardProps = {
     bio: string;
     experience: string;
     specialization?: string;
+    button: LinkProps;
 };

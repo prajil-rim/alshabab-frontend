@@ -1,5 +1,6 @@
 import { StrapiImage } from "@/components/common/strapi-image";
-import { getImage } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { cn, getImage } from "@/lib/utils";
 import { TeamProfileCardProps } from "@/types";
 import { Award, Briefcase, Star } from "lucide-react";
 import Link from "next/link";
@@ -30,7 +31,14 @@ const TeamProfileCard = ({ team }: { team: TeamProfileCardProps }) => {
                     {/* Overlay */}
                     <div className="absolute !mb-0 inset-0 bg-gradient-to-t from-black to-transparent lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                    <div className="flex relative z-10 justify-between items-center lg:bg-white/27 rounded-full px-3 py-1 lg:backdrop-blur-md text-white lg:translate-y-[220%] group-hover:translate-y-0 group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-300">
+                    <div
+                        className={cn(
+                            "flex relative z-10 justify-between items-center lg:bg-white/27 rounded-full px-3 py-1 lg:backdrop-blur-md text-white group-hover:translate-y-0 group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-300",
+                            team.button
+                                ? "lg:translate-y-[340%]"
+                                : "lg:translate-y-[220%]"
+                        )}
+                    >
                         <h4 className="text-2xl lg:text-xl font-semibold">
                             {team.name}
                         </h4>
@@ -59,7 +67,14 @@ const TeamProfileCard = ({ team }: { team: TeamProfileCardProps }) => {
                             ))}
                         </div>
                     </div>
-                    <div className="lg:translate-y-[220%] relative z-10 space-y-2 group-hover:translate-y-0 transition-all duration-300">
+                    <div
+                        className={cn(
+                            "relative z-10 space-y-2 group-hover:translate-y-0 transition-all duration-300",
+                            team.button
+                                ? "lg:translate-y-[340%]"
+                                : "lg:translate-y-[220%]"
+                        )}
+                    >
                         <p className="text-xs text-white px-3 font-manrope">
                             {team.bio}
                         </p>
@@ -75,6 +90,21 @@ const TeamProfileCard = ({ team }: { team: TeamProfileCardProps }) => {
                                 {team.role}
                             </ul>
                         </div>
+                        {team.button && (
+                            <Link
+                                href={team.button.href}
+                                target={
+                                    team.button.isExternal ? "_blank" : "_self"
+                                }
+                            >
+                                <Button
+                                    size="sm"
+                                    className="rounded-full font-manrope text-xs cursor-pointer ms-3"
+                                >
+                                    {team.button.text}
+                                </Button>
+                            </Link>
+                        )}
                     </div>
                 </div>
             </div>

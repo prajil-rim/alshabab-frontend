@@ -55,6 +55,7 @@ const Footer = ({
     contact_info,
 }: Readonly<FooterProps>) => {
     const t = useTranslations("footer");
+    if (!logo) return null;
     return (
         <footer className="bg-off-black text-primary-foreground font-manrope">
             <div className="-mb-5 max-w-7xl mx-auto px-3 py-8 lg:px-6 2xl:px-0">
