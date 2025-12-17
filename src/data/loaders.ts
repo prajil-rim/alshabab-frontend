@@ -18,6 +18,7 @@ import {
     parentPackageListQuery,
     parentPackageQuery,
     partnerSectionQuery,
+    termsPolicyPageQuery,
     testimonialQuery,
     visaListingQuery,
     visaQuery,
@@ -272,5 +273,21 @@ export async function getVisaListing(locale: string) {
     const url = new URL(path, BASE_URL);
     url.search = visaListingQuery;
     url.searchParams.set("locale", locale);
+    return fetchAPI(url.href, { method: "GET" });
+}
+
+export async function getPolicyPage(locale: string) {
+    const path = "/api/privacy-policy";
+    const url = new URL(path, BASE_URL);
+    url.search = termsPolicyPageQuery;
+    url.searchParams.append("locale", locale);
+    return fetchAPI(url.href, { method: "GET" });
+}
+
+export async function getTermsPage(locale: string) {
+    const path = "/api/term-of-service";
+    const url = new URL(path, BASE_URL);
+    url.search = termsPolicyPageQuery;
+    url.searchParams.append("locale", locale);
     return fetchAPI(url.href, { method: "GET" });
 }

@@ -1436,3 +1436,25 @@ export const visaListingQuery = qs.stringify({
         },
     },
 });
+
+export const termsPolicyPageQuery = qs.stringify({
+    populate: {
+        background: {
+            fields: ["url", "alternativeText"],
+        },
+        seo: {
+            populate: {
+                metaImage: {
+                    fields: ["url", "alternativeText"],
+                },
+                openGraph: {
+                    populate: {
+                        ogImage: {
+                            fields: ["url", "alternativeText"],
+                        },
+                    },
+                },
+            },
+        },
+    },
+});

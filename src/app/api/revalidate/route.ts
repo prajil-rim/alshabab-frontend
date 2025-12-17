@@ -11,6 +11,8 @@ const StaticModelMap = {
     "international-package-listing-page":
         "/packages/international-tour-packages",
     "visa-listing-page": "/visa-services",
+    "term-of-service": "/terms-of-service",
+    "privacy-policy": "/privacy-policy",
 };
 
 const DynamicModelMap = {
