@@ -98,9 +98,11 @@ const PackageGrid = ({
         // ✅ 4. RecommendedFor filter (e.g., ["Family", "Couple"])
         if (recommendedFor.length > 0) {
             const tags = pkg.package_general_info?.package_categories ?? [];
+
             const matches = recommendedFor.some((r) =>
-                tags.filter((t) => t.slug === r)
+                tags.some((t) => t.slug === r)
             );
+
             if (!matches) {
                 return false;
             }
@@ -155,7 +157,7 @@ const PackageGrid = ({
     }, [packageFilter]);
 
     // ✅ Pagination logic
-    const totalPages = Math.ceil(sortedPackages?.length ?? 1 / PAGE_SIZE);
+    const totalPages = Math.ceil((sortedPackages?.length ?? 1) / PAGE_SIZE);
     const start = (page - 1) * PAGE_SIZE;
     const end = start + PAGE_SIZE;
     const currentPageData = sortedPackages?.slice(start, end);
@@ -203,7 +205,7 @@ const PackageGrid = ({
 
                     <Banner data={parentPackageData.package_banner} />
 
-                    {currentPageData?.length &&
+                    {currentPageData?.length !== undefined &&
                         currentPageData?.length > 6 &&
                         currentPageData?.slice(6).map((pkg) => (
                             // <Link
