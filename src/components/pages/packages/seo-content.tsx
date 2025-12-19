@@ -16,7 +16,7 @@ const SeoContent = ({ content }: { content: string }) => {
             )}
         >
             <div
-                className="prose max-w-[90%] md:max-w-[80%] mx-auto font-manrope mb-10"
+                className="prose max-w-[90%] md:max-w-[80%] mx-auto font-manrope mb-10 real_table"
                 dangerouslySetInnerHTML={{ __html: content }}
             ></div>
             <Button

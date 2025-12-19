@@ -16,7 +16,7 @@ const CancellationPolicy = ({
                 <h5 className="font-bold text-xl">
                     {cancellation_policy.title}
                 </h5>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto real_table">
                     <table className="min-w-full border border-gray-300 text-sm text-left">
                         <thead>
                             <tr>

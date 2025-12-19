@@ -13,7 +13,7 @@ interface BlogContentProps {
 
 const BlogContent = ({ blog, sectionRefs }: Readonly<BlogContentProps>) => {
     return (
-        <div className="prose lg:prose-lg font-manrope pt-10 mx-auto">
+        <div className="prose lg:prose-lg font-manrope pt-10 mx-auto real_table">
             <BlocksRenderer
                 content={blog}
                 blocks={{

@@ -23,7 +23,7 @@ type PackageFilter = {
 
 const defaultPackageFilter: PackageFilter = {
     withFlights: true,
-    budget: [499, 4999],
+    budget: [99, 4999],
     duration: [1, 20],
     recommendedFor: [],
     other: "Rest More",

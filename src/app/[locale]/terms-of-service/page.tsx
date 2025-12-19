@@ -77,7 +77,7 @@ const PrivacyTermsPage = async ({
             />
             <main className="container-padding-x pb-10 md:pb-20 md:pt-10">
                 <div className="max-w-3xl mx-auto">
-                    <div className="max-w-3xl prose lg:prose-lg mx-auto">
+                    <div className="max-w-3xl prose lg:prose-lg mx-auto real_table">
                         <BlocksRenderer content={pageData.terms || []} />
                     </div>
                 </div>

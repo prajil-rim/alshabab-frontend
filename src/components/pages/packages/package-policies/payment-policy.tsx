@@ -23,7 +23,7 @@ const PaymentPolicy = ({
         <div className="bg-[#FAFAFA] rounded-xl p-2 md:p-3 font-manrope">
             <div className="bg-white rounded-xl border p-3 space-y-4">
                 <h5 className="font-bold text-xl">{payment_policy.title}</h5>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto real_table">
                     <table className="min-w-full border border-gray-300 text-sm text-left">
                         <thead>
                             <tr>

@@ -69,7 +69,7 @@ const VisaPage = async ({
             />
             <div className="py-10">
                 <div
-                    className="prose max-w-[90%] md:max-w-[80%] mx-auto font-manrope mb-10"
+                    className="prose max-w-[90%] md:max-w-[80%] mx-auto font-manrope mb-10 real_table"
                     dangerouslySetInnerHTML={{ __html: pageData.contents }}
                 ></div>
             </div>

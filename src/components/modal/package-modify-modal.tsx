@@ -26,7 +26,13 @@ import { usePackagePriceContext } from "@/provider/package-price-context";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
 
-export function PackageModifyModal({ children }: { children?: ReactNode }) {
+export function PackageModifyModal({
+    children,
+    room_price,
+}: {
+    children?: ReactNode;
+    room_price: string;
+}) {
     const [open, setOpen] = useState(false);
     const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -49,7 +55,7 @@ export function PackageModifyModal({ children }: { children?: ReactNode }) {
                             Package modify
                         </DialogTitle>
                     </DialogHeader>
-                    <Content />
+                    <Content room_price={room_price} />
                 </DialogContent>
             </Dialog>
         );
@@ -71,7 +77,7 @@ export function PackageModifyModal({ children }: { children?: ReactNode }) {
                         Modify package
                     </DrawerTitle>
                 </DrawerHeader>
-                <Content className="px-4" />
+                <Content room_price={room_price} className="px-4" />
                 <DrawerFooter className="pt-2">
                     <DrawerClose asChild>
                         <Button variant="outline" className="mt-5 font-manrope">
@@ -84,46 +90,61 @@ export function PackageModifyModal({ children }: { children?: ReactNode }) {
     );
 }
 
-function Content({ className }: { className?: string }) {
+function Content({
+    className,
+    room_price,
+}: {
+    className?: string;
+    room_price: string;
+}) {
     const [open, setOpen] = useState(false);
     const { packageDetail, setPackageDetail } = usePackagePriceContext();
 
     return (
         <div className={cn("grid grid-cols-2 items-center gap-6", className)}>
-            <div className="space-y-2 flex flex-col items-center">
-                <Label className="text-xl font-manrope">Rooms</Label>
-                <div className="flex items-center gap-2">
-                    <Button
-                        size={"icon"}
-                        variant={"outline"}
-                        className="rounded-full cursor-pointer"
-                        disabled={packageDetail.room === 1}
-                        onClick={() =>
-                            setPackageDetail({
-                                ...packageDetail,
-                                room: packageDetail.room - 1,
-                            })
-                        }
-                    >
-                        <Minus />
-                    </Button>
-                    <span className="font-manrope">{packageDetail.room}</span>
-                    <Button
-                        size={"icon"}
-                        variant={"outline"}
-                        className="rounded-full cursor-pointer"
-                        onClick={() =>
-                            setPackageDetail({
-                                ...packageDetail,
-                                room: packageDetail.room + 1,
-                            })
-                        }
-                    >
-                        <Plus />
-                    </Button>
+            {Number(room_price ?? 0) !== 0 && (
+                <div className="space-y-2 flex flex-col items-center">
+                    <Label className="text-xl font-manrope">Rooms</Label>
+                    <div className="flex items-center gap-2">
+                        <Button
+                            size={"icon"}
+                            variant={"outline"}
+                            className="rounded-full cursor-pointer"
+                            disabled={packageDetail.room === 1}
+                            onClick={() =>
+                                setPackageDetail({
+                                    ...packageDetail,
+                                    room: packageDetail.room - 1,
+                                })
+                            }
+                        >
+                            <Minus />
+                        </Button>
+                        <span className="font-manrope">
+                            {packageDetail.room}
+                        </span>
+                        <Button
+                            size={"icon"}
+                            variant={"outline"}
+                            className="rounded-full cursor-pointer"
+                            onClick={() =>
+                                setPackageDetail({
+                                    ...packageDetail,
+                                    room: packageDetail.room + 1,
+                                })
+                            }
+                        >
+                            <Plus />
+                        </Button>
+                    </div>
                 </div>
-            </div>
-            <div className="space-y-2 flex flex-col items-center">
+            )}
+            <div
+                className={cn(
+                    "space-y-2 flex flex-col items-center",
+                    Number(room_price ?? 0) === 0 && "col-span-2"
+                )}
+            >
                 <Label className="text-xl font-manrope">Guests</Label>
                 <div className="flex items-center gap-2">
                     <Button

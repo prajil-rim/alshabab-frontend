@@ -24,7 +24,7 @@ const PackageCard = (pkg: PackageCardProps) => {
         <Card className="overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow p-0 hover:border-primary">
             <div className="relative">
                 <Image
-                    src={pkg.hero.background.url || "/placeholder.svg"}
+                    src={pkg.hero.background?.url || "/placeholder.svg"}
                     alt={pkg.package}
                     width={400}
                     height={200}

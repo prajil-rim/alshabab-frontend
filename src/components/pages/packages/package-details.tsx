@@ -50,6 +50,7 @@ type PackageDetailsSectionProps = {
         payment_policy: Policy;
         payment_policy_points: LabelProps[];
         term_and_conditions: TermsAndConditionsProps;
+        package_policies: LabelProps[];
     };
     packages: PackageListProps[];
     locale: string;
@@ -78,6 +79,9 @@ const PackageDetailsSection = ({
                             title: package_general_info.form_modal_title || "",
                         }}
                         locale={locale}
+                        room_price={
+                            package_general_info.price_details.price_per_room
+                        }
                     />
 
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-10 relative bg-[#FAFAFA] lg:bg-transparent">
@@ -133,6 +137,9 @@ const PackageDetailsSection = ({
                                         }
                                         term_and_conditions={
                                             package_policies.term_and_conditions
+                                        }
+                                        package_policies={
+                                            package_policies.package_policies
                                         }
                                     />
                                 </TabsContent>

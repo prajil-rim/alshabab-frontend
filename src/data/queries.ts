@@ -918,6 +918,7 @@ export const packageQuery = qs.stringify({
                         },
                     },
                 },
+                package_policies: true,
             },
         },
         internal_links: {
