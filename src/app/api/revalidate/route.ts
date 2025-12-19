@@ -43,9 +43,14 @@ export async function POST(request: NextRequest) {
     } else if (Object.keys(DynamicModelMap).includes(body.model)) {
         // Revalidate the specific path
         const path =
-            DynamicModelMap[body.model as keyof typeof DynamicModelMap] +
-            (body.entry.slug ?? body.entry.package_slug);
-        revalidatePath("/" + body.entry.locale + path);
+            DynamicModelMap[body.model as keyof typeof DynamicModelMap];
+        const actualPath = body.entry.parentPackage?.package_slug
+            ? path +
+              body.entry.parentPackage?.package_slug +
+              "/" +
+              (body.entry.slug ?? body.entry.package_slug)
+            : path + "/" + (body.entry.slug ?? body.entry.package_slug);
+        revalidatePath("/" + body.entry.locale + actualPath);
 
         // Revalidate tags
         if (path.includes("destinations")) {
@@ -59,7 +64,7 @@ export async function POST(request: NextRequest) {
         }
 
         revalidateTag("sitemap"); // Revalidate sitemap after every blog, destination, or package update or creation
-        console.log("Revalidated " + path);
+        console.log("Revalidated " + actualPath);
     } else if (
         body.model === "global" ||
         body.model === "testimonial" ||
