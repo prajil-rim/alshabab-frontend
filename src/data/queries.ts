@@ -1158,7 +1158,7 @@ export const parentPackageListQuery = qs.stringify({
             fields: ["documentId"],
         },
     },
-    fields: ["documentId", "package", "package_slug"],
+    fields: ["documentId", "package", "package_slug", "parent_menu"],
     pagination: {
         pageSize: 100,
     },

@@ -17,6 +17,7 @@ import {
 import { useEffect, useState } from "react";
 import { getPackageResults } from "@/data/loaders";
 import { useParams, useSearchParams } from "next/navigation";
+import { Link } from "@/i18n/navigation";
 
 const PAGE_SIZE = 12; // adjust per your design
 
@@ -187,19 +188,23 @@ const PackageGrid = ({
                         </div>
                     ) : (
                         currentPageData?.slice(0, 6).map((pkg) => (
-                            // <Link
-                            //     key={pkg.id}
-                            //     href={`/packages/${parentPackageData.package_slug}/${pkg.slug}`}
-                            // >
-                            <PackageCard
-                                slug={pkg.slug}
-                                package={pkg.package}
-                                hero={pkg.hero}
-                                package_general_info={pkg.package_general_info}
-                                package_slug={parentPackageData.package_slug}
+                            <Link
                                 key={pkg.id}
-                            />
-                            // </Link>
+                                href={`/packages/${parentPackageData.package_slug}/${pkg.slug}`}
+                            >
+                                <PackageCard
+                                    slug={pkg.slug}
+                                    package={pkg.package}
+                                    hero={pkg.hero}
+                                    package_general_info={
+                                        pkg.package_general_info
+                                    }
+                                    package_slug={
+                                        parentPackageData.package_slug
+                                    }
+                                    key={pkg.id}
+                                />
+                            </Link>
                         ))
                     )}
 

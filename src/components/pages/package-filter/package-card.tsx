@@ -1,5 +1,4 @@
 import ArrowRightUp from "@/components/icons/arrow-right-up";
-import WhatsappOutline from "@/components/icons/whatsapp-outline";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,7 +6,6 @@ import { getImage } from "@/lib/utils";
 import type { MediaProps, PackageGeneralInfo } from "@/types";
 import { Clock, Handshake, MapPin, MoveRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 type PackageCardProps = {
     package: string;
@@ -30,7 +28,7 @@ const PackageCard = (pkg: PackageCardProps) => {
                     height={200}
                     className="w-full h-48 object-cover"
                 />
-                <Link
+                {/* <Link
                     href={`https://api.whatsapp.com/send/?phone=${pkg.package_general_info.whatsapp}&text=Hi, I would like to know more about this package, *${pkg.package}*, https://alshababtours.ae/packages/${pkg.slug}&type=phone_number&app_absent=0`}
                     target="_blank"
                 >
@@ -40,7 +38,7 @@ const PackageCard = (pkg: PackageCardProps) => {
                     >
                         <WhatsappOutline /> Send Enquiry
                     </Button>
-                </Link>
+                </Link> */}
             </div>
 
             <CardContent className="p-4 pt-0 flex-1 flex flex-col">
@@ -82,7 +80,7 @@ const PackageCard = (pkg: PackageCardProps) => {
                 <p className="text-sm text-[#625F5F] mb-3 font-semibold">
                     This package is customizable
                 </p>
-                <div className="flex items-center gap-3 mb-4 bg-[#F5F1E3] rounded-full w-fit px-2 py-1.5">
+                <div className="flex items-center gap-3 mb-4 bg-[#F5F1E3] rounded-full w-fit px-2 py-1.5 whitespace-nowrap overflow-x-scroll scrollbar-none">
                     {pkg.package_general_info?.package_includes?.map(
                         (service) => (
                             <div
@@ -150,17 +148,17 @@ const PackageCard = (pkg: PackageCardProps) => {
                     </div>
                 </div>
                 <div className="pt-3 flex-1 flex items-end">
-                    <Link
+                    {/* <Link
                         href={`/packages/${pkg.package_slug}/${pkg.slug}`}
                         className="w-full"
+                    > */}
+                    <Button
+                        variant={"secondary"}
+                        className="w-full font-bold cursor-pointer"
                     >
-                        <Button
-                            variant={"secondary"}
-                            className="w-full font-bold cursor-pointer"
-                        >
-                            View Details <ArrowRightUp color="blue" />
-                        </Button>
-                    </Link>
+                        View Details <ArrowRightUp color="blue" />
+                    </Button>
+                    {/* </Link> */}
                 </div>
             </CardContent>
         </Card>

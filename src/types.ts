@@ -78,6 +78,7 @@ export interface ParentPackageListProps extends Base {
     };
     package: string;
     package_slug: string;
+    parent_menu: string;
 }
 
 export interface FooterCTAProps {

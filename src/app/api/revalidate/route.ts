@@ -19,7 +19,7 @@ const DynamicModelMap = {
     blog: "/blogs/",
     destination: "/destinations/",
     package: "/packages/",
-    "parent-package": "/packages/international-tour-packages/",
+    "parent-package": "/packages/international-tour-packages",
     "visa-page": "/visa-services/",
 };
 

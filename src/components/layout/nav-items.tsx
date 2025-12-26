@@ -29,6 +29,7 @@ const NavItems = ({
     // const [dOpen, setDOpen] = useState(false);
     const [pOpen, setPOpen] = useState(false);
     const [intlOpen, setIntlOpen] = useState(false);
+    const [UAEActOpen, setUAEActOpen] = useState(false);
     const pathname = usePathname();
     const t = useTranslations("homePage.header.navItems");
     const isActive = (path: string) => pathname === path;
@@ -139,37 +140,89 @@ const NavItems = ({
                     {/* Dropdown */}
                     {pOpen && (
                         <div className="absolute left-0 top-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
-                            <div
-                                className="relative"
-                                onMouseEnter={() => setIntlOpen(true)}
-                                onMouseLeave={() => setIntlOpen(false)}
-                            >
-                                <Link
-                                    href={
-                                        "/packages/international-tour-packages"
-                                    }
-                                    className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
+                            {packages?.filter(
+                                (pck) =>
+                                    pck.parent_menu ===
+                                    "International Tour Packages"
+                            ).length > 0 && (
+                                <div
+                                    className="relative"
+                                    onMouseEnter={() => setIntlOpen(true)}
+                                    onMouseLeave={() => setIntlOpen(false)}
                                 >
-                                    {t("intlPackage")}
-                                </Link>
+                                    <Link
+                                        href={
+                                            "/packages/international-tour-packages"
+                                        }
+                                        className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
+                                    >
+                                        {t("intlPackage")}
+                                    </Link>
 
-                                {intlOpen && (
-                                    <div className="absolute top-0 left-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
-                                        {packages?.map((package_) => (
-                                            <Link
-                                                href={
-                                                    "/packages/" +
-                                                    package_.package_slug
-                                                }
-                                                key={package_.documentId}
-                                                className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
-                                            >
-                                                {package_.package}
-                                            </Link>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
+                                    {intlOpen && (
+                                        <div className="absolute top-0 left-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
+                                            {packages
+                                                ?.filter(
+                                                    (pck) =>
+                                                        pck.parent_menu ===
+                                                        "International Tour Packages"
+                                                )
+                                                .map((package_) => (
+                                                    <Link
+                                                        href={
+                                                            "/packages/" +
+                                                            package_.package_slug
+                                                        }
+                                                        key={
+                                                            package_.documentId
+                                                        }
+                                                        className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
+                                                    >
+                                                        {package_.package}
+                                                    </Link>
+                                                ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                            {packages?.filter(
+                                (pac) => pac.parent_menu === "UAE Activities"
+                            ).length > 0 && (
+                                <div
+                                    className="relative"
+                                    onMouseEnter={() => setUAEActOpen(true)}
+                                    onMouseLeave={() => setUAEActOpen(false)}
+                                >
+                                    <span className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black">
+                                        {t("uaeActivities")}
+                                    </span>
+
+                                    {UAEActOpen && (
+                                        <div className="absolute top-0 left-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
+                                            {packages
+                                                ?.filter(
+                                                    (pac) =>
+                                                        pac.parent_menu ===
+                                                        "UAE Activities"
+                                                )
+                                                .map((package_) => (
+                                                    <Link
+                                                        href={
+                                                            "/packages/" +
+                                                            package_.package_slug
+                                                        }
+                                                        key={
+                                                            package_.documentId
+                                                        }
+                                                        className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
+                                                    >
+                                                        {package_.package}
+                                                    </Link>
+                                                ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                             <Link
                                 href={"/"}
                                 className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"

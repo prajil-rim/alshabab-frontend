@@ -1,5 +1,4 @@
 import Testimonials from "@/components/common/testimonials/testimonials";
-import PackageFilterHero from "@/components/hero/package-filter-hero";
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 import BudgetFilter from "@/components/pages/package-filter/budget-filter";
@@ -17,9 +16,10 @@ import FooterCTA from "@/components/layout/footer-cta";
 import { PackageFilterProvider } from "@/provider/package-filter-context";
 import InternalLinks from "@/components/layout/internal-links";
 import { Metadata } from "next";
-import { returnMetadata } from "@/lib/utils";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getImage, returnMetadata } from "@/lib/utils";
+import { setRequestLocale } from "next-intl/server";
 import SeoContent from "@/components/pages/packages/seo-content";
+import { StrapiImage } from "@/components/common/strapi-image";
 
 let parentPackagePageDataPromise: ReturnType<typeof getParentPackage> | null =
     null;
@@ -76,11 +76,9 @@ export default async function DashboardLayout({
     // Enable static rendering
     setRequestLocale(locale);
 
-    const t = await getTranslations("homePage.header.navItems");
-
     return (
         <main>
-            <PackageFilterHero
+            {/* <PackageFilterHero
                 title={pageData.hero_title}
                 description={pageData.hero_description}
                 background={pageData.hero_background}
@@ -99,7 +97,19 @@ export default async function DashboardLayout({
                     },
                 ]}
                 cta_button="Get Consultation"
-            />
+            /> */}
+            <div className="relative before:absolute before:w-full before:h-1/2 before:bg-gradient-to-b before:from-black/50 before:to-transparent">
+                <StrapiImage
+                    src={getImage({
+                        local: "http://localhost:3000/local/parent-hero.png",
+                        prod: pageData.hero_background?.url,
+                    })}
+                    alt={pageData.hero_background?.alternativeText || ""}
+                    width={1000}
+                    height={500}
+                    className="w-full h-screen object-cover"
+                />
+            </div>
 
             <section className="relative">
                 <div className="absolute top-0 w-full h-72 bg-gradient-to-t from-transparent via-[#ffffff] to-[#448CD9]/80"></div>
