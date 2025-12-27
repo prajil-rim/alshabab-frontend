@@ -222,13 +222,13 @@
     text-stroke: 1px transparent; /* For extra support (optional) */
 }
 
-.real_table ~ table {
+.real_table table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.real_table ~ table th,
-.real_table ~ table td {
+.real_table table th,
+.real_table table td {
     border: 1px solid #333;
     padding: 10px 15px;
     text-align: left;

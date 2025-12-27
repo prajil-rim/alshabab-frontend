@@ -76,7 +76,7 @@ const VisaServicesPage = async ({
                     {pageData.core_services_section.description}
                 </p>
                 <div
-                    className="mx-auto w-fit"
+                    className="mx-auto w-fit real_table"
                     dangerouslySetInnerHTML={{
                         __html: pageData.core_services_section
                             .core_services_table,

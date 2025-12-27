@@ -213,19 +213,23 @@ const PackageGrid = ({
                     {currentPageData?.length !== undefined &&
                         currentPageData?.length > 6 &&
                         currentPageData?.slice(6).map((pkg) => (
-                            // <Link
-                            //     key={pkg.id}
-                            //     href={`/packages/${parentPackageData.package_slug}/${pkg.slug}`}
-                            // >
-                            <PackageCard
+                            <Link
                                 key={pkg.id}
-                                slug={pkg.slug}
-                                package={pkg.package}
-                                hero={pkg.hero}
-                                package_general_info={pkg.package_general_info}
-                                package_slug={parentPackageData.package_slug}
-                            />
-                            // </Link>
+                                href={`/packages/${parentPackageData.package_slug}/${pkg.slug}`}
+                            >
+                                <PackageCard
+                                    key={pkg.id}
+                                    slug={pkg.slug}
+                                    package={pkg.package}
+                                    hero={pkg.hero}
+                                    package_general_info={
+                                        pkg.package_general_info
+                                    }
+                                    package_slug={
+                                        parentPackageData.package_slug
+                                    }
+                                />
+                            </Link>
                         ))}
 
                     {totalPages > 1 && (
