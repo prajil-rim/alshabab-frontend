@@ -101,13 +101,23 @@ export default async function DashboardLayout({
             <div className="relative before:absolute before:w-full before:h-1/2 before:bg-gradient-to-b before:from-black/50 before:to-transparent">
                 <StrapiImage
                     src={getImage({
-                        local: "http://localhost:3000/local/parent-hero.png",
+                        local: "http://localhost:3000/local/test-hero.webp",
                         prod: pageData.hero_background?.url,
                     })}
                     alt={pageData.hero_background?.alternativeText || ""}
                     width={1000}
                     height={500}
-                    className="w-full h-screen object-cover"
+                    className="w-full h-[110vh] hidden lg:block"
+                />
+                <StrapiImage
+                    src={getImage({
+                        local: "http://localhost:3000/local/hero-mob.png",
+                        prod: pageData.hero_background_mob?.url,
+                    })}
+                    alt={pageData.hero_background_mob?.alternativeText || ""}
+                    width={1000}
+                    height={500}
+                    className="w-full h-[90vh] lg:hidden"
                 />
             </div>
 

@@ -16,16 +16,29 @@ const FlightFilter = () => {
             </div>
             <RadioGroup
                 value={
-                    packageFilter.withFlights ? "with-flight" : "without-flight"
+                    packageFilter.withFlights === null
+                        ? "all"
+                        : packageFilter.withFlights
+                        ? "with-flight"
+                        : "without-flight"
                 }
                 onValueChange={(value) =>
                     setPackageFilter((prev) => ({
                         ...prev,
-                        withFlights: value === "with-flight",
+                        withFlights:
+                            value === "all"
+                                ? null
+                                : value === "with-flight"
+                                ? true
+                                : false,
                     }))
                 }
                 className="flex"
             >
+                <div className="flex items-center gap-3">
+                    <RadioGroupItem value="all" id="r0" />
+                    <Label htmlFor="r0">All</Label>
+                </div>
                 <div className="flex items-center gap-3">
                     <RadioGroupItem value="with-flight" id="r1" />
                     <Label htmlFor="r1">With Flight</Label>

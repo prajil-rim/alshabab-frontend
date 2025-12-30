@@ -10,9 +10,7 @@ import Image from "next/image";
 type PackageCardProps = {
     package: string;
     slug: string;
-    hero: {
-        background: MediaProps;
-    };
+    card_banner: MediaProps;
     package_general_info: PackageGeneralInfo;
     package_slug: string;
 };
@@ -22,7 +20,7 @@ const PackageCard = (pkg: PackageCardProps) => {
         <Card className="overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow p-0 hover:border-primary">
             <div className="relative">
                 <Image
-                    src={pkg.hero.background?.url || "/placeholder.svg"}
+                    src={pkg.card_banner?.url || "/placeholder.svg"}
                     alt={pkg.package}
                     width={400}
                     height={200}

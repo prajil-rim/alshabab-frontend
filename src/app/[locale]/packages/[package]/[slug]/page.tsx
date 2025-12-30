@@ -2,17 +2,13 @@ import BlogSection from "@/components/common/blog-section/blog-section";
 import FAQSection from "@/components/common/faq/faq-section";
 import FormSection from "@/components/common/form-section";
 import Testimonials from "@/components/common/testimonials/testimonials";
-import ImageHero from "@/components/hero/image-hero";
+import CarouselHero from "@/components/hero/carousel-hero";
 import FooterCTA from "@/components/layout/footer-cta";
 import InternalLinks from "@/components/layout/internal-links";
 import PackageDetailsSection from "@/components/pages/packages/package-details";
 import PackageIncludesSection from "@/components/pages/packages/package-includes-section";
 import TripDetailsSection from "@/components/pages/packages/trip-details-section";
-import {
-    getDestinationsList,
-    getPackage,
-    getParentPackagesList,
-} from "@/data/loaders";
+import { getPackage, getParentPackagesList } from "@/data/loaders";
 import { routing } from "@/i18n/routing";
 import { returnMetadata } from "@/lib/utils";
 import { Metadata } from "next";
@@ -37,16 +33,14 @@ function getPackageDataOnce(slug: string, locale: string) {
 }
 
 async function loader(slug: string, locale: string) {
-    const [pageData, packages, destinations] = await Promise.all([
+    const [pageData, packages] = await Promise.all([
         getPackageDataOnce(slug, locale),
         getParentPackagesList(),
-        getDestinationsList(),
     ]);
     if (!pageData || !pageData.data) notFound();
     return {
         pageData: pageData.data,
         packages: packages.data,
-        destinations: destinations.data,
     };
 }
 
@@ -64,54 +58,51 @@ export async function generateMetadata({
 const PackagePage = async ({
     params,
 }: {
-    params: Promise<{ slug: string; locale: string }>;
+    params: Promise<{ package: string; slug: string; locale: string }>;
 }) => {
-    const { slug, locale } = await params;
+    const { package: package_, slug, locale } = await params;
     if (!slug) return notFound();
 
-    const { pageData, packages, destinations } = await loader(
-        slug as string,
-        locale
-    );
+    const { pageData, packages } = await loader(slug as string, locale);
 
     // Enable static rendering
     setRequestLocale(locale);
 
     const t = await getTranslations("homePage.header.navItems");
 
+    const breadcrumbs = [
+        {
+            text: t("home"),
+            href: "/",
+        },
+        {
+            text: t("packages"),
+            href: "/packages",
+        },
+        {
+            text: packages.find(
+                (p: { package_slug: string }) => p.package_slug === package_
+            )?.package,
+            href: `/packages/${package_}`,
+        },
+        {
+            text: pageData.package,
+        },
+    ];
+
     return (
-        <main>
-            <ImageHero
-                background={pageData.hero.background}
-                description={pageData.hero.description}
-                title={pageData.hero.title}
-                cta_button={pageData.hero.cta_button}
-                destinations={destinations}
-                packages={packages}
-                locale={locale}
-                breadcrumbs={[
-                    {
-                        text: t("home"),
-                        href: "/",
-                    },
-                    {
-                        text: t("packages"),
-                        href: "/packages",
-                    },
-                    {
-                        text: pageData.package,
-                    },
-                ]}
-                base_price_per_adult={
-                    pageData.package_general_info?.price_details
-                        ?.base_price_per_adult || 0
+        <main className="black-nav-section">
+            <CarouselHero
+                breadcrumbs={breadcrumbs}
+                hero={pageData.hero}
+                price={pageData.price}
+                number_of_days={
+                    pageData.package_general_info?.duration?.number_of_days
                 }
-                offer_price_per_adult={
-                    pageData.package_general_info?.price_details
-                        ?.offer_price_per_adult || 0
+                number_of_nights={
+                    pageData.package_general_info?.duration?.number_of_nights
                 }
-                showPrice
-                showBadge
+                package_={pageData.package}
             />
             <FormSection {...pageData.form_section} packages={packages} />
             {pageData.package_general_info && (

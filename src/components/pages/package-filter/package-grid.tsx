@@ -64,13 +64,13 @@ const PackageGrid = ({
 
         // ✅ 1. Flights filter
         if (
-            withFlights &&
+            withFlights === true &&
             pkg.package_general_info?.flights !== "With Flight"
         ) {
             return false;
         }
         if (
-            !withFlights &&
+            withFlights === false &&
             pkg.package_general_info?.flights !== "Without Flight"
         ) {
             return false;
@@ -195,7 +195,7 @@ const PackageGrid = ({
                                 <PackageCard
                                     slug={pkg.slug}
                                     package={pkg.package}
-                                    hero={pkg.hero}
+                                    card_banner={pkg.card_banner}
                                     package_general_info={
                                         pkg.package_general_info
                                     }
@@ -221,7 +221,7 @@ const PackageGrid = ({
                                     key={pkg.id}
                                     slug={pkg.slug}
                                     package={pkg.package}
-                                    hero={pkg.hero}
+                                    card_banner={pkg.card_banner}
                                     package_general_info={
                                         pkg.package_general_info
                                     }

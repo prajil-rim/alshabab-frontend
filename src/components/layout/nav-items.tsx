@@ -12,6 +12,11 @@ import ContactFormSmModal from "../modal/contact-form-sm-modal";
 import { useTranslations } from "next-intl";
 import { Button } from "../ui/button";
 import ArrowRightUp from "../icons/arrow-right-up";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useBlackNavOnScroll } from "@/hooks/use-black-nav-on-scroll";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const NavItems = ({
     destinations,
@@ -30,9 +35,14 @@ const NavItems = ({
     const [pOpen, setPOpen] = useState(false);
     const [intlOpen, setIntlOpen] = useState(false);
     const [UAEActOpen, setUAEActOpen] = useState(false);
+
     const pathname = usePathname();
+
     const t = useTranslations("homePage.header.navItems");
+
     const isActive = (path: string) => pathname === path;
+
+    const isBlack = useBlackNavOnScroll();
 
     function activeStyle(path: string, style?: string) {
         return clsx(
@@ -50,10 +60,11 @@ const NavItems = ({
     return (
         <ul
             className={cn(
-                "flex text-white font-normal text-sm gap-5",
+                "flex font-normal text-sm gap-5",
                 isMobile
                     ? "flex-col font-manrope gap-3 text-[#202020] font-medium"
-                    : "flex-row"
+                    : "flex-row",
+                isBlack ? "text-black" : "text-white"
             )}
         >
             {/* {!isMobile && (
@@ -258,7 +269,7 @@ const NavItems = ({
                                     duration: 0.4,
                                     ease: "easeInOut",
                                 }}
-                                className="overflow-hidden px-0 py-2 space-y-2"
+                                className="overflow-hidden px-0 pt-3 pb-2 space-y-4"
                             >
                                 {/* <Link
                                     href={
@@ -275,6 +286,7 @@ const NavItems = ({
                                         }
                                         onClick={closeMenu}
                                         key={package_.documentId}
+                                        className="block ps-3"
                                     >
                                         <li>{package_.package}</li>
                                     </Link>
@@ -284,7 +296,7 @@ const NavItems = ({
                     </AnimatePresence>
                 </li>
             )}
-            <li className={activeStyle("/visa-services") && "md:hidden"}>
+            <li className={activeStyle("/visa-services")}>
                 <Link href={"/"} onClick={closeMenu} target="_blank">
                     {t("airTicketing")}
                 </Link>

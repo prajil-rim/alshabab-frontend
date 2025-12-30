@@ -746,11 +746,13 @@ export const maxPaginationQuery = qs.stringify({
 export const packageQuery = qs.stringify({
     populate: {
         hero: {
-            populate: {
-                background: {
-                    fields: ["url", "alternativeText"],
-                },
-            },
+            fields: ["url", "alternativeText"],
+        },
+        card_banner: {
+            fields: ["url", "alternativeText"],
+        },
+        parentPackage: {
+            fields: ["documentId"],
         },
         trip_highlights_section: {
             populate: {
@@ -934,6 +936,9 @@ export const parentPackageQuery = qs.stringify({
         hero_background: {
             fields: ["url", "alternativeText"],
         },
+        hero_background_mob: {
+            fields: ["url", "alternativeText"],
+        },
         testimonial: {
             populate: {
                 testimonials: {
@@ -1112,12 +1117,8 @@ export const packageListingPageQuery = qs.stringify({
 
 export const filterPackageResultsQuery = qs.stringify({
     populate: {
-        hero: {
-            populate: {
-                background: {
-                    fields: ["url", "alternativeText"],
-                },
-            },
+        card_banner: {
+            fields: ["url", "alternativeText"],
         },
         package_general_info: {
             populate: {

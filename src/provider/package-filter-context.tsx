@@ -10,7 +10,7 @@ import {
 } from "react";
 
 type PackageFilter = {
-    withFlights: boolean;
+    withFlights: boolean | null;
     budget: number[];
     duration: number[];
     recommendedFor: string[];
@@ -22,7 +22,7 @@ type PackageFilter = {
 };
 
 const defaultPackageFilter: PackageFilter = {
-    withFlights: false,
+    withFlights: null,
     budget: [99, 4999],
     duration: [1, 20],
     recommendedFor: [],

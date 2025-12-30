@@ -17,7 +17,8 @@ import {
 } from "@/types";
 import { useState } from "react";
 import LocaleSwitcher from "../layout/language-switcher";
-import { getImage } from "@/lib/utils";
+import { cn, getImage } from "@/lib/utils";
+import { useBlackNavOnScroll } from "@/hooks/use-black-nav-on-scroll";
 
 interface SidenavProps {
     logo: LogoProps;
@@ -33,11 +34,17 @@ const Sidenav = ({
     locale,
 }: Readonly<SidenavProps>) => {
     const [open, setOpen] = useState(false);
+    const isBlack = useBlackNavOnScroll();
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger>
-                <Menu className="text-white stroke-3 lg:hidden" />
+                <Menu
+                    className={cn(
+                        "stroke-3 lg:hidden",
+                        isBlack ? "text-black" : "text-white"
+                    )}
+                />
             </SheetTrigger>
             <SheetContent className="py-6 px-3 space-y-4">
                 <SheetTitle className="sr-only">Menu</SheetTitle>

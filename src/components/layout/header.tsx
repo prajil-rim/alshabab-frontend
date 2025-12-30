@@ -59,7 +59,7 @@ export function Header({
                         packages={packages}
                         locale={locale}
                     >
-                        <Button className="bg-white text-black rounded-full font-semibold lg:!px-5 lg:!py-2.5 cursor-pointer hover:bg-white">
+                        <Button className="bg-white text-black shadow-lg rounded-full font-semibold lg:!px-5 lg:!py-2.5 cursor-pointer hover:bg-white">
                             {cta}
                             <ArrowRightUp color="red" />
                         </Button>
@@ -71,7 +71,7 @@ export function Header({
                         packages={packages}
                         locale={locale}
                     >
-                        <Button className="rounded-full font-semibold lg:!px-5 lg:!py-2.5 cursor-pointer hover:bg-white bg-white text-black">
+                        <Button className="rounded-full font-semibold lg:!px-5 lg:!py-2.5 cursor-pointer shadow-lg hover:bg-white bg-white text-black">
                             {cta}
                             <ArrowRightUp color="red" />
                         </Button>

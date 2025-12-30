@@ -352,9 +352,7 @@ export type PackageCardProps = {
     id: number;
     package: string;
     slug: string;
-    hero: {
-        background: MediaProps;
-    };
+    card_banner: MediaProps;
     package_general_info: PackageGeneralInfo;
 };
 
