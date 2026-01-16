@@ -17,11 +17,13 @@ export async function generateStaticParams() {
 
 let visaDataPromise: ReturnType<typeof getVisa> | null = null;
 let localeCache: string | null = null;
+let slugCache: string | null = null;
 
 function getVisaDataOnce(slug: string, locale: string) {
-    if (!visaDataPromise || localeCache !== locale) {
+    if (!visaDataPromise || localeCache !== locale || slugCache !== slug) {
         visaDataPromise = getVisa(slug, locale);
         localeCache = locale;
+        slugCache = slug;
     }
     return visaDataPromise;
 }

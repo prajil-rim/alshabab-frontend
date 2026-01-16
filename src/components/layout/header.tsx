@@ -3,16 +3,14 @@ import {
     LogoProps,
     ParentPackageListProps,
 } from "@/types";
-import { StrapiImage } from "../common/strapi-image";
 import ContactFormModal from "../modal/contact-form-modal";
 import NavItems from "./nav-items";
-import Link from "next/link";
 import Sidenav from "../sheet/sidenav";
 import ContactFormSmModal from "../modal/contact-form-sm-modal";
 import LocaleSwitcher from "./language-switcher";
 import { Button } from "../ui/button";
 import ArrowRightUp from "../icons/arrow-right-up";
-import { getImage } from "@/lib/utils";
+import Logo from "./logo";
 
 interface HeaderProps {
     cta: string;
@@ -33,18 +31,7 @@ export function Header({
 
     return (
         <header className="absolute z-50 w-full flex justify-between items-center p-4 max-w-7xl lg:px-6 2xl:px-4 left-1/2 -translate-x-1/2 font-manrope">
-            <Link href={"/"}>
-                <StrapiImage
-                    src={getImage({
-                        local: process.env.PLACEHOLDER_IMAGE!,
-                        prod: logo.image?.url,
-                    })}
-                    alt={logo.image.alternativeText || logo.logoText}
-                    width={70}
-                    height={40}
-                    priority
-                />
-            </Link>
+            <Logo logo={logo} />
             <div className="hidden lg:block">
                 <NavItems
                     destinations={destinations}

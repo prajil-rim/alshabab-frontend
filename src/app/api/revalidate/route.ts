@@ -16,11 +16,11 @@ const StaticModelMap = {
 };
 
 const DynamicModelMap = {
-    blog: "/blogs/",
-    destination: "/destinations/",
-    package: "/packages/",
+    blog: "/blogs",
+    destination: "/destinations",
+    package: "/packages",
     "parent-package": "/packages/international-tour-packages",
-    "visa-page": "/visa-services/",
+    "visa-page": "/visa-services",
 };
 
 export async function POST(request: NextRequest) {

@@ -23,7 +23,7 @@ const BudgetFilter = ({ hideEraser = false }: { hideEraser?: boolean }) => {
                         onClick={() =>
                             setPackageFilter((prev) => ({
                                 ...prev,
-                                budget: [99, 4999],
+                                budget: [29, 9999],
                             }))
                         }
                     >
@@ -41,15 +41,15 @@ const BudgetFilter = ({ hideEraser = false }: { hideEraser?: boolean }) => {
                             budget: value,
                         }));
                     }}
-                    min={99}
-                    max={4999}
+                    min={29}
+                    max={9999}
                     step={100}
                     aria-label="Dual range slider"
                     className="w-full"
                 />
                 <div className="flex justify-between text-xs text-[#B0AAAA] font-semibold">
-                    <span>AED 99</span>
-                    <span>AED 4999</span>
+                    <span>AED 29</span>
+                    <span>AED 9999</span>
                 </div>
             </div>
         </div>
