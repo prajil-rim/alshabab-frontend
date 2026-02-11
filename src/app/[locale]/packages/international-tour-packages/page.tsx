@@ -90,7 +90,7 @@ const InternationalPackageListingPage = async ({
                 breadcrumbs={[
                     { text: t("home"), href: "/" },
                     { text: t("packages"), href: "/packages" },
-                    { text: "International Tour Packages" },
+                    { text: t("intlPackage") },
                 ]}
                 cta_button={pageData.hero.cta_button}
                 cta_whatsapp={pageData.hero.cta_whatsapp}

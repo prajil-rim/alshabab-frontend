@@ -34,6 +34,7 @@ const NavItems = ({
     // const [dOpen, setDOpen] = useState(false);
     const [pOpen, setPOpen] = useState(false);
     const [intlOpen, setIntlOpen] = useState(false);
+    const [intlHolidayOpen, setIntlHolidayOpen] = useState(false);
     const [UAEActOpen, setUAEActOpen] = useState(false);
 
     const pathname = usePathname();
@@ -177,6 +178,50 @@ const NavItems = ({
                                                     (pck) =>
                                                         pck.parent_menu ===
                                                         "International Tour Packages"
+                                                )
+                                                .map((package_) => (
+                                                    <Link
+                                                        href={
+                                                            "/packages/" +
+                                                            package_.package_slug
+                                                        }
+                                                        key={
+                                                            package_.documentId
+                                                        }
+                                                        className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black"
+                                                    >
+                                                        {package_.package}
+                                                    </Link>
+                                                ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                            {packages?.filter(
+                                (pck) =>
+                                    pck.parent_menu ===
+                                    "International Holiday Packages"
+                            ).length > 0 && (
+                                <div
+                                    className="relative"
+                                    onMouseEnter={() =>
+                                        setIntlHolidayOpen(true)
+                                    }
+                                    onMouseLeave={() =>
+                                        setIntlHolidayOpen(false)
+                                    }
+                                >
+                                    <span className="block px-2 py-1.5 hover:bg-gray-100 rounded text-black">
+                                        {t("intlHolidayPackage")}
+                                    </span>
+
+                                    {intlOpen && (
+                                        <div className="absolute top-0 left-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
+                                            {packages
+                                                ?.filter(
+                                                    (pck) =>
+                                                        pck.parent_menu ===
+                                                        "International Holiday Packages"
                                                 )
                                                 .map((package_) => (
                                                     <Link
