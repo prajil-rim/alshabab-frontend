@@ -16,6 +16,7 @@ import { HomeHeroProps } from "@/types";
 import { CirclePause, CirclePlay, Volume2, VolumeOff } from "lucide-react";
 import MapPin from "../icons/map-pin";
 import { cn, getImage } from "@/lib/utils";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 interface BreadcrumbProps {
     hero: HomeHeroProps[];
@@ -75,6 +76,8 @@ const HomeHero = ({ hero, locale }: Readonly<BreadcrumbProps>) => {
         }
     }
 
+    const isMobile = useMediaQuery("(max-width: 768px)");
+
     useEffect(() => {
         const initialPlaying: { [key: number]: boolean } = {};
         const initialMuted: { [key: number]: boolean } = {};
@@ -89,7 +92,7 @@ const HomeHero = ({ hero, locale }: Readonly<BreadcrumbProps>) => {
     if (!hero || hero.length === 0) return null;
 
     return (
-        <section className="w-full h-screen bg-black text-white">
+        <section className="w-full h-[40rem] min-h-screen bg-black text-white">
             <Carousel
                 setApi={setApi}
                 opts={{
@@ -104,18 +107,33 @@ const HomeHero = ({ hero, locale }: Readonly<BreadcrumbProps>) => {
                         }
 
                         return (
-                            <CarouselItem key={index} className="h-screen pl-0">
+                            <CarouselItem
+                                key={index}
+                                className="h-[40rem] min-h-screen pl-0"
+                            >
                                 <div
-                                    className="relative flex flex-col justify-center items-center h-full bg-no-repeat bg-center bg-cover after:inset-0 after:bg-black/50 after:absolute gap-32 pb-10 font"
+                                    className="relative flex flex-col justify-center items-center h-full bg-no-repeat bg-center bg-cover after:bottom-0 after:left-0 after:right-0 after:h-40 after:bg-gradient-to-t after:from-black/50 after:to-transparent after:absolute gap-32 pb-10"
                                     style={
                                         data.background?.type === "image"
                                             ? {
                                                   backgroundImage: `url(${getImage(
                                                       {
-                                                          local: process.env
-                                                              .PLACEHOLDER_IMAGE!,
-                                                          prod: data.background
-                                                              ?.background?.url,
+                                                          local: isMobile
+                                                              ? "/local/hero-res.png"
+                                                              : "/local/hero.webp",
+                                                          prod:
+                                                              isMobile &&
+                                                              data.background
+                                                                  .responsive_image
+                                                                  ?.url
+                                                                  ? data
+                                                                        .background
+                                                                        .responsive_image
+                                                                        ?.url
+                                                                  : data
+                                                                        .background
+                                                                        ?.background
+                                                                        ?.url,
                                                       }
                                                   )})`,
                                               }
@@ -155,7 +173,7 @@ const HomeHero = ({ hero, locale }: Readonly<BreadcrumbProps>) => {
                                             }}
                                         ></video>
                                     )}
-                                    <div className="space-y-3 lg:space-y-5 flex flex-col justify-center items-center text-white relative z-10 px-3">
+                                    {/* <div className="space-y-3 lg:space-y-5 flex flex-col justify-center items-center text-white relative z-10 px-3">
                                         <h1 className="text-3xl lg:text-5xl font-bold max-w-[44rem] text-center leading-tight">
                                             {data?.title || "No Content!"}
                                         </h1>
@@ -177,7 +195,7 @@ const HomeHero = ({ hero, locale }: Readonly<BreadcrumbProps>) => {
                                                 </Button>
                                             </Link>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="flex items-center gap-2.5 absolute bottom-0 left-0 p-3 pb-10 lg:p-10 z-10 w-full">
                                         <MapPin />
                                         <span className="font-manrope">

@@ -30,7 +30,7 @@ export function Header({
     if (!cta || !logo) return null;
 
     return (
-        <header className="absolute z-50 w-full flex justify-between items-center p-4 max-w-7xl lg:px-6 2xl:px-4 left-1/2 -translate-x-1/2 font-manrope">
+        <header className="absolute z-50 bg-gradient-to-b from-black via-black/60 to-transparent w-full flex justify-between items-center p-4 max-w-7xl lg:px-6 2xl:px-4 left-1/2 -translate-x-1/2 font-manrope">
             <Logo logo={logo} />
             <div className="hidden lg:block">
                 <NavItems

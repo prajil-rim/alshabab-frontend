@@ -65,7 +65,7 @@ const NavItems = ({
                 isMobile
                     ? "flex-col font-manrope gap-3 text-[#202020] font-medium"
                     : "flex-row",
-                isBlack ? "text-black" : "text-white"
+                isBlack ? "text-black" : "text-black lg:text-white"
             )}
         >
             {/* {!isMobile && (
@@ -215,7 +215,7 @@ const NavItems = ({
                                         {t("intlHolidayPackage")}
                                     </span>
 
-                                    {intlOpen && (
+                                    {intlHolidayOpen && (
                                         <div className="absolute top-0 left-full z-50 w-48 bg-white shadow-lg rounded-md p-1">
                                             {packages
                                                 ?.filter(

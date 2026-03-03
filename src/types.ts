@@ -179,6 +179,7 @@ export interface HomeHeroProps {
         id: number;
         type: "image" | "video";
         background: MediaProps;
+        responsive_image: MediaProps | null;
     };
 }
 

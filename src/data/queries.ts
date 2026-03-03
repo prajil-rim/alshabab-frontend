@@ -12,6 +12,9 @@ export const homePageQuery = qs.stringify({
                                 background: {
                                     fields: ["url", "alternativeText"],
                                 },
+                                responsive_image: {
+                                    fields: ["url", "alternativeText"],
+                                },
                             },
                         },
                     },
