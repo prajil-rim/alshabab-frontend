@@ -1,9 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { Button } from "../ui/button";
-import ArrowRightUp from "../icons/arrow-right-up";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
     Carousel,
     CarouselApi,
@@ -14,9 +11,10 @@ import {
 } from "../ui/carousel";
 import { HomeHeroProps } from "@/types";
 import { CirclePause, CirclePlay, Volume2, VolumeOff } from "lucide-react";
-import MapPin from "../icons/map-pin";
+// import MapPin from "../icons/map-pin";
 import { cn, getImage } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import Autoplay from "embla-carousel-autoplay";
 
 interface BreadcrumbProps {
     hero: HomeHeroProps[];
@@ -24,20 +22,27 @@ interface BreadcrumbProps {
 }
 
 const HomeHero = ({ hero, locale }: Readonly<BreadcrumbProps>) => {
-    const [api, setApi] = React.useState<CarouselApi>();
-    const [current, setCurrent] = React.useState(0);
+    const [api, setApi] = useState<CarouselApi>();
+    // const [current, setCurrent] = useState(0);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-    const [playingStates, setPlayingStates] = React.useState<{
+    const [playingStates, setPlayingStates] = useState<{
         [key: number]: boolean;
     }>({});
-    const [mutedStates, setMutedStates] = React.useState<{
+    const [mutedStates, setMutedStates] = useState<{
         [key: number]: boolean;
     }>({});
 
-    React.useEffect(() => {
+    const plugin = useRef(
+        Autoplay({
+            delay: 5000,
+            stopOnInteraction: false,
+        })
+    );
+
+    useEffect(() => {
         if (!api) return;
 
-        setCurrent(api.selectedScrollSnap() + 1);
+        // setCurrent(api.selectedScrollSnap() + 1);
 
         api.on("select", () => {
             videoRefs.current.map((video, index) => {
@@ -47,7 +52,7 @@ const HomeHero = ({ hero, locale }: Readonly<BreadcrumbProps>) => {
                     video?.pause();
                 }
             });
-            setCurrent(api.selectedScrollSnap() + 1);
+            // setCurrent(api.selectedScrollSnap() + 1);
         });
     }, [api]);
 
@@ -97,7 +102,9 @@ const HomeHero = ({ hero, locale }: Readonly<BreadcrumbProps>) => {
                 setApi={setApi}
                 opts={{
                     watchDrag: false,
+                    loop: true,
                 }}
+                plugins={[plugin.current]}
                 className="size-full relative"
             >
                 <CarouselContent className="ml-0">
@@ -197,10 +204,10 @@ const HomeHero = ({ hero, locale }: Readonly<BreadcrumbProps>) => {
                                         </div>
                                     </div> */}
                                     <div className="flex items-center gap-2.5 absolute bottom-0 left-0 p-3 pb-10 lg:p-10 z-10 w-full">
-                                        <MapPin />
+                                        {/* <MapPin />
                                         <span className="font-manrope">
                                             {data?.destination}
-                                        </span>
+                                        </span> */}
                                         {data.background?.type === "video" && (
                                             <div className="flex items-center gap-2.5">
                                                 {playingStates[index] ? (
@@ -257,7 +264,7 @@ const HomeHero = ({ hero, locale }: Readonly<BreadcrumbProps>) => {
                 >
                     <div className="flex w-full justify-end max-w-6xl mx-auto">
                         <ul className="gap-6 text-sm text-white font-manrope items-center flex">
-                            {hero.map((data, index) => (
+                            {/* {hero.map((data, index) => (
                                 <li
                                     key={data?.id}
                                     className={cn(
@@ -269,7 +276,7 @@ const HomeHero = ({ hero, locale }: Readonly<BreadcrumbProps>) => {
                                 >
                                     {data?.attraction}
                                 </li>
-                            ))}
+                            ))} */}
                             <li className="flex items-center gap-3">
                                 <CarouselPrevious className="relative left-0 right-0 translate-y-0 disabled:bg-transparent disabled:text-white disabled:border-white disabled:opacity-100 hover:bg-primary/90 hover:text-white cursor-pointer" />
                                 <CarouselNext className="relative left-0 right-0 translate-y-0 disabled:bg-transparent disabled:text-white disabled:border-white disabled:opacity-100 hover:bg-primary/90 hover:text-white cursor-pointer" />

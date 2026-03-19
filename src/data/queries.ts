@@ -572,11 +572,7 @@ export const destinationQuery = qs.stringify({
                 packages: {
                     populate: {
                         hero: {
-                            populate: {
-                                background: {
-                                    fields: ["url", "alternativeText"],
-                                },
-                            },
+                            fields: ["url", "alternativeText"],
                         },
                         packages_for: true,
                     },

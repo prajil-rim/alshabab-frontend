@@ -346,11 +346,11 @@ const NavItems = ({
                     {t("airTicketing")}
                 </Link>
             </li>
-            <li className={activeStyle("/visa-services")}>
+            {/* <li className={activeStyle("/visa-services")}>
                 <Link href={"/visa-services"} onClick={closeMenu}>
                     {t("visaServices")}
                 </Link>
-            </li>
+            </li> */}
             <li className={activeStyle("/blogs")}>
                 <Link href={"/blogs"} onClick={closeMenu}>
                     {t("insights")}
