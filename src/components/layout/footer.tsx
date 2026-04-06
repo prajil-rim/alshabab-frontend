@@ -124,7 +124,7 @@ const Footer = ({
                             <ul className="flex items-center gap-3.5 justify-center lg:justify-start">
                                 {socials?.map((social, i) => (
                                     <li key={i}>
-                                        <Link href={"/"}>
+                                        <Link href={social.href}>
                                             <StrapiImage
                                                 alt={
                                                     social.icon
