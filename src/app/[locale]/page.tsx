@@ -110,7 +110,7 @@ export default async function HomeRoute({
                 <div className="max-w-7xl mx-auto py-10 px-3 lg:px-6 2xl:px-0">
                     <SearchSection
                         destinations={destinations}
-                        packages={packages}
+                        packages={parentPackages}
                         trending_searches={pageData.trending_search}
                         price_range={pageData.price_range}
                     />

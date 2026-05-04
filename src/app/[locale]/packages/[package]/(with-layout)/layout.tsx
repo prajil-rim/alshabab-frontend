@@ -20,6 +20,7 @@ import { getImage, returnMetadata } from "@/lib/utils";
 import { setRequestLocale } from "next-intl/server";
 import SeoContent from "@/components/pages/packages/seo-content";
 import { StrapiImage } from "@/components/common/strapi-image";
+import { notFound } from "next/navigation";
 
 let parentPackagePageDataPromise: ReturnType<typeof getParentPackage> | null =
     null;
@@ -75,6 +76,8 @@ export default async function DashboardLayout({
 
     // Enable static rendering
     setRequestLocale(locale);
+
+    if (!pageData) return notFound();
 
     return (
         <main>
