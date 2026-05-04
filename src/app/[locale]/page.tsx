@@ -16,7 +16,6 @@ import WhyUsSection from "@/components/pages/home/why-us-section";
 import {
     getDestinationsList,
     getHomePage,
-    getPackagesList,
     getParentPackagesList,
     getPartners,
     getTestimonials,
@@ -50,14 +49,14 @@ async function loader(locale: string) {
         partners,
         destinations,
         parentPackages,
-        packages,
+        // packages,
     ] = await Promise.all([
         getHomePageOnce(locale),
         getTestimonials(locale),
         getPartners(locale),
         getDestinationsList(),
         getParentPackagesList(),
-        getPackagesList(),
+        // getPackagesList(),
     ]);
     if (!pageData || !pageData.data) notFound();
     return {
@@ -65,7 +64,7 @@ async function loader(locale: string) {
         testimonials: testimonials.data,
         partners: partners.data,
         destinations: destinations.data,
-        packages: packages.data,
+        // packages: packages.data,
         parentPackages: parentPackages.data,
     };
 }
@@ -87,14 +86,8 @@ export default async function HomeRoute({
     params: Promise<{ locale: string }>;
 }) {
     const locale = (await params).locale;
-    const {
-        pageData,
-        testimonials,
-        partners,
-        destinations,
-        packages,
-        parentPackages,
-    } = await loader(locale || "en");
+    const { pageData, testimonials, partners, destinations, parentPackages } =
+        await loader(locale || "en");
 
     if (!hasLocale(routing.locales, locale)) {
         notFound();
